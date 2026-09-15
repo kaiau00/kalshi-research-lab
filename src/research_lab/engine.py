@@ -155,7 +155,8 @@ class Replay:
             del account.pending[ticker]
             meta = self.state.metadata(ticker)
             book = self._fresh_book(ticker, now)
-            if not meta or now >= meta[2] or self.state.markets[ticker].get("result") or not book:
+            if (not meta or now >= meta[2] or self.state.markets[ticker].get("result") or not book
+                    or not self.state.fee_supported(self.cfg)):
                 order["status"] = "canceled_unavailable"
                 continue
             # Use the book known at the first receipt event at/after arrival, only

@@ -91,3 +91,12 @@ def test_unknown_or_increased_series_fees_block_entries():
     replay._decide(account, ticker, int((START + 750.1) * NS))
     assert not account.orders
     assert account.rejected['missing_or_unsupported_series_fees'] == 1
+
+
+def test_fee_change_during_latency_cancels_order():
+    replay, ticker, account, now = prepared()
+    replay.state.series['fee_multiplier'] = 2
+    replay._fill_due(account, now + NS)
+    assert account.orders[0]['status'] == 'canceled_unavailable'
+    assert account.cash == 100
+    assert account.reserved == 0
