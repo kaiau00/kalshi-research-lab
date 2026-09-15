@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "restart": 0,
+      "public_discovery": true,
+      "auth_required": true,
+      "health": 200,
+      "data_readiness_without_key": 503,
+      "event_prefix": {
+        "last_event_id": 4,
+        "sha256_chain": "15f2496c8bae0736448638e39126fd5dae79b45cb0f718e134266ce76aa528d7"
+      }
+    },
+    {
+      "restart": 1,
+      "public_discovery": true,
+      "auth_required": true,
+      "health": 200,
+      "data_readiness_without_key": 503,
+      "event_prefix": {
+        "last_event_id": 7,
+        "sha256_chain": "b109b263f299631a4349887258b357088314e51d8474378bdf22870f532d65eb"
+      }
+    }
+  ],
+  "integrity": {
+    "verified_events": 7,
+    "sha256_chain": "b109b263f299631a4349887258b357088314e51d8474378bdf22870f532d65eb"
+  },
+  "experiment_registrations_after_restart": 1,
+  "authenticated_feed_tested": false,
+  "live_orders_possible": false
+}

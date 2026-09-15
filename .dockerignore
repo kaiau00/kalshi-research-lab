@@ -1,0 +1,13 @@
+.git
+.venv
+.env*
+*.pem
+*.key
+data
+reports
+tests
+__pycache__
+.pytest_cache
+.ruff_cache
+.railway
+outputs
