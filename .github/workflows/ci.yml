@@ -14,3 +14,19 @@ jobs:
       - run: uv sync --locked
       - run: uv run ruff check .
       - run: uv run pytest
+  container:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t kalshi-research-lab:ci .
+      - name: Check isolated container startup and protected dashboard
+        run: |
+          docker run -d --name lab-smoke --network none -e LAB_DASHBOARD_PASSWORD=ci-only-not-a-production-secret kalshi-research-lab:ci
+          docker cp scripts/smoke_container.py lab-smoke:/tmp/smoke_container.py
+          docker exec lab-smoke python /tmp/smoke_container.py
+      - name: Container logs and cleanup
+        if: always()
+        run: |
+          docker logs lab-smoke || true
+          docker rm -f lab-smoke || true
