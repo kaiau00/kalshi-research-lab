@@ -64,9 +64,15 @@ class MarketState:
         elif event.kind == "market":
             m = p["market"]
             self.markets[m["ticker"]] = m
+            if m.get("status") == "finalized":
+                self.books.pop(m["ticker"], None)
         elif event.kind == "gap":
             self.quality["gaps"] += 1
-            self.invalidate()
+            if p.get("stream") == "benchmark":
+                self.index.clear()
+                self.last_index_source = -1
+            else:
+                self.invalidate()
         elif event.kind == "ws":
             try:
                 self._ws(event)
@@ -77,8 +83,6 @@ class MarketState:
     def _ws(self, event):
         frame = event.payload["frame"]
         typ = frame.get("type")
-        if typ not in ("orderbook_snapshot", "orderbook_delta", "cfbenchmarks_value"):
-            return
         session = event.payload["session"]
         if "sid" in frame and "seq" in frame:
             key = (session, int(frame["sid"]))
@@ -90,6 +94,8 @@ class MarketState:
                 self.quality["gaps"] += 1
                 self.invalidate()
             self.seq[key] = seq
+        if typ not in ("orderbook_snapshot", "orderbook_delta", "cfbenchmarks_value"):
+            return
         msg = frame["msg"]
         if typ == "cfbenchmarks_value":
             if msg.get("index_id") != "BRTI":

@@ -18,10 +18,10 @@ Historical quote screens and synthetic checks do not establish executable return
 <section class="card"><div class="muted">Recorded events</div><div class="value" id="events">—</div><div id="size" class="muted"></div></section>
 <section class="card"><div class="muted">Latest research job</div><div class="value" id="job">—</div><div id="error" class="muted"></div></section></div>
 <h2>Compare the strategies</h2><p class="muted">Basic fair value · late underdog near the threshold · adaptive volatility</p>
-<p>Automatic hourly reports use the settings registered before collection began. Changed code or settings stop prospective replay until a new dataset is registered. Every run uses a frozen data prefix.</p>
+<p>Automatic reports use the settings registered before collection began. Changed code or settings stop prospective replay until a new dataset is registered. Every run uses a frozen data prefix.</p>
 <select id="split" aria-label="Research dataset"><option value="forward">Registered forward paper</option><option value="train">Training slice (60%)</option><option value="validation">Validation slice (20%)</option></select>
 <button id="run">Run comparison</button><p id="message" role="status"></p>
-<h2>Reports</h2><ul id="reports"><li>No report yet. Add the Kalshi credentials to begin book and benchmark collection.</li></ul>
+<h2>Reports</h2><ul id="reports"><li>No completed report yet. Recording and archive status appear above.</li></ul>
 <details><summary>Data quality and operating status</summary><pre id="details"></pre></details>
 <p class="muted">Infrastructure target: up to $10/month. Storage stops at the configured cap; raw observations are never silently deleted.
 Check actual Railway usage separately. Health means the process is running; readiness also requires fresh book and benchmark data.</p>
@@ -32,7 +32,9 @@ $('mode').textContent=s.recorder.mode.replaceAll('_',' ');$('events').textConten
 $('size').textContent=((s.storage?.bytes??0)/1e6).toFixed(1)+' MB on persistent storage';$('job').textContent=s.job.state;
 $('error').textContent=s.job.reason??s.recorder.error??'';const b=s.recorder.last_benchmark_ns;
 $('fresh').textContent=b?'Benchmark received '+Math.max(0,Math.round((Date.now()-b/1e6)/1000))+'s ago':'Benchmark authentication pending';
-$('details').textContent=JSON.stringify({quality:s.quality,recorder:s.recorder,job:s.job},null,2);
+$('details').textContent=JSON.stringify({quality:s.quality,recorder:s.recorder,job:s.job,storage:s.storage},null,2);
+for(const o of $('split').options){o.disabled=s.segmented&&o.value!=='forward'}
+if(s.segmented){$('split').value='forward';$('size').textContent+='; '+((s.storage?.archive_bytes??0)/1e6).toFixed(1)+' MB archived'}
 $('run').disabled=s.job.state==='running';if(s.reports.length){$('reports').replaceChildren();for(const name of s.reports){const li=document.createElement('li'),a=document.createElement('a');a.href='/reports/'+name;a.textContent='Comparison '+new Date(Number(name.split('-')[0])/1e6).toLocaleString();li.append(a);$('reports').append(li)}}
 }catch(e){$('message').textContent=e.message}}
 $('run').onclick=async()=>{try{const r=await fetch('/api/replay',{method:'POST',headers:{'Content-Type':'application/json','X-Research-Lab':'1'},body:JSON.stringify({split:$('split').value})});const j=await r.json();$('message').textContent=r.ok?'Comparison started.':j.detail;await refresh()}catch(e){$('message').textContent=e.message}};

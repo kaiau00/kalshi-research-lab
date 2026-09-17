@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import json
 import logging
 import os
 import re
@@ -41,7 +42,7 @@ class Jobs:
     def start(self, split='forward'):
         if self.task and not self.task.done():
             raise HTTPException(409, 'A replay is already running')
-        if time.monotonic() - self.last_start < 60:
+        if time.monotonic() - self.last_start < (10 if os.environ.get('LAB_SEGMENTED') == '1' else 60):
             raise HTTPException(429, 'Wait one minute between replay jobs')
         self.last_start = time.monotonic()
         self.status = {'state': 'running', 'split': split, 'started_ns': time.time_ns()}
@@ -51,12 +52,19 @@ class Jobs:
         proc = None
         try:
             output = data_dir() / 'reports'
-            proc = await asyncio.create_subprocess_exec(sys.executable, '-m', 'research_lab.cli', 'backtest',
-                '--db', str(db_path()), '--output', str(output), '--split', split,
+            segmented = os.environ.get('LAB_SEGMENTED') == '1'
+            if segmented and split != 'forward':
+                raise ValueError('Restore a frozen archive for exploratory offline replay')
+            args = (['maintain', '--root', str(data_dir())] if segmented else
+                    ['backtest', '--db', str(db_path()), '--output', str(output), '--split', split])
+            proc = await asyncio.create_subprocess_exec(sys.executable, '-m', 'research_lab.cli', *args,
                 stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
             stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=180)
             if proc.returncode:
                 self.status = {'state': 'failed', 'reason': stderr.decode()[-500:]}
+            elif segmented:
+                self.status = json.loads(stdout)
+                self.status['completed_ns'] = time.time_ns()
             else:
                 path = Path(stdout.decode().strip())
                 self.status = {'state': 'complete', 'report': path.name, 'completed_ns': time.time_ns()}
@@ -65,6 +73,8 @@ class Jobs:
                     old.unlink()
                     old.with_suffix('.html').unlink(missing_ok=True)
             write_json(data_dir() / 'last-job.json', self.status)
+        except (ValueError, OSError) as exc:
+            self.status = {'state': 'failed', 'reason': str(exc)}
         except TimeoutError:
             self.status = {'state': 'failed', 'reason': 'Replay exceeded the 180-second service budget'}
         finally:
@@ -81,7 +91,8 @@ def create_app(record=True):
     async def periodic():
         # Start only after data can exist. No external cron or laptop process is required.
         while True:
-            await asyncio.sleep(max(300, int(os.environ.get('LAB_REPORT_INTERVAL_SECONDS', '3600'))))
+            await asyncio.sleep(10 if os.environ.get('LAB_SEGMENTED') == '1' else
+                                max(300, int(os.environ.get('LAB_REPORT_INTERVAL_SECONDS', '3600'))))
             if recorder and recorder.status['last_benchmark_ns']:
                 try:
                     jobs.start('forward')
@@ -142,6 +153,7 @@ def create_app(record=True):
                 'storage': recorder.store.stats() if recorder and worker and not worker.done() else None,
                 'quality': recorder.state.quality if recorder else None, 'job': jobs.status,
                 'scope': 'BTC only; research and simulated orders only; $100 per strategy',
+                'segmented': os.environ.get('LAB_SEGMENTED') == '1',
                 'reports': [p.name for p in sorted((data_dir() / 'reports').glob('*.html'), reverse=True)[:20]]}
 
     @app.post('/api/replay', dependencies=[Depends(authenticated)])

@@ -186,7 +186,8 @@ class Replay:
         for ticker, pos in list(account.positions.items()):
             result = self.state.markets.get(ticker, {}).get("result")
             meta = self.state.metadata(ticker)
-            if result not in ("yes", "no") or not meta or now < meta[2]:
+            if (result not in ("yes", "no") or not meta or now < meta[2]
+                    or self.state.markets[ticker].get("status") != "finalized"):
                 continue
             won = result == pos["side"]
             payout = Decimal(pos["filled"] if won else 0)

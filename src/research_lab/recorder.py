@@ -70,7 +70,15 @@ def load_signer():
 
 class Recorder:
     def __init__(self, path: Path):
-        self.store = Store(path)
+        self.segmented = os.environ.get('LAB_SEGMENTED') == '1'
+        if self.segmented:
+            from .segments import SegmentedStore
+            self.store = SegmentedStore(path.parent)
+            latest = self.store.latest_markets()
+        else:
+            self.store = Store(path)
+            latest = [json.loads(zlib.decompress(row[0])) for row in
+                      self.store.conn.execute('SELECT payload FROM latest_markets')]
         if self.store.prefix()['last_event_id'] == 0:
             from .research import source_hash
             from .settings import Experiment
@@ -78,163 +86,194 @@ class Recorder:
                                                           'source_sha256': source_hash()})
             self.store.commit()
         self.client = MarketDataClient()
-        self.current = set()
-        self.last_series = 0
-        self.resolve_cursor = 0
-        latest = [json.loads(zlib.decompress(row[0])) for row in
-                  self.store.conn.execute('SELECT payload FROM latest_markets')]
-        self.pending = {m['ticker'] for m in latest if not m.get('result')}
+        self.current, self.watch = set(), set()
+        self.pending = {m['ticker'] for m in latest if m.get('status') != 'finalized'}
+        self.known = {m['ticker']: m for m in latest}
         self.state = MarketState()
-        self.status = {"mode": "waiting_for_credentials", "last_discovery_ns": None,
-                       "last_ws_ns": None, "last_benchmark_ns": None, "error": None}
-        self.max_bytes = int(os.environ.get("LAB_MAX_STORAGE_BYTES", "2000000000"))
+        self.status = {'mode': 'waiting_for_credentials', 'last_discovery_ns': None,
+                       'last_ws_ns': None, 'last_benchmark_ns': None, 'error': None,
+                       'book_connection': 'waiting', 'benchmark_connection': 'waiting'}
+        self.max_bytes = int(os.environ.get('LAB_MAX_STORAGE_BYTES', '2000000000'))
         self.last_commit = time.monotonic()
+        self.last_series = 0
 
     def append(self, kind, payload, source_ns=None):
         event = self.store.append(kind, payload, source_ns=source_ns)
         self.state.apply(event)
         if time.monotonic() - self.last_commit >= 1:
-            if self.store.stats()["bytes"] >= self.max_bytes:
-                raise RuntimeError("storage_limit_reached")
+            if self.store.stats()['bytes'] >= self.max_bytes:
+                raise RuntimeError('storage_limit_reached')
+            if self.segmented:
+                from .segments import enough_disk
+                if not enough_disk(self.store.root):
+                    raise RuntimeError('disk_reserve_reached')
             self.store.commit()
             self.last_commit = time.monotonic()
         return event
 
+    def remember(self, market):
+        ticker = market['ticker']
+        old = self.known.get(ticker)
+        if old and old.get('result') in ('yes', 'no') and market.get('result') != old['result']:
+            self.append('outcome_revision', {'ticker': ticker, 'previous': old['result'],
+                                            'current': market.get('result')})
+        self.append('market', {'market': market})
+        self.known[ticker] = market
+        if market.get('status') == 'finalized':
+            self.pending.discard(ticker)
+        else:
+            self.pending.add(ticker)
+
     async def discover(self):
         while True:
             try:
-                if time.monotonic() - self.last_series >= 900:
-                    series = await self.client.get('/series/' + SERIES)
-                    self.append('series', {'series': series['series']})
-                    self.last_series = time.monotonic()
-                result = await self.client.markets(status="open")
-                markets = result.get("markets", [])
-                if result.get("cursor"):
-                    raise RuntimeError("Unexpected BTC discovery pagination")
-                active = set()
-                for market in markets:
-                    self.append("market", {"market": market})
-                    ticker = market["ticker"]
-                    self.pending.add(ticker)
-                    if epoch_ns(market["close_time"]) > time.time_ns():
-                        active.add(ticker)
-                self.current = active
-                # Bounded old-market resolution work per cycle; official results only.
-                unresolved = sorted(self.pending - active)
-                offset = self.resolve_cursor % max(1, len(unresolved))
-                batch = (unresolved[offset:] + unresolved[:offset])[:12]
-                self.resolve_cursor += len(batch)
-                for ticker in batch:
-                    try:
-                        try:
-                            result = await self.client.get("/markets/" + ticker)
-                        except httpx.HTTPStatusError as exc:
-                            if exc.response.status_code != 404:
-                                raise
-                            result = await self.client.get("/historical/markets/" + ticker)
-                    except (httpx.HTTPError, RuntimeError) as exc:
-                        self.append('resolution_error', {'ticker': ticker, 'error': type(exc).__name__})
-                        continue
-                    market = result.get("market", result)
-                    self.append("market", {"market": market})
-                    if market.get("result") in ("yes", "no"):
-                        self.pending.discard(ticker)
-                self.status["last_discovery_ns"] = time.time_ns()
+                now = time.time()
+                # Includes upcoming markets so their book can be subscribed before open.
+                result = await self.client.markets(min_close_ts=int(now)-60, max_close_ts=int(now)+1800)
+                if result.get('cursor'):
+                    raise RuntimeError('Unexpected BTC discovery pagination')
+                current, watch = set(), set()
+                for market in result.get('markets', []):
+                    self.remember(market)
+                    start, close = epoch_ns(market['open_time'])/1e9, epoch_ns(market['close_time'])/1e9
+                    if close > now and market.get('status') in ('active', 'initialized', 'inactive'):
+                        watch.add(market['ticker'])
+                        if start <= now:
+                            current.add(market['ticker'])
+                self.current, self.watch = current, watch
+                self.status['last_discovery_ns'] = time.time_ns()
             except asyncio.CancelledError:
                 raise
             except Exception as exc:
-                self.status["error"] = type(exc).__name__
-                LOG.warning("Market discovery failed: %s", type(exc).__name__)
-                if str(exc) == "storage_limit_reached":
+                self.status['error'] = str(exc) if str(exc).endswith('_reached') else type(exc).__name__
+                if str(exc).endswith('_reached'):
                     raise
-            await asyncio.sleep(30)
+            # Faster near boundaries, moderate polling elsewhere. Resolution never blocks discovery.
+            phase = time.time() % 900
+            await asyncio.sleep(1 if phase < 60 or phase > 840 else 5)
 
-    async def stream(self):
+    async def resolve(self):
+        while True:
+            if time.monotonic() - self.last_series >= 900:
+                try:
+                    result = await self.client.get('/series/' + SERIES)
+                    self.append('series', {'series': result['series']})
+                    self.last_series = time.monotonic()
+                except (httpx.HTTPError, RuntimeError) as exc:
+                    if str(exc).endswith('_reached'):
+                        raise
+            # Keep refreshing determined outcomes until the exchange finalizes them.
+            for ticker in sorted(self.pending):
+                if epoch_ns(self.known[ticker]['close_time']) > time.time_ns():
+                    continue
+                try:
+                    try:
+                        result = await self.client.get('/markets/' + ticker)
+                    except httpx.HTTPStatusError as exc:
+                        if exc.response.status_code != 404:
+                            raise
+                        result = await self.client.get('/historical/markets/' + ticker)
+                    self.remember(result.get('market', result))
+                except (httpx.HTTPError, RuntimeError) as exc:
+                    if str(exc).endswith('_reached'):
+                        raise
+                    self.append('resolution_error', {'ticker': ticker, 'error': type(exc).__name__})
+                await asyncio.sleep(.1)
+            await asyncio.sleep(3)
+
+    async def stream(self, channel):
+        benchmark = channel == 'benchmark'
         delay = 1
         while True:
             try:
                 signer = load_signer()
                 if signer is None:
-                    self.status["mode"] = "waiting_for_credentials"
                     await asyncio.sleep(10)
                     continue
-                if not self.current:
-                    self.status["mode"] = "waiting_for_market"
-                    await asyncio.sleep(5)
+                if not benchmark and not self.watch:
+                    await asyncio.sleep(1)
                     continue
-                self.status["mode"] = "connecting"
                 session = uuid.uuid4().hex
-                subscribed = set(self.current)
-                seq = {}
+                seq, sid, request_id = {}, None, 1
+                subscribed = set(self.watch) if not benchmark else set()
+                self.status[channel + '_connection'] = 'connecting'
                 async with connect(WS_URL, additional_headers=signer(), ping_interval=15,
-                                   ping_timeout=15, max_size=4 * 1024 * 1024, max_queue=128) as ws:
-                    self.append("gap", {"reason": "new_stream_session", "session": session})
-                    await ws.send(json.dumps({"id": 1, "cmd": "subscribe", "params": {
-                        "channels": ["orderbook_delta"], "market_tickers": sorted(subscribed),
-                        "use_yes_price": True}}))
-                    await ws.send(json.dumps({"id": 2, "cmd": "subscribe", "params": {
-                        "channels": ["cfbenchmarks_value"], "index_ids": ["BRTI"]}}))
-                    await ws.send(json.dumps({"id": 3, "cmd": "subscribe", "params": {
-                        "channels": ["trade"], "market_tickers": sorted(subscribed)}}))
-                    self.status["mode"] = "connected_waiting_for_data"
+                                   ping_timeout=15, max_size=4*1024*1024, max_queue=128) as ws:
+                    self.append('gap', {'reason': 'new_stream_session', 'session': session, 'stream': channel})
+                    params = ({'channels': ['cfbenchmarks_value'], 'index_ids': ['BRTI']} if benchmark else
+                              {'channels': ['orderbook_delta'], 'market_tickers': sorted(subscribed), 'use_yes_price': True})
+                    await ws.send(json.dumps({'id': 1, 'cmd': 'subscribe', 'params': params}))
                     last_data = time.monotonic()
-                    while self.current == subscribed:
+                    while True:
+                        if not benchmark and sid is not None:
+                            add = self.watch - subscribed
+                            remove = subscribed - self.watch
+                            # Retain the final closed book while idle; never unsubscribe BRTI.
+                            for action, tickers in [('add_markets', add), ('delete_markets', remove if self.watch else set())]:
+                                if tickers:
+                                    request_id += 1
+                                    await ws.send(json.dumps({'id': request_id, 'cmd': 'update_subscription',
+                                        'params': {'sid': sid, 'market_tickers': sorted(tickers), 'action': action}}))
+                                    if action == 'add_markets':
+                                        subscribed |= tickers
+                                    else:
+                                        subscribed -= tickers
                         try:
-                            raw = await asyncio.wait_for(ws.recv(), timeout=1)
+                            raw = await asyncio.wait_for(ws.recv(), timeout=.25)
                         except TimeoutError:
-                            if time.monotonic() - last_data > 30:
-                                raise RuntimeError("stream_no_data")
+                            if time.monotonic()-last_data > 30 and (benchmark or self.current):
+                                raise RuntimeError('stream_no_data')
                             continue
                         last_data = time.monotonic()
                         frame = json.loads(raw)
-                        source_ns = None
-                        msg = frame.get("msg") or {}
-                        if msg.get("ts_ms"):
-                            source_ns = int(msg["ts_ms"]) * 1_000_000
-                        if frame.get("type") == "cfbenchmarks_value":
-                            try:
-                                data = json.loads(msg["data"]) if isinstance(msg["data"], str) else msg["data"]
-                                source_ns = int(data["time"]) * 1_000_000
-                                self.status["last_benchmark_ns"] = time.time_ns()
-                            except (KeyError, TypeError, ValueError):
-                                pass
-                        self.append("ws", {"frame": frame, "session": session,
-                                           "book_convention": "yes_price"}, source_ns)
-                        if frame.get("type") == "error":
-                            # Never log the raw upstream error, which may include request details.
-                            raise RuntimeError("subscription_error")
-                        if "sid" in frame and "seq" in frame:
-                            sid, cur = int(frame["sid"]), int(frame["seq"])
-                            if sid in seq and cur != seq[sid] + 1 and cur > seq[sid]:
-                                raise RuntimeError("sequence_gap")
-                            seq[sid] = max(seq.get(sid, cur), cur)
-                        self.status.update(last_ws_ns=time.time_ns(), mode="recording", error=None)
+                        msg = frame.get('msg') or {}
+                        source_ns = int(msg['ts_ms'])*1_000_000 if msg.get('ts_ms') else None
+                        if frame.get('type') == 'subscribed':
+                            sid = msg.get('sid', frame.get('sid'))
+                        if frame.get('type') == 'cfbenchmarks_value':
+                            data = json.loads(msg['data']) if isinstance(msg['data'], str) else msg['data']
+                            source_ns = int(data['time'])*1_000_000
+                            self.status['last_benchmark_ns'] = time.time_ns()
+                        self.append('ws', {'frame': frame, 'session': session,
+                                          'book_convention': 'yes_price'}, source_ns)
+                        if frame.get('type') == 'error':
+                            raise RuntimeError('subscription_error')
+                        if 'sid' in frame and 'seq' in frame:
+                            stream_id, cur = int(frame['sid']), int(frame['seq'])
+                            if stream_id in seq and cur != seq[stream_id]+1:
+                                raise RuntimeError('sequence_gap')
+                            seq[stream_id] = cur
+                        self.status.update(last_ws_ns=time.time_ns(), mode='recording', error=None)
+                        self.status[channel + '_connection'] = 'connected'
                         delay = 1
             except asyncio.CancelledError:
                 raise
             except Exception as exc:
-                self.status.update(mode="reconnecting", error=type(exc).__name__)
-                self.append("gap", {"reason": type(exc).__name__})
+                reason = str(exc) if isinstance(exc, RuntimeError) else type(exc).__name__
+                self.status.update(error=reason)
+                self.status[channel + '_connection'] = 'reconnecting'
+                self.append('gap', {'reason': reason, 'stream': channel})
                 self.store.commit()
-                LOG.warning("Stream reconnect: %s", type(exc).__name__)
-                if str(exc) == "storage_limit_reached":
+                if reason.endswith('_reached'):
                     raise
                 await asyncio.sleep(delay)
-                delay = min(60, delay * 2)
+                delay = min(60, delay*2)
 
     async def heartbeat(self):
         while True:
-            self.append("heartbeat", {"mode": self.status["mode"]})
+            self.append('heartbeat', {'mode': self.status['mode']})
             self.store.commit()
-            await asyncio.sleep(30)
+            await asyncio.sleep(10)
 
     async def run(self):
         try:
             async with asyncio.TaskGroup() as group:
                 group.create_task(self.discover())
-                group.create_task(self.stream())
+                group.create_task(self.resolve())
+                group.create_task(self.stream('benchmark'))
+                group.create_task(self.stream('book'))
                 group.create_task(self.heartbeat())
         finally:
-            self.status["mode"] = "stopped"
+            self.status['mode'] = 'stopped'
             await self.client.close()
             self.store.close()

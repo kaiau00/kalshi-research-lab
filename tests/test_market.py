@@ -123,3 +123,13 @@ def test_settlement_forecast_includes_first_second_before_close():
     state, ticker = warmed_state(870)
     state.index = type(state.index)((row for row in state.index if row[0] != START + 840), maxlen=7200)
     assert state.forecast(ticker, int((START + 870.1) * NS), Experiment()) is None
+
+
+def test_subscription_ack_consumes_sequence_without_invalidating_book():
+    state, ticker = warmed_state()
+    state.apply(ws(book_frame(ticker, 1), START + 751))
+    state.apply(ws({'type': 'ok', 'sid': 1, 'seq': 2, 'msg': {'market_tickers': [ticker]}}, START + 752))
+    state.apply(ws({'type': 'orderbook_delta', 'sid': 1, 'seq': 3, 'msg': {
+        'market_ticker': ticker, 'side': 'yes', 'price_dollars': '.28', 'delta_fp': '1'}}, START + 753))
+    assert state.books[ticker].valid
+    assert state.quality['gaps'] == 0

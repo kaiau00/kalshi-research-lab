@@ -42,6 +42,10 @@ def test_delayed_partial_fill_official_settlement_cash_and_fees():
     replay._settle(account, (START + 901) * NS)
     assert ticker in account.positions  # No invented settlement from spot price.
     replay.state.markets[ticker]['result'] = 'yes'
+    replay.state.markets[ticker]['status'] = 'determined'
+    replay._settle(account, (START + 901) * NS)
+    assert ticker in account.positions
+    replay.state.markets[ticker]['status'] = 'finalized'
     replay._settle(account, (START + 899) * NS)
     assert ticker in account.positions
     replay._settle(account, (START + 901) * NS)

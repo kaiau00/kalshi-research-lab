@@ -37,6 +37,11 @@ def main():
     backup = sub.add_parser('backup', help='Export a consistent SQLite snapshot and verify its hash chain')
     backup.add_argument('--db', type=Path, default=db_path())
     backup.add_argument('--output', type=Path, required=True)
+    maintain = sub.add_parser('maintain', help='One bounded segment replay and verified archive')
+    maintain.add_argument('--root', type=Path, required=True)
+    restore = sub.add_parser('restore-segments', help='Restore verified sealed archives to a new SQLite file')
+    restore.add_argument('--root', type=Path, required=True)
+    restore.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -47,6 +52,12 @@ def main():
         elif args.command == 'record':
             from .recorder import Recorder
             asyncio.run(Recorder(db_path()).run())
+        elif args.command == 'maintain':
+            from .segments import process_one
+            print(json.dumps(process_one(args.root)))
+        elif args.command == 'restore-segments':
+            from .segments import restore
+            print(json.dumps(restore(args.root, args.output)))
         elif args.command == 'backtest':
             from .research import backtest
             cfg = Experiment(**json.loads(args.config.read_text())) if args.config else Experiment()
