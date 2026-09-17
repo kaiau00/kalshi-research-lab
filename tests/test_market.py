@@ -80,3 +80,36 @@ def test_bad_book_fails_closed(change):
         frame['msg']['yes_dollars_fp'][0][0] = '.50'
     state.apply(ws(frame, START + 751, **extra))
     assert not state.books[ticker].valid
+
+
+@pytest.mark.parametrize('remaining_side', [None, 'yes', 'no'])
+def test_snapshot_omitted_sides_clear_old_depth(remaining_side):
+    state, ticker = warmed_state()
+    state.apply(ws(book_frame(ticker, 1), START + 751))
+    frame = book_frame(ticker, 2)
+    for side in ('yes', 'no'):
+        if side != remaining_side:
+            del frame['msg'][side + '_dollars_fp']
+    state.apply(ws(frame, START + 752))
+    book = state.books[ticker]
+    assert book.valid
+    assert state.quality['malformed'] == 0
+    for side in ('yes', 'no'):
+        assert bool(getattr(book, side)) == (side == remaining_side)
+    if remaining_side is None:
+        assert book.best_ask('yes') is None
+        assert book.best_ask('no') is None
+    # A later snapshot restores executable quotes without an invented sequence gap.
+    state.apply(ws(book_frame(ticker, 3), START + 753))
+    assert book.valid and book.best_ask('yes') is not None and book.best_ask('no') is not None
+    assert state.quality['gaps'] == 0
+
+
+@pytest.mark.parametrize('levels', [None, {}, '', 0])
+def test_present_malformed_snapshot_side_still_fails_closed(levels):
+    state, ticker = warmed_state()
+    frame = book_frame(ticker, 1)
+    frame['msg']['yes_dollars_fp'] = levels
+    state.apply(ws(frame, START + 751))
+    assert state.quality['malformed'] == 1
+    assert not state.books[ticker].valid

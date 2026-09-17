@@ -112,7 +112,11 @@ class MarketState:
             levels = {}
             for side in ("yes", "no"):
                 levels[side] = {}
-                for raw_price, raw_count in msg[side + "_dollars_fp"]:
+                # Live snapshots omit sides with no depth, including both at rollover.
+                raw_levels = msg.get(side + "_dollars_fp", [])
+                if not isinstance(raw_levels, list):
+                    raise ValueError("Invalid snapshot levels")
+                for raw_price, raw_count in raw_levels:
                     price, count = Decimal(str(raw_price)), Decimal(str(raw_count))
                     if not price.is_finite() or not count.is_finite() or not 0 < price < 1 or count < 0:
                         raise ValueError("Invalid depth")

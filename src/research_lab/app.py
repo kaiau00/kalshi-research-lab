@@ -127,7 +127,8 @@ def create_app(record=True):
         valid = bool(recorder and worker and not worker.done() and recorder.state.index
                      and now - recorder.state.index[-1][2] < 3_000_000_000
                      and abs(now / 1e9 - recorder.state.index[-1][0]) < 3
-                     and any(b.valid and now - b.at_ns < 2_000_000_000
+                     and any(b.valid and b.best_ask('yes') is not None
+                             and b.best_ask('no') is not None and now - b.at_ns < 2_000_000_000
                              for t, b in recorder.state.books.items() if t in recorder.current))
         return JSONResponse({'data_ready': valid}, status_code=200 if valid else 503)
 

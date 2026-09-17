@@ -1,6 +1,6 @@
 # Research lab rules
 
-BTC-only research. Never add or enable live order submission without a new explicit user request. The Kalshi client exposes market-data GETs and WebSocket subscriptions only. Never reuse credentials or code from prior bots.
+BTC-only research. Never add or enable live order submission without a new explicit user request. The Kalshi client exposes market-data GETs and WebSocket subscriptions only. Never reuse code from prior bots. Reusing credentials requires explicit user authorization; on 2026-09-17 the user authorized copying the existing Kalshi key pair from old Railway variables into this research-only service.
 
 Preserve raw events and their local receipt order. Never backdate historical downloads into live replay. Never replace absent prices, thresholds, outcomes, or depth with favorable assumptions. Official results resolve positions; index averages are diagnostics and forecast inputs. Preserve incomplete/unresolved markets in reports.
 

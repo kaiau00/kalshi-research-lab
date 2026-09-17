@@ -1,12 +1,12 @@
 # Hosted research lab
 
-Verified 2026-09-17. The research service is hosted and recording public BTC metadata. Authenticated order-book and BRTI commissioning is still pending the user-provided Kalshi key. There is no live-order capability.
+Verified 2026-09-17. The research service is hosted and recording public BTC metadata. Authenticated order-book and BRTI subscriptions are now connected using the old Railway key pair at the user’s explicit request. Full-market execution and settlement commissioning is still pending. There is no live-order capability.
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
 - Environment: production
 - Deployed source commit: `c03b4c4` (later documentation-only commits need no app redeploy)
-- Active deployment: `b021652d-be70-420c-be23-c82e989eb921`, observed `SUCCESS`
+- Active deployment: `80a999e9-d74f-42a3-916f-25930d8b0db3`, observed `SUCCESS`
 - One replica; persistent volume `research-lab-volume` mounted at `/data`
 - HTTPS domain target port: **8080**, matching the Railway-assigned `PORT`
 
@@ -14,7 +14,7 @@ Verified 2026-09-17. The research service is hosted and recording public BTC met
 
 Dashboard username: `lab`. A generated password is saved locally in the ignored `.env.dashboard` file in the Desktop repository; it is not committed or included in Docker uploads. The same value is configured as `LAB_DASHBOARD_PASSWORD` on Railway.
 
-In the Railway service Variables tab, add `KALSHI_API_KEY_ID` and `KALSHI_PRIVATE_KEY_PEM` (full PEM value), or use the supported base64 alternative. Do not commit either credential. After deployment, audit actual BRTI and order-book subscriptions before calling data collection commissioned.
+The authorized key ID and base64 private key are configured as Railway secret variables. Do not commit either credential. Full-market execution and settlement auditing remains open.
 
 ## Verified behavior
 
@@ -36,8 +36,23 @@ The existing workspace hard usage limit of **$10** was left unchanged. The Hobby
 
 ## Remaining commissioning gates
 
-1. User installs Kalshi credentials in Railway Variables.
+1. Completed: user authorized the old Railway Kalshi key pair transfer; the key ID and base64 private key are installed. No key value was displayed or saved locally.
 2. Confirm fresh BRTI and book snapshots, sequence recovery and both receipt/source timestamps.
 3. Audit at least two complete BTC markets, official thresholds, outcomes and simulated fills.
 4. Verify account-specific balance rounding and fee assumptions.
 5. Measure real feed/replay usage against the budget and test archival capacity before a multi-week experiment.
+
+## Authenticated feed check — 2026-09-17
+
+The user explicitly requested credential reuse from old Railway variables. A read-only BRTI WebSocket subscription first verified the matching key ID/private key pair in `Kalyx_Final`. Only `KALSHI_API_KEY_ID` and `KALSHI_PRIVATE_KEY_B64` were copied into the new service, through stdin with command output captured. Old trading flags, endpoints, and strategy settings were not copied. Old services were not restarted.
+
+Following redeployment, the collector reported `recording`, `/readyz` returned 200, and fresh benchmark and valid book data were present. Initial quality counts were zero malformed frames, zero clock regressions, and one expected new-session gap marker. Evidence: `validation/authenticated-feed.json`. This supersedes the earlier missing-credential readiness check above.
+
+The first feed sample included 4,715 WebSocket events in approximately 23 seconds. That brief burst is not a long-term rate estimate, but it confirms that the two-million-event replay ceiling could become a near-term constraint. Capacity/checkpoint work remains tracked in issue #2; the existing limits have not been raised. Full-market outcome, fill, fee, and capacity auditing is still required before claiming sustained research commissioning.
+
+
+### Rollover correction
+
+The first live replay completed (13,680 events), but subsequent rollover snapshots omitted both depth arrays. The old normalizer incorrectly counted these as malformed and invalidated other books. Missing sides now clear that side of depth; explicitly malformed arrays still fail closed. Readiness additionally requires quotes on both sides. Seven new regression cases pass (34 total tests; Ruff clean).
+
+The corrected source starts a separately registered experiment in `/data/normalizer-v2`. The original `/data/events.sqlite3` and its reports are retained, because changing normalization code must not silently change the original forward experiment. No feed or replay capacity limits were increased.

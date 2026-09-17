@@ -1,0 +1,57 @@
+{
+  "recorder": {
+    "mode": "recording",
+    "last_discovery_ns": 1789618370667050699,
+    "last_ws_ns": 1789618399125562336,
+    "last_benchmark_ns": 1789618399060715230,
+    "error": null
+  },
+  "quality": {
+    "gaps": 1,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "data_ready": true,
+  "streams": [
+    {
+      "kind": "experiment_registration",
+      "events": 1,
+      "first_ns": 1789583452915867637,
+      "last_ns": 1789583452915867637
+    },
+    {
+      "kind": "gap",
+      "events": 1,
+      "first_ns": 1789618375685987404,
+      "last_ns": 1789618375685987404
+    },
+    {
+      "kind": "heartbeat",
+      "events": 1167,
+      "first_ns": 1789583452935180901,
+      "last_ns": 1789618370578659453
+    },
+    {
+      "kind": "market",
+      "events": 1211,
+      "first_ns": 1789583453025602929,
+      "last_ns": 1789618370666738612
+    },
+    {
+      "kind": "series",
+      "events": 42,
+      "first_ns": 1789583453003271602,
+      "last_ns": 1789618370644463660
+    },
+    {
+      "kind": "ws",
+      "events": 4715,
+      "first_ns": 1789618375705168425,
+      "last_ns": 1789618399125450537
+    }
+  ],
+  "prefix": {
+    "last_event_id": 7137,
+    "sha256_chain": "46fb35981f8c1c7c79c28b53453d1e8dd49b60d20a8de682a2af0c8854bc4f3e"
+  }
+}
