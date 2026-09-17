@@ -1,0 +1,23 @@
+{
+  "health_checks": {
+    "/healthz": 200,
+    "/readyz": 503,
+    "/": 401
+  },
+  "before_prefix": {
+    "last_event_id": 2357,
+    "sha256_chain": "0e279721588e76c46a14ac9aad8db50f41668968f6cd7113282203acb0f82d79"
+  },
+  "after_prefix": {
+    "last_event_id": 2368,
+    "sha256_chain": "55bd56eaf7858bc22633db52c46fc0d26bf301476651998910715a48ea28c491"
+  },
+  "unchanged_experiment_registration": {
+    "kind": "experiment_registration",
+    "events": 1,
+    "first_ns": 1789583452915867637,
+    "last_ns": 1789583452915867637
+  },
+  "collector_mode": "waiting_for_credentials",
+  "authenticated_feeds_verified": false
+}
