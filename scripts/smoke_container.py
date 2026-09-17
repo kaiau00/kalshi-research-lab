@@ -6,6 +6,9 @@ import time
 import urllib.error
 import urllib.request
 
+import boto3
+
+assert boto3.__version__  # Archive dependency must be included in the deployed image.
 base = 'http://127.0.0.1:8000'
 for _ in range(30):
     try:
