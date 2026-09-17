@@ -1,0 +1,99 @@
+{
+  "health_http": 200,
+  "ready_http": 200,
+  "recorder": {
+    "mode": "recording",
+    "last_discovery_ns": 1789618841734794129,
+    "last_ws_ns": 1789618855896084809,
+    "last_benchmark_ns": 1789618855049143002,
+    "error": null
+  },
+  "quality": {
+    "gaps": 1,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "storage": {
+    "prefix": {
+      "last_event_id": 20586,
+      "sha256_chain": "cea00ac6213c1de16215a6749c719204fbe6351387a34be6cfbf5d7e2f7d2601"
+    },
+    "bytes": 11796584,
+    "streams": [
+      {
+        "kind": "experiment_registration",
+        "events": 1,
+        "first_ns": 1789618811533655949,
+        "last_ns": 1789618811533655949
+      },
+      {
+        "kind": "gap",
+        "events": 1,
+        "first_ns": 1789618816687161352,
+        "last_ns": 1789618816687161352
+      },
+      {
+        "kind": "heartbeat",
+        "events": 2,
+        "first_ns": 1789618811588264243,
+        "last_ns": 1789618841591427758
+      },
+      {
+        "kind": "market",
+        "events": 2,
+        "first_ns": 1789618811672267254,
+        "last_ns": 1789618841734489181
+      },
+      {
+        "kind": "series",
+        "events": 1,
+        "first_ns": 1789618811651213719,
+        "last_ns": 1789618811651213719
+      },
+      {
+        "kind": "ws",
+        "events": 20579,
+        "first_ns": 1789618816709356486,
+        "last_ns": 1789618855895975980
+      }
+    ]
+  },
+  "job": {
+    "state": "complete",
+    "report": "1789618856783195734-20da7042.json",
+    "completed_ns": 1789618856797060966
+  },
+  "replay": {
+    "synthetic": false,
+    "quality": {
+      "gaps": 1,
+      "malformed": 0,
+      "clock_adjustments": 0
+    },
+    "accounts": {
+      "basic_fair_value": {
+        "orders_submitted": 0,
+        "settled_markets": 0,
+        "cash": 100.0
+      },
+      "tail_underdog": {
+        "orders_submitted": 0,
+        "settled_markets": 0,
+        "cash": 100.0
+      },
+      "adaptive_volatility": {
+        "orders_submitted": 0,
+        "settled_markets": 0,
+        "cash": 100.0
+      }
+    }
+  },
+  "preserved_original": {
+    "events": 112049,
+    "reprocessed_quality": {
+      "gaps": 2,
+      "malformed": 0,
+      "clock_adjustments": 0
+    }
+  }
+}

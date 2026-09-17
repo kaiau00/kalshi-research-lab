@@ -5,8 +5,8 @@ Verified 2026-09-17. The research service is hosted and recording public BTC met
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
 - Environment: production
-- Deployed source commit: `c03b4c4` (later documentation-only commits need no app redeploy)
-- Active deployment: `80a999e9-d74f-42a3-916f-25930d8b0db3`, observed `SUCCESS`
+- Deployed source commit: `ab08ff3` (later documentation-only commits need no app redeploy)
+- Active deployment: `912c251f-b12a-406f-9b80-fe3ff059b757`, observed `SUCCESS`
 - One replica; persistent volume `research-lab-volume` mounted at `/data`
 - HTTPS domain target port: **8080**, matching the Railway-assigned `PORT`
 
@@ -56,3 +56,5 @@ The first feed sample included 4,715 WebSocket events in approximately 23 second
 The first live replay completed (13,680 events), but subsequent rollover snapshots omitted both depth arrays. The old normalizer incorrectly counted these as malformed and invalidated other books. Missing sides now clear that side of depth; explicitly malformed arrays still fail closed. Readiness additionally requires quotes on both sides. Seven new regression cases pass (34 total tests; Ruff clean).
 
 The corrected source starts a separately registered experiment in `/data/normalizer-v2`. The original `/data/events.sqlite3` and its reports are retained, because changing normalization code must not silently change the original forward experiment. No feed or replay capacity limits were increased.
+
+Deployment reached SUCCESS; external health and two-sided readiness returned 200 with fresh authenticated data and zero malformed frames. Reprocessing all 112,049 preserved original events with the corrected normalizer produced zero malformed frames. GitHub CI passed tests, image build and startup verification: https://github.com/kaiau00/kalshi-research-lab/actions/runs/35181515139. Sanitized hosted evidence: `validation/authenticated-feed-v2.json`.
