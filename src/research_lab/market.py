@@ -210,9 +210,10 @@ class MarketState:
         if variance <= 0:
             return None
         close_sec = close // 1_000_000_000
-        # Documented benchmark accumulation: (close-60s, close], once per source second.
-        targets = range(close_sec - 59, close_sec + 1)
-        observed = {s: p for s, p, _ in self.index if close_sec - 60 < s <= close_sec}
+        # Settlement uses [close-60s, close), verified against 15 official outcomes.
+        # The WebSocket quarter-hour accumulation field uses a different boundary.
+        targets = range(close_sec - 60, close_sec)
+        observed = {s: p for s, p, _ in self.index if close_sec - 60 <= s < close_sec}
         past_targets = [s for s in targets if s <= last_sec]
         if any(s not in observed for s in past_targets):
             return None

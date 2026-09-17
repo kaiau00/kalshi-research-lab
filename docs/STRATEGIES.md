@@ -12,7 +12,7 @@ All use up to $1 per market including assumed taker fees, a $100 independent ban
 
 ## Probability model
 
-Use contiguous one-second log returns from BRTI only, with at least 60 returns. No forward-filled gaps, spot-exchange substitute, or forced minimum volatility. For the settlement average, use the 60 source seconds in `(close − 60 seconds, close]`. Any missing already-observed settlement second blocks the forecast.
+Use contiguous one-second log returns from BRTI only, with at least 60 returns. No forward-filled gaps, spot-exchange substitute, or forced minimum volatility. For the settlement average, use the 60 source seconds in `[close − 60 seconds, close)`. Any missing already-observed settlement second blocks the forecast.
 
 The conditional mean averages known settlement observations and the latest benchmark price for remaining seconds. Conditional variance uses Brownian covariance `min(t_i, t_j)` across remaining sampling times. A normal CDF estimates the chance of crossing the threshold, with a half-cent continuity correction for the specified cent rounding. This approximation assumes zero short-horizon drift and locally stable diffusion; it does not model jumps, latency arbitrage, or volatility risk premiums.
 
@@ -36,3 +36,5 @@ The collector also records series fee metadata every fifteen minutes. Missing fe
 - [Historical data and cutoff](https://docs.kalshi.com/getting_started/historical_data)
 
 The exact current market rules are preserved with every metadata observation. If a market's rules or schema differ from the supported form, the integration must be reviewed rather than silently guessed.
+
+Settlement boundary was corrected on 2026-09-17 after all 15 audited completed markets matched the close-exclusive average, while the former close-inclusive model matched none. Kalshi’s `last_60s_windowed_average_15min` feed field uses the latter boundary and must not be treated as the official settlement average. See `DATA_VALIDATION.md`. Existing reports from the earlier model are commissioning artifacts; corrected forward experiments require a new registration.

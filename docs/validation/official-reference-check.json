@@ -1,0 +1,119 @@
+{
+  "checked_date": "2026-09-17",
+  "reference_fetched_after_recording": true,
+  "sqlite_quick_check": "ok",
+  "checks": [
+    {
+      "ticker": "KXBTC15M-26SEP170030-30",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76160.07"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170045-45",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76304.78"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170100-00",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76497.59"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170115-15",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76405.19"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170130-30",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76421.09"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170145-45",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76293.62"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170200-00",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76262.74"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170215-15",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76392.00"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170230-30",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76349.87"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170245-45",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76492.62"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170300-00",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76406.25"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170515-15",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76621.78"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170530-30",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "yes",
+      "official_expiration_value": "76628.20"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170545-45",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76539.34"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170600-00",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76416.03"
+    },
+    {
+      "ticker": "KXBTC15M-26SEP170615-15",
+      "mismatched_fields": [],
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76345.08"
+    }
+  ]
+}

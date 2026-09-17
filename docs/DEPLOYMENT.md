@@ -1,5 +1,7 @@
 # Hosted research lab
 
+**Current status after the 2026-09-17 data audit:** the recorder stopped at its storage safety limit around 06:05 EDT. Dashboard remains reachable; health/readiness are 503 and replay exceeded its event cap. Settlement-window correction is committed separately but not deployed. See `DATA_VALIDATION.md`. Earlier successful checks below describe deployment-time behavior.
+
 Verified 2026-09-17. The research service is hosted and recording public BTC metadata. Authenticated order-book and BRTI subscriptions are now connected using the old Railway key pair at the user’s explicit request. Full-market execution and settlement commissioning is still pending. There is no live-order capability.
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app

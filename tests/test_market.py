@@ -59,9 +59,9 @@ def test_duplicate_index_and_stale_inputs_do_not_create_forecasts():
 def test_settlement_average_uses_accumulated_seconds_and_rejects_a_gap():
     state, ticker = warmed_state(870)
     fair = state.forecast(ticker, int((START + 870.1) * NS), Experiment())
-    assert fair['observed_settlement_seconds'] == 30  # seconds 841 through 870
-    observed = [p for sec, p, _ in state.index if START + 840 < sec <= START + 870]
-    expected = (sum(observed) + 30 * state.index[-1][1]) / 60
+    assert fair['observed_settlement_seconds'] == 31  # seconds 840 through 870
+    observed = [p for sec, p, _ in state.index if START + 840 <= sec <= START + 870]
+    expected = (sum(observed) + 29 * state.index[-1][1]) / 60
     assert fair['expected_average'] == pytest.approx(expected)
     state.index = type(state.index)((row for row in state.index if row[0] != START + 850), maxlen=7200)
     assert state.forecast(ticker, int((START + 870.1) * NS), Experiment()) is None
@@ -113,3 +113,13 @@ def test_present_malformed_snapshot_side_still_fails_closed(levels):
     state.apply(ws(frame, START + 751))
     assert state.quality['malformed'] == 1
     assert not state.books[ticker].valid
+
+
+def test_settlement_forecast_includes_first_second_before_close():
+    state, ticker = warmed_state(840)
+    fair = state.forecast(ticker, int((START + 840.1) * NS), Experiment())
+    assert fair['observed_settlement_seconds'] == 1
+    # Missing the first settlement second must block later forecasts.
+    state, ticker = warmed_state(870)
+    state.index = type(state.index)((row for row in state.index if row[0] != START + 840), maxlen=7200)
+    assert state.forecast(ticker, int((START + 870.1) * NS), Experiment()) is None
