@@ -12,7 +12,7 @@ from .storage import Store
 def market_fixture(start=1800000000, name='SYNTHETIC', **overrides):
     def iso(sec):
         return datetime.fromtimestamp(sec, timezone.utc).isoformat()
-    return {'ticker': 'KXBTC15M-' + name, 'floor_strike': 80000,
+    return {'ticker': 'KXBTC15M-' + name, 'event_ticker': 'KXBTC15M-EVENT-' + name, 'floor_strike': 80000,
             'custom_strike': {'round_digits': '2'},
             'strike_type': 'greater_or_equal', 'open_time': iso(start), 'close_time': iso(start + 900),
             'rules_primary': 'SYNTHETIC: average of BRTI during the final sixty seconds',
@@ -49,6 +49,13 @@ def create_demo(path: Path, markets=10):
                 sec = begin + offset
                 # Alternating toy oscillations deliberately yield grossly mispriced toy quotes.
                 price = 80000 + 2 * math.sin(offset * .9)
+                if offset % 60 == 0:
+                    store.append('event_metadata', {'synthetic': True, 'event': {
+                        'event_ticker': market['event_ticker'], 'series_ticker': 'KXBTC15M'}},
+                        received_ns=sec * 10**9)
+                if offset == 0:
+                    store.append('series', {'synthetic': True, 'series': {'ticker': 'KXBTC15M',
+                        'fee_type': 'quadratic', 'fee_multiplier': 1}}, received_ns=sec * 10**9)
                 seq += 1
                 for frame, lag in ((index_frame(sec, price), 10_000_000),
                                    (book_frame(market['ticker'], seq), 20_000_000)):

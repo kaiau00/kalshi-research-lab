@@ -28,3 +28,26 @@ def test_book_rollover_does_not_clear_benchmark_history():
     assert len(state.index) == 1
     state.apply(Event(2, 100000000002, None, 'gap', {'stream': 'benchmark'}))
     assert not state.index and state.last_index_source == -1
+
+
+def test_event_fee_capture_and_refresh_throttle(tmp_path, monkeypatch):
+    monkeypatch.delenv('LAB_SEGMENTED', raising=False)
+    r = Recorder(tmp_path / 'events.db')
+    m = market_fixture()
+    r.remember(m)
+    r.watch = {m['ticker']}
+    calls = []
+
+    async def get(path):
+        calls.append(path)
+        return {'event': {'event_ticker': m['event_ticker'], 'series_ticker': 'KXBTC15M',
+                          'fee_multiplier_override': 2}}
+
+    r.client.get = get
+    asyncio.run(r.refresh_event_fees())
+    asyncio.run(r.refresh_event_fees())
+    assert calls == ['/events/' + m['event_ticker']]
+    records = [e for e in r.store.events() if e.kind == 'event_metadata']
+    assert len(records) == 1 and records[0].payload['event']['fee_multiplier_override'] == 2
+    r.store.close()
+    asyncio.run(r.client.close())

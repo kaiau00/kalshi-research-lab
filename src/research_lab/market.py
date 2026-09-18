@@ -42,6 +42,8 @@ class MarketState:
     def __init__(self):
         self.markets = {}
         self.series = None
+        self.series_received_ns = 0
+        self.event_fees = {}
         self.books: dict[str, Book] = {}
         self.seq: dict[tuple[str, int], int] = {}
         self.index = deque(maxlen=7200)  # (source_second, price, received_ns)
@@ -61,6 +63,10 @@ class MarketState:
             return
         if event.kind == 'series':
             self.series = p['series']
+            self.series_received_ns = event.received_ns
+        elif event.kind == 'event_metadata':
+            data = p['event']
+            self.event_fees[data['event_ticker']] = (data, event.received_ns)
         elif event.kind == "market":
             m = p["market"]
             self.markets[m["ticker"]] = m
@@ -173,13 +179,25 @@ class MarketState:
         except (KeyError, ValueError, TypeError):
             return None
 
-    def fee_supported(self, cfg):
+    def fee_supported(self, cfg, ticker, now):
         try:
-            return (self.series is not None and self.series.get('ticker') == 'KXBTC15M'
-                    and self.series.get('fee_type') == 'quadratic'
-                    and Decimal(str(self.series['fee_multiplier'])) > 0
-                    and Decimal(str(self.series['fee_multiplier'])) * Decimal('.07')
-                    <= Decimal(cfg.taker_fee_rate))
+            if (self.series is None or self.series.get('ticker') != 'KXBTC15M'
+                    or not 0 <= now-self.series_received_ns <= 1800_000_000_000):
+                return False
+            event_id = self.markets[ticker]['event_ticker']
+            event, received = self.event_fees[event_id]
+            if (event.get('series_ticker') != 'KXBTC15M'
+                    or not 0 <= now-received <= 120_000_000_000):
+                return False
+            fee_type = event.get('fee_type_override')
+            if fee_type is None:
+                fee_type = self.series.get('fee_type')
+            multiplier = event.get('fee_multiplier_override')
+            if multiplier is None:
+                multiplier = self.series['fee_multiplier']
+            multiplier = Decimal(str(multiplier))
+            return (fee_type == 'quadratic' and multiplier.is_finite() and multiplier >= 0
+                    and multiplier * Decimal('.07') <= Decimal(cfg.taker_fee_rate))
         except (ValueError, KeyError, TypeError, ArithmeticError):
             return False
 

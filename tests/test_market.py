@@ -22,6 +22,9 @@ def warmed_state(last=750):
     state.series = {'ticker': 'KXBTC15M', 'fee_type': 'quadratic', 'fee_multiplier': 1}
     market = market_fixture()
     state.apply(Event(1, START * NS, None, 'market', {'market': market}))
+    state.series_received_ns = (START+last)*NS
+    state.apply(Event(1, (START+last)*NS, None, 'event_metadata', {'event': {
+        'event_ticker': market['event_ticker'], 'series_ticker': 'KXBTC15M'}}))
     for offset in range(last - 120, last + 1):
         state.apply(ws(index_frame(START + offset, 80000 + math.sin(offset)), START + offset + .01))
     return state, market['ticker']

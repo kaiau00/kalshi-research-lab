@@ -104,3 +104,44 @@ def test_fee_change_during_latency_cancels_order():
     assert account.orders[0]['status'] == 'canceled_unavailable'
     assert account.cash == 100
     assert account.reserved == 0
+
+
+@pytest.mark.parametrize('change', ['missing', 'stale', 'wrong_series', 'higher_fee', 'flat_fee', 'nan_fee'])
+def test_event_fee_guard_blocks_pending_fill(change):
+    replay, ticker, account, now = prepared()
+    event_id = replay.state.markets[ticker]['event_ticker']
+    event, received = replay.state.event_fees[event_id]
+    if change == 'missing':
+        replay.state.event_fees.clear()
+    elif change == 'stale':
+        replay.state.event_fees[event_id] = (event, now-121_000_000_000)
+    elif change == 'wrong_series':
+        event['series_ticker'] = 'OTHER'
+    elif change == 'higher_fee':
+        event['fee_multiplier_override'] = 2
+    elif change == 'flat_fee':
+        event['fee_type_override'] = 'flat'
+    else:
+        event['fee_multiplier_override'] = 'NaN'
+    replay._fill_due(account, now+500_000_000)
+    assert account.orders[0]['status'] == 'canceled_unavailable'
+    assert account.cash == 100 and account.reserved == 0
+
+
+def test_stale_series_blocks_fee_assumptions():
+    replay, ticker, account, now = prepared()
+    replay.state.series_received_ns = now-1801_000_000_000
+    replay._fill_due(account, now+500_000_000)
+    assert account.cash == 100 and not account.positions
+
+
+def test_paused_market_rejects_order_and_pending_fill():
+    replay, ticker, account, now = prepared()
+    replay.state.markets[ticker]['status'] = 'inactive'
+    replay._fill_due(account, now+500_000_000)
+    assert account.cash == 100 and not account.positions
+    account.attempts.clear()
+    account.last_attempt.clear()
+    before = len(account.orders)
+    replay._decide(account, ticker, now+1_000_000_000)
+    assert len(account.orders) == before

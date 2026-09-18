@@ -82,12 +82,13 @@ class Replay:
         if ticker in account.traded or ticker in account.pending or account.attempts.get(ticker, 0) >= 3:
             return
         meta = self.state.metadata(ticker)
-        if not meta or self.state.markets[ticker].get("result"):
+        if (not meta or self.state.markets[ticker].get("result")
+                or self.state.markets[ticker].get("status") != "active"):
             return
         seconds_left = (meta[2] - now) / 1e9
         if not self.cfg.min_seconds_left <= seconds_left <= self.cfg.max_seconds_left:
             return
-        if not self.state.fee_supported(self.cfg):
+        if not self.state.fee_supported(self.cfg, ticker, now):
             account.reject('missing_or_unsupported_series_fees')
             return
         if now - account.last_attempt.get(ticker, 0) < 10_000_000_000:
@@ -156,7 +157,8 @@ class Replay:
             meta = self.state.metadata(ticker)
             book = self._fresh_book(ticker, now)
             if (not meta or now >= meta[2] or self.state.markets[ticker].get("result") or not book
-                    or not self.state.fee_supported(self.cfg)):
+                    or self.state.markets[ticker].get("status") != "active"
+                    or not self.state.fee_supported(self.cfg, ticker, now)):
                 order["status"] = "canceled_unavailable"
                 continue
             # Use the book known at the first receipt event at/after arrival, only

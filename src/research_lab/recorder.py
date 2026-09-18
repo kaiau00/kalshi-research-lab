@@ -31,7 +31,7 @@ class MarketDataClient:
         self.http = httpx.AsyncClient(timeout=20, follow_redirects=False)
 
     async def get(self, path, params=None):
-        if not path.startswith(("/markets", "/historical/", "/series/", "/exchange/")) or ":" in path:
+        if not path.startswith(("/markets", "/historical/", "/series/", "/events/", "/exchange/")) or ":" in path:
             raise ValueError("Only market-data GET endpoints are allowed")
         for attempt in range(4):
             response = await self.http.get(REST_BASE + path, params=params)
@@ -96,6 +96,7 @@ class Recorder:
         self.max_bytes = int(os.environ.get('LAB_MAX_STORAGE_BYTES', '2000000000'))
         self.last_commit = time.monotonic()
         self.last_series = 0
+        self.last_event_fees = {}
 
     def append(self, kind, payload, source_ns=None):
         event = self.store.append(kind, payload, source_ns=source_ns)
@@ -179,6 +180,30 @@ class Recorder:
                         raise
                     self.append('resolution_error', {'ticker': ticker, 'error': type(exc).__name__})
                 await asyncio.sleep(.1)
+            await asyncio.sleep(3)
+
+    async def refresh_event_fees(self):
+        event_ids = {self.known[t]['event_ticker'] for t in self.watch
+                     if self.known[t].get('event_ticker')}
+        for event_id in sorted(event_ids):
+            if time.monotonic() - self.last_event_fees.get(event_id, 0) < 60:
+                continue
+            try:
+                response = await self.client.get('/events/' + event_id)
+                event = response['event']
+                if event.get('event_ticker') != event_id or event.get('series_ticker') != SERIES:
+                    raise ValueError('Mismatched event fee response')
+                self.append('event_metadata', {'event': event})
+                self.last_event_fees[event_id] = time.monotonic()
+            except (httpx.HTTPError, RuntimeError, ValueError, KeyError) as exc:
+                if str(exc).endswith('_reached'):
+                    raise
+                self.append('fee_metadata_error', {'event_ticker': event_id, 'error': type(exc).__name__})
+        self.last_event_fees = {k: v for k, v in self.last_event_fees.items() if k in event_ids}
+
+    async def fees(self):
+        while True:
+            await self.refresh_event_fees()
             await asyncio.sleep(3)
 
     async def stream(self, channel):
@@ -270,6 +295,7 @@ class Recorder:
             async with asyncio.TaskGroup() as group:
                 group.create_task(self.discover())
                 group.create_task(self.resolve())
+                group.create_task(self.fees())
                 group.create_task(self.stream('benchmark'))
                 group.create_task(self.stream('book'))
                 group.create_task(self.heartbeat())
