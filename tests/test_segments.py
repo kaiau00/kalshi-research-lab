@@ -1,3 +1,5 @@
+import gzip
+import hashlib
 import json
 import shutil
 
@@ -8,9 +10,9 @@ from research_lab.checkpoint import decode, encode
 from research_lab.demo import create_demo
 from research_lab.engine import Replay
 from research_lab.research import source_hash
-from research_lab.segments import SegmentedStore, checksum, process_one, restore
+from research_lab.segments import SegmentedStore, archive_events, checksum, process_one, restore
 from research_lab.settings import Experiment
-from research_lab.storage import Store
+from research_lab.storage import Store, canonical
 
 
 class FakeBucket:
@@ -100,3 +102,23 @@ def test_segment_archive_retry_restore_and_continuous_accounts(tmp_path, monkeyp
     first_archive.write_bytes(b'corrupt')
     with pytest.raises(ValueError, match='checksum'):
         restore(root, tmp_path / 'bad-restore.db', bucket)
+
+
+@pytest.mark.parametrize('legacy', [False, True])
+def test_archive_formats_reconstruct_exact_hash_and_reject_changed_payload(tmp_path, legacy):
+    fields = [1, 1800000000000000000, None, 'diagnostic', {'value': 42}]
+    digest = hashlib.sha256(bytes.fromhex('0' * 64) + canonical(fields[1:])).hexdigest()
+    row = {'count': 1, 'digest': digest}
+    if legacy:
+        fields.append(digest)
+    path = tmp_path / 'archive.gz'
+    with gzip.open(path, 'wb') as f:
+        f.write(canonical(fields) + b'\n')
+    events = list(archive_events(path, row))
+    assert events[0].digest == digest
+    assert events[0].payload == {'value': 42}
+    fields[4]['value'] = 43
+    with gzip.open(path, 'wb') as f:
+        f.write(canonical(fields) + b'\n')
+    with pytest.raises(ValueError, match='integrity|prefix'):
+        list(archive_events(path, row))

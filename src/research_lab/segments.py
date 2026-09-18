@@ -175,11 +175,15 @@ def archive_events(path, row):
     count = 0
     with gzip.open(path, 'rt') as f:
         for line in f:
-            i, received, source, kind, payload, recorded_digest = json.loads(line)
+            fields = json.loads(line)
+            if len(fields) not in (5, 6):
+                raise ValueError("Unknown archive envelope")
+            i, received, source, kind, payload = fields[:5]
+            recorded_digest = fields[5] if len(fields) == 6 else None
             if i != count + 1:
                 raise ValueError('Archive event ordering error')
             digest = hashlib.sha256(bytes.fromhex(digest) + canonical([received, source, kind, payload])).hexdigest()
-            if digest != recorded_digest:
+            if recorded_digest is not None and digest != recorded_digest:
                 raise ValueError('Archive event integrity error')
             count += 1
             yield Event(i, received, source, kind, payload, digest)
@@ -244,7 +248,7 @@ def _process_one(root, bucket):
                             raise ValueError('Broken segment linkage')
                     if next_segment == row['id']:
                         replay.feed(e)
-                    f.write(canonical([e.id, e.received_ns, e.source_ns, e.kind, e.payload, e.digest]) + b'\n')
+                    f.write(canonical([e.id, e.received_ns, e.source_ns, e.kind, e.payload]) + b'\n')
             if digest != row['digest']:
                 raise ValueError('Sealed prefix mismatch')
         finally:
