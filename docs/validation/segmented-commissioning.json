@@ -1,0 +1,462 @@
+{
+  "schema_version": 2,
+  "settlement_window": "[close-60s, close)",
+  "scope": "Data integrity and coverage only; no strategy or execution validation",
+  "prefix": {
+    "last_event_id": 1197032,
+    "sha256_chain": "7b9f94240ddd371030f32318e7046e02d49b1442590a80d52943c20fe5349aae"
+  },
+  "verified_events": 1197032,
+  "hash_matches_frozen_prefix": true,
+  "first_received_ns": 1789665886362753400,
+  "last_received_ns": 1789668104150440546,
+  "counts": {
+    "experiment_registration": 1,
+    "heartbeat": 222,
+    "series": 4,
+    "gap": 4,
+    "market": 1616,
+    "ws": 1195172,
+    "segment_start": 11,
+    "outcome_revision": 2
+  },
+  "frame_counts": {
+    "subscribed": 4,
+    "cfbenchmarks_value": 2216,
+    "orderbook_snapshot": 10,
+    "orderbook_delta": 1192936,
+    "ok": 6
+  },
+  "registration": [
+    {
+      "event_id": 1,
+      "source_matches": true
+    }
+  ],
+  "normalizer_quality": {
+    "gaps": 4,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "issues": {},
+  "gaps": [
+    {
+      "event_id": 4,
+      "received_ns": 1789665886520874915,
+      "reason": "new_stream_session"
+    },
+    {
+      "event_id": 9,
+      "received_ns": 1789665887536116202,
+      "reason": "new_stream_session"
+    },
+    {
+      "event_id": 154525,
+      "received_ns": 1789666114868185256,
+      "reason": "new_stream_session"
+    },
+    {
+      "event_id": 154528,
+      "received_ns": 1789666115883509603,
+      "reason": "new_stream_session"
+    }
+  ],
+  "sequence_issues": [],
+  "source_timestamp_missing": {
+    "subscribed": 4,
+    "orderbook_snapshot": 10,
+    "ok": 6
+  },
+  "source_to_receipt_latency": {
+    "cfbenchmarks_value": {
+      "<=250ms": 2215,
+      "<=1s": 1
+    },
+    "orderbook_delta": {
+      "<=250ms": 1192936
+    }
+  },
+  "markets": [
+    {
+      "ticker": "KXBTC15M-26SEP171330-30",
+      "open_time": "2026-09-17T17:15:00Z",
+      "close_time": "2026-09-17T17:30:00Z",
+      "floor_strike": 76752.39,
+      "strike_type": "greater_or_equal",
+      "custom_strike": {
+        "round_digits": "2"
+      },
+      "status": "finalized",
+      "result": "yes",
+      "expiration_value": "76836.19",
+      "metadata_supported": true,
+      "threshold_versions": [
+        "76752.39"
+      ],
+      "result_versions": [
+        "yes"
+      ],
+      "threshold_first_seen_seconds_after_open": 586.5219011306763,
+      "book_first_seen_seconds_after_open": 587.5616648197174,
+      "result_first_seen_seconds_after_close": 1.9490742683410645,
+      "recording_spans_market": false,
+      "benchmark_seconds_present": 312,
+      "benchmark_seconds_expected": 900,
+      "final_minute_count": 60,
+      "final_minute_missing_seconds": [],
+      "reconstructed_settlement": "76836.19",
+      "unrounded_average": "76836.1915",
+      "recorded_settlement_matches": true,
+      "reconstructed_result": "yes",
+      "recorded_result_matches": true,
+      "exchange_final_window": {
+        "value": "76836.66966667",
+        "window_end_ts_exclusive": 1789666200000,
+        "window_size": 60,
+        "window_start_ts_ms": 1789666140000
+      },
+      "book_counts": {
+        "orderbook_snapshot": 4,
+        "orderbook_delta": 161518,
+        "empty_snapshots": 2
+      },
+      "book_coverage_seconds": {
+        "valid": 312.409701464,
+        "two_sided": 261.175848147,
+        "fresh_two_sided": 259.692648763
+      },
+      "missing_benchmark_seconds_count": 588
+    },
+    {
+      "ticker": "KXBTC15M-26SEP171345-45",
+      "open_time": "2026-09-17T17:30:00Z",
+      "close_time": "2026-09-17T17:45:00Z",
+      "floor_strike": 76836.19,
+      "strike_type": "greater_or_equal",
+      "custom_strike": {
+        "round_digits": "2"
+      },
+      "status": "finalized",
+      "result": "no",
+      "expiration_value": "76696.72",
+      "metadata_supported": true,
+      "threshold_versions": [
+        "76836.19"
+      ],
+      "result_versions": [
+        "no"
+      ],
+      "threshold_first_seen_seconds_after_open": 0.9218988418579102,
+      "book_first_seen_seconds_after_open": -312.43776273727417,
+      "result_first_seen_seconds_after_close": 1.393115520477295,
+      "recording_spans_market": true,
+      "benchmark_seconds_present": 900,
+      "benchmark_seconds_expected": 900,
+      "final_minute_count": 60,
+      "final_minute_missing_seconds": [],
+      "reconstructed_settlement": "76696.72",
+      "unrounded_average": "76696.7185",
+      "recorded_settlement_matches": true,
+      "reconstructed_result": "no",
+      "recorded_result_matches": true,
+      "exchange_final_window": {
+        "value": "76695.61216667",
+        "window_end_ts_exclusive": 1789667100000,
+        "window_size": 60,
+        "window_start_ts_ms": 1789667040000
+      },
+      "book_counts": {
+        "orderbook_snapshot": 3,
+        "empty_snapshots": 3,
+        "orderbook_delta": 547281
+      },
+      "book_coverage_seconds": {
+        "valid": 900.0,
+        "two_sided": 826.058978987,
+        "fresh_two_sided": 826.058978987
+      },
+      "missing_benchmark_seconds_count": 0
+    },
+    {
+      "ticker": "KXBTC15M-26SEP171400-00",
+      "open_time": "2026-09-17T17:45:00Z",
+      "close_time": "2026-09-17T18:00:00Z",
+      "floor_strike": 76696.72,
+      "strike_type": "greater_or_equal",
+      "custom_strike": {
+        "round_digits": "2"
+      },
+      "status": "finalized",
+      "result": "no",
+      "expiration_value": "76608.90",
+      "metadata_supported": true,
+      "threshold_versions": [
+        "76696.72"
+      ],
+      "result_versions": [
+        "no"
+      ],
+      "threshold_first_seen_seconds_after_open": 1.3929517269134521,
+      "book_first_seen_seconds_after_open": -899.0583009719849,
+      "result_first_seen_seconds_after_close": 1.7557568550109863,
+      "recording_spans_market": true,
+      "benchmark_seconds_present": 900,
+      "benchmark_seconds_expected": 900,
+      "final_minute_count": 60,
+      "final_minute_missing_seconds": [],
+      "reconstructed_settlement": "76608.90",
+      "unrounded_average": "76608.90333333333333333333333",
+      "recorded_settlement_matches": true,
+      "reconstructed_result": "no",
+      "recorded_result_matches": true,
+      "exchange_final_window": {
+        "value": "76608.76400000",
+        "window_end_ts_exclusive": 1789668000000,
+        "window_size": 60,
+        "window_start_ts_ms": 1789667940000
+      },
+      "book_counts": {
+        "orderbook_snapshot": 1,
+        "empty_snapshots": 1,
+        "orderbook_delta": 433206
+      },
+      "book_coverage_seconds": {
+        "valid": 900.0,
+        "two_sided": 843.320711445,
+        "fresh_two_sided": 843.320711445
+      },
+      "missing_benchmark_seconds_count": 0
+    },
+    {
+      "ticker": "KXBTC15M-26SEP171415-15",
+      "open_time": "2026-09-17T18:00:00Z",
+      "close_time": "2026-09-17T18:15:00Z",
+      "floor_strike": 76608.9,
+      "strike_type": "greater_or_equal",
+      "custom_strike": {
+        "round_digits": "2"
+      },
+      "status": "active",
+      "result": "",
+      "expiration_value": "",
+      "metadata_supported": true,
+      "threshold_versions": [
+        "76608.9"
+      ],
+      "result_versions": [],
+      "threshold_first_seen_seconds_after_open": 0.7281067371368408,
+      "book_first_seen_seconds_after_open": -899.6117036342621,
+      "result_first_seen_seconds_after_close": null,
+      "recording_spans_market": false,
+      "benchmark_seconds_present": 104,
+      "benchmark_seconds_expected": 900,
+      "final_minute_count": 0,
+      "final_minute_missing_seconds": [
+        1789668840,
+        1789668841,
+        1789668842,
+        1789668843,
+        1789668844,
+        1789668845,
+        1789668846,
+        1789668847,
+        1789668848,
+        1789668849,
+        1789668850,
+        1789668851,
+        1789668852,
+        1789668853,
+        1789668854,
+        1789668855,
+        1789668856,
+        1789668857,
+        1789668858,
+        1789668859,
+        1789668860,
+        1789668861,
+        1789668862,
+        1789668863,
+        1789668864,
+        1789668865,
+        1789668866,
+        1789668867,
+        1789668868,
+        1789668869,
+        1789668870,
+        1789668871,
+        1789668872,
+        1789668873,
+        1789668874,
+        1789668875,
+        1789668876,
+        1789668877,
+        1789668878,
+        1789668879,
+        1789668880,
+        1789668881,
+        1789668882,
+        1789668883,
+        1789668884,
+        1789668885,
+        1789668886,
+        1789668887,
+        1789668888,
+        1789668889,
+        1789668890,
+        1789668891,
+        1789668892,
+        1789668893,
+        1789668894,
+        1789668895,
+        1789668896,
+        1789668897,
+        1789668898,
+        1789668899
+      ],
+      "reconstructed_settlement": null,
+      "unrounded_average": null,
+      "recorded_settlement_matches": null,
+      "reconstructed_result": null,
+      "recorded_result_matches": null,
+      "exchange_final_window": null,
+      "book_counts": {
+        "orderbook_snapshot": 1,
+        "empty_snapshots": 1,
+        "orderbook_delta": 50931
+      },
+      "book_coverage_seconds": {
+        "valid": 104.150440546,
+        "two_sided": 104.119087772,
+        "fresh_two_sided": 104.119087772
+      },
+      "missing_benchmark_seconds_count": 796
+    },
+    {
+      "ticker": "KXBTC15M-26SEP171430-30",
+      "open_time": "2026-09-17T18:15:00Z",
+      "close_time": "2026-09-17T18:30:00Z",
+      "floor_strike": null,
+      "strike_type": null,
+      "custom_strike": null,
+      "status": "initialized",
+      "result": "",
+      "expiration_value": "",
+      "metadata_supported": false,
+      "threshold_versions": [],
+      "result_versions": [],
+      "threshold_first_seen_seconds_after_open": null,
+      "book_first_seen_seconds_after_open": -899.2474234104156,
+      "result_first_seen_seconds_after_close": null,
+      "recording_spans_market": false,
+      "benchmark_seconds_present": 0,
+      "benchmark_seconds_expected": 900,
+      "final_minute_count": 0,
+      "final_minute_missing_seconds": [
+        1789669740,
+        1789669741,
+        1789669742,
+        1789669743,
+        1789669744,
+        1789669745,
+        1789669746,
+        1789669747,
+        1789669748,
+        1789669749,
+        1789669750,
+        1789669751,
+        1789669752,
+        1789669753,
+        1789669754,
+        1789669755,
+        1789669756,
+        1789669757,
+        1789669758,
+        1789669759,
+        1789669760,
+        1789669761,
+        1789669762,
+        1789669763,
+        1789669764,
+        1789669765,
+        1789669766,
+        1789669767,
+        1789669768,
+        1789669769,
+        1789669770,
+        1789669771,
+        1789669772,
+        1789669773,
+        1789669774,
+        1789669775,
+        1789669776,
+        1789669777,
+        1789669778,
+        1789669779,
+        1789669780,
+        1789669781,
+        1789669782,
+        1789669783,
+        1789669784,
+        1789669785,
+        1789669786,
+        1789669787,
+        1789669788,
+        1789669789,
+        1789669790,
+        1789669791,
+        1789669792,
+        1789669793,
+        1789669794,
+        1789669795,
+        1789669796,
+        1789669797,
+        1789669798,
+        1789669799
+      ],
+      "reconstructed_settlement": null,
+      "unrounded_average": null,
+      "recorded_settlement_matches": null,
+      "reconstructed_result": null,
+      "recorded_result_matches": null,
+      "exchange_final_window": null,
+      "book_counts": {
+        "orderbook_snapshot": 1,
+        "empty_snapshots": 1
+      },
+      "book_coverage_seconds": {},
+      "missing_benchmark_seconds_count": 900
+    }
+  ],
+  "archive_restore_verification": {
+    "verified_events": 1197032,
+    "sha256_chain": "7b9f94240ddd371030f32318e7046e02d49b1442590a80d52943c20fe5349aae"
+  },
+  "archive_segments": {
+    "first": 0,
+    "last": 11,
+    "count": 12
+  },
+  "independent_official_checks": [
+    {
+      "ticker": "KXBTC15M-26SEP171345-45",
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76696.72",
+      "threshold_matches": true,
+      "result_matches": true,
+      "settlement_matches": true
+    },
+    {
+      "ticker": "KXBTC15M-26SEP171400-00",
+      "official_status": "finalized",
+      "official_result": "no",
+      "official_expiration_value": "76608.90",
+      "threshold_matches": true,
+      "result_matches": true,
+      "settlement_matches": true
+    }
+  ],
+  "dataset": "6907fda78df14d2fb2c182a1107396a0",
+  "dataset_directory": "/data/segments-v3",
+  "note": "Coverage audit of frozen segments 0\u201311; later compact-archive deployment uses a separate v4 registration. Startup and partial markets remain explicit."
+}

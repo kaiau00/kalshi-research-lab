@@ -1,0 +1,27 @@
+{
+  "dataset": "384c24bdda914bf0aef8347d741b1318",
+  "archived_segments": 1,
+  "archive_bytes": 3142355,
+  "source_sha256": "46304dde01e8f24dad8dac28682c299bc498dac10c8eae4ac7728a2c4f18e119",
+  "envelope_fields": 5,
+  "first_archive": {
+    "count": 100000,
+    "bytes": 3142355,
+    "terminal_hash_matches": true,
+    "registration_matches": true,
+    "checksum_verified": true
+  },
+  "checkpoint": {
+    "checksum_valid": true,
+    "source_matches": true,
+    "next_segment": 1
+  },
+  "deployment": "acd0d537-de9a-4a5d-92e5-b923165c38f6",
+  "source_commit": "0a515674c480a25898797543b5fc0b050e475aba",
+  "http_checks": {
+    "health": 200,
+    "ready": 200,
+    "unauthenticated_dashboard": 401
+  },
+  "ci": "https://github.com/kaiau00/kalshi-research-lab/actions/runs/35348396368"
+}

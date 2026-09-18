@@ -1,5 +1,7 @@
 # Data validation — 2026-09-17
 
+**Follow-up:** the collection, rollover, settlement-window and bounded replay fixes are deployed. Two complete markets passed the new audit; see [COMMISSIONING.md](COMMISSIONING.md). The findings below are preserved as historical evidence.
+
 **Decision: captured-data integrity passes; the system is not ready for strategy validation or uninterrupted collection.**
 
 Audited every one of 5,334,381 events captured between 04:20:11 and 10:05:23 UTC on September 17 (00:20–06:05 EDT). The database prefix is fixed at event 5,334,381, hash `73e23205576ef1f36f4f43fc4483bb0cf76eb3365857f33c0f0b227ee0bf1bf4`. Production source was `ab08ff3`. No performance evaluation or parameter selection was performed.

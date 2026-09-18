@@ -1,22 +1,23 @@
 # Hosted research lab
 
-**Current status after the 2026-09-17 data audit:** the recorder stopped at its storage safety limit around 06:05 EDT. Dashboard remains reachable; health/readiness are 503 and replay exceeded its event cap. Settlement-window correction is committed separately but not deployed. See `DATA_VALIDATION.md`. Earlier successful checks below describe deployment-time behavior.
-
-Verified 2026-09-17. The research service is hosted and recording public BTC metadata. Authenticated order-book and BRTI subscriptions are now connected using the old Railway key pair at the user’s explicit request. Full-market execution and settlement commissioning is still pending. There is no live-order capability.
+**Current status — September 18, 2026:** recording and bounded paper replay are restored. Settlement-window and rollover fixes passed an archive-based audit of two complete markets. See [COMMISSIONING.md](COMMISSIONING.md) for evidence and remaining execution/strategy gates. There is no live-order capability.
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
-- Environment: production
-- Deployed source commit: `ab08ff3` (later documentation-only commits need no app redeploy)
-- Active deployment: `912c251f-b12a-406f-9b80-fe3ff059b757`, observed `SUCCESS`
-- One replica; persistent volume `research-lab-volume` mounted at `/data`
-- HTTPS domain target port: **8080**, matching the Railway-assigned `PORT`
+- Production source: `0a51567`; later documentation commits need no redeployment.
+- Active deployment: `acd0d537-de9a-4a5d-92e5-b923165c38f6`, observed `SUCCESS`.
+- Dataset `/data/segments-v4`, ID `384c24bdda914bf0aef8347d741b1318`; all earlier datasets preserved.
+- One replica, persistent `/data` volume and private `research-archive` bucket; HTTPS target port 8080.
+- External health/readiness both 200; unauthenticated dashboard 401; authenticated status 200; both feeds connected, no recorder error.
+- Existing $10 workspace hard usage limit unchanged. Compact-format planning estimate is $7–9/month at the measured traffic rate, subject to sustained measurement.
+
+The dated notes below preserve earlier commissioning history; statements about absent credentials or blocked capacity describe those earlier checks.
 
 ## Access and credentials
 
 Dashboard username: `lab`. A generated password is saved locally in the ignored `.env.dashboard` file in the Desktop repository; it is not committed or included in Docker uploads. The same value is configured as `LAB_DASHBOARD_PASSWORD` on Railway.
 
-The authorized key ID and base64 private key are configured as Railway secret variables. Do not commit either credential. Full-market execution and settlement auditing remains open.
+The authorized key ID and base64 private key are configured as Railway secret variables. Do not commit either credential. Full-market data and settlement checks passed; execution and fee auditing remains open.
 
 ## Verified behavior
 
@@ -34,15 +35,15 @@ At the user's request, all nine older projects were audited. Older active deploy
 
 The user explicitly approved deletion of five retained data volumes, about 3.64 GB total. All five are detached and pending permanent deletion on 2026-09-18, following Railway's 48-hour recovery period. Historical volume objects can remain visible in project metadata; active volume instances and pending-deletion flags distinguish them from attached storage. Do not claim the recovery-period storage has already been physically removed or that accrued charges have been reversed.
 
-The existing workspace hard usage limit of **$10** was left unchanged. The Hobby subscription still applies. Only this research service is running; longer-term resource cost and data throughput still need validation once authenticated feeds are enabled.
+The existing workspace hard usage limit of **$10** was left unchanged. The Hobby subscription still applies. At the September 17 cleanup check, only this research service was running. See COMMISSIONING.md for subsequent authenticated-feed measurements.
 
 ## Remaining commissioning gates
 
 1. Completed: user authorized the old Railway Kalshi key pair transfer; the key ID and base64 private key are installed. No key value was displayed or saved locally.
-2. Confirm fresh BRTI and book snapshots, sequence recovery and both receipt/source timestamps.
-3. Audit at least two complete BTC markets, official thresholds, outcomes and simulated fills.
+2. Completed: fresh BRTI/books, source/receipt timestamps and continuous rollover data verified.
+3. Completed: two full markets, thresholds and official outcomes audited. Simulated fill auditing remains open.
 4. Verify account-specific balance rounding and fee assumptions.
-5. Measure real feed/replay usage against the budget and test archival capacity before a multi-week experiment.
+5. Archive restore and checkpoint continuity passed; re-measure sustained compact-format cost before declaring a month-long budget fit.
 
 ## Authenticated feed check — 2026-09-17
 
