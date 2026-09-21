@@ -1,0 +1,54 @@
+{
+  "scope": "One already-disclosed validation winner; no holdout data reported; no actual exchange fill claim",
+  "dataset": "df8b028c26294ac68ee34f2b37f32ce3",
+  "checkpoint_sha256": "4a5c09e57d7a0099218f5e0493953418b693fb59644cc298809f2d6f8c1a410d",
+  "market": "KXBTC15M-26SEP192315-15",
+  "pnl": "14.0726",
+  "filled": 15,
+  "side": "no",
+  "verified_archive_segments": [
+    624,
+    625,
+    626,
+    627,
+    628,
+    629,
+    630,
+    631,
+    632,
+    633,
+    634,
+    635
+  ],
+  "observations": {
+    "decision": {
+      "receipt_ns": 1789873802004912446,
+      "price": "0.0620",
+      "depth": "39.02",
+      "book_receipt_ns": 1789873802004912446,
+      "segment": 633,
+      "event": 61459
+    },
+    "fill": {
+      "receipt_ns": 1789873802530564946,
+      "price": "0.0580",
+      "depth": "2038.81",
+      "book_receipt_ns": 1789873802530564946,
+      "segment": 633,
+      "event": 62277
+    }
+  },
+  "finalization": {
+    "receipt_ns": 1789874104949281512,
+    "result": "no"
+  },
+  "checks": {
+    "decision_quote_matches_limit": true,
+    "fill_price_matches": true,
+    "quantity_within_depth": true,
+    "book_within_freshness_limit": true,
+    "arrival_latency_respected": true,
+    "official_finalization_matches": true,
+    "pnl_reconciles": true
+  }
+}

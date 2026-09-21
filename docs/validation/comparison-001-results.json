@@ -1,0 +1,505 @@
+{
+  "train": {
+    "split": "train",
+    "eligible_markets": 140,
+    "source": {
+      "dataset": "df8b028c26294ac68ee34f2b37f32ce3",
+      "checkpoint_sha256": "4a5c09e57d7a0099218f5e0493953418b693fb59644cc298809f2d6f8c1a410d",
+      "registered_source_sha256": "c8d6f4e633b8ccaab8b903e1bd904f97c9d748e035ea3e62fba4567cf238995b",
+      "terminal_hash": "d56133de76d4cdd12390dbc4776477a7bebe93e7a2d5d198a50aa8c98294a641",
+      "receipt_cutoff_ns": 1789952260098411162
+    },
+    "scope": "Attribution of original continuous forward accounts; no bankroll resets or parameter changes",
+    "config": {
+      "bankroll": "100.00",
+      "risk_per_market": "1.00",
+      "min_edge": 0.04,
+      "latency_ms": 500,
+      "max_book_age_ms": 2000,
+      "max_index_age_ms": 3000,
+      "min_seconds_left": 5,
+      "max_seconds_left": 300,
+      "tail_max_seconds": 135,
+      "tail_max_price": 0.35,
+      "tail_max_z": 1.0,
+      "slow_window_seconds": 600,
+      "fast_window_seconds": 60,
+      "min_returns": 60,
+      "taker_fee_rate": "0.07",
+      "balance_precision": "0.0001",
+      "execution": "delayed_ioc"
+    },
+    "accounts": {
+      "basic_fair_value": {
+        "net_pnl": "16.3289",
+        "profit_concentration": {
+          "net_without_largest_win": "7.2651",
+          "net_without_three_largest_wins": "-0.9365",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP181445-45",
+              "side": "no",
+              "filled": 10,
+              "fill_price": "0.0880",
+              "fees": "0.0562",
+              "pnl": "9.0638"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP181345-45",
+              "side": "yes",
+              "filled": 6,
+              "fill_price": "0.1500",
+              "fees": "0.0536",
+              "pnl": "5.0464"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP190930-30",
+              "side": "no",
+              "filled": 4,
+              "fill_price": "0.2000",
+              "fees": "0.0448",
+              "pnl": "3.1552"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "18.7550",
+        "fees_paid": "2.4261",
+        "orders": 158,
+        "filled_markets": 106,
+        "settled_markets": 106,
+        "win_rate": 0.6132075471698113,
+        "fill_rate": 0.6708860759493671,
+        "max_drawdown_cost_basis": "9.2654",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "filled": 106,
+          "canceled_limit_not_marketable": 49,
+          "canceled_no_integer_depth": 3
+        },
+        "daily": {
+          "2026-09-19": {
+            "net_pnl": "-0.2728",
+            "settled_markets": 72
+          },
+          "2026-09-18": {
+            "net_pnl": "18.3382",
+            "settled_markets": 29
+          },
+          "2026-09-20": {
+            "net_pnl": "-1.7365",
+            "settled_markets": 5
+          }
+        },
+        "observed_utc_days": 3,
+        "mean_predicted_win_probability": 0.6776234775738128,
+        "brier_score": 0.19490841169263173,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      },
+      "tail_underdog": {
+        "net_pnl": "-6.1423",
+        "profit_concentration": {
+          "net_without_largest_win": "-12.3243",
+          "net_without_three_largest_wins": "-20.6723",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP190930-30",
+              "side": "no",
+              "filled": 7,
+              "fill_price": "0.1100",
+              "fees": "0.0480",
+              "pnl": "6.1820"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP181315-15",
+              "side": "yes",
+              "filled": 6,
+              "fill_price": "0.1400",
+              "fees": "0.0506",
+              "pnl": "5.1094"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP182130-30",
+              "side": "no",
+              "filled": 4,
+              "fill_price": "0.1800",
+              "fees": "0.0414",
+              "pnl": "3.2386"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "-4.1640",
+        "fees_paid": "1.9783",
+        "orders": 57,
+        "filled_markets": 47,
+        "settled_markets": 47,
+        "win_rate": 0.1702127659574468,
+        "fill_rate": 0.8245614035087719,
+        "max_drawdown_cost_basis": "9.8743",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "canceled_limit_not_marketable": 10,
+          "filled": 47
+        },
+        "daily": {
+          "2026-09-19": {
+            "net_pnl": "1.1302",
+            "settled_markets": 27
+          },
+          "2026-09-18": {
+            "net_pnl": "-3.7264",
+            "settled_markets": 16
+          },
+          "2026-09-20": {
+            "net_pnl": "-3.5461",
+            "settled_markets": 4
+          }
+        },
+        "observed_utc_days": 3,
+        "mean_predicted_win_probability": 0.36250066966312283,
+        "brier_score": 0.20935444468168535,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      },
+      "adaptive_volatility": {
+        "net_pnl": "-0.2469",
+        "profit_concentration": {
+          "net_without_largest_win": "-13.2624",
+          "net_without_three_largest_wins": "-19.4897",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP190930-30",
+              "side": "no",
+              "filled": 14,
+              "fill_price": "0.0660",
+              "fees": "0.0605",
+              "pnl": "13.0155"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP181345-45",
+              "side": "yes",
+              "filled": 4,
+              "fill_price": "0.1900",
+              "fees": "0.0431",
+              "pnl": "3.1969"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP181500-00",
+              "side": "no",
+              "filled": 4,
+              "fill_price": "0.2300",
+              "fees": "0.0496",
+              "pnl": "3.0304"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "2.1440",
+        "fees_paid": "2.3909",
+        "orders": 169,
+        "filled_markets": 120,
+        "settled_markets": 120,
+        "win_rate": 0.6083333333333333,
+        "fill_rate": 0.7100591715976331,
+        "max_drawdown_cost_basis": "10.0381",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "filled": 120,
+          "canceled_limit_not_marketable": 46,
+          "canceled_no_integer_depth": 3
+        },
+        "daily": {
+          "2026-09-19": {
+            "net_pnl": "-0.9327",
+            "settled_markets": 83
+          },
+          "2026-09-18": {
+            "net_pnl": "2.4223",
+            "settled_markets": 32
+          },
+          "2026-09-20": {
+            "net_pnl": "-1.7365",
+            "settled_markets": 5
+          }
+        },
+        "observed_utc_days": 3,
+        "mean_predicted_win_probability": 0.7189624044666314,
+        "brier_score": 0.17389127386009734,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      }
+    },
+    "unresolved_market_outcomes": [],
+    "holdout_performance_disclosed": false,
+    "limitations": [
+      "This is a short sample, not proof of an edge.",
+      "Validation attributes the continuing original account; no fresh bankroll replay.",
+      "Drawdown values open positions at cost, not liquidation value.",
+      "Order-level rejection statuses are shown; per-decision rejection counts cannot be split from aggregated counters.",
+      "No new full-dataset execution stress or parameter search is claimed.",
+      "Direct-member fee precision assumed; actual account channel remains unconfirmed.",
+      "Hosting costs are not deducted from strategy P&L."
+    ],
+    "analysis_script_sha256": "e775e2195903a1cf53f61d10578f9bada75940e22c82ac1d5463468fd6724ff9"
+  },
+  "validation": {
+    "split": "validation",
+    "eligible_markets": 47,
+    "source": {
+      "dataset": "df8b028c26294ac68ee34f2b37f32ce3",
+      "checkpoint_sha256": "4a5c09e57d7a0099218f5e0493953418b693fb59644cc298809f2d6f8c1a410d",
+      "registered_source_sha256": "c8d6f4e633b8ccaab8b903e1bd904f97c9d748e035ea3e62fba4567cf238995b",
+      "terminal_hash": "d56133de76d4cdd12390dbc4776477a7bebe93e7a2d5d198a50aa8c98294a641",
+      "receipt_cutoff_ns": 1789952260098411162
+    },
+    "scope": "Attribution of original continuous forward accounts; no bankroll resets or parameter changes",
+    "config": {
+      "bankroll": "100.00",
+      "risk_per_market": "1.00",
+      "min_edge": 0.04,
+      "latency_ms": 500,
+      "max_book_age_ms": 2000,
+      "max_index_age_ms": 3000,
+      "min_seconds_left": 5,
+      "max_seconds_left": 300,
+      "tail_max_seconds": 135,
+      "tail_max_price": 0.35,
+      "tail_max_z": 1.0,
+      "slow_window_seconds": 600,
+      "fast_window_seconds": 60,
+      "min_returns": 60,
+      "taker_fee_rate": "0.07",
+      "balance_precision": "0.0001",
+      "execution": "delayed_ioc"
+    },
+    "accounts": {
+      "basic_fair_value": {
+        "net_pnl": "5.8028",
+        "profit_concentration": {
+          "net_without_largest_win": "-8.2698",
+          "net_without_three_largest_wins": "-10.9289",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP192315-15",
+              "side": "no",
+              "filled": 15,
+              "fill_price": "0.0580",
+              "fees": "0.0574",
+              "pnl": "14.0726"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200815-15",
+              "side": "no",
+              "filled": 2,
+              "fill_price": "0.3000",
+              "fees": "0.0294",
+              "pnl": "1.3706"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200215-15",
+              "side": "yes",
+              "filled": 2,
+              "fill_price": "0.3400",
+              "fees": "0.0315",
+              "pnl": "1.2885"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "6.7300",
+        "fees_paid": "0.9272",
+        "orders": 45,
+        "filled_markets": 39,
+        "settled_markets": 39,
+        "win_rate": 0.5384615384615384,
+        "fill_rate": 0.8666666666666667,
+        "max_drawdown_cost_basis": "9.0324",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "filled": 39,
+          "canceled_no_integer_depth": 1,
+          "canceled_limit_not_marketable": 5
+        },
+        "daily": {
+          "2026-09-20": {
+            "net_pnl": "5.8028",
+            "settled_markets": 39
+          }
+        },
+        "observed_utc_days": 1,
+        "mean_predicted_win_probability": 0.6288674397697422,
+        "brier_score": 0.14630374151378325,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      },
+      "tail_underdog": {
+        "net_pnl": "-3.1652",
+        "profit_concentration": {
+          "net_without_largest_win": "-6.2787",
+          "net_without_three_largest_wins": "-10.6801",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP200400-00",
+              "side": "no",
+              "filled": 4,
+              "fill_price": "0.2100",
+              "fees": "0.0465",
+              "pnl": "3.1135"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200630-30",
+              "side": "yes",
+              "filled": 4,
+              "fill_price": "0.2200",
+              "fees": "0.0481",
+              "pnl": "3.0719"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200500-00",
+              "side": "yes",
+              "filled": 2,
+              "fill_price": "0.3200",
+              "fees": "0.0305",
+              "pnl": "1.3295"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "-2.4900",
+        "fees_paid": "0.6752",
+        "orders": 27,
+        "filled_markets": 16,
+        "settled_markets": 16,
+        "win_rate": 0.1875,
+        "fill_rate": 0.5925925925925926,
+        "max_drawdown_cost_basis": "6.4743",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "filled": 16,
+          "canceled_limit_not_marketable": 9,
+          "canceled_no_integer_depth": 2
+        },
+        "daily": {
+          "2026-09-20": {
+            "net_pnl": "-3.1652",
+            "settled_markets": 16
+          }
+        },
+        "observed_utc_days": 1,
+        "mean_predicted_win_probability": 0.33669077261406033,
+        "brier_score": 0.1697962455467612,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      },
+      "adaptive_volatility": {
+        "net_pnl": "-8.1105",
+        "profit_concentration": {
+          "net_without_largest_win": "-12.1588",
+          "net_without_three_largest_wins": "-13.5576",
+          "largest_wins": [
+            {
+              "ticker": "KXBTC15M-26SEP200045-45",
+              "side": "no",
+              "filled": 5,
+              "fill_price": "0.1800",
+              "fees": "0.0517",
+              "pnl": "4.0483"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200730-30",
+              "side": "no",
+              "filled": 2,
+              "fill_price": "0.4600",
+              "fees": "0.0348",
+              "pnl": "1.0452"
+            },
+            {
+              "ticker": "KXBTC15M-26SEP200845-45",
+              "side": "no",
+              "filled": 1,
+              "fill_price": "0.6300",
+              "fees": "0.0164",
+              "pnl": "0.3536"
+            }
+          ],
+          "interpretation": "Diagnostic concentration check, not a rule for removing observed trades."
+        },
+        "gross_pnl": "-7.1420",
+        "fees_paid": "0.9685",
+        "orders": 58,
+        "filled_markets": 42,
+        "settled_markets": 42,
+        "win_rate": 0.5238095238095238,
+        "fill_rate": 0.7241379310344828,
+        "max_drawdown_cost_basis": "10.2201",
+        "open_cost": "0",
+        "unresolved_positions": 0,
+        "pending_orders": 0,
+        "status_counts": {
+          "filled": 42,
+          "canceled_limit_not_marketable": 14,
+          "canceled_no_integer_depth": 2
+        },
+        "daily": {
+          "2026-09-20": {
+            "net_pnl": "-8.1105",
+            "settled_markets": 42
+          }
+        },
+        "observed_utc_days": 1,
+        "mean_predicted_win_probability": 0.6661437822702544,
+        "brier_score": 0.14476892804967686,
+        "startup_partial_pnl": "0",
+        "training_settlements_precede_validation_decisions": true,
+        "uncertainty": {
+          "available": false,
+          "reason": "Requires at least 20 observed UTC days and 50 settled markets."
+        }
+      }
+    },
+    "unresolved_market_outcomes": [],
+    "holdout_performance_disclosed": false,
+    "limitations": [
+      "This is a short sample, not proof of an edge.",
+      "Validation attributes the continuing original account; no fresh bankroll replay.",
+      "Drawdown values open positions at cost, not liquidation value.",
+      "Order-level rejection statuses are shown; per-decision rejection counts cannot be split from aggregated counters.",
+      "No new full-dataset execution stress or parameter search is claimed.",
+      "Direct-member fee precision assumed; actual account channel remains unconfirmed.",
+      "Hosting costs are not deducted from strategy P&L."
+    ],
+    "analysis_script_sha256": "e775e2195903a1cf53f61d10578f9bada75940e22c82ac1d5463468fd6724ff9"
+  }
+}

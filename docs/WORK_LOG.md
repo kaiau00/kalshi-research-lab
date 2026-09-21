@@ -71,3 +71,12 @@ A complete day of compact-format measurements implies about $8.60/month at a rep
 The v6 deployment reached SUCCESS (7bbc756b-11f6-4e16-825f-b8e4ba6eaa7b). Health/readiness returned 200, unauthenticated dashboard 401, and both streams connected. Series metadata was recorded about 0.15 seconds after registration and event metadata within 6.1 seconds; prior v5 checkpoint remains present. All earlier recordings remain intact.
 
 The first v6 compact archive (100,000 events) passed full download checksum, reconstructed terminal hash and registration checks. Its replay checkpoint checksum/source matched and advanced to segment 1.
+
+
+## September 21 — first registered strategy comparison
+
+Committed the comparison protocol before inspecting v5 strategy P&L, then froze 95,466,332 events / 982 segments with matching checkpoint, catalog, registration and account identities. Froze 140 development, 47 validation and 47 held-out closed markets. Opened only development/validation. The analysis attributes the original continuous forward paper ledger; it does not reset bankrolls or claim a new full raw replay. No production source/config or deployment changed.
+
+Basic fair value: +$16.3289 development / +$5.8028 validation. Tail: -$6.1423 / -$3.1652. Adaptive: -$0.2469 / -$8.1105. Basic's validation becomes -$8.2698 without a single $14.0726 winner. Independently checked that winner's limit, observed fill depth/price, latency and recorded official result across 12 original archive segments; all checks passed. This is concentration-sensitive paper performance, not evidence of a reliable executable edge.
+
+All 61 tests and Ruff pass. Report STRATEGY_COMPARISON_001.md records exact settings, trades, drawdown, fees, calibration, limitations and provenance. No parameters were tuned, no strategy promoted, and the held-out performance remains undisclosed. Too few observed days for the predeclared uncertainty/selection gate; continue prospective data collection and require a separate declared development study before tuning.

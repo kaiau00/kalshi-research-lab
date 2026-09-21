@@ -134,7 +134,17 @@ def group_summary(replay, manifest, split):
                         or max((o['settled_ns'] for o in training_closed), default=0) < first_decision))
         uncertainty = daily_interval({'settled_markets': len(closed),
                                       'daily_pnl': {d: float(v['net_pnl']) for d, v in daily.items()}}, set(daily))
-        results[name] = {'net_pnl': str(pnl), 'gross_pnl': str(pnl+sum((o['fees'] for o in closed), Decimal(0))),
+        largest = sorted(closed, key=lambda o: o['pnl'], reverse=True)[:3]
+        best_wins = [o for o in largest if o['pnl'] > 0]
+        concentration = {
+            'net_without_largest_win': str(pnl - (best_wins[0]['pnl'] if best_wins else 0)),
+            'net_without_three_largest_wins': str(pnl - sum((o['pnl'] for o in best_wins), Decimal(0))),
+            'largest_wins': [{k: str(o[k]) if isinstance(o[k], Decimal) else o[k]
+                             for k in ('ticker', 'side', 'filled', 'fill_price', 'fees', 'pnl')}
+                            for o in best_wins],
+            'interpretation': 'Diagnostic concentration check, not a rule for removing observed trades.',
+        }
+        results[name] = {'net_pnl': str(pnl), 'profit_concentration': concentration, 'gross_pnl': str(pnl+sum((o['fees'] for o in closed), Decimal(0))),
                         'fees_paid': str(fees), 'orders': len(orders), 'filled_markets': filled,
                         'settled_markets': len(closed), 'win_rate': sum(o['won'] for o in closed)/len(closed) if closed else None,
                         'fill_rate': filled/len(orders) if orders else None, 'max_drawdown_cost_basis': str(dd),
