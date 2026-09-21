@@ -1,0 +1,13 @@
+# Registered strategy comparison 001
+
+Declared before inspecting v5 strategy profit/loss on September 21, 2026. Compare the existing fixed settings; do not optimize them in this first screen.
+
+Use the stopped v5 dataset, including event fee metadata, with its original continuous three independent $100 paper accounts. Freeze its last durable checkpoint, catalog prefix, registered source/config and market list before reading performance. Use 60/20/20 chronological splits by market close; all orders and outcomes for a contract stay together. Markets not yet closed at the frozen receipt cutoff stay outside these groups. Retain closed-but-unresolved markets; flag the startup partial market rather than silently removing it.
+
+Reports attribute the actual registered forward ledger to each market group. Validation continues the original accounts; it is not a newly funded $100 replay or a rerun with tuned settings. Report P&L, fees, counts, fill rate, cost-basis drawdown, daily consistency, open exposure and calibration. Verify cash/reservation identities and checkpoint/source/catalog provenance. Report training settlement versus first validation-decision timing; unsettled training exposure or overlapping learning/decision times blocks a selection claim.
+
+Only train and validation reports may be opened. Keep holdout performance undisclosed. Record each disclosure. Existing v5 counts and accounting checks were inspected during commissioning; no v5 strategy P&L was inspected before this protocol. The earlier inspected v3 sample is development/commissioning evidence and is not reused as a holdout.
+
+No promotion or parameter tuning from this short sample. Minimum gate before treating a candidate as ready for independent validation: at least 20 observed UTC days and 50 settled markets, positive net results in both development and validation, and robustness to execution assumptions. These are minimum screening gates, not proof of an edge. If the current data is insufficient or defaults lose, report that directly, preserve the sealed holdout and continue collecting. A later small parameter study must have its candidate grid and selection rule recorded before running it, use development data only, and preserve separate later validation.
+
+Fee rounding remains an account-channel assumption. Baseline uses direct-member $0.0001 precision. Existing cent-rounding execution diagnostics are separate evidence; do not call them an account-specific validation or a full-dataset stress test. Railway costs are separate; the frozen accounts are not charged an invented allocation of hosting costs.
