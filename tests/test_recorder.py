@@ -1,5 +1,7 @@
 import asyncio
 
+import pytest
+
 from research_lab.demo import market_fixture
 from research_lab.market import MarketState
 from research_lab.recorder import Recorder
@@ -30,7 +32,8 @@ def test_book_rollover_does_not_clear_benchmark_history():
     assert not state.index and state.last_index_source == -1
 
 
-def test_event_fee_capture_and_refresh_throttle(tmp_path, monkeypatch):
+@pytest.mark.parametrize("uptime", [0.0, 10.0, 10000.0])
+def test_event_fee_capture_and_refresh_throttle(tmp_path, monkeypatch, uptime):
     monkeypatch.delenv('LAB_SEGMENTED', raising=False)
     r = Recorder(tmp_path / 'events.db')
     m = market_fixture()
@@ -44,10 +47,29 @@ def test_event_fee_capture_and_refresh_throttle(tmp_path, monkeypatch):
                           'fee_multiplier_override': 2}}
 
     r.client.get = get
+    monkeypatch.setattr('research_lab.recorder.time.monotonic', lambda: uptime)
     asyncio.run(r.refresh_event_fees())
     asyncio.run(r.refresh_event_fees())
     assert calls == ['/events/' + m['event_ticker']]
     records = [e for e in r.store.events() if e.kind == 'event_metadata']
     assert len(records) == 1 and records[0].payload['event']['fee_multiplier_override'] == 2
+    r.store.close()
+    asyncio.run(r.client.close())
+
+
+def test_series_requested_immediately_at_zero_uptime(tmp_path, monkeypatch):
+    monkeypatch.delenv('LAB_SEGMENTED', raising=False)
+    r = Recorder(tmp_path / 'events.db')
+    calls = []
+
+    async def get(path):
+        calls.append(path)
+        raise asyncio.CancelledError()
+
+    r.client.get = get
+    monkeypatch.setattr('research_lab.recorder.time.monotonic', lambda: 0.0)
+    with pytest.raises(asyncio.CancelledError):
+        asyncio.run(r.resolve())
+    assert calls == ['/series/KXBTC15M']
     r.store.close()
     asyncio.run(r.client.close())

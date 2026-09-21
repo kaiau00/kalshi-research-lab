@@ -95,7 +95,7 @@ class Recorder:
                        'book_connection': 'waiting', 'benchmark_connection': 'waiting'}
         self.max_bytes = int(os.environ.get('LAB_MAX_STORAGE_BYTES', '2000000000'))
         self.last_commit = time.monotonic()
-        self.last_series = 0
+        self.last_series = None
         self.last_event_fees = {}
 
     def append(self, kind, payload, source_ns=None):
@@ -155,7 +155,7 @@ class Recorder:
 
     async def resolve(self):
         while True:
-            if time.monotonic() - self.last_series >= 900:
+            if self.last_series is None or time.monotonic() - self.last_series >= 900:
                 try:
                     result = await self.client.get('/series/' + SERIES)
                     self.append('series', {'series': result['series']})
@@ -186,7 +186,7 @@ class Recorder:
         event_ids = {self.known[t]['event_ticker'] for t in self.watch
                      if self.known[t].get('event_ticker')}
         for event_id in sorted(event_ids):
-            if time.monotonic() - self.last_event_fees.get(event_id, 0) < 60:
+            if event_id in self.last_event_fees and time.monotonic() - self.last_event_fees[event_id] < 60:
                 continue
             try:
                 response = await self.client.get('/events/' + event_id)
