@@ -1,0 +1,59 @@
+{
+  "checked_on": "2026-09-20 America/New_York",
+  "deployment": "ddf5aa33-8671-49b6-b248-84fe70468791",
+  "checks": [
+    {
+      "dataset": "df8b028c26294ac68ee34f2b37f32ce3",
+      "archived_segments": 981,
+      "archive_bytes": 3079994703,
+      "source_sha256": "c8d6f4e633b8ccaab8b903e1bd904f97c9d748e035ea3e62fba4567cf238995b",
+      "envelope_fields": 5,
+      "first_archive": {
+        "count": 100000,
+        "bytes": 3281474,
+        "terminal_hash_matches": true,
+        "registration_matches": true,
+        "checksum_verified": true
+      },
+      "checkpoint": {
+        "checksum_valid": true,
+        "source_matches": true,
+        "next_segment": 981
+      }
+    },
+    {
+      "checkpoint_events": 95366332,
+      "prefix_events": 95366332,
+      "quality": {
+        "gaps": 2,
+        "malformed": 0,
+        "clock_adjustments": 0
+      },
+      "event_fee_records_in_checkpoint": 236,
+      "latest_fee_age_seconds": 2.856433175,
+      "supported_active_markets": [
+        "KXBTC15M-26SEP202100-00"
+      ],
+      "accounts": {
+        "basic_fair_value": {
+          "cash_reconciles": true,
+          "reserved_reconciles": true,
+          "filled_markets": 177,
+          "settled_markets": 176
+        },
+        "tail_underdog": {
+          "cash_reconciles": true,
+          "reserved_reconciles": true,
+          "filled_markets": 75,
+          "settled_markets": 75
+        },
+        "adaptive_volatility": {
+          "cash_reconciles": true,
+          "reserved_reconciles": true,
+          "filled_markets": 198,
+          "settled_markets": 198
+        }
+      }
+    }
+  ]
+}

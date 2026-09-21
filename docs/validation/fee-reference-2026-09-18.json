@@ -1,0 +1,45 @@
+{
+  "scope": "Current public reference only, not historical fee observations or account certification",
+  "checked_at_utc": "2026-09-18T14:25:09.860890+00:00",
+  "series": {
+    "ticker": "KXBTC15M",
+    "fee_type": "quadratic",
+    "fee_multiplier": 1
+  },
+  "events": [
+    {
+      "market": "KXBTC15M-26SEP171330-30",
+      "event_ticker": "KXBTC15M-26SEP171330",
+      "fee_type_override": null,
+      "fee_multiplier_override": null
+    },
+    {
+      "market": "KXBTC15M-26SEP171345-45",
+      "event_ticker": "KXBTC15M-26SEP171345",
+      "fee_type_override": null,
+      "fee_multiplier_override": null
+    },
+    {
+      "market": "KXBTC15M-26SEP171400-00",
+      "event_ticker": "KXBTC15M-26SEP171400",
+      "fee_type_override": null,
+      "fee_multiplier_override": null
+    },
+    {
+      "market": "KXBTC15M-26SEP171415-15",
+      "event_ticker": "KXBTC15M-26SEP171415",
+      "fee_type_override": null,
+      "fee_multiplier_override": null
+    },
+    {
+      "market": "KXBTC15M-26SEP171430-30",
+      "event_ticker": "KXBTC15M-26SEP171430",
+      "fee_type_override": null,
+      "fee_multiplier_override": null
+    }
+  ],
+  "sources": [
+    "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+    "https://docs.kalshi.com/getting_started/fee_rounding"
+  ]
+}

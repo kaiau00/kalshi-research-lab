@@ -1,0 +1,57 @@
+{
+  "scope": "24 hours of measured usage; 30-day steady-rate projection, not a bill or guarantee",
+  "sample_start_utc": "2026-09-20T00:57:00+00:00",
+  "sample_end_utc": "2026-09-21T00:56:00+00:00",
+  "summary": {
+    "CPU_LIMIT": {
+      "samples": 1440,
+      "average": 8.0,
+      "max": 8.0
+    },
+    "CPU_USAGE": {
+      "samples": 1440,
+      "average": 0.10105287688657408,
+      "max": 0.3658715333333334
+    },
+    "DISK_USAGE_GB": {
+      "samples": 1440,
+      "average": 2.378471551051852,
+      "max": 2.407538688
+    },
+    "MEMORY_LIMIT_GB": {
+      "samples": 1440,
+      "average": 8.0,
+      "max": 8.0
+    },
+    "MEMORY_USAGE_GB": {
+      "samples": 1440,
+      "average": 0.16924645594074075,
+      "max": 0.25366528
+    },
+    "NETWORK_RX_GB": {
+      "samples": 1440,
+      "average": 0.008998535165277778,
+      "max": 0.036552457
+    },
+    "NETWORK_TX_GB": {
+      "samples": 1440,
+      "average": 0.0016335267333333332,
+      "max": 0.009506744
+    }
+  },
+  "egress_gb_observed": 2.352278496,
+  "monthly_component_estimate_usd": {
+    "cpu": 2.0210575377314814,
+    "ram": 1.6924645594074075,
+    "volume": 0.35677073265777776,
+    "egress": 3.5284177440000004,
+    "bucket_allowance": 1.0
+  },
+  "monthly_total_estimate_usd": 8.598710573796668,
+  "caveats": [
+    "CPU/RAM/checkpoint history and activity may grow",
+    "Bucket allowance covers current 60GB cap and retained older archives approximately",
+    "Existing $10 workspace hard limit unchanged",
+    "Hobby minimum includes $5 resource usage; not added twice"
+  ]
+}

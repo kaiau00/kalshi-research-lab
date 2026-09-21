@@ -26,9 +26,16 @@ The deployed v4 format also passed a direct bucket read-back: its first 100,000-
 
 ## Remaining before strategy review
 
-1. Audit fees, rounding and representative simulated fills; stress delayed execution, available depth and stale quotes.
+1. Completed for the initial sample: independent fill/accounting audit and six execution scenarios; see [EXECUTION_AUDIT.md](EXECUTION_AUDIT.md). Event fee recording and inactive-market guards added in v5. Account-specific and actual multi-fill behavior remain qualified.
 2. Compare registered strategies across independent time periods and market conditions; select parameters using development data only.
 3. Freeze selected settings and assess untouched/forward evidence, drawdown, trade count and sensitivity with separate $100 simulated accounts.
 4. Re-measure sustained compact-format costs. Full recovery after loss of the entire volume/catalog is a separate untested gate; normal archive restore has passed.
 
 All 44 automated tests pass and Ruff is clean. No live order submission exists. No strategy or parameter is presently proven profitable.
+
+
+## September 20 follow-up
+
+Fee capture and execution diagnostics are documented in [EXECUTION_AUDIT.md](EXECUTION_AUDIT.md). The v5 recorder stayed healthy for over two days, accumulating more than 95 million events and 981 verified archives with zero backlog and reconciled account checkpoints. The first live v5 archive was independently downloaded and hash-verified. A CI-only failure revealed a real initial-poll timing assumption; explicit first-request state fixes it and passes 58 tests plus the container check.
+
+The full-day measurement averages about 0.101 vCPU and 0.169 GB RAM, with 2.35 GB service egress/day. At those rates, including volume and a $1 archive allowance, the planning estimate is approximately $8.6/month. This supersedes the earlier size-only estimate but remains conditional on future workload and growing account/checkpoint history. [Usage evidence](validation/usage-2026-09-20.json). The $10 workspace hard usage limit remains unchanged.

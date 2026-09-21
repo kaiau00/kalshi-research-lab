@@ -1,15 +1,15 @@
 # Hosted research lab
 
-**Current status — September 18, 2026:** recording and bounded paper replay are restored. Settlement-window and rollover fixes passed an archive-based audit of two complete markets. See [COMMISSIONING.md](COMMISSIONING.md) for evidence and remaining execution/strategy gates. There is no live-order capability.
+**Current status — September 20, 2026:** recording and bounded paper replay are restored. Settlement-window and rollover fixes passed an archive-based audit of two complete markets. Independent execution checks passed, event fee guards are deployed, and the initial metadata polling bug is fixed. See [COMMISSIONING.md](COMMISSIONING.md) for evidence and remaining execution/strategy gates. There is no live-order capability.
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
-- Production source: `0a51567`; later documentation commits need no redeployment.
-- Active deployment: `acd0d537-de9a-4a5d-92e5-b923165c38f6`, observed `SUCCESS`.
-- Dataset `/data/segments-v4`, ID `384c24bdda914bf0aef8347d741b1318`; all earlier datasets preserved.
+- Production source: `7742abc`; later documentation commits need no redeployment.
+- Active deployment: `7bbc756b-11f6-4e16-825f-b8e4ba6eaa7b`, observed `SUCCESS`.
+- Dataset `/data/segments-v6`, ID `e2d5cb33e7c44660809b531f03d4b4e3`; all earlier datasets preserved.
 - One replica, persistent `/data` volume and private `research-archive` bucket; HTTPS target port 8080.
 - External health/readiness both 200; unauthenticated dashboard 401; authenticated status 200; both feeds connected, no recorder error.
-- Existing $10 workspace hard usage limit unchanged. Compact-format planning estimate is $7–9/month at the measured traffic rate, subject to sustained measurement.
+- Existing $10 workspace hard usage limit unchanged. A full-day compact-format measurement projects approximately $8.6/month at repeated rates; growing history and future activity can change it.
 
 The dated notes below preserve earlier commissioning history; statements about absent credentials or blocked capacity describe those earlier checks.
 
@@ -17,7 +17,7 @@ The dated notes below preserve earlier commissioning history; statements about a
 
 Dashboard username: `lab`. A generated password is saved locally in the ignored `.env.dashboard` file in the Desktop repository; it is not committed or included in Docker uploads. The same value is configured as `LAB_DASHBOARD_PASSWORD` on Railway.
 
-The authorized key ID and base64 private key are configured as Railway secret variables. Do not commit either credential. Full-market data and settlement checks passed; execution and fee auditing remains open.
+The authorized key ID and base64 private key are configured as Railway secret variables. Do not commit either credential. Data/settlement and sampled execution audits passed; actual exchange multi-fill behavior and account-specific rounding remain qualified. See EXECUTION_AUDIT.md.
 
 ## Verified behavior
 
@@ -41,9 +41,9 @@ The existing workspace hard usage limit of **$10** was left unchanged. The Hobby
 
 1. Completed: user authorized the old Railway Kalshi key pair transfer; the key ID and base64 private key are installed. No key value was displayed or saved locally.
 2. Completed: fresh BRTI/books, source/receipt timestamps and continuous rollover data verified.
-3. Completed: two full markets, thresholds and official outcomes audited. Simulated fill auditing remains open.
+3. Completed: two full markets, thresholds and official outcomes audited; 11 baseline fills independently reproduced and 57 fills checked across six execution scenarios.
 4. Verify account-specific balance rounding and fee assumptions.
-5. Archive restore and checkpoint continuity passed; re-measure sustained compact-format cost before declaring a month-long budget fit.
+5. Archive restore, checkpoint continuity and a full day of compact-format cost measurement passed. Longer-term growth and full bare-volume recovery remain open.
 
 ## Authenticated feed check — 2026-09-17
 

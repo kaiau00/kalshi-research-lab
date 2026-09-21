@@ -1,0 +1,58 @@
+{
+  "deployment": "7bbc756b-11f6-4e16-825f-b8e4ba6eaa7b",
+  "source_commit": "7742abc25574f7305ff8261aca92b633b7f64dfe",
+  "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+  "http": {
+    "health": 200,
+    "ready": 200,
+    "unauthenticated_dashboard": 401
+  },
+  "quality": {
+    "gaps": 2,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "series_seconds_after_registration": 0.146910911,
+  "event_metadata_seconds_after_registration": 6.048752266,
+  "initial_verification": [
+    {
+      "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+      "archived_segments": 0,
+      "archive_bytes": 0,
+      "source_sha256": "c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc"
+    },
+    {
+      "root": "/data/segments-v6",
+      "event_counts": {
+        "event_metadata": 5,
+        "experiment_registration": 1,
+        "gap": 2,
+        "heartbeat": 11,
+        "market": 107,
+        "series": 1,
+        "ws": 46277
+      },
+      "prior_v5_preserved": true
+    }
+  ],
+  "ci": "https://github.com/kaiau00/kalshi-research-lab/actions/runs/35549267859",
+  "archive_check": {
+    "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+    "archived_segments": 1,
+    "archive_bytes": 3220185,
+    "source_sha256": "c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc",
+    "envelope_fields": 5,
+    "first_archive": {
+      "count": 100000,
+      "bytes": 3220185,
+      "terminal_hash_matches": true,
+      "registration_matches": true,
+      "checksum_verified": true
+    },
+    "checkpoint": {
+      "checksum_valid": true,
+      "source_matches": true,
+      "next_segment": 1
+    }
+  }
+}

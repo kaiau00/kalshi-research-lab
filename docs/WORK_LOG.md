@@ -56,3 +56,18 @@ Implemented segmented SQLite recording, receipt-order links, verified private-bu
 Overnight capture exceeded 33.6 million events, with 340 verified archives, no pending segment backlog and about 31 MB hot data. Restored and hash-verified 1,197,032 real events. Two complete markets had 900/900 benchmark seconds, complete settlement windows, valid reconstructed books throughout, and exact matches to finalized official settlement values. Checkpoint event totals and accounting identity/reservation invariants passed. This does not validate fill realism or profitability.
 
 A six-hour egress measurement projected a total around $11/month, above target. Removed redundant digest strings from the archive representation while preserving every event field and exact hash reconstruction. A 100,000-event real archive shrank 60.05%; new and old formats both reject tampering. All 44 tests and Ruff pass. Committed source 0a51567, deployed SUCCESS as acd0d537-de9a-4a5d-92e5-b923165c38f6, and registered a separate v4 dataset. The previous v3 dataset and archives remain untouched. Health/readiness 200, both feeds connected. Planning estimate now $7–9/month at similar traffic; actual long-run compact usage remains to be measured. $10 workspace hard limit unchanged. See COMMISSIONING.md for limits and evidence.
+
+
+## September 18–20 — execution audit and fee guards
+
+Audited 2,397,032 archived v3 events using an independent raw-book reconstruction and independent rounding arithmetic. All 11 baseline fills exactly matched the preserved forward ledger; 57 fills across six execution scenarios passed price/depth/latency/fee/reservation checks, with all cash ledgers reconciled. All three defaults lost in this tiny five-market sample; results are diagnostic, not a parameter ranking or holdout claim.
+
+Verified the official fee coefficient and rounding documentation. Added timestamped event fee metadata, precedence for overrides, stale/missing-fee rejection and inactive-market rejection. Deployed v5 separately, preserving earlier raw data. Work was interrupted by a Codex usage-limit rejection after deployment started; subsequent September 20 checks observed deployment SUCCESS, healthy feeds, over 95 million events, 981 archives and zero backlog. Active fee metadata and checkpoint identities/accounting passed.
+
+GitHub CI exposed initial polling that incorrectly depended on host monotonic uptime. Corrected both series and event first-request handling, added zero/short-uptime regressions, and verified 58 local tests, Ruff and GitHub's production-container job. Source 7742abc. This operational fix uses a fresh v6 registration, preserving v5's two-day sample and original simulated accounts.
+
+A complete day of compact-format measurements implies about $8.60/month at a repeated workload, including a $1 archive allowance. This is a planning estimate, not a billing guarantee; increasing account/checkpoint history remains a cost risk. No workspace spending limit was changed. Full bare-volume recovery and strategy selection/untouched validation remain outstanding.
+
+The v6 deployment reached SUCCESS (7bbc756b-11f6-4e16-825f-b8e4ba6eaa7b). Health/readiness returned 200, unauthenticated dashboard 401, and both streams connected. Series metadata was recorded about 0.15 seconds after registration and event metadata within 6.1 seconds; prior v5 checkpoint remains present. All earlier recordings remain intact.
+
+The first v6 compact archive (100,000 events) passed full download checksum, reconstructed terminal hash and registration checks. Its replay checkpoint checksum/source matched and advanced to segment 1.

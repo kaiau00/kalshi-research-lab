@@ -1,6 +1,6 @@
 # Segmented recording and recovery
 
-The current design uses one continuously running Railway service, the existing volume, and a private Railway bucket. Existing `/data/events.sqlite3` and `/data/normalizer-v2/events.sqlite3` are preserved. The current dataset uses `/data/segments-v4`; `/data/segments-v3` and its archives are also preserved. The collector/model was validated on v3; v4 changes only the lossless archive envelope.
+The current design uses one continuously running Railway service, the existing volume, and a private Railway bucket. Existing `/data/events.sqlite3` and `/data/normalizer-v2/events.sqlite3` are preserved. The current dataset uses `/data/segments-v6`; all earlier datasets and their archives remain preserved. v3 validated rollover/model collection, v4 introduced compact archives, v5 added event fee metadata and inactive-market guards, and v6 makes initial metadata requests independent of host uptime.
 
 ## Data and execution boundaries
 
@@ -20,7 +20,7 @@ The worker exports event IDs, receipt/source timestamps, kind and unchanged payl
 - Five latest derived reports retained; raw observations and current account history remain preserved.
 - Existing workspace $10 hard usage limit is unchanged. This is a budget constraint, not a promise that recording can continue indefinitely regardless of throughput.
 
-Railway buckets cost $0.015/GB-month; bucket API operations and downloads are free, but uploads count as service egress. A full 60 GB raw archive costs about $0.90/month for storage, plus upload traffic, CPU, RAM, volume and small checkpoint overhead. The September 18 measured load and compact-format experiment suggest roughly $7–9/month, conditional on similar traffic; this is not a measured month of billing. Earlier archives also continue to incur storage. See COMMISSIONING.md. [Railway bucket pricing](https://docs.railway.com/storage-buckets).
+Railway buckets cost $0.015/GB-month; bucket API operations and downloads are free, but uploads count as service egress. A full 60 GB raw archive costs about $0.90/month for storage, plus upload traffic, CPU, RAM, volume and small checkpoint overhead. The September 20 full-day compact-format measurement suggests roughly $8–9/month, conditional on similar traffic; this is not a measured month of billing. Earlier archives also continue to incur storage. See COMMISSIONING.md. [Railway bucket pricing](https://docs.railway.com/storage-buckets).
 
 ## Rollover and outcomes
 
@@ -30,7 +30,7 @@ A benchmark reconnect clears its benchmark history for warmup; a book reconnect 
 
 ## Restore and audit
 
-Use `research-lab restore-segments --root /data/segments-v4 --output /tmp/frozen-validation.sqlite3` to restore all sealed segments to a new SQLite file. The output path must not exist. The restore holds the maintenance lock to prevent races with hot-replica removal, checks object checksums and every archived event hash, verifies segment linkage, and rebuilds a fresh global event chain while preserving payloads and receipt/source times. It excludes the still-open segment; allow a subsequent seal before expecting the latest result in the restored prefix.
+Use `research-lab restore-segments --root /data/segments-v6 --output /tmp/frozen-validation.sqlite3` to restore all sealed segments to a new SQLite file. The output path must not exist. The restore holds the maintenance lock to prevent races with hot-replica removal, checks object checksums and every archived event hash, verifies segment linkage, and rebuilds a fresh global event chain while preserving payloads and receipt/source times. It excludes the still-open segment; allow a subsequent seal before expecting the latest result in the restored prefix.
 
 Run `PYTHONPATH=src python scripts/audit_data.py --db <restored-file>` for complete data coverage/settlement checks. The restored chain differs from segment-local chains because IDs/segment scope differ; retain catalog/archive hashes as provenance. Downloaded later official data is reference evidence, never backdated into these recordings.
 
