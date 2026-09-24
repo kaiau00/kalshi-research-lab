@@ -80,3 +80,9 @@ Committed the comparison protocol before inspecting v5 strategy P&L, then froze 
 Basic fair value: +$16.3289 development / +$5.8028 validation. Tail: -$6.1423 / -$3.1652. Adaptive: -$0.2469 / -$8.1105. Basic's validation becomes -$8.2698 without a single $14.0726 winner. Independently checked that winner's limit, observed fill depth/price, latency and recorded official result across 12 original archive segments; all checks passed. This is concentration-sensitive paper performance, not evidence of a reliable executable edge.
 
 All 61 tests and Ruff pass. Report STRATEGY_COMPARISON_001.md records exact settings, trades, drawdown, fees, calibration, limitations and provenance. No parameters were tuned, no strategy promoted, and the held-out performance remains undisclosed. Too few observed days for the predeclared uncertainty/selection gate; continue prospective data collection and require a separate declared development study before tuning.
+
+## September 23–24 — demo account integration
+
+The user requested fair-value trading with $125 of Kalshi demo funds and retrieval of the key from old Railway projects. Found the exact matching ID/private key in kalyx-perp; verified demo balance $125.54, authenticated demo BRTI, and no active exposure/resting orders on crypto exchange 2. BTC demo markets are available but their books can be one-sided. No old service was restarted and no credentials were printed or committed.
+
+Added an isolated demo-only execution package using the existing fair-value decision model. Durable intent/reconciliation logic, strict demo hosts and scoped IOC order bodies, conservative sizing, restart/uncertain-order guards, exchange-reported settlement attribution, and protected demo status are covered by tests. Research source files and v6 account registration remain unchanged. See DEMO_EXECUTION.md for operating limits; deployment and actual exchange execution require separate verification below.

@@ -9,3 +9,5 @@ All strategies use the same execution simulator. Money uses Decimal. Limit price
 Run `uv run pytest` and `uv run ruff check .` before pushing. Add meaningful regression checks for correctness failures. Do not execute old bots. Keep secrets, recordings, and private account data out of git and logs.
 
 Railway budget target: $10/month, separate from the $100 simulated bankroll. One continuously running recorder/web process, persistent volume; bounded, on-demand replay jobs. Never change other Railway projects or workspace-wide spending limits without explicit authorization.
+
+On September 23, 2026 the user explicitly authorized fair-value execution in their Kalshi DEMO account with $125 of practice funds and retrieving the matching key pair from old Railway variables. `src/demo_execution` is the isolated demo-only adapter. Production order submission remains prohibited. Never substitute production credentials, data or endpoints into this adapter. Preserve durable order intents and reconcile uncertain requests before any additional order; no automatic POST retries. Keep the existing research registrations and accounts intact.
