@@ -1,11 +1,11 @@
 # Hosted research lab
 
-**Current status — September 24, 2026:** recording and bounded paper replay continue on v6. The optional fair-value demo exchange connector is deployed in the same service and waits for its $125 initial demo balance on exchange 2; the funding API request timed out and remains unconfirmed. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the deployment evidence and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
+**Current status — September 24, 2026:** recording and bounded paper replay continue on v6. The optional fair-value demo connector is deployed in the same service for BTC `KXBTC15M` Predictions markets. Its internal Predictions exchange-2 balance is verified at exactly $125 and the runner reports `watching`; it has submitted zero orders so far. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the deployment evidence and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
-- Production source: `7742abc`; later documentation commits need no redeployment.
-- Active deployment: `7bbc756b-11f6-4e16-825f-b8e4ba6eaa7b`, observed `SUCCESS`.
+- Research source remains `7742abc`; the deployed demo connector source is `df3f4cf`. Later documentation commits need no redeployment.
+- Active deployment: `62072295-2308-4b85-970b-aae1c4016ca7`, observed `SUCCESS` with a running instance.
 - Dataset `/data/segments-v6`, ID `e2d5cb33e7c44660809b531f03d4b4e3`; all earlier datasets preserved.
 - One replica, persistent `/data` volume and private `research-archive` bucket; HTTPS target port 8080.
 - External health/readiness both 200; unauthenticated dashboard 401; authenticated status 200; both feeds connected, no recorder error.
