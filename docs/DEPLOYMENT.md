@@ -1,6 +1,6 @@
 # Hosted research lab
 
-**Current status — September 20, 2026:** recording and bounded paper replay are restored. Settlement-window and rollover fixes passed an archive-based audit of two complete markets. Independent execution checks passed, event fee guards are deployed, and the initial metadata polling bug is fixed. See [COMMISSIONING.md](COMMISSIONING.md) for evidence and remaining execution/strategy gates. There is no live-order capability.
+**Current status — September 24, 2026:** recording and bounded paper replay continue on v6. The optional fair-value demo exchange connector is deployed in the same service and waits for its $125 initial demo balance on exchange 2; the funding API request timed out and remains unconfirmed. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the deployment evidence and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af

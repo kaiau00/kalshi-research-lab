@@ -1,5 +1,7 @@
 # Fair-value Kalshi demo experiment 001
 
+**September 24, 2026 status:** deployed successfully on Railway as `62072295-2308-4b85-970b-aae1c4016ca7`, source `df3f4cf`. The demo runner is connected to BRTI and discovering current BTC markets, but reports `waiting_initial_demo_funding`, exchange-2 cash $0 and zero order attempts. The single $125 funding request returned HTTP 504; balances remain unchanged and no matching new transfer appeared in the latest history page. Do not report this request as completed or automatically resubmit it. `/demo` is available with the existing dashboard credentials. Actual order submission, fills and settlement are not yet exchange-verified.
+
 The user authorized trading the existing Kalshi demo account with a $125 practice bankroll on September 23, 2026, and authorized retrieving its matching credentials from old Railway variables. The exact key pair was found in kalyx-perp and authenticated successfully to the demo balance and BRTI endpoints. No production order submission is authorized or implemented.
 
 The recovered account reported $125.54, all on exchange 0, with no positions or resting orders on exchange 2. BTC 15-minute demo markets are on exchange 2. Allocate exactly $125 of practice funds to that exchange, leaving $0.54 on exchange 0. The execution service does not contain automatic fund-transfer logic.
@@ -23,6 +25,8 @@ A process lock prevents concurrent runners against the same ledger. The existing
 Before its first order attempt, the runner requires the exchange-2 cash balance to be exactly $125. Otherwise its status is `waiting_initial_demo_funding`. It continues recording and reading balances while waiting, and cannot send an order. After the first attempt, subsequent orders use the actual remaining balance.
 
 Raw demo capture stops at 256 MB and preserves its data; it does not silently rotate or upload demo account data to the market-data archive. The volume ledger survives ordinary service restarts, but bare-volume disaster recovery is not automated. The additional demo workload has not yet received a full-day cost measurement. No new Railway service, old-bot restart, or workspace limit increase is required.
+
+Local validation: 92 tests and Ruff passed. GitHub run 36012077117 passed tests and the isolated container startup check. External health/readiness returned 200; the protected demo status returned 200 and reported an active runner. The research recorder retained dataset `e2d5cb33e7c44660809b531f03d4b4e3`, both feeds connected and no recorder error after deployment.
 
 ## Primary API references
 
