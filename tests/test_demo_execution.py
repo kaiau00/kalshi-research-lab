@@ -247,3 +247,33 @@ def test_full_step_journals_before_submit_and_never_reenters_after_fill(tmp_path
         r.raw.close()
         r.journal.db.close()
         r.lock.close()
+
+
+@pytest.mark.parametrize('cash', ['0', '100', '125.54'])
+def test_first_order_waits_for_exact_authorized_initial_funding(tmp_path, monkeypatch, cash):
+    monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
+    monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
+    r = Runner(tmp_path)
+
+    async def noop():
+        pass
+
+    async def read(path, params=None):
+        assert path == '/portfolio/balance'
+        return {'balance_dollars': cash}, 0
+
+    r.discover = r.settlements = noop
+    r.read = read
+
+    async def exercise():
+        await r.step()
+        assert r.status['state'] == 'waiting_initial_demo_funding'
+        assert not r.journal.rows()
+        await r.client.close()
+
+    try:
+        asyncio.run(exercise())
+    finally:
+        r.raw.close()
+        r.journal.db.close()
+        r.lock.close()

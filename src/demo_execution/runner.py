@@ -235,6 +235,10 @@ class Runner:
         if time.time() - self.account_at > 15:
             await self.account()
             self.account_at = time.time()
+        if not self.journal.rows() and Decimal(self.status.get('cash', '0')) != Decimal(self.cfg.bankroll):
+            self.status['state'] = 'waiting_initial_demo_funding'
+            self.status['markets'] = self.current
+            return
         self.status['state'] = 'watching'
         self.status['markets'] = self.current
         for ticker in self.current:

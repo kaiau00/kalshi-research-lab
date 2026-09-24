@@ -20,6 +20,8 @@ A process lock prevents concurrent runners against the same ledger. The existing
 
 `LAB_DEMO_ENABLED=1` enables the task. `KALSHI_DEMO_KEY_ID` and `KALSHI_DEMO_PRIVATE_KEY_B64` are separate Railway variables. `/demo` and `/api/demo/status` use the existing dashboard password. Creating `/data/demo-fair-value-001/STOP` stops new order attempts; removing it resumes evaluation. An uncertain order still requires reconciliation. No resting orders are deliberately created.
 
+Before its first order attempt, the runner requires the exchange-2 cash balance to be exactly $125. Otherwise its status is `waiting_initial_demo_funding`. It continues recording and reading balances while waiting, and cannot send an order. After the first attempt, subsequent orders use the actual remaining balance.
+
 Raw demo capture stops at 256 MB and preserves its data; it does not silently rotate or upload demo account data to the market-data archive. The volume ledger survives ordinary service restarts, but bare-volume disaster recovery is not automated. The additional demo workload has not yet received a full-day cost measurement. No new Railway service, old-bot restart, or workspace limit increase is required.
 
 ## Primary API references
