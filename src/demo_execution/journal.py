@@ -12,8 +12,11 @@ def dumps(value):
 
 
 class Journal:
-    def __init__(self, path):
+    def __init__(self, path, max_order_cost='1.00'):
         Path(path).parent.mkdir(parents=True, exist_ok=True)
+        self.max_order_cost = Decimal(max_order_cost)
+        if not self.max_order_cost.is_finite() or self.max_order_cost <= 0:
+            raise ValueError('Invalid journal order cost limit')
         self.db = sqlite3.connect(path)
         self.db.row_factory = sqlite3.Row
         self.db.executescript('''
@@ -28,11 +31,34 @@ class Journal:
             CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
         ''')
 
-    def register(self, config, identity):
+    def register(self, config, identity, revision=None):
         value = dumps({'config': config, 'identity': identity, 'environment': 'demo', 'exchange_index': 2})
         old = self.db.execute("SELECT value FROM metadata WHERE key='registration'").fetchone()
         if old and old[0] != value:
-            raise RuntimeError('Demo registration changed; preserve ledger and review before restarting')
+            if not revision:
+                raise RuntimeError('Demo registration changed; preserve ledger and review before restarting')
+            before, after = json.loads(old[0]), json.loads(value)
+            before_cfg, after_cfg = dict(before['config']), dict(after['config'])
+            before_risk = before_cfg.pop('risk_per_market', None)
+            after_risk = after_cfg.pop('risk_per_market', None)
+            settled = {row['ticker'] for row in self.settled()}
+            unsettled_fills = [row['ticker'] for row in self.rows()
+                               if row['exchange_order']
+                               and Decimal(json.loads(row['exchange_order'])['fill_count_fp']) > 0
+                               and row['ticker'] not in settled]
+            revision_key = 'revision:' + revision
+            if (before.get('identity') != after.get('identity') or before_cfg != after_cfg
+                    or before_risk != '1.00' or after_risk != '3.00'
+                    or self.pending() or unsettled_fills
+                    or self.db.execute('SELECT 1 FROM metadata WHERE key=?',
+                                       (revision_key,)).fetchone()):
+                raise RuntimeError('Demo registration revision is not safe')
+            self.db.execute('INSERT INTO metadata VALUES (?,?)',
+                            (revision_key, dumps({'from': before, 'to': after,
+                                                  'changed_ns': time.time_ns()})))
+            self.db.execute("UPDATE metadata SET value=? WHERE key='registration'", (value,))
+            self.db.commit()
+            return
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('registration',?)", (value,))
         self.db.commit()
 
@@ -77,8 +103,8 @@ class Journal:
             raise RuntimeError('Unexpected demo order response; stop and reconcile')
         amounts = [Decimal(order[k]) for k in ('taker_fill_cost_dollars', 'maker_fill_cost_dollars',
                                                'taker_fees_dollars', 'maker_fees_dollars')]
-        if any(not x.is_finite() or x < 0 for x in amounts) or sum(amounts) > 1:
-            raise RuntimeError('Demo order cost exceeded one-dollar budget')
+        if any(not x.is_finite() or x < 0 for x in amounts) or sum(amounts) > self.max_order_cost:
+            raise RuntimeError('Demo order cost exceeded configured budget')
         self.db.execute('UPDATE intents SET state=?,exchange_order=?,error=NULL WHERE client_id=?',
                         ('terminal', dumps(order), client_id))
         self.db.commit()

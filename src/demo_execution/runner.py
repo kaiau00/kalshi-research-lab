@@ -23,6 +23,9 @@ from research_lab.storage import Store
 from .client import WS, DemoClient
 from .journal import Journal, dumps
 
+RISK_PER_MARKET = Decimal('3.00')
+CONFIG_REVISION = 'risk-cap-3-20260924'
+
 
 def parse_book(data, received_ns):
     # REST uses each outcome's own bid price. The research WebSocket explicitly
@@ -42,13 +45,13 @@ def parse_book(data, received_ns):
     return Book(levels['yes'], levels['no'], received_ns, valid)
 
 
-def order_payload(decision):
+def order_payload(decision, max_order_cost=Decimal('1.00')):
     price = decision['limit']
     quantity = decision['quantity']
     # Reserve a cent-rounded fee per contract, conservatively covering the
     # simulator's aggregate fee assumption. Exchange fills determine actual cost.
     unit = (price + entry_fee(price, 1, Experiment())).quantize(Decimal('.01'), rounding=ROUND_CEILING)
-    quantity = min(quantity, int(Decimal('1') / unit))
+    quantity = min(quantity, int(Decimal(max_order_cost) / unit))
     if quantity < 1:
         return None
     return {'ticker': decision['ticker'], 'client_order_id': 'fv-' + uuid.uuid4().hex,
@@ -64,16 +67,17 @@ class Runner:
         self.root.mkdir(parents=True, exist_ok=True)
         self.lock = (self.root / 'runner.lock').open('a')
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        self.client = DemoClient()
-        self.cfg = Experiment(bankroll='125.00')
-        self.journal = Journal(self.root / 'orders.sqlite3')
+        self.cfg = Experiment(bankroll='125.00', risk_per_market=str(RISK_PER_MARKET))
+        self.client = DemoClient(max_order_cost=RISK_PER_MARKET)
+        self.journal = Journal(self.root / 'orders.sqlite3', max_order_cost=RISK_PER_MARKET)
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
-        self.journal.register(self.cfg.to_dict(), identity)
+        self.journal.register(self.cfg.to_dict(), identity, revision=CONFIG_REVISION)
         self.raw = Store(self.root / 'events.sqlite3')
         self.replay = Replay(self.cfg)
         self.state = self.replay.state
         self.status = {'environment': 'demo', 'strategy': 'basic_fair_value', 'state': 'starting',
-                       'bankroll': '125.00', 'risk_per_market': '1.00', 'exchange_index': 2,
+                       'bankroll': '125.00', 'risk_per_market': str(RISK_PER_MARKET),
+                       'config_revision': CONFIG_REVISION, 'exchange_index': 2,
                        'execution': 'exchange IOC; measured network latency, no simulated fills',
                        'started_ns': time.time_ns()}
         self.current = []
@@ -266,7 +270,7 @@ class Runner:
             decision = self.signal(ticker, cash)
             if decision is None:
                 continue
-            payload = order_payload(decision)
+            payload = order_payload(decision, RISK_PER_MARKET)
             if payload is None:
                 continue
             self.journal.intent(payload, decision)

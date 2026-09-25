@@ -9,8 +9,8 @@ from research_lab.settings import Experiment
 from research_lab.storage import Event
 
 
-def prepared(quantity='10'):
-    replay = Replay(Experiment(latency_ms=500, risk_per_market='1.00'))
+def prepared(quantity='10', risk_per_market='1.00'):
+    replay = Replay(Experiment(latency_ms=500, risk_per_market=risk_per_market))
     replay.state, ticker = warmed_state()
     replay.state.apply(ws(book_frame(ticker, 1, '.40', '.38', quantity), START + 750))
     account = replay.accounts['basic_fair_value']

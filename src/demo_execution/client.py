@@ -19,12 +19,15 @@ TICKER = re.compile(r'KXBTC15M-[A-Z0-9-]+\Z')
 class DemoClient:
     """No configurable host, production-key fallback, redirects, or write retries."""
 
-    def __init__(self, key_id=None, pem=None, *, transport=None):
+    def __init__(self, key_id=None, pem=None, *, max_order_cost='1.00', transport=None):
         self.key_id = key_id or os.environ['KALSHI_DEMO_KEY_ID']
         raw = pem or base64.b64decode(os.environ['KALSHI_DEMO_PRIVATE_KEY_B64'], validate=True)
         self.key = serialization.load_pem_private_key(raw, password=None)
         if not isinstance(self.key, (rsa.RSAPrivateKey, ed25519.Ed25519PrivateKey)):
             raise ValueError('Unsupported demo signing key')
+        self.max_order_cost = Decimal(max_order_cost)
+        if not self.max_order_cost.is_finite() or self.max_order_cost <= 0:
+            raise ValueError('Invalid demo order cost limit')
         self.http = httpx.AsyncClient(timeout=10, follow_redirects=False, transport=transport)
 
     def headers(self, method, path):
@@ -49,7 +52,7 @@ class DemoClient:
         return response.json()
 
     async def submit(self, payload):
-        validate_order(payload)
+        validate_order(payload, self.max_order_cost)
         path = PREFIX + '/portfolio/events/orders'
         response = await self.http.post(BASE + path, headers=self.headers('POST', path), json=payload)
         response.raise_for_status()
@@ -59,7 +62,7 @@ class DemoClient:
         await self.http.aclose()
 
 
-def validate_order(p):
+def validate_order(p, max_order_cost=Decimal('1.00')):
     required = {'ticker', 'client_order_id', 'side', 'count', 'price', 'time_in_force',
                 'self_trade_prevention_type', 'exchange_index', 'subaccount'}
     if set(p) != required or not TICKER.fullmatch(p['ticker']):
@@ -74,7 +77,10 @@ def validate_order(p):
         raise ValueError('Invalid demo order price/quantity')
     cost = price if p['side'] == 'bid' else 1-price
     fee = (Decimal('.07') * count * cost * (1-cost)).quantize(Decimal('.000001'), rounding=ROUND_CEILING)
-    if (count * cost + fee).quantize(Decimal('.0001'), rounding=ROUND_CEILING) > 1:
-        raise ValueError('Demo order cost exceeds one dollar')
+    limit = Decimal(max_order_cost)
+    if not limit.is_finite() or limit <= 0:
+        raise ValueError('Invalid demo order cost limit')
+    if (count * cost + fee).quantize(Decimal('.0001'), rounding=ROUND_CEILING) > limit:
+        raise ValueError('Demo order cost exceeds configured limit')
     if not re.fullmatch(r'fv-[a-f0-9]{32}', p['client_order_id']):
         raise ValueError('Invalid persistent client order ID')

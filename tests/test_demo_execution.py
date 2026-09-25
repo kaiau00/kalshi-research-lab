@@ -13,7 +13,7 @@ from test_engine import prepared
 from demo_execution.app import create_app
 from demo_execution.client import BASE, DemoClient, validate_order
 from demo_execution.journal import Journal
-from demo_execution.runner import Runner, order_payload, parse_book
+from demo_execution.runner import CONFIG_REVISION, Runner, order_payload, parse_book
 
 
 def pem():
@@ -46,16 +46,17 @@ def test_no_side_and_rest_book_have_distinct_price_coordinates():
 
 
 @pytest.mark.parametrize('price', ['.0001', '.058', '.38', '.50', '.80', '.99', '.9999'])
-def test_sizing_retains_one_dollar_limit_with_conservative_fee_reserve(price):
+def test_sizing_retains_configured_limit_with_conservative_fee_reserve(price):
     from research_lab.engine import entry_fee
     from research_lab.settings import Experiment
     price = Decimal(price)
+    cap = Decimal('3.00')
     p = order_payload({'ticker': 'KXBTC15M-26SEP232215-15', 'limit': price,
-                       'quantity': int(1/price), 'side': 'no'})
+                       'quantity': int(cap/price), 'side': 'no'}, cap)
     if p:
-        validate_order(p)
+        validate_order(p, cap)
         qty = int(p['count'])
-        assert qty * price + entry_fee(price, qty, Experiment()) <= 1
+        assert qty * price + entry_fee(price, qty, Experiment()) <= cap
 
 
 def test_demo_request_signing_scope_and_no_retries():
@@ -127,7 +128,7 @@ def test_mismatched_or_overbudget_response_stays_blocked(tmp_path, change):
 
 
 def test_runner_uses_existing_fair_value_and_does_not_simulate_fills(tmp_path, monkeypatch):
-    replay, ticker, account, now = prepared()
+    replay, ticker, account, now = prepared(risk_per_market='3.00')
     monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
     monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
     r = Runner(tmp_path)
@@ -185,6 +186,67 @@ def test_same_ledger_rejects_different_demo_account(tmp_path):
     with pytest.raises(RuntimeError, match='registration changed'):
         j.register({'bankroll': '125'}, 'two')
     assert json.loads(j.db.execute('SELECT value FROM metadata').fetchone()[0])['identity'] == 'one'
+    j.db.close()
+
+
+def test_explicit_risk_revision_preserves_settled_ledger(tmp_path):
+    from research_lab.settings import Experiment
+    j = Journal(tmp_path / 'j.sqlite3', max_order_cost='3.00')
+    old = Experiment(bankroll='125.00', risk_per_market='1.00').to_dict()
+    new = Experiment(bankroll='125.00', risk_per_market='3.00').to_dict()
+    j.register(old, 'one')
+    p = intent()
+    j.intent(p, {})
+    j.reconcile(p['client_order_id'], result(p))
+    j.settlement(p['ticker'], {
+        'ticker': p['ticker'], 'exchange_index': 2, 'yes_count_fp': '0',
+        'no_count_fp': '1.50', 'yes_total_cost_dollars': '0',
+        'no_total_cost_dollars': '.57', 'fee_cost': '.0248', 'revenue': 150,
+    })
+    j.register(new, 'one', revision=CONFIG_REVISION)
+    registration = json.loads(j.db.execute(
+        "SELECT value FROM metadata WHERE key='registration'").fetchone()[0])
+    assert registration['config']['risk_per_market'] == '3.00'
+    assert j.db.execute('SELECT 1 FROM metadata WHERE key=?',
+                        ('revision:' + CONFIG_REVISION,)).fetchone()
+    assert len(j.rows()) == 1 and len(j.settled()) == 1
+    j.register(new, 'one', revision=CONFIG_REVISION)
+    j.db.close()
+
+
+def test_three_dollar_reconciliation_accepts_only_configured_budget(tmp_path):
+    j = Journal(tmp_path / 'j.sqlite3', max_order_cost='3.00')
+    p = order_payload({'ticker': 'KXBTC15M-26SEP232215-15', 'limit': Decimal('.38'),
+                       'quantity': 7, 'side': 'yes'}, Decimal('3.00'))
+    validate_order(p, Decimal('3.00'))
+    j.intent(p, {})
+    accepted = result(p, fill=p['count'])
+    accepted.update(taker_fill_cost_dollars='2.6600', taker_fees_dollars='.1000',
+                    status='executed')
+    j.reconcile(p['client_order_id'], accepted)
+    assert not j.pending()
+
+    p = order_payload({'ticker': 'KXBTC15M-26SEP232230-30', 'limit': Decimal('.38'),
+                       'quantity': 7, 'side': 'yes'}, Decimal('3.00'))
+    j.intent(p, {})
+    over = result(p, fill=p['count'])
+    over.update(taker_fill_cost_dollars='2.9000', taker_fees_dollars='.1001',
+                status='executed')
+    with pytest.raises(RuntimeError, match='configured budget'):
+        j.reconcile(p['client_order_id'], over)
+    assert len(j.pending()) == 1
+    j.db.close()
+
+
+def test_risk_revision_refuses_pending_order(tmp_path):
+    from research_lab.settings import Experiment
+    j = Journal(tmp_path / 'j.sqlite3', max_order_cost='3.00')
+    old = Experiment(bankroll='125.00', risk_per_market='1.00').to_dict()
+    new = Experiment(bankroll='125.00', risk_per_market='3.00').to_dict()
+    j.register(old, 'one')
+    j.intent(intent(), {})
+    with pytest.raises(RuntimeError, match='revision is not safe'):
+        j.register(new, 'one', revision=CONFIG_REVISION)
     j.db.close()
 
 
