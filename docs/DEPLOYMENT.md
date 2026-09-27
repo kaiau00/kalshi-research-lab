@@ -1,11 +1,11 @@
 # Hosted research lab
 
-**Current status — September 24, 2026:** recording and bounded paper replay continue on v6. The optional fair-value demo connector is deployed in the same service for BTC `KXBTC15M` Predictions markets. Its runner reports `watching` with a $3 maximum modeled cost per market, a $125.3983 exchange-2 balance, 24 filled and settled markets, no unresolved orders, and +$0.3983 realized P&L. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the deployment evidence and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
+**Current status — September 27, 2026:** recording and bounded paper replay continue on v6. The optional demo connector is running `tail_underdog` in the same service for BTC `KXBTC15M` Predictions markets. Its runner reports `watching` with a $3 maximum modeled cost per market, a $157.5630 fixed starting baseline, zero initial attempts, and no unresolved orders. The completed fair-value ledger is frozen at 133 attempts, 132 fills and settlements, and +$32.563000 realized P&L. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the exact tail parameters, deployment evidence, and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
-- Research source remains `7742abc`; the deployed demo connector source is `f9bd9e2`. Later documentation commits need no redeployment.
-- Active deployment: `738d7ad4-3f14-481b-a514-29ce4130f83c`, observed `SUCCESS` with a running instance.
+- Research source remains `7742abc`; the deployed strategy-selection source is `6345828`. Later documentation commits need no redeployment.
+- Active deployment: `e1c08e9e-2a76-4207-8a46-2393c02b170f`, observed `SUCCESS` with a running instance.
 - Dataset `/data/segments-v6`, ID `e2d5cb33e7c44660809b531f03d4b4e3`; all earlier datasets preserved.
 - One replica, persistent `/data` volume and private `research-archive` bucket; HTTPS target port 8080.
 - External health/readiness both 200; unauthenticated dashboard 401; authenticated status 200; both feeds connected, no recorder error.
