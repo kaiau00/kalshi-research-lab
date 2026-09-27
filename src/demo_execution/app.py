@@ -45,11 +45,11 @@ def create_app(record=True):
     @app.get('/demo', dependencies=[Depends(authenticated)])
     async def dashboard():
         return HTMLResponse('''<!doctype html><html lang="en"><meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair value — Kalshi demo</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1"><title>Strategy experiment — Kalshi demo</title>
         <style>body{font:16px system-ui;max-width:900px;margin:40px auto;padding:0 20px;background:#101820;
         color:#edf4f7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#192934;padding:20px;
-        border-radius:12px}a{color:#7bd8ea}</style><h1>Fair value · Kalshi demo</h1>
-        <p>$125 practice bankroll · $3 maximum per market · BTC 15-minute markets</p>
+        border-radius:12px}a{color:#7bd8ea}</style><h1>Strategy experiment · Kalshi demo</h1>
+        <p>Configured practice bankroll · $3 maximum per market · BTC 15-minute markets</p>
         <p>Exchange-reported demo execution. Demo liquidity and profits do not establish real-market returns.</p>
         <p><a href="/">Research dashboard</a></p><pre id="status">Loading…</pre><script>
         async function refresh(){try{let r=await fetch('/api/demo/status');if(!r.ok)throw new Error(r.status);

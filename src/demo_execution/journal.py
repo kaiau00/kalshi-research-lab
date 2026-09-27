@@ -31,7 +31,12 @@ class Journal:
             CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
         ''')
 
-    def register(self, config, identity, revision=None):
+    def register(self, config, identity, strategy='basic_fair_value', revision=None):
+        strategy_value = dumps({'strategy': strategy})
+        old_strategy = self.db.execute(
+            "SELECT value FROM metadata WHERE key='strategy_registration'").fetchone()
+        if old_strategy and old_strategy[0] != strategy_value:
+            raise RuntimeError('Demo strategy changed; preserve ledger and use a new ledger')
         value = dumps({'config': config, 'identity': identity, 'environment': 'demo', 'exchange_index': 2})
         old = self.db.execute("SELECT value FROM metadata WHERE key='registration'").fetchone()
         if old and old[0] != value:
@@ -57,9 +62,9 @@ class Journal:
                             (revision_key, dumps({'from': before, 'to': after,
                                                   'changed_ns': time.time_ns()})))
             self.db.execute("UPDATE metadata SET value=? WHERE key='registration'", (value,))
-            self.db.commit()
-            return
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('registration',?)", (value,))
+        self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('strategy_registration',?)",
+                        (strategy_value,))
         self.db.commit()
 
     def rows(self, ticker=None):

@@ -14,7 +14,7 @@ import httpx
 from websockets.asyncio.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
-from research_lab.engine import Replay, entry_fee
+from research_lab.engine import STRATEGIES, Replay, entry_fee
 from research_lab.market import Book
 from research_lab.research import source_hash
 from research_lab.settings import Experiment
@@ -25,6 +25,8 @@ from .journal import Journal, dumps
 
 RISK_PER_MARKET = Decimal('3.00')
 CONFIG_REVISION = 'risk-cap-3-20260924'
+DEFAULT_STRATEGY = 'basic_fair_value'
+DEFAULT_STARTING_CASH = Decimal('125.00')
 
 
 def parse_book(data, received_ns):
@@ -63,22 +65,34 @@ def order_payload(decision, max_order_cost=Decimal('1.00')):
 
 class Runner:
     def __init__(self, root=None):
+        self.strategy = os.environ.get('LAB_DEMO_STRATEGY', DEFAULT_STRATEGY)
+        if self.strategy not in STRATEGIES:
+            raise ValueError('Unsupported demo strategy')
+        try:
+            self.starting_cash = Decimal(os.environ.get('LAB_DEMO_STARTING_CASH',
+                                                        str(DEFAULT_STARTING_CASH)))
+        except Exception as exc:
+            raise ValueError('Invalid demo starting cash') from exc
+        if not self.starting_cash.is_finite() or self.starting_cash < RISK_PER_MARKET:
+            raise ValueError('Invalid demo starting cash')
         self.root = Path(root or os.environ.get('LAB_DEMO_DIR', '/data/demo-fair-value-001'))
         self.root.mkdir(parents=True, exist_ok=True)
         self.lock = (self.root / 'runner.lock').open('a')
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        self.cfg = Experiment(bankroll='125.00', risk_per_market=str(RISK_PER_MARKET))
+        self.cfg = Experiment(bankroll=str(self.starting_cash), risk_per_market=str(RISK_PER_MARKET))
         self.client = DemoClient(max_order_cost=RISK_PER_MARKET)
         self.journal = Journal(self.root / 'orders.sqlite3', max_order_cost=RISK_PER_MARKET)
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
-        self.journal.register(self.cfg.to_dict(), identity, revision=CONFIG_REVISION)
+        self.journal.register(self.cfg.to_dict(), identity, strategy=self.strategy,
+                              revision=CONFIG_REVISION)
         self.raw = Store(self.root / 'events.sqlite3')
         self.replay = Replay(self.cfg)
         self.state = self.replay.state
-        self.status = {'environment': 'demo', 'strategy': 'basic_fair_value', 'state': 'starting',
-                       'bankroll': '125.00', 'risk_per_market': str(RISK_PER_MARKET),
+        self.status = {'environment': 'demo', 'strategy': self.strategy, 'state': 'starting',
+                       'bankroll': str(self.starting_cash), 'risk_per_market': str(RISK_PER_MARKET),
                        'config_revision': CONFIG_REVISION, 'exchange_index': 2,
                        'execution': 'exchange IOC; measured network latency, no simulated fills',
+                       'strategy_parameters': self.strategy_parameters(),
                        'started_ns': time.time_ns()}
         self.current = []
         self.discovery_at = self.series_at = 0
@@ -87,8 +101,23 @@ class Runner:
         self.account_at = 0
         self.settlement_at = 0
         demo_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted(Path(__file__).parent.glob('*.py'))))
-        self.record('demo_start', {'config': self.cfg.to_dict(), 'research_source': source_hash(),
+        self.record('demo_start', {'config': self.cfg.to_dict(), 'strategy': self.strategy,
+                                  'research_source': source_hash(),
                                   'demo_source': demo_hash.hexdigest(), 'environment': 'demo'})
+
+    def strategy_parameters(self):
+        parameters = {'min_seconds_left': self.cfg.min_seconds_left,
+                      'max_seconds_left': self.cfg.max_seconds_left,
+                      'min_net_edge': self.cfg.min_edge}
+        if self.strategy == 'tail_underdog':
+            parameters.update(tail_max_seconds=self.cfg.tail_max_seconds,
+                              tail_max_price=self.cfg.tail_max_price,
+                              tail_max_abs_z=self.cfg.tail_max_z,
+                              side_selection='cheaper_outcome_only')
+        elif self.strategy == 'adaptive_volatility':
+            parameters.update(fast_window_seconds=self.cfg.fast_window_seconds,
+                              slow_window_seconds=self.cfg.slow_window_seconds)
+        return parameters
 
     def record(self, kind, payload):
         event = self.raw.append(kind, payload)
@@ -166,8 +195,8 @@ class Runner:
     def signal(self, ticker, cash):
         model = Replay(self.cfg)
         model.state = self.state
-        account = model.accounts['basic_fair_value']
-        account.cash = min(Decimal('125'), cash)
+        account = model.accounts[self.strategy]
+        account.cash = min(self.starting_cash, cash)
         rows = self.journal.rows(ticker)
         account.attempts[ticker] = len(rows)
         if rows:
@@ -247,7 +276,9 @@ class Runner:
         self.status['markets'] = self.current
         for ticker in self.current:
             meta = self.state.metadata(ticker)
-            if not meta or not 5 <= (meta[2] - time.time_ns()) / 1e9 <= 300:
+            max_seconds = (self.cfg.tail_max_seconds if self.strategy == 'tail_underdog'
+                           else self.cfg.max_seconds_left)
+            if not meta or not self.cfg.min_seconds_left <= (meta[2] - time.time_ns()) / 1e9 <= max_seconds:
                 continue
             await self.book(ticker)
             if not self.signal(ticker, Decimal(self.status.get('cash', '0'))):

@@ -148,6 +148,51 @@ def test_runner_uses_existing_fair_value_and_does_not_simulate_fills(tmp_path, m
         r.lock.close()
 
 
+def test_runner_uses_existing_tail_underdog_strategy(tmp_path, monkeypatch):
+    from test_market import NS, START, warmed_state, ws
+
+    from research_lab.demo import book_frame, index_frame
+    from research_lab.engine import Replay
+    from research_lab.settings import Experiment
+
+    replay = Replay(Experiment(bankroll='157.5630', risk_per_market='3.00'))
+    replay.state, ticker = warmed_state()
+    replay.state.apply(ws(index_frame(START + 780, 80000), START + 780.01))
+    replay.state.apply(ws(book_frame(ticker, 1, '.72', '.70', '20'), START + 780.02))
+    now = int((START + 780.1) * NS)
+    account = replay.accounts['tail_underdog']
+    replay._decide(account, ticker, now)
+    assert ticker in account.pending
+
+    monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
+    monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
+    monkeypatch.setenv('LAB_DEMO_STRATEGY', 'tail_underdog')
+    monkeypatch.setenv('LAB_DEMO_STARTING_CASH', '157.5630')
+    r = Runner(tmp_path)
+    try:
+        r.state = replay.state
+        monkeypatch.setattr('demo_execution.runner.time.time_ns', lambda: now)
+        signal = r.signal(ticker, Decimal('157.5630'))
+        for field in ('side', 'limit', 'quantity', 'probability', 'edge'):
+            assert signal[field] == account.pending[ticker][field]
+        assert signal['side'] == 'no'
+        assert signal['limit'] <= Decimal('.35')
+        assert abs(signal['forecast']['z']) <= 1
+        assert signal['edge'] >= .04
+        assert r.status['strategy_parameters']['tail_max_seconds'] == 135
+    finally:
+        asyncio.run(r.client.close())
+        r.raw.close()
+        r.journal.db.close()
+        r.lock.close()
+
+
+def test_runner_rejects_unknown_strategy(tmp_path, monkeypatch):
+    monkeypatch.setenv('LAB_DEMO_STRATEGY', 'made_up')
+    with pytest.raises(ValueError, match='Unsupported demo strategy'):
+        Runner(tmp_path)
+
+
 def test_unknown_order_is_not_resubmitted(tmp_path, monkeypatch):
     monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
     monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
@@ -186,6 +231,17 @@ def test_same_ledger_rejects_different_demo_account(tmp_path):
     with pytest.raises(RuntimeError, match='registration changed'):
         j.register({'bankroll': '125'}, 'two')
     assert json.loads(j.db.execute('SELECT value FROM metadata').fetchone()[0])['identity'] == 'one'
+    j.db.close()
+
+
+def test_same_ledger_rejects_different_strategy(tmp_path):
+    j = Journal(tmp_path / 'j.sqlite3')
+    j.register({'bankroll': '125'}, 'one', strategy='basic_fair_value')
+    with pytest.raises(RuntimeError, match='strategy changed'):
+        j.register({'bankroll': '125'}, 'one', strategy='tail_underdog')
+    registered = json.loads(j.db.execute(
+        "SELECT value FROM metadata WHERE key='strategy_registration'").fetchone()[0])
+    assert registered['strategy'] == 'basic_fair_value'
     j.db.close()
 
 
@@ -336,6 +392,34 @@ def test_first_order_waits_for_exact_authorized_initial_funding(tmp_path, monkey
     try:
         asyncio.run(exercise())
     finally:
+        r.raw.close()
+        r.journal.db.close()
+        r.lock.close()
+
+
+def test_first_order_uses_configured_starting_cash_gate(tmp_path, monkeypatch):
+    monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
+    monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
+    monkeypatch.setenv('LAB_DEMO_STRATEGY', 'tail_underdog')
+    monkeypatch.setenv('LAB_DEMO_STARTING_CASH', '157.5630')
+    r = Runner(tmp_path)
+
+    async def noop():
+        pass
+
+    async def read(path, params=None):
+        assert path == '/portfolio/balance'
+        return {'balance_dollars': '157.5600'}, 0
+
+    r.discover = r.settlements = noop
+    r.read = read
+    try:
+        asyncio.run(r.step())
+        assert r.status['state'] == 'waiting_initial_demo_funding'
+        assert r.status['bankroll'] == '157.5630'
+        assert not r.journal.rows()
+    finally:
+        asyncio.run(r.client.close())
         r.raw.close()
         r.journal.db.close()
         r.lock.close()
