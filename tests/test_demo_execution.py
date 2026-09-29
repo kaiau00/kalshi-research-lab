@@ -13,7 +13,7 @@ from test_engine import prepared
 from demo_execution.app import create_app
 from demo_execution.client import BASE, READ_BASES, DemoClient, validate_order
 from demo_execution.journal import Journal
-from demo_execution.runner import CONFIG_REVISION, Runner, order_payload, parse_book
+from demo_execution.runner import CONFIG_REVISION, Runner, market_close_timestamp, order_payload, parse_book
 
 
 def pem():
@@ -43,6 +43,12 @@ def test_no_side_and_rest_book_have_distinct_price_coordinates():
     assert book.at_ns == 123 and book.valid
     assert not parse_book({'orderbook_fp': {'yes_dollars': [['.65', '5']],
                                           'no_dollars': [['.35', '4']]}}, 123).valid
+
+
+def test_demo_market_close_time_parsing_fails_closed():
+    assert market_close_timestamp({'close_time': '2026-09-29T01:30:00Z'}) == 1790645400
+    assert market_close_timestamp({'close_time': 'bad'}) is None
+    assert market_close_timestamp({}) is None
 
 
 @pytest.mark.parametrize('price', ['.0001', '.058', '.38', '.50', '.80', '.99', '.9999'])

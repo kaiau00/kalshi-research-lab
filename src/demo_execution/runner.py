@@ -8,6 +8,7 @@ import os
 import time
 import uuid
 from dataclasses import replace
+from datetime import datetime
 from decimal import ROUND_CEILING, Decimal
 from pathlib import Path
 
@@ -32,6 +33,14 @@ TAIL_SHADOW_OVERRIDES = {
     'tail_control_135s': {},
     'tail_window_180s': {'tail_max_seconds': 180},
 }
+
+
+def market_close_timestamp(market):
+    try:
+        value = market['close_time']
+        return datetime.fromisoformat(value.replace('Z', '+00:00')).timestamp()
+    except (KeyError, TypeError, ValueError):
+        return None
 
 
 def parse_book(data, received_ns):
@@ -168,8 +177,10 @@ class Runner:
         now = time.time()
         if now - self.discovery_at < 5:
             return
-        data, _ = await self.read('/markets', {'series_ticker': 'KXBTC15M', 'min_close_ts': int(now),
-                                             'max_close_ts': int(now) + 1800, 'limit': 100})
+        # The demo timestamp-filter combination can return HTTP 500. The documented
+        # open filter is bounded and then narrowed by close time locally.
+        data, _ = await self.read('/markets', {'series_ticker': 'KXBTC15M',
+                                             'status': 'open', 'limit': 100})
         if data.get('cursor'):
             raise RuntimeError('Unexpected demo discovery pagination')
         self.current = []
@@ -177,7 +188,9 @@ class Runner:
             if market.get('exchange_index') != 2:
                 continue
             self.record('market', {'market': market})
-            if market.get('status') == 'active':
+            close_ts = market_close_timestamp(market)
+            if (market.get('status') == 'active' and close_ts is not None
+                    and now <= close_ts <= now + 1800):
                 self.current.append(market['ticker'])
         self.discovery_at = now
         if now - self.series_at > 600:
