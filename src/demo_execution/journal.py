@@ -29,6 +29,10 @@ class Journal:
             );
             CREATE TABLE IF NOT EXISTS settlements (ticker TEXT PRIMARY KEY, response TEXT NOT NULL, pnl TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS shadow_signals (
+                variant TEXT NOT NULL, ticker TEXT NOT NULL, created_ns INTEGER NOT NULL,
+                decision TEXT NOT NULL, PRIMARY KEY (variant, ticker)
+            );
         ''')
 
     def register(self, config, identity, strategy='basic_fair_value', revision=None):
@@ -66,6 +70,39 @@ class Journal:
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('strategy_registration',?)",
                         (strategy_value,))
         self.db.commit()
+
+    def register_shadow_variants(self, variants):
+        for name, config in variants.items():
+            key = 'shadow_variant:' + name
+            value = dumps({'strategy': 'tail_underdog', 'config': config,
+                           'execution': 'signal_only_no_order'})
+            old = self.db.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()
+            if old and old[0] != value:
+                raise RuntimeError('Shadow variant changed; use a new variant name')
+            self.db.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)', (key, value))
+        self.db.commit()
+
+    def shadow_signal(self, variant, ticker, decision, created_ns=None):
+        result = self.db.execute('INSERT OR IGNORE INTO shadow_signals VALUES (?,?,?,?)',
+                                 (variant, ticker, created_ns or time.time_ns(), dumps(decision)))
+        self.db.commit()
+        return result.rowcount == 1
+
+    def shadow_rows(self, variant=None):
+        query = ('SELECT * FROM shadow_signals' + (' WHERE variant=?' if variant else '')
+                 + ' ORDER BY created_ns')
+        return [dict(r) for r in self.db.execute(query, (variant,) if variant else ())]
+
+    def has_shadow_signal(self, variant, ticker):
+        return bool(self.db.execute(
+            'SELECT 1 FROM shadow_signals WHERE variant=? AND ticker=?',
+            (variant, ticker)).fetchone())
+
+    def shadow_summary(self, variants):
+        return {'execution': 'signal_only_no_order',
+                'counts': {name: len(self.shadow_rows(name)) for name in variants},
+                'recent': [{**r, 'decision': json.loads(r['decision'])}
+                           for r in self.shadow_rows()[-10:]]}
 
     def rows(self, ticker=None):
         return [dict(r) for r in self.db.execute(

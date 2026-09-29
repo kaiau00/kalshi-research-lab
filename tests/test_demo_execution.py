@@ -245,6 +245,46 @@ def test_same_ledger_rejects_different_strategy(tmp_path):
     j.db.close()
 
 
+def test_shadow_variants_are_append_only_and_record_one_signal_per_market(tmp_path):
+    j = Journal(tmp_path / 'j.sqlite3')
+    j.register_shadow_variants({'tail_window_180s': {'tail_max_seconds': 180}})
+    assert j.shadow_signal('tail_window_180s', 'KXBTC15M-A', {'limit': '.30'}, created_ns=1)
+    assert not j.shadow_signal('tail_window_180s', 'KXBTC15M-A', {'limit': '.31'}, created_ns=2)
+    assert j.shadow_summary(['tail_window_180s'])['counts']['tail_window_180s'] == 1
+    j.register_shadow_variants({'tail_window_180s': {'tail_max_seconds': 180},
+                                'tail_price_040': {'tail_max_price': .40}})
+    with pytest.raises(RuntimeError, match='variant changed'):
+        j.register_shadow_variants({'tail_window_180s': {'tail_max_seconds': 181}})
+    j.db.close()
+
+
+def test_180_second_shadow_adds_signal_without_changing_live_tail(tmp_path, monkeypatch):
+    from test_market import NS, START, warmed_state, ws
+
+    from research_lab.demo import book_frame
+
+    monkeypatch.setenv('KALSHI_DEMO_KEY_ID', 'test')
+    monkeypatch.setenv('KALSHI_DEMO_PRIVATE_KEY_B64', base64.b64encode(pem()).decode())
+    monkeypatch.setenv('LAB_DEMO_STRATEGY', 'tail_underdog')
+    r = Runner(tmp_path)
+    r.state, ticker = warmed_state()
+    r.state.apply(ws(book_frame(ticker, 1), START + 750))
+    now = int((START + 750.1) * NS)
+    monkeypatch.setattr('demo_execution.runner.time.time_ns', lambda: now)
+    try:
+        assert r.signal(ticker, Decimal('125')) is None
+        r.shadow_signals(ticker)
+        assert not r.journal.shadow_rows('tail_control_135s')
+        rows = r.journal.shadow_rows('tail_window_180s')
+        assert len(rows) == 1 and rows[0]['ticker'] == ticker
+        assert not r.journal.rows()
+    finally:
+        asyncio.run(r.client.close())
+        r.raw.close()
+        r.journal.db.close()
+        r.lock.close()
+
+
 def test_explicit_risk_revision_preserves_settled_ledger(tmp_path):
     from research_lab.settings import Experiment
     j = Journal(tmp_path / 'j.sqlite3', max_order_cost='3.00')

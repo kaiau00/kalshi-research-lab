@@ -7,6 +7,7 @@ import json
 import os
 import time
 import uuid
+from dataclasses import replace
 from decimal import ROUND_CEILING, Decimal
 from pathlib import Path
 
@@ -27,6 +28,10 @@ RISK_PER_MARKET = Decimal('3.00')
 CONFIG_REVISION = 'risk-cap-3-20260924'
 DEFAULT_STRATEGY = 'basic_fair_value'
 DEFAULT_STARTING_CASH = Decimal('125.00')
+TAIL_SHADOW_OVERRIDES = {
+    'tail_control_135s': {},
+    'tail_window_180s': {'tail_max_seconds': 180},
+}
 
 
 def parse_book(data, received_ns):
@@ -85,6 +90,11 @@ class Runner:
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
         self.journal.register(self.cfg.to_dict(), identity, strategy=self.strategy,
                               revision=CONFIG_REVISION)
+        self.shadow_configs = ({name: replace(self.cfg, **overrides)
+                                for name, overrides in TAIL_SHADOW_OVERRIDES.items()}
+                               if self.strategy == 'tail_underdog' else {})
+        self.journal.register_shadow_variants(
+            {name: cfg.to_dict() for name, cfg in self.shadow_configs.items()})
         self.raw = Store(self.root / 'events.sqlite3')
         self.replay = Replay(self.cfg)
         self.state = self.replay.state
@@ -187,10 +197,33 @@ class Runner:
         self.state.event_fees = {k: v for k, v in self.state.event_fees.items() if k in events}
         self.event_at = {k: v for k, v in self.event_at.items() if k in events}
 
-    async def book(self, ticker):
-        data, started = await self.read('/markets/' + ticker + '/orderbook', {'depth': 1})
+    async def book(self, ticker, *, record=True):
+        if record:
+            data, started = await self.read('/markets/' + ticker + '/orderbook', {'depth': 1})
+        else:
+            started = time.time_ns()
+            data = await self.client.get('/markets/' + ticker + '/orderbook', {'depth': 1})
         # Using request start conservatively includes REST round-trip delay in quote age.
         self.state.books[ticker] = parse_book(data, started)
+
+    def shadow_signals(self, ticker):
+        now = time.time_ns()
+        for name, cfg in self.shadow_configs.items():
+            if self.journal.has_shadow_signal(name, ticker):
+                continue
+            model = Replay(cfg)
+            model.state = self.state
+            account = model.accounts['tail_underdog']
+            account.cash = self.starting_cash
+            model._decide(account, ticker, now)
+            decision = account.pending.get(ticker)
+            if decision is None:
+                continue
+            serial = json.loads(dumps(decision))
+            if self.journal.shadow_signal(name, ticker, serial, created_ns=now):
+                self.record('demo_shadow_signal', {'variant': name, 'strategy': 'tail_underdog',
+                                                   'execution': 'signal_only_no_order',
+                                                   'decision': serial})
 
     def signal(self, ticker, cash):
         model = Replay(self.cfg)
@@ -276,11 +309,20 @@ class Runner:
         self.status['markets'] = self.current
         for ticker in self.current:
             meta = self.state.metadata(ticker)
-            max_seconds = (self.cfg.tail_max_seconds if self.strategy == 'tail_underdog'
-                           else self.cfg.max_seconds_left)
-            if not meta or not self.cfg.min_seconds_left <= (meta[2] - time.time_ns()) / 1e9 <= max_seconds:
+            live_max_seconds = (self.cfg.tail_max_seconds if self.strategy == 'tail_underdog'
+                                else self.cfg.max_seconds_left)
+            evaluation_max_seconds = max(
+                [live_max_seconds, *(cfg.tail_max_seconds for cfg in self.shadow_configs.values())])
+            seconds_left = (meta[2] - time.time_ns()) / 1e9 if meta else -1
+            if not self.cfg.min_seconds_left <= seconds_left <= evaluation_max_seconds:
                 continue
-            await self.book(ticker)
+            # Extended-window quotes are used only for signal counting. Persist a compact
+            # record when a shadow signal occurs, without growing the private raw log for
+            # every rejected quote.
+            await self.book(ticker, record=seconds_left <= live_max_seconds)
+            self.shadow_signals(ticker)
+            if seconds_left > live_max_seconds:
+                continue
             if not self.signal(ticker, Decimal(self.status.get('cash', '0'))):
                 continue
             exchange, _ = await self.read('/exchange/status')
@@ -333,6 +375,8 @@ class Runner:
                            recent_orders=[{'ticker': r['ticker'], 'state': r['state'], 'error': r['error'],
                                            'order': json.loads(r['exchange_order']) if r['exchange_order'] else None}
                                           for r in rows[-10:]])
+        if self.shadow_configs:
+            self.status['shadow'] = self.journal.shadow_summary(self.shadow_configs)
         path = self.root / 'status.tmp'
         path.write_text(dumps(self.status))
         os.replace(path, self.root / 'status.json')
