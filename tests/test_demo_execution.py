@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 from test_engine import prepared
 
 from demo_execution.app import create_app
-from demo_execution.client import BASE, DemoClient, validate_order
+from demo_execution.client import BASE, READ_BASES, DemoClient, validate_order
 from demo_execution.journal import Journal
 from demo_execution.runner import CONFIG_REVISION, Runner, order_payload, parse_book
 
@@ -82,6 +82,33 @@ def test_demo_request_signing_scope_and_no_retries():
             assert len(calls) == 1
         finally:
             await c.close()
+    asyncio.run(check())
+
+
+def test_demo_reads_fail_over_but_order_writes_never_retry():
+    key = pem()
+    calls = []
+
+    def handle(req):
+        calls.append((req.method, str(req.url)))
+        if req.method == 'GET' and str(req.url).startswith(READ_BASES[0]):
+            return httpx.Response(500, json={'code': 'temporary'})
+        if req.method == 'GET' and str(req.url).startswith(READ_BASES[1]):
+            return httpx.Response(200, json={'balance_dollars': '125.00'})
+        return httpx.Response(503, json={'code': 'temporary'})
+
+    async def check():
+        c = DemoClient('demo-test', key, transport=httpx.MockTransport(handle))
+        try:
+            assert (await c.get('/portfolio/balance'))['balance_dollars'] == '125.00'
+            assert [method for method, _ in calls] == ['GET', 'GET']
+            with pytest.raises(httpx.HTTPStatusError):
+                await c.submit(intent())
+            assert [method for method, _ in calls] == ['GET', 'GET', 'POST']
+            assert calls[-1][1].startswith(BASE)
+        finally:
+            await c.close()
+
     asyncio.run(check())
 
 

@@ -11,13 +11,14 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519, padding, rsa
 
 BASE = 'https://external-api.demo.kalshi.co'
+READ_BASES = (BASE, 'https://demo-api.kalshi.co')
 WS = 'wss://external-api-ws.demo.kalshi.co/trade-api/ws/v2'
 PREFIX = '/trade-api/v2'
 TICKER = re.compile(r'KXBTC15M-[A-Z0-9-]+\Z')
 
 
 class DemoClient:
-    """No configurable host, production-key fallback, redirects, or write retries."""
+    """Fixed demo hosts only, with no production fallback, redirects, or write retries."""
 
     def __init__(self, key_id=None, pem=None, *, max_order_cost='1.00', transport=None):
         self.key_id = key_id or os.environ['KALSHI_DEMO_KEY_ID']
@@ -46,10 +47,18 @@ class DemoClient:
                                '/portfolio/orders', '/portfolio/positions', '/portfolio/settlements'))
         if not allowed:
             raise ValueError('Unsupported demo read path')
-        response = await self.http.get(BASE + PREFIX + path, params=params,
-                                       headers=self.headers('GET', PREFIX + path))
-        response.raise_for_status()
-        return response.json()
+        for index, base in enumerate(READ_BASES):
+            try:
+                response = await self.http.get(base + PREFIX + path, params=params,
+                                               headers=self.headers('GET', PREFIX + path))
+            except httpx.RequestError:
+                if index + 1 < len(READ_BASES):
+                    continue
+                raise
+            if response.status_code < 500 or index + 1 == len(READ_BASES):
+                response.raise_for_status()
+                return response.json()
+        raise RuntimeError('Unreachable demo read fallback state')
 
     async def submit(self, payload):
         validate_order(payload, self.max_order_cost)
