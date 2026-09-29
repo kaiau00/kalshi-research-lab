@@ -14,6 +14,12 @@ The active strategy is `tail_underdog` on BTC `KXBTC15M`. It evaluates only 5–
 
 The existing research probability and decision functions are reused. The runner allows up to three attempts ten seconds apart and no reentry after any fill. Position sizing reserves a cent-rounded cost per contract conservatively. The three research accounts retain their existing $100 registrations and histories. A durable strategy registration prevents a ledger from being silently reused for a different strategy.
 
+## Prospective frequency study
+
+On September 28, the runner began an append-only, signal-only comparison of `tail_control_135s` and `tail_window_180s`. Both use the same $0.35 maximum price, absolute z-score limit of 1.0, 4% minimum modeled net edge, inputs and timestamps; only `tail_max_seconds` differs. Each variant records at most its first qualifying signal per market in the durable order ledger. Shadow signals never create exchange orders, reserve funds, change the live account, or affect the live strategy's attempt/fill guards. The active exchange strategy remains the 135-second control with the $3 cap.
+
+Quotes from 135–180 seconds are fetched only for the shadow comparison. Rejected extended-window quotes are not added to the private demo audit log; any qualifying shadow signal stores its decision and forecast. Complete continuous benchmark and order-book price action remains available in the separately segmented v6 research archive for reproducible historical replay.
+
 Demo BRTI streams continuously. Demo REST quotes are sampled approximately once per second in the entry window, with quote age conservatively measured from request start. Demo metadata, thresholds, fees and order books are used throughout; there is no production quote substitution. Missing, stale or one-sided quotes block entries. Actual demo orders use IOC limits, integer requested contracts, and the current V2 YES-book convention: YES buys are bids; NO buys are asks at `1 - NO limit`.
 
 Execution uses measured network latency rather than the research simulator's 500 ms delay. Partial fills, costs, fees and final account settlements are read from the demo exchange. Settlement quantities and costs must reconcile with tracked fills before P&L is attributed. Demo liquidity and performance are not evidence of production profitability.
@@ -28,7 +34,7 @@ A process lock prevents concurrent runners against the same ledger. The existing
 
 Before its first tail order attempt, the runner requires the exchange-2 cash balance to be exactly $157.5630. Otherwise its status is `waiting_initial_demo_funding`. It continues recording and reading balances while waiting, and cannot send an order. After the first attempt, subsequent orders use the actual remaining balance up to the fixed starting baseline.
 
-Raw demo capture stops at 256 MB and preserves its data; it does not silently rotate or upload demo account data to the market-data archive. The volume ledger survives ordinary service restarts, but bare-volume disaster recovery is not automated. The additional demo workload has not yet received a full-day cost measurement. No new Railway service, old-bot restart, or workspace limit increase is required.
+Raw demo capture stops at 256 MB and preserves its data; it does not silently rotate or upload demo account data to the market-data archive. It is an account/execution audit, not the primary long-history backtest source. The v6 research dataset continuously records BRTI, book events, market metadata and official outcomes in receipt order, seals bounded segments, verifies compressed archives, and maintains a replay checkpoint. The volume ledger survives ordinary service restarts, but bare-volume disaster recovery is not automated. The additional demo workload has not yet received a full-day cost measurement. No new Railway service, old-bot restart, or workspace limit increase is required.
 
 Local validation for the strategy switch: 99 tests and Ruff passed. External health/readiness returned 200; the protected demo status returned 200 and reported an active tail runner with the exact declared parameters and zero initial attempts. A direct preflight and post-deploy read found no positions or resting orders. The research recorder retained dataset `e2d5cb33e7c44660809b531f03d4b4e3`.
 

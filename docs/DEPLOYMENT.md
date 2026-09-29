@@ -1,14 +1,15 @@
 # Hosted research lab
 
-**Current status — September 27, 2026:** recording and bounded paper replay continue on v6. The optional demo connector is running `tail_underdog` in the same service for BTC `KXBTC15M` Predictions markets. Its runner reports `watching` with a $3 maximum modeled cost per market, a $157.5630 fixed starting baseline, zero initial attempts, and no unresolved orders. The completed fair-value ledger is frozen at 133 attempts, 132 fills and settlements, and +$32.563000 realized P&L. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the exact tail parameters, deployment evidence, and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
+**Current status — September 28, 2026:** recording and bounded paper replay continue on v6. The optional demo connector is running `tail_underdog` in the same service for BTC `KXBTC15M` Predictions markets. Its runner reports `watching` with a $3 maximum modeled cost per market, $159.6318 cash, five filled and settled markets, +$2.0688 realized P&L, and no unresolved orders. A signal-only 135-second control and 180-second candidate now collect prospective opportunity counts without placing shadow orders or changing live parameters. The completed fair-value ledger remains frozen at 133 attempts, 132 fills and settlements, and +$32.563000 realized P&L. See [DEMO_EXECUTION.md](DEMO_EXECUTION.md) for the exact tail parameters, deployment evidence, and limits. Production order submission is not implemented. Settlement-window and rollover fixes passed an archive-based audit of two complete markets; independent execution checks and metadata guards are recorded in [COMMISSIONING.md](COMMISSIONING.md).
 
 - Dashboard: https://research-lab-production-ade8.up.railway.app
 - Railway service: https://railway.com/project/c6476eeb-df32-47aa-b0ef-262a50f8e9a8/service/a1bf43d4-6a8b-463a-9711-63a61e399688?environmentId=15e2863f-f700-45c7-973c-d00903bed9af
-- Research source remains `7742abc`; the deployed strategy-selection source is `6345828`. Later documentation commits need no redeployment.
-- Active deployment: `e1c08e9e-2a76-4207-8a46-2393c02b170f`, observed `SUCCESS` with a running instance.
+- Research source remains `7742abc`; the deployed shadow-study/read-failover source is `4792d34`. Later documentation commits need no redeployment.
+- Active deployment: `cdab6a9e-3c99-4075-bf34-cbde85939129`, observed `SUCCESS` with a running instance.
 - Dataset `/data/segments-v6`, ID `e2d5cb33e7c44660809b531f03d4b4e3`; all earlier datasets preserved.
 - One replica, persistent `/data` volume and private `research-archive` bucket; HTTPS target port 8080.
 - External health/readiness both 200; unauthenticated dashboard 401; authenticated status 200; both feeds connected, no recorder error.
+- At shadow-study commissioning, v6 contained 372,804,629 receipt-ordered events across 3,813 verified archived segments and 11.83 GB of compressed archives; the hot volume portion was about 184 MB.
 - Existing $10 workspace hard usage limit unchanged. A full-day compact-format measurement projects approximately $8.6/month at repeated rates; growing history and future activity can change it.
 
 The dated notes below preserve earlier commissioning history; statements about absent credentials or blocked capacity describe those earlier checks.
