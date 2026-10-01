@@ -10,6 +10,7 @@ from fastapi.responses import HTMLResponse
 from candidate_study.runner import CandidateRunner
 from research_lab.app import authenticated
 from research_lab.app import create_app as research_app
+from walk_forward_study.runner import ParameterRunner
 
 from .runner import Runner
 
@@ -21,10 +22,12 @@ def create_app(record=True):
     task = None
     candidate = None
     candidate_task = None
+    parameter = None
+    parameter_task = None
 
     @asynccontextmanager
     async def lifespan(application):
-        nonlocal runner, task, candidate, candidate_task
+        nonlocal runner, task, candidate, candidate_task, parameter, parameter_task
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1':
                 runner = Runner()
@@ -32,19 +35,24 @@ def create_app(record=True):
             if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') == '1':
                 candidate = CandidateRunner()
                 candidate_task = asyncio.create_task(candidate.run())
+            if os.environ.get('LAB_PARAMETER_STUDY_ENABLED') == '1':
+                parameter = ParameterRunner()
+                parameter_task = asyncio.create_task(parameter.run())
             try:
                 yield
             finally:
-                for background in (candidate_task, task):
+                for background in (parameter_task, candidate_task, task):
                     if background:
                         background.cancel()
-                for background in (candidate_task, task):
+                for background in (parameter_task, candidate_task, task):
                     if not background:
                         continue
                     with contextlib.suppress(asyncio.CancelledError, Exception):
                         await background
                 if candidate:
                     candidate.close()
+                if parameter:
+                    parameter.close()
 
     app.router.lifespan_context = lifespan
 
@@ -60,6 +68,13 @@ def create_app(record=True):
             return {'study': '003', 'state': 'disabled'}
         return {**candidate.status,
                 'runner_active': bool(candidate_task and not candidate_task.done())}
+
+    @app.get('/api/parameter-study/status', dependencies=[Depends(authenticated)])
+    async def parameter_status():
+        if not parameter:
+            return {'study': '004', 'state': 'disabled'}
+        return {**parameter.status,
+                'runner_active': bool(parameter_task and not parameter_task.done())}
 
     @app.get('/demo', dependencies=[Depends(authenticated)])
     async def dashboard():
