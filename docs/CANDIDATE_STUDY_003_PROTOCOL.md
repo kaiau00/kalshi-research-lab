@@ -36,7 +36,6 @@ Passing these gates permits a later untouched validation experiment; it does not
 
 The study registration, source hash, frozen seed identity, calibration coefficient, segment cursor, exact simulator state and derived reports must be durable under `/data/candidate-studies/003`. A registration or source mismatch stops processing instead of rewriting the study. Full inputs remain in the verified v6 archive; reports retain unresolved positions and explicit gap counts.
 
-
 ## Frozen calibration fit
 
 Before replaying segment 4,345, the declared fit produced coefficient `0.7459916645763038`. On the 616 development trades, binary log loss was `0.5148963080793826` before scaling and `0.5039266910399527` after scaling. These development values select the fixed transform; they are not forward performance evidence.
