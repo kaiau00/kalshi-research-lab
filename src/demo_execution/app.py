@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
+from candidate_study.runner import CandidateRunner
 from research_lab.app import authenticated
 from research_lab.app import create_app as research_app
 
@@ -18,21 +19,32 @@ def create_app(record=True):
     original = app.router.lifespan_context
     runner = None
     task = None
+    candidate = None
+    candidate_task = None
 
     @asynccontextmanager
     async def lifespan(application):
-        nonlocal runner, task
+        nonlocal runner, task, candidate, candidate_task
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1':
                 runner = Runner()
                 task = asyncio.create_task(runner.run())
+            if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') == '1':
+                candidate = CandidateRunner()
+                candidate_task = asyncio.create_task(candidate.run())
             try:
                 yield
             finally:
-                if task:
-                    task.cancel()
+                for background in (candidate_task, task):
+                    if background:
+                        background.cancel()
+                for background in (candidate_task, task):
+                    if not background:
+                        continue
                     with contextlib.suppress(asyncio.CancelledError, Exception):
-                        await task
+                        await background
+                if candidate:
+                    candidate.close()
 
     app.router.lifespan_context = lifespan
 
@@ -41,6 +53,13 @@ def create_app(record=True):
         if not runner:
             return {'environment': 'demo', 'state': 'disabled'}
         return {**runner.status, 'runner_active': bool(task and not task.done())}
+
+    @app.get('/api/candidate-study/status', dependencies=[Depends(authenticated)])
+    async def candidate_status():
+        if not candidate:
+            return {'study': '003', 'state': 'disabled'}
+        return {**candidate.status,
+                'runner_active': bool(candidate_task and not candidate_task.done())}
 
     @app.get('/demo', dependencies=[Depends(authenticated)])
     async def dashboard():
