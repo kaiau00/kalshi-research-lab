@@ -1,0 +1,3131 @@
+{
+  "configuration_count": 40,
+  "configurations_ranked_by_headline_pnl": [
+    {
+      "binary_log_loss": 0.667884013252832,
+      "block_pnl": [
+        17.013600000000004,
+        -8.827500000000002,
+        -14.973999999999998,
+        22.3474,
+        3.7685000000000044
+      ],
+      "brier_score": 0.21635628619444086,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend25",
+        "name": "window_blend25_e06_30_180",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": 6.9362,
+        "2026-09-22": 15.1775,
+        "2026-09-23": -9.3031,
+        "2026-09-24": -5.5593,
+        "2026-09-25": -16.209200000000003,
+        "2026-09-26": -4.615399999999999,
+        "2026-09-27": 32.287400000000005,
+        "2026-09-28": -5.512000000000002,
+        "2026-09-29": 6.230500000000001,
+        "2026-09-30": -0.10459999999999997
+      },
+      "fees_paid": 7.602,
+      "fill_rate": 0.6719817767653758,
+      "filled_markets": 295,
+      "max_drawdown_cost_basis": 43.682400000000015,
+      "name": "window_blend25_e06_30_180",
+      "orders_submitted": 439,
+      "pnl_without_top_three_winners": -32.3316,
+      "positive_blocks": 3,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": 19.328,
+      "settled_markets": 294,
+      "stressed_pnl": {
+        "1": 9.8538,
+        "2": 0.3924
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": 19.69980000000001,
+          "settled": 202
+        },
+        "medium": {
+          "pnl": -0.3717999999999977,
+          "settled": 92
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.4708095547891608,
+      "block_pnl": [
+        10.640100000000015,
+        -47.185399999999994,
+        -12.062899999999988,
+        36.0386,
+        25.719199999999997
+      ],
+      "brier_score": 0.1507647313052838,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.04,
+        "min_seconds": 5,
+        "model": "calibrated",
+        "name": "signal_calibrated_e04",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -29.139899999999994,
+        "2026-09-22": 32.7388,
+        "2026-09-23": -19.775499999999994,
+        "2026-09-24": -23.7621,
+        "2026-09-25": -15.396900000000002,
+        "2026-09-26": -14.949399999999999,
+        "2026-09-27": -18.1338,
+        "2026-09-28": 87.1656,
+        "2026-09-29": 17.697999999999986,
+        "2026-09-30": -3.2952
+      },
+      "fees_paid": 26.7538,
+      "fill_rate": 0.7413984461709212,
+      "filled_markets": 668,
+      "max_drawdown_cost_basis": 113.591,
+      "name": "signal_calibrated_e04",
+      "orders_submitted": 901,
+      "pnl_without_top_three_winners": -130.1579,
+      "positive_blocks": 3,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": 13.1496,
+      "settled_markets": 667,
+      "stressed_pnl": {
+        "1": -54.7467,
+        "2": -122.5525
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 3.5261,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -80.50870000000003,
+          "settled": 399
+        },
+        "medium": {
+          "pnl": 90.13220000000004,
+          "settled": 264
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.519268784197985,
+      "block_pnl": [
+        29.178100000000008,
+        -12.975900000000003,
+        -3.933200000000004,
+        -13.154100000000003,
+        8.4885
+      ],
+      "brier_score": 0.1666832390660805,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.04,
+        "min_seconds": 5,
+        "model": "blend25",
+        "name": "signal_blend25_e04",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -2.3022,
+        "2026-09-22": 31.1997,
+        "2026-09-23": -7.228700000000003,
+        "2026-09-24": -6.698999999999998,
+        "2026-09-25": -9.0849,
+        "2026-09-26": -1.6279000000000012,
+        "2026-09-27": -0.6883999999999995,
+        "2026-09-28": 2.3606999999999982,
+        "2026-09-29": 4.0078,
+        "2026-09-30": -2.3337
+      },
+      "fees_paid": 12.74,
+      "fill_rate": 0.712258064516129,
+      "filled_markets": 552,
+      "max_drawdown_cost_basis": 39.99940000000001,
+      "name": "signal_blend25_e04",
+      "orders_submitted": 775,
+      "pnl_without_top_three_winners": -39.6997,
+      "positive_blocks": 2,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": 7.6034,
+      "settled_markets": 551,
+      "stressed_pnl": {
+        "1": -9.2436,
+        "2": -26.0692
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 2.5996,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -12.819699999999997,
+          "settled": 407
+        },
+        "medium": {
+          "pnl": 17.823499999999992,
+          "settled": 139
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5148963080793824,
+      "block_pnl": [
+        6.984100000000003,
+        -26.927200000000006,
+        20.20559999999999,
+        -10.652200000000002,
+        16.05689999999999
+      ],
+      "brier_score": 0.16053814642955933,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.04,
+        "min_seconds": 5,
+        "model": "raw",
+        "name": "signal_raw_e04",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -10.962200000000001,
+        "2026-09-22": 15.297699999999987,
+        "2026-09-23": -18.505300000000002,
+        "2026-09-24": 19.507600000000007,
+        "2026-09-25": -13.155799999999997,
+        "2026-09-26": 0.5146999999999986,
+        "2026-09-27": -2.6793999999999967,
+        "2026-09-28": 22.117499999999993,
+        "2026-09-29": -5.153800000000001,
+        "2026-09-30": -1.3137999999999999
+      },
+      "fees_paid": 15.4217,
+      "fill_rate": 0.7667493796526055,
+      "filled_markets": 618,
+      "max_drawdown_cost_basis": 31.0604,
+      "name": "signal_raw_e04",
+      "orders_submitted": 806,
+      "pnl_without_top_three_winners": -42.5253,
+      "positive_blocks": 3,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": 5.6672,
+      "settled_markets": 616,
+      "stressed_pnl": {
+        "1": -18.1096,
+        "2": -41.8535
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.8558000000000001,
+          "settled": 7
+        },
+        "low": {
+          "pnl": -22.219199999999997,
+          "settled": 426
+        },
+        "medium": {
+          "pnl": 27.030600000000003,
+          "settled": 183
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.661012481866909,
+      "block_pnl": [
+        22.5534,
+        -12.850200000000006,
+        3.2361999999999997,
+        -9.496899999999998,
+        2.2050999999999967
+      ],
+      "brier_score": 0.21402629503545303,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.08,
+        "min_seconds": 5,
+        "model": "raw",
+        "name": "signal_raw_e08",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.7126999999999994,
+        "2026-09-22": 24.5948,
+        "2026-09-23": -11.9283,
+        "2026-09-24": 6.118900000000002,
+        "2026-09-25": -15.2242,
+        "2026-09-26": 4.215200000000001,
+        "2026-09-27": 3.536300000000002,
+        "2026-09-28": -1.427200000000001,
+        "2026-09-29": -0.13599999999999873,
+        "2026-09-30": -0.38920000000000005
+      },
+      "fees_paid": 11.4838,
+      "fill_rate": 0.7228714524207012,
+      "filled_markets": 433,
+      "max_drawdown_cost_basis": 34.50869999999999,
+      "name": "signal_raw_e08",
+      "orders_submitted": 599,
+      "pnl_without_top_three_winners": -41.6942,
+      "positive_blocks": 3,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": 5.6476,
+      "settled_markets": 432,
+      "stressed_pnl": {
+        "1": -8.4931,
+        "2": -22.6148
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 8.2711,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -4.149500000000006,
+          "settled": 298
+        },
+        "medium": {
+          "pnl": 1.525999999999994,
+          "settled": 129
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6254696215040361,
+      "block_pnl": [
+        21.851200000000002,
+        -9.430200000000001,
+        -10.695400000000006,
+        -3.6730999999999994,
+        5.361099999999997
+      ],
+      "brier_score": 0.20573744431529073,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 5,
+        "model": "blend25",
+        "name": "signal_blend25_e06",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": 4.741200000000002,
+        "2026-09-22": 16.67,
+        "2026-09-23": -11.3363,
+        "2026-09-24": -3.126199999999999,
+        "2026-09-25": -16.0249,
+        "2026-09-26": 5.157300000000002,
+        "2026-09-27": 8.272000000000004,
+        "2026-09-28": -0.14849999999999886,
+        "2026-09-29": -0.4018000000000011,
+        "2026-09-30": -0.38920000000000005
+      },
+      "fees_paid": 10.1608,
+      "fill_rate": 0.7210084033613445,
+      "filled_markets": 429,
+      "max_drawdown_cost_basis": 39.62489999999998,
+      "name": "signal_blend25_e06",
+      "orders_submitted": 595,
+      "pnl_without_top_three_winners": -30.3622,
+      "positive_blocks": 2,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": 3.4136,
+      "settled_markets": 428,
+      "stressed_pnl": {
+        "1": -7.6722,
+        "2": -18.7434
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 7.6281,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -2.200800000000004,
+          "settled": 312
+        },
+        "medium": {
+          "pnl": -2.0136999999999965,
+          "settled": 111
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5713259017900603,
+      "block_pnl": [
+        27.541800000000006,
+        -14.5187,
+        -2.6760000000000037,
+        -8.9721,
+        1.0437999999999965
+      ],
+      "brier_score": 0.19022079259375665,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.04,
+        "min_seconds": 5,
+        "model": "blend50",
+        "name": "signal_blend50_e04",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": 3.3184999999999993,
+        "2026-09-22": 23.82050000000001,
+        "2026-09-23": -13.0654,
+        "2026-09-24": -4.9289000000000005,
+        "2026-09-25": -9.8625,
+        "2026-09-26": 6.867299999999997,
+        "2026-09-27": -0.31899999999999984,
+        "2026-09-28": 0.4462000000000004,
+        "2026-09-29": -3.571100000000001,
+        "2026-09-30": -0.2868
+      },
+      "fees_paid": 8.9416,
+      "fill_rate": 0.7062818336162988,
+      "filled_markets": 416,
+      "max_drawdown_cost_basis": 32.58409999999999,
+      "name": "signal_blend50_e04",
+      "orders_submitted": 589,
+      "pnl_without_top_three_winners": -30.4001,
+      "positive_blocks": 2,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": 2.4188,
+      "settled_markets": 415,
+      "stressed_pnl": {
+        "1": -7.2598,
+        "2": -16.9252
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 8.5275,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -8.344100000000008,
+          "settled": 323
+        },
+        "medium": {
+          "pnl": 2.235400000000009,
+          "settled": 88
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7413429631044097,
+      "block_pnl": [
+        26.117000000000004,
+        -14.919100000000004,
+        -6.893899999999996,
+        -7.610899999999999,
+        2.4712999999999954
+      ],
+      "brier_score": 0.24238707287366337,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.1,
+        "min_seconds": 5,
+        "model": "raw",
+        "name": "signal_raw_e10",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": 5.278600000000001,
+        "2026-09-22": 20.3506,
+        "2026-09-23": -15.226899999999999,
+        "2026-09-24": -3.7125,
+        "2026-09-25": -13.142100000000001,
+        "2026-09-26": 4.183600000000001,
+        "2026-09-27": 3.4247000000000023,
+        "2026-09-28": 2.4318000000000004,
+        "2026-09-29": -4.0439,
+        "2026-09-30": -0.3795
+      },
+      "fees_paid": 9.738,
+      "fill_rate": 0.7191235059760956,
+      "filled_markets": 361,
+      "max_drawdown_cost_basis": 36.816800000000015,
+      "name": "signal_raw_e10",
+      "orders_submitted": 502,
+      "pnl_without_top_three_winners": -34.6114,
+      "positive_blocks": 2,
+      "positive_day_share": 0.5,
+      "promotion_eligible": false,
+      "realized_net_pnl": -0.8356,
+      "settled_markets": 360,
+      "stressed_pnl": {
+        "1": -12.3119,
+        "2": -23.7731
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 8.5275,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -12.328499999999998,
+          "settled": 251
+        },
+        "medium": {
+          "pnl": 2.9654000000000043,
+          "settled": 105
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6703690148647696,
+      "block_pnl": [
+        40.423300000000005,
+        -10.096899999999998,
+        -14.013499999999995,
+        -13.465699999999998,
+        -4.964399999999998
+      ],
+      "brier_score": 0.19957321020640018,
+      "config": {
+        "max_seconds": 120,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "raw",
+        "name": "window_raw_e06_30_120",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -4.6626,
+        "2026-09-22": 48.9515,
+        "2026-09-23": -8.6848,
+        "2026-09-24": -6.190199999999999,
+        "2026-09-25": -14.328399999999998,
+        "2026-09-26": -2.8879,
+        "2026-09-27": -4.216199999999999,
+        "2026-09-28": -12.067599999999997,
+        "2026-09-29": 3.1370000000000005,
+        "2026-09-30": -1.168
+      },
+      "fees_paid": 7.9945,
+      "fill_rate": 0.6175771971496437,
+      "filled_markets": 260,
+      "max_drawdown_cost_basis": 50.8227,
+      "name": "window_raw_e06_30_120",
+      "orders_submitted": 421,
+      "pnl_without_top_three_winners": -61.4136,
+      "positive_blocks": 1,
+      "positive_day_share": 0.2,
+      "promotion_eligible": false,
+      "realized_net_pnl": -2.1172,
+      "settled_markets": 259,
+      "stressed_pnl": {
+        "1": -18.417,
+        "2": -34.6947
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -0.6112,
+          "settled": 1
+        },
+        "low": {
+          "pnl": -24.1345,
+          "settled": 174
+        },
+        "medium": {
+          "pnl": 22.628499999999992,
+          "settled": 84
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7081920013831392,
+      "block_pnl": [
+        -2.6907,
+        -8.8095,
+        -6.204600000000003,
+        7.8684,
+        6.3691
+      ],
+      "brier_score": 0.2360910565069761,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "window_blend50_e06_30_180",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.868099999999999,
+        "2026-09-22": 1.4576000000000002,
+        "2026-09-23": -5.1687,
+        "2026-09-24": -3.6994000000000025,
+        "2026-09-25": -5.1309,
+        "2026-09-26": -0.5276000000000004,
+        "2026-09-27": 8.146,
+        "2026-09-28": 2.1670000000000003,
+        "2026-09-29": 3.2614,
+        "2026-09-30": -0.10459999999999997
+      },
+      "fees_paid": 4.1033,
+      "fill_rate": 0.6204620462046204,
+      "filled_markets": 188,
+      "max_drawdown_cost_basis": 18.66279999999999,
+      "name": "window_blend50_e06_30_180",
+      "orders_submitted": 303,
+      "pnl_without_top_three_winners": -24.4902,
+      "positive_blocks": 2,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": -3.4673,
+      "settled_markets": 187,
+      "stressed_pnl": {
+        "1": -7.3194,
+        "2": -11.1668
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -0.9281,
+          "settled": 1
+        },
+        "low": {
+          "pnl": 1.1312000000000038,
+          "settled": 149
+        },
+        "medium": {
+          "pnl": -3.670399999999998,
+          "settled": 37
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7081920013831392,
+      "block_pnl": [
+        -2.6907,
+        -8.8095,
+        -6.204600000000003,
+        7.8684,
+        6.3691
+      ],
+      "brier_score": 0.2360910565069761,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.03",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "spread_blend50_e06_30_180_s03",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.868099999999999,
+        "2026-09-22": 1.4576000000000002,
+        "2026-09-23": -5.1687,
+        "2026-09-24": -3.6994000000000025,
+        "2026-09-25": -5.1309,
+        "2026-09-26": -0.5276000000000004,
+        "2026-09-27": 8.146,
+        "2026-09-28": 2.1670000000000003,
+        "2026-09-29": 3.2614,
+        "2026-09-30": -0.10459999999999997
+      },
+      "fees_paid": 4.1033,
+      "fill_rate": 0.6204620462046204,
+      "filled_markets": 188,
+      "max_drawdown_cost_basis": 18.66279999999999,
+      "name": "spread_blend50_e06_30_180_s03",
+      "orders_submitted": 303,
+      "pnl_without_top_three_winners": -24.4902,
+      "positive_blocks": 2,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": -3.4673,
+      "settled_markets": 187,
+      "stressed_pnl": {
+        "1": -7.3194,
+        "2": -11.1668
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -0.9281,
+          "settled": 1
+        },
+        "low": {
+          "pnl": 1.1312000000000038,
+          "settled": 149
+        },
+        "medium": {
+          "pnl": -3.670399999999998,
+          "settled": 37
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7081920013831392,
+      "block_pnl": [
+        -2.6907,
+        -8.8095,
+        -6.204600000000003,
+        7.8684,
+        6.3691
+      ],
+      "brier_score": 0.2360910565069761,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.05",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "spread_blend50_e06_30_180_s05",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.868099999999999,
+        "2026-09-22": 1.4576000000000002,
+        "2026-09-23": -5.1687,
+        "2026-09-24": -3.6994000000000025,
+        "2026-09-25": -5.1309,
+        "2026-09-26": -0.5276000000000004,
+        "2026-09-27": 8.146,
+        "2026-09-28": 2.1670000000000003,
+        "2026-09-29": 3.2614,
+        "2026-09-30": -0.10459999999999997
+      },
+      "fees_paid": 4.1033,
+      "fill_rate": 0.6204620462046204,
+      "filled_markets": 188,
+      "max_drawdown_cost_basis": 18.66279999999999,
+      "name": "spread_blend50_e06_30_180_s05",
+      "orders_submitted": 303,
+      "pnl_without_top_three_winners": -24.4902,
+      "positive_blocks": 2,
+      "positive_day_share": 0.4,
+      "promotion_eligible": false,
+      "realized_net_pnl": -3.4673,
+      "settled_markets": 187,
+      "stressed_pnl": {
+        "1": -7.3194,
+        "2": -11.1668
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -0.9281,
+          "settled": 1
+        },
+        "low": {
+          "pnl": 1.1312000000000038,
+          "settled": 149
+        },
+        "medium": {
+          "pnl": -3.670399999999998,
+          "settled": 37
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.8060096657962617,
+      "block_pnl": [
+        8.4673,
+        -9.731599999999998,
+        -2.2531000000000008,
+        -7.023000000000001,
+        3.4955999999999987
+      ],
+      "brier_score": 0.26526434008260186,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.1,
+        "min_seconds": 5,
+        "model": "blend25",
+        "name": "signal_blend25_e10",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.8825000000000003,
+        "2026-09-22": 11.702000000000005,
+        "2026-09-23": -7.5520000000000005,
+        "2026-09-24": -2.2117,
+        "2026-09-25": -4.0710999999999995,
+        "2026-09-26": 0.8548000000000003,
+        "2026-09-27": -2.3947999999999987,
+        "2026-09-28": 3.6915999999999998,
+        "2026-09-29": -2.9081999999999995,
+        "2026-09-30": -0.2729
+      },
+      "fees_paid": 5.5662,
+      "fill_rate": 0.6464088397790055,
+      "filled_markets": 234,
+      "max_drawdown_cost_basis": 20.373100000000008,
+      "name": "signal_blend25_e10",
+      "orders_submitted": 362,
+      "pnl_without_top_three_winners": -23.5617,
+      "positive_blocks": 2,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -7.0448,
+      "settled_markets": 233,
+      "stressed_pnl": {
+        "1": -12.0507,
+        "2": -17.0502
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 6.2966999999999995,
+          "settled": 3
+        },
+        "low": {
+          "pnl": -17.125999999999998,
+          "settled": 185
+        },
+        "medium": {
+          "pnl": 3.7844999999999995,
+          "settled": 45
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5667570623283605,
+      "block_pnl": [
+        27.549700000000005,
+        -13.899500000000003,
+        -6.623300000000002,
+        -17.3275,
+        -0.1726999999999982
+      ],
+      "brier_score": 0.18222383960254498,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 5,
+        "model": "raw",
+        "name": "signal_raw_e06",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -2.579999999999999,
+        "2026-09-22": 29.659600000000005,
+        "2026-09-23": -6.6977,
+        "2026-09-24": -8.098399999999998,
+        "2026-09-25": -11.485700000000001,
+        "2026-09-26": -4.776100000000002,
+        "2026-09-27": -1.955499999999997,
+        "2026-09-28": 1.982600000000001,
+        "2026-09-29": -4.168499999999999,
+        "2026-09-30": -2.3536
+      },
+      "fees_paid": 12.958,
+      "fill_rate": 0.6984993178717599,
+      "filled_markets": 512,
+      "max_drawdown_cost_basis": 47.5744,
+      "name": "signal_raw_e06",
+      "orders_submitted": 733,
+      "pnl_without_top_three_winners": -52.6313,
+      "positive_blocks": 1,
+      "positive_day_share": 0.2,
+      "promotion_eligible": false,
+      "realized_net_pnl": -10.4733,
+      "settled_markets": 510,
+      "stressed_pnl": {
+        "1": -27.224,
+        "2": -43.9537
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 2.6064000000000003,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -16.41720000000001,
+          "settled": 361
+        },
+        "medium": {
+          "pnl": 3.33749999999999,
+          "settled": 144
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.9578662490411027,
+      "block_pnl": [
+        -2.2529999999999997,
+        -2.7485,
+        -4.245000000000001,
+        -3.6261999999999994,
+        -0.8112
+      ],
+      "brier_score": 0.3469780764792236,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.1,
+        "min_seconds": 5,
+        "model": "blend75",
+        "name": "signal_blend75_e10",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -1.1037,
+        "2026-09-22": -0.8446,
+        "2026-09-23": -1.7651,
+        "2026-09-24": -0.49670000000000003,
+        "2026-09-25": -3.4406000000000003,
+        "2026-09-26": -2.763,
+        "2026-09-27": -1.7247999999999997,
+        "2026-09-28": -0.7342,
+        "2026-09-29": -0.8112,
+        "2026-09-30": 0.0
+      },
+      "fees_paid": 0.8439,
+      "fill_rate": 0.589041095890411,
+      "filled_markets": 43,
+      "max_drawdown_cost_basis": 13.978899999999996,
+      "name": "signal_blend75_e10",
+      "orders_submitted": 73,
+      "pnl_without_top_three_winners": -14.9523,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "promotion_eligible": false,
+      "realized_net_pnl": -13.6839,
+      "settled_markets": 43,
+      "stressed_pnl": {
+        "1": -14.2427,
+        "2": -14.8006
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -11.3088,
+          "settled": 38
+        },
+        "medium": {
+          "pnl": -2.3750999999999998,
+          "settled": 5
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6620830657379813,
+      "block_pnl": [
+        4.557099999999999,
+        -11.9995,
+        -0.2678000000000018,
+        -12.471800000000002,
+        5.695700000000001
+      ],
+      "brier_score": 0.2234368147275676,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 5,
+        "model": "blend50",
+        "name": "signal_blend50_e06",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.5337,
+        "2026-09-22": 7.673100000000001,
+        "2026-09-23": -10.190600000000002,
+        "2026-09-24": -1.9954,
+        "2026-09-25": -2.0817999999999994,
+        "2026-09-26": 0.8650999999999999,
+        "2026-09-27": -9.7956,
+        "2026-09-28": 6.361599999999999,
+        "2026-09-29": -1.4094999999999998,
+        "2026-09-30": -0.3795
+      },
+      "fees_paid": 5.3447,
+      "fill_rate": 0.6475,
+      "filled_markets": 259,
+      "max_drawdown_cost_basis": 26.1045,
+      "name": "signal_blend50_e06",
+      "orders_submitted": 400,
+      "pnl_without_top_three_winners": -25.4939,
+      "positive_blocks": 2,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -14.4863,
+      "settled_markets": 258,
+      "stressed_pnl": {
+        "1": -19.0648,
+        "2": -23.6382
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 6.2966999999999995,
+          "settled": 3
+        },
+        "low": {
+          "pnl": -21.2965,
+          "settled": 213
+        },
+        "medium": {
+          "pnl": 0.5135000000000014,
+          "settled": 42
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6557441140964139,
+      "block_pnl": [
+        -1.6248,
+        2.5228999999999995,
+        -5.980600000000003,
+        -6.227700000000001,
+        -3.366699999999999
+      ],
+      "brier_score": 0.22970045506924497,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.04,
+        "min_seconds": 5,
+        "model": "blend75",
+        "name": "signal_blend75_e04",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -0.4820000000000001,
+        "2026-09-22": -0.9072999999999998,
+        "2026-09-23": -1.4216000000000002,
+        "2026-09-24": 3.8481999999999994,
+        "2026-09-25": -5.2276,
+        "2026-09-26": -1.1973000000000007,
+        "2026-09-27": -4.5722000000000005,
+        "2026-09-28": -2.9137,
+        "2026-09-29": -1.1276,
+        "2026-09-30": -0.6758
+      },
+      "fees_paid": 2.6399,
+      "fill_rate": 0.6348547717842323,
+      "filled_markets": 153,
+      "max_drawdown_cost_basis": 16.350700000000003,
+      "name": "signal_blend75_e04",
+      "orders_submitted": 241,
+      "pnl_without_top_three_winners": -22.4953,
+      "positive_blocks": 1,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -14.6769,
+      "settled_markets": 153,
+      "stressed_pnl": {
+        "1": -16.6385,
+        "2": -18.5978
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -11.481100000000005,
+          "settled": 135
+        },
+        "medium": {
+          "pnl": -3.1957999999999993,
+          "settled": 18
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6836728136745216,
+      "block_pnl": [
+        11.690999999999999,
+        -7.252499999999999,
+        -12.804799999999998,
+        -3.8705000000000007,
+        -3.6212999999999984
+      ],
+      "brier_score": 0.21478565927806903,
+      "config": {
+        "max_seconds": 120,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend25",
+        "name": "window_blend25_e06_30_120",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -5.0659,
+        "2026-09-22": 21.3809,
+        "2026-09-23": -6.282900000000001,
+        "2026-09-24": -8.1161,
+        "2026-09-25": -12.1221,
+        "2026-09-26": -0.3282999999999999,
+        "2026-09-27": 2.6078000000000015,
+        "2026-09-28": -9.3145,
+        "2026-09-29": 2.6699,
+        "2026-09-30": -1.2869
+      },
+      "fees_paid": 6.3821,
+      "fill_rate": 0.6095505617977528,
+      "filled_markets": 217,
+      "max_drawdown_cost_basis": 37.665800000000004,
+      "name": "window_blend25_e06_30_120",
+      "orders_submitted": 356,
+      "pnl_without_top_three_winners": -47.6782,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -15.8581,
+      "settled_markets": 217,
+      "stressed_pnl": {
+        "1": -24.7738,
+        "2": -33.6784
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -16.5179,
+          "settled": 146
+        },
+        "medium": {
+          "pnl": 0.6598000000000064,
+          "settled": 71
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.8562203333616986,
+      "block_pnl": [
+        -2.5454999999999997,
+        -4.1363,
+        -2.1083,
+        -5.4599,
+        -2.1929
+      ],
+      "brier_score": 0.30878505578996146,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.08,
+        "min_seconds": 5,
+        "model": "blend75",
+        "name": "signal_blend75_e08",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -0.7891999999999999,
+        "2026-09-22": -2.2628,
+        "2026-09-23": -1.7651,
+        "2026-09-24": -1.0732999999999995,
+        "2026-09-25": -2.5685000000000002,
+        "2026-09-26": -1.4984,
+        "2026-09-27": -2.7121999999999997,
+        "2026-09-28": -2.088,
+        "2026-09-29": -1.6854,
+        "2026-09-30": 0.0
+      },
+      "fees_paid": 1.1129,
+      "fill_rate": 0.59375,
+      "filled_markets": 57,
+      "max_drawdown_cost_basis": 16.737899999999996,
+      "name": "signal_blend75_e08",
+      "orders_submitted": 96,
+      "pnl_without_top_three_winners": -17.7906,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "promotion_eligible": false,
+      "realized_net_pnl": -16.4429,
+      "settled_markets": 57,
+      "stressed_pnl": {
+        "1": -17.1686,
+        "2": -17.8931
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -13.267800000000001,
+          "settled": 49
+        },
+        "medium": {
+          "pnl": -3.1750999999999996,
+          "settled": 8
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.955281737556955,
+      "block_pnl": [
+        -4.1361,
+        -5.3816,
+        -3.2558,
+        -4.2886999999999995,
+        -0.42800000000000005
+      ],
+      "brier_score": 0.3365862828207768,
+      "config": {
+        "max_seconds": 120,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend75",
+        "name": "window_blend75_e06_30_120",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -1.9261999999999997,
+        "2026-09-22": -3.0210999999999997,
+        "2026-09-23": -3.53,
+        "2026-09-24": -0.9157,
+        "2026-09-25": -1.7199000000000002,
+        "2026-09-26": -2.8774,
+        "2026-09-27": -3.0719,
+        "2026-09-28": 0.0,
+        "2026-09-29": -0.42800000000000005,
+        "2026-09-30": 0.0
+      },
+      "fees_paid": 0.9102,
+      "fill_rate": 0.5060240963855421,
+      "filled_markets": 42,
+      "max_drawdown_cost_basis": 17.873400000000004,
+      "name": "window_blend75_e06_30_120",
+      "orders_submitted": 83,
+      "pnl_without_top_three_winners": -18.7883,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "promotion_eligible": false,
+      "realized_net_pnl": -17.4902,
+      "settled_markets": 42,
+      "stressed_pnl": {
+        "1": -18.1345,
+        "2": -18.7783
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -15.297199999999998,
+          "settled": 37
+        },
+        "medium": {
+          "pnl": -2.1929999999999996,
+          "settled": 5
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7677718850378387,
+      "block_pnl": [
+        -3.1873,
+        -0.1056000000000003,
+        -5.041099999999999,
+        -6.668500000000001,
+        -3.0467999999999997
+      ],
+      "brier_score": 0.27277267984833536,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 5,
+        "model": "blend75",
+        "name": "signal_blend75_e06",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -1.1757,
+        "2026-09-22": -2.5181,
+        "2026-09-23": -2.8165,
+        "2026-09-24": 2.8848,
+        "2026-09-25": -2.6017,
+        "2026-09-26": -4.3854,
+        "2026-09-27": -2.7121999999999997,
+        "2026-09-28": -2.1852,
+        "2026-09-29": -1.9918,
+        "2026-09-30": -0.5475
+      },
+      "fees_paid": 1.6793,
+      "fill_rate": 0.593103448275862,
+      "filled_markets": 86,
+      "max_drawdown_cost_basis": 18.344300000000004,
+      "name": "signal_blend75_e06",
+      "orders_submitted": 145,
+      "pnl_without_top_three_winners": -23.7746,
+      "positive_blocks": 0,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -18.0493,
+      "settled_markets": 86,
+      "stressed_pnl": {
+        "1": -19.2586,
+        "2": -20.4663
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -15.4108,
+          "settled": 77
+        },
+        "medium": {
+          "pnl": -2.6384999999999996,
+          "settled": 9
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7159056724211811,
+      "block_pnl": [
+        21.4726,
+        -16.120600000000007,
+        -4.709400000000001,
+        -17.474700000000002,
+        -1.4934999999999992
+      ],
+      "brier_score": 0.23834267418812932,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.08,
+        "min_seconds": 5,
+        "model": "blend25",
+        "name": "signal_blend25_e08",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -1.4909999999999999,
+        "2026-09-22": 22.4758,
+        "2026-09-23": -13.227800000000002,
+        "2026-09-24": -5.1347999999999985,
+        "2026-09-25": -6.2973,
+        "2026-09-26": -1.3270000000000008,
+        "2026-09-27": -8.3422,
+        "2026-09-28": -4.5883,
+        "2026-09-29": -0.013499999999998902,
+        "2026-09-30": -0.3795
+      },
+      "fees_paid": 7.824,
+      "fill_rate": 0.6971677559912854,
+      "filled_markets": 320,
+      "max_drawdown_cost_basis": 43.7668,
+      "name": "signal_blend25_e08",
+      "orders_submitted": 459,
+      "pnl_without_top_three_winners": -51.1445,
+      "positive_blocks": 1,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -18.3256,
+      "settled_markets": 319,
+      "stressed_pnl": {
+        "1": -26.7347,
+        "2": -35.1324
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 4.7828,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -30.755900000000004,
+          "settled": 242
+        },
+        "medium": {
+          "pnl": 7.647500000000002,
+          "settled": 72
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 1.130972109741915,
+      "block_pnl": [
+        0.2727,
+        0.13539999999999996,
+        -7.9925,
+        -8.9683,
+        -2.0005
+      ],
+      "brier_score": 0.3592763951013716,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.03",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "persist_blend50_e06_30_180_s03",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": 0.1031,
+        "2026-09-22": -0.46249999999999997,
+        "2026-09-23": -0.6855,
+        "2026-09-24": -0.1378999999999999,
+        "2026-09-25": -4.255299999999999,
+        "2026-09-26": -5.2422,
+        "2026-09-27": -4.5606,
+        "2026-09-28": -1.3117999999999999,
+        "2026-09-29": -1.4133,
+        "2026-09-30": -0.5872
+      },
+      "fees_paid": 0.9112,
+      "fill_rate": 0.8571428571428571,
+      "filled_markets": 42,
+      "max_drawdown_cost_basis": 18.995500000000007,
+      "name": "persist_blend50_e06_30_180_s03",
+      "orders_submitted": 49,
+      "pnl_without_top_three_winners": -21.4968,
+      "positive_blocks": 2,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -18.5532,
+      "settled_markets": 42,
+      "stressed_pnl": {
+        "1": -19.5448,
+        "2": -20.535
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -14.588199999999999,
+          "settled": 37
+        },
+        "medium": {
+          "pnl": -3.9650000000000003,
+          "settled": 5
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 1.130972109741915,
+      "block_pnl": [
+        0.2727,
+        0.13539999999999996,
+        -7.9925,
+        -8.9683,
+        -2.0005
+      ],
+      "brier_score": 0.3592763951013716,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.05",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "persist_blend50_e06_30_180_s05",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": 0.1031,
+        "2026-09-22": -0.46249999999999997,
+        "2026-09-23": -0.6855,
+        "2026-09-24": -0.1378999999999999,
+        "2026-09-25": -4.255299999999999,
+        "2026-09-26": -5.2422,
+        "2026-09-27": -4.5606,
+        "2026-09-28": -1.3117999999999999,
+        "2026-09-29": -1.4133,
+        "2026-09-30": -0.5872
+      },
+      "fees_paid": 0.9112,
+      "fill_rate": 0.8571428571428571,
+      "filled_markets": 42,
+      "max_drawdown_cost_basis": 18.995500000000007,
+      "name": "persist_blend50_e06_30_180_s05",
+      "orders_submitted": 49,
+      "pnl_without_top_three_winners": -21.4968,
+      "positive_blocks": 2,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -18.5532,
+      "settled_markets": 42,
+      "stressed_pnl": {
+        "1": -19.5448,
+        "2": -20.535
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -14.588199999999999,
+          "settled": 37
+        },
+        "medium": {
+          "pnl": -3.9650000000000003,
+          "settled": 5
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 1.130972109741915,
+      "block_pnl": [
+        0.2727,
+        0.13539999999999996,
+        -7.9925,
+        -8.9683,
+        -2.0005
+      ],
+      "brier_score": 0.3592763951013716,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.07",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "persist_blend50_e06_30_180_s07",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": 0.1031,
+        "2026-09-22": -0.46249999999999997,
+        "2026-09-23": -0.6855,
+        "2026-09-24": -0.1378999999999999,
+        "2026-09-25": -4.255299999999999,
+        "2026-09-26": -5.2422,
+        "2026-09-27": -4.5606,
+        "2026-09-28": -1.3117999999999999,
+        "2026-09-29": -1.4133,
+        "2026-09-30": -0.5872
+      },
+      "fees_paid": 0.9112,
+      "fill_rate": 0.8571428571428571,
+      "filled_markets": 42,
+      "max_drawdown_cost_basis": 18.995500000000007,
+      "name": "persist_blend50_e06_30_180_s07",
+      "orders_submitted": 49,
+      "pnl_without_top_three_winners": -21.4968,
+      "positive_blocks": 2,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -18.5532,
+      "settled_markets": 42,
+      "stressed_pnl": {
+        "1": -19.5448,
+        "2": -20.535
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -14.588199999999999,
+          "settled": 37
+        },
+        "medium": {
+          "pnl": -3.9650000000000003,
+          "settled": 5
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.6239767984313577,
+      "block_pnl": [
+        19.360400000000006,
+        -17.6048,
+        -28.0242,
+        3.8326000000000007,
+        3.416299999999997
+      ],
+      "brier_score": 0.19988644566887204,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "raw",
+        "name": "window_raw_e06_30_180",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -3.9316999999999998,
+        "2026-09-22": 25.241700000000005,
+        "2026-09-23": -13.08,
+        "2026-09-24": -8.4682,
+        "2026-09-25": -21.203500000000002,
+        "2026-09-26": -11.1515,
+        "2026-09-27": 14.628400000000003,
+        "2026-09-28": -5.748100000000001,
+        "2026-09-29": 4.797799999999997,
+        "2026-09-30": -0.10459999999999997
+      },
+      "fees_paid": 10.287,
+      "fill_rate": 0.6754716981132075,
+      "filled_markets": 358,
+      "max_drawdown_cost_basis": 61.49520000000001,
+      "name": "window_raw_e06_30_180",
+      "orders_submitted": 530,
+      "pnl_without_top_three_winners": -65.2147,
+      "positive_blocks": 3,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -19.0197,
+      "settled_markets": 356,
+      "stressed_pnl": {
+        "1": -36.3002,
+        "2": -53.5591
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -3.4746,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -8.92289999999999,
+          "settled": 232
+        },
+        "medium": {
+          "pnl": -6.622199999999988,
+          "settled": 120
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7544420177114167,
+      "block_pnl": [
+        -1.2912,
+        -7.072800000000001,
+        -4.821000000000002,
+        -3.4820000000000007,
+        -2.4777999999999984
+      ],
+      "brier_score": 0.25896034976027726,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.08,
+        "min_seconds": 5,
+        "model": "blend50",
+        "name": "signal_blend50_e08",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": 0.6594999999999998,
+        "2026-09-22": -2.0734,
+        "2026-09-23": -3.8003,
+        "2026-09-24": -1.5536000000000003,
+        "2026-09-25": -5.6355,
+        "2026-09-26": -0.6740000000000004,
+        "2026-09-27": -2.5354000000000005,
+        "2026-09-28": 0.2264000000000005,
+        "2026-09-29": -3.0826999999999996,
+        "2026-09-30": -0.6758
+      },
+      "fees_paid": 3.6698,
+      "fill_rate": 0.6581818181818182,
+      "filled_markets": 181,
+      "max_drawdown_cost_basis": 20.9619,
+      "name": "signal_blend50_e08",
+      "orders_submitted": 275,
+      "pnl_without_top_three_winners": -28.0427,
+      "positive_blocks": 0,
+      "positive_day_share": 0.2,
+      "promotion_eligible": false,
+      "realized_net_pnl": -19.1448,
+      "settled_markets": 180,
+      "stressed_pnl": {
+        "1": -21.9391,
+        "2": -24.7288
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -20.68379999999999,
+          "settled": 151
+        },
+        "medium": {
+          "pnl": 1.5389999999999995,
+          "settled": 29
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5327601868033432,
+      "block_pnl": [
+        31.341900000000003,
+        -19.790200000000006,
+        8.78989999999999,
+        -12.726199999999995,
+        -28.76130000000001
+      ],
+      "brier_score": 0.16762212329155013,
+      "config": {
+        "max_seconds": 120,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "window_calibrated_e06_30_120",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -11.673599999999997,
+        "2026-09-22": 44.415099999999995,
+        "2026-09-23": -12.152099999999999,
+        "2026-09-24": 12.109000000000002,
+        "2026-09-25": -12.467799999999999,
+        "2026-09-26": -7.536299999999998,
+        "2026-09-27": 3.503099999999999,
+        "2026-09-28": -29.206300000000006,
+        "2026-09-29": -5.97,
+        "2026-09-30": -2.167
+      },
+      "fees_paid": 13.8674,
+      "fill_rate": 0.6559356136820925,
+      "filled_markets": 326,
+      "max_drawdown_cost_basis": 60.000799999999984,
+      "name": "window_calibrated_e06_30_120",
+      "orders_submitted": 497,
+      "pnl_without_top_three_winners": -108.3829,
+      "positive_blocks": 2,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -21.1459,
+      "settled_markets": 325,
+      "stressed_pnl": {
+        "1": -68.4997,
+        "2": -115.7907
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -41.7456,
+          "settled": 187
+        },
+        "medium": {
+          "pnl": 20.599699999999988,
+          "settled": 138
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.8870478027096877,
+      "block_pnl": [
+        -5.1326,
+        2.1863,
+        -7.606300000000001,
+        -7.721100000000001,
+        -2.9722
+      ],
+      "brier_score": 0.30408597103502694,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.1,
+        "min_seconds": 5,
+        "model": "blend50",
+        "name": "signal_blend50_e10",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -2.3207999999999998,
+        "2026-09-22": -3.3183,
+        "2026-09-23": -1.7212,
+        "2026-09-24": 4.477499999999999,
+        "2026-09-25": -6.075099999999999,
+        "2026-09-26": -3.6056000000000004,
+        "2026-09-27": -4.3598,
+        "2026-09-28": -2.9137,
+        "2026-09-29": -0.7331000000000001,
+        "2026-09-30": -0.6758
+      },
+      "fees_paid": 2.6259,
+      "fill_rate": 0.5893719806763285,
+      "filled_markets": 122,
+      "max_drawdown_cost_basis": 21.667699999999996,
+      "name": "signal_blend50_e10",
+      "orders_submitted": 207,
+      "pnl_without_top_three_winners": -29.0643,
+      "positive_blocks": 1,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -21.2459,
+      "settled_markets": 122,
+      "stressed_pnl": {
+        "1": -23.4496,
+        "2": -25.6491
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -15.6109,
+          "settled": 103
+        },
+        "medium": {
+          "pnl": -5.635000000000001,
+          "settled": 19
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.8164564425624269,
+      "block_pnl": [
+        -3.5587999999999997,
+        -4.7466,
+        -4.9319999999999995,
+        -6.735399999999999,
+        -1.8497
+      ],
+      "brier_score": 0.2899586993317938,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend75",
+        "name": "window_blend75_e06_30_180",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -1.5280999999999998,
+        "2026-09-22": -2.5372,
+        "2026-09-23": -3.1997,
+        "2026-09-24": -1.3729999999999998,
+        "2026-09-25": -1.8483,
+        "2026-09-26": -5.613300000000001,
+        "2026-09-27": -2.2439999999999998,
+        "2026-09-28": -1.6292,
+        "2026-09-29": -1.3022,
+        "2026-09-30": -0.5475
+      },
+      "fees_paid": 1.2925,
+      "fill_rate": 0.6146788990825688,
+      "filled_markets": 67,
+      "max_drawdown_cost_basis": 22.117500000000007,
+      "name": "window_blend75_e06_30_180",
+      "orders_submitted": 109,
+      "pnl_without_top_three_winners": -23.1206,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "promotion_eligible": false,
+      "realized_net_pnl": -21.8225,
+      "settled_markets": 67,
+      "stressed_pnl": {
+        "1": -22.7291,
+        "2": -23.6347
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 0.0,
+          "settled": 0
+        },
+        "low": {
+          "pnl": -19.376999999999992,
+          "settled": 60
+        },
+        "medium": {
+          "pnl": -2.4454999999999996,
+          "settled": 7
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.7787581688272038,
+      "block_pnl": [
+        -4.2094999999999985,
+        -3.5625,
+        -12.126399999999999,
+        -2.775299999999999,
+        0.6324000000000012
+      ],
+      "brier_score": 0.2536381645325598,
+      "config": {
+        "max_seconds": 120,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "blend50",
+        "name": "window_blend50_e06_30_120",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -5.976699999999999,
+        "2026-09-22": 1.5731000000000002,
+        "2026-09-23": -1.0734000000000004,
+        "2026-09-24": -5.0783,
+        "2026-09-25": -6.5377,
+        "2026-09-26": -1.0384000000000002,
+        "2026-09-27": -3.6558,
+        "2026-09-28": 2.3111000000000006,
+        "2026-09-29": -1.2228999999999997,
+        "2026-09-30": -1.3423
+      },
+      "fees_paid": 3.1733,
+      "fill_rate": 0.540650406504065,
+      "filled_markets": 133,
+      "max_drawdown_cost_basis": 23.834900000000005,
+      "name": "window_blend50_e06_30_120",
+      "orders_submitted": 246,
+      "pnl_without_top_three_winners": -32.9966,
+      "positive_blocks": 1,
+      "positive_day_share": 0.2,
+      "promotion_eligible": false,
+      "realized_net_pnl": -22.0413,
+      "settled_markets": 133,
+      "stressed_pnl": {
+        "1": -25.0217,
+        "2": -27.9986
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -0.9281,
+          "settled": 1
+        },
+        "low": {
+          "pnl": -21.3829,
+          "settled": 98
+        },
+        "medium": {
+          "pnl": 0.26970000000000044,
+          "settled": 34
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.48770386306330604,
+      "block_pnl": [
+        27.187899999999996,
+        -5.4649,
+        -23.769999999999992,
+        -20.1806,
+        -23.257699999999993
+      ],
+      "brier_score": 0.14556532977925943,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.03",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "persist_calibrated_e06_30_180_s03",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": -13.2686,
+        "2026-09-22": 41.81719999999999,
+        "2026-09-23": -3.011400000000002,
+        "2026-09-24": 15.8095,
+        "2026-09-25": -33.858700000000006,
+        "2026-09-26": -26.916200000000003,
+        "2026-09-27": 4.771699999999999,
+        "2026-09-28": -21.667800000000007,
+        "2026-09-29": -5.901800000000001,
+        "2026-09-30": -3.2592
+      },
+      "fees_paid": 17.0688,
+      "fill_rate": 0.7689161554192229,
+      "filled_markets": 376,
+      "max_drawdown_cost_basis": 104.5554,
+      "name": "persist_calibrated_e06_30_180_s03",
+      "orders_submitted": 489,
+      "pnl_without_top_three_winners": -124.5991,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -45.4853,
+      "settled_markets": 375,
+      "stressed_pnl": {
+        "1": -86.4994,
+        "2": -127.4572
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -4.5971,
+          "settled": 6
+        },
+        "low": {
+          "pnl": -42.82399999999998,
+          "settled": 172
+        },
+        "medium": {
+          "pnl": 1.9357999999999964,
+          "settled": 197
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.48770386306330604,
+      "block_pnl": [
+        27.187899999999996,
+        -5.4649,
+        -23.769999999999992,
+        -20.1806,
+        -23.257699999999993
+      ],
+      "brier_score": 0.14556532977925943,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.05",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "persist_calibrated_e06_30_180_s05",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": -13.2686,
+        "2026-09-22": 41.81719999999999,
+        "2026-09-23": -3.011400000000002,
+        "2026-09-24": 15.8095,
+        "2026-09-25": -33.858700000000006,
+        "2026-09-26": -26.916200000000003,
+        "2026-09-27": 4.771699999999999,
+        "2026-09-28": -21.667800000000007,
+        "2026-09-29": -5.901800000000001,
+        "2026-09-30": -3.2592
+      },
+      "fees_paid": 17.0688,
+      "fill_rate": 0.7689161554192229,
+      "filled_markets": 376,
+      "max_drawdown_cost_basis": 104.5554,
+      "name": "persist_calibrated_e06_30_180_s05",
+      "orders_submitted": 489,
+      "pnl_without_top_three_winners": -124.5991,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -45.4853,
+      "settled_markets": 375,
+      "stressed_pnl": {
+        "1": -86.4994,
+        "2": -127.4572
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -4.5971,
+          "settled": 6
+        },
+        "low": {
+          "pnl": -42.82399999999998,
+          "settled": 172
+        },
+        "medium": {
+          "pnl": 1.9357999999999964,
+          "settled": 197
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.48770386306330604,
+      "block_pnl": [
+        27.187899999999996,
+        -5.4649,
+        -23.769999999999992,
+        -20.1806,
+        -23.257699999999993
+      ],
+      "brier_score": 0.14556532977925943,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.07",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "persist_calibrated_e06_30_180_s07",
+        "persistence": 2
+      },
+      "daily_pnl": {
+        "2026-09-21": -13.2686,
+        "2026-09-22": 41.81719999999999,
+        "2026-09-23": -3.011400000000002,
+        "2026-09-24": 15.8095,
+        "2026-09-25": -33.858700000000006,
+        "2026-09-26": -26.916200000000003,
+        "2026-09-27": 4.771699999999999,
+        "2026-09-28": -21.667800000000007,
+        "2026-09-29": -5.901800000000001,
+        "2026-09-30": -3.2592
+      },
+      "fees_paid": 17.0688,
+      "fill_rate": 0.7689161554192229,
+      "filled_markets": 376,
+      "max_drawdown_cost_basis": 104.5554,
+      "name": "persist_calibrated_e06_30_180_s07",
+      "orders_submitted": 489,
+      "pnl_without_top_three_winners": -124.5991,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -45.4853,
+      "settled_markets": 375,
+      "stressed_pnl": {
+        "1": -86.4994,
+        "2": -127.4572
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -4.5971,
+          "settled": 6
+        },
+        "low": {
+          "pnl": -42.82399999999998,
+          "settled": 172
+        },
+        "medium": {
+          "pnl": 1.9357999999999964,
+          "settled": 197
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5263659027102756,
+      "block_pnl": [
+        13.337799999999998,
+        -14.021000000000004,
+        -7.767000000000003,
+        -20.4426,
+        -17.092799999999997
+      ],
+      "brier_score": 0.16517478748596212,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.03",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "spread_calibrated_e06_30_180_s03",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -18.555700000000005,
+        "2026-09-22": 30.141600000000007,
+        "2026-09-23": -4.080800000000002,
+        "2026-09-24": 12.378699999999997,
+        "2026-09-25": -27.1281,
+        "2026-09-26": -17.592699999999997,
+        "2026-09-27": 4.074400000000001,
+        "2026-09-28": -16.097999999999995,
+        "2026-09-29": -7.163600000000002,
+        "2026-09-30": -1.9614
+      },
+      "fees_paid": 18.0666,
+      "fill_rate": 0.6748466257668712,
+      "filled_markets": 440,
+      "max_drawdown_cost_basis": 76.87809999999999,
+      "name": "spread_calibrated_e06_30_180_s03",
+      "orders_submitted": 652,
+      "pnl_without_top_three_winners": -120.1296,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -45.9856,
+      "settled_markets": 439,
+      "stressed_pnl": {
+        "1": -93.4781,
+        "2": -140.9073
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -3.7953,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -27.156699999999965,
+          "settled": 252
+        },
+        "medium": {
+          "pnl": -15.033599999999991,
+          "settled": 183
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5263659027102756,
+      "block_pnl": [
+        13.337799999999998,
+        -14.021000000000004,
+        -7.767000000000003,
+        -20.4426,
+        -17.092799999999997
+      ],
+      "brier_score": 0.16517478748596212,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": "0.05",
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "spread_calibrated_e06_30_180_s05",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -18.555700000000005,
+        "2026-09-22": 30.141600000000007,
+        "2026-09-23": -4.080800000000002,
+        "2026-09-24": 12.378699999999997,
+        "2026-09-25": -27.1281,
+        "2026-09-26": -17.592699999999997,
+        "2026-09-27": 4.074400000000001,
+        "2026-09-28": -16.097999999999995,
+        "2026-09-29": -7.163600000000002,
+        "2026-09-30": -1.9614
+      },
+      "fees_paid": 18.0666,
+      "fill_rate": 0.6748466257668712,
+      "filled_markets": 440,
+      "max_drawdown_cost_basis": 76.87809999999999,
+      "name": "spread_calibrated_e06_30_180_s05",
+      "orders_submitted": 652,
+      "pnl_without_top_three_winners": -120.1296,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -45.9856,
+      "settled_markets": 439,
+      "stressed_pnl": {
+        "1": -93.4781,
+        "2": -140.9073
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -3.7953,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -27.156699999999965,
+          "settled": 252
+        },
+        "medium": {
+          "pnl": -15.033599999999991,
+          "settled": 183
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5263787837209913,
+      "block_pnl": [
+        13.337799999999998,
+        -14.062000000000005,
+        -7.767000000000003,
+        -20.4426,
+        -17.092799999999997
+      ],
+      "brier_score": 0.16518121469416489,
+      "config": {
+        "max_seconds": 180,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 30,
+        "model": "calibrated",
+        "name": "window_calibrated_e06_30_180",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -18.555700000000005,
+        "2026-09-22": 30.141600000000007,
+        "2026-09-23": -4.080800000000002,
+        "2026-09-24": 12.337699999999996,
+        "2026-09-25": -27.1281,
+        "2026-09-26": -17.592699999999997,
+        "2026-09-27": 4.074400000000001,
+        "2026-09-28": -16.097999999999995,
+        "2026-09-29": -7.163600000000002,
+        "2026-09-30": -1.9614
+      },
+      "fees_paid": 18.0676,
+      "fill_rate": 0.6748466257668712,
+      "filled_markets": 440,
+      "max_drawdown_cost_basis": 76.8781,
+      "name": "window_calibrated_e06_30_180",
+      "orders_submitted": 652,
+      "pnl_without_top_three_winners": -120.1706,
+      "positive_blocks": 1,
+      "positive_day_share": 0.3,
+      "promotion_eligible": false,
+      "realized_net_pnl": -46.0266,
+      "settled_markets": 439,
+      "stressed_pnl": {
+        "1": -93.519,
+        "2": -140.9481
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": -3.7953,
+          "settled": 4
+        },
+        "low": {
+          "pnl": -27.19769999999997,
+          "settled": 252
+        },
+        "medium": {
+          "pnl": -15.033599999999991,
+          "settled": 183
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5613216996463914,
+      "block_pnl": [
+        -13.439200000000001,
+        -30.9596,
+        -0.8740999999999982,
+        -22.984399999999994,
+        3.420699999999999
+      ],
+      "brier_score": 0.18014399125370487,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.1,
+        "min_seconds": 5,
+        "model": "calibrated",
+        "name": "signal_calibrated_e10",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -20.5674,
+        "2026-09-22": 6.965200000000002,
+        "2026-09-23": -14.6643,
+        "2026-09-24": -15.407900000000005,
+        "2026-09-25": -18.6043,
+        "2026-09-26": -3.5501000000000036,
+        "2026-09-27": -1.8368000000000007,
+        "2026-09-28": 8.534800000000002,
+        "2026-09-29": -3.1631000000000027,
+        "2026-09-30": -2.5427
+      },
+      "fees_paid": 19.915,
+      "fill_rate": 0.7369230769230769,
+      "filled_markets": 479,
+      "max_drawdown_cost_basis": 78.1332,
+      "name": "signal_calibrated_e10",
+      "orders_submitted": 650,
+      "pnl_without_top_three_winners": -100.9797,
+      "positive_blocks": 1,
+      "positive_day_share": 0.2,
+      "promotion_eligible": false,
+      "realized_net_pnl": -64.8366,
+      "settled_markets": 478,
+      "stressed_pnl": {
+        "1": -97.2395,
+        "2": -129.6012
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 4.6445,
+          "settled": 8
+        },
+        "low": {
+          "pnl": -34.953300000000006,
+          "settled": 270
+        },
+        "medium": {
+          "pnl": -34.527799999999985,
+          "settled": 200
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.5177210231243283,
+      "block_pnl": [
+        -18.946299999999994,
+        -29.22190000000001,
+        -9.408999999999997,
+        -30.423199999999998,
+        -11.998700000000003
+      ],
+      "brier_score": 0.16548330014444293,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.08,
+        "min_seconds": 5,
+        "model": "calibrated",
+        "name": "signal_calibrated_e08",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -23.5937,
+        "2026-09-22": 1.8210999999999977,
+        "2026-09-23": -12.557000000000002,
+        "2026-09-24": -14.714800000000004,
+        "2026-09-25": -19.6278,
+        "2026-09-26": -11.241899999999998,
+        "2026-09-27": -4.548999999999997,
+        "2026-09-28": -15.532700000000002,
+        "2026-09-29": -0.0033,
+        "2026-09-30": 0.0
+      },
+      "fees_paid": 18.2481,
+      "fill_rate": 0.7244732576985413,
+      "filled_markets": 447,
+      "max_drawdown_cost_basis": 101.3081,
+      "name": "signal_calibrated_e08",
+      "orders_submitted": 617,
+      "pnl_without_top_three_winners": -118.4186,
+      "positive_blocks": 0,
+      "positive_day_share": 0.1,
+      "promotion_eligible": false,
+      "realized_net_pnl": -99.9991,
+      "settled_markets": 447,
+      "stressed_pnl": {
+        "1": -131.795,
+        "2": -163.5505
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 2.5231,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -28.089299999999998,
+          "settled": 256
+        },
+        "medium": {
+          "pnl": -74.43290000000003,
+          "settled": 186
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    },
+    {
+      "binary_log_loss": 0.4829472970107125,
+      "block_pnl": [
+        -28.897200000000005,
+        -30.6688,
+        -9.2167,
+        -31.2173,
+        0.0
+      ],
+      "brier_score": 0.15378575097170777,
+      "config": {
+        "max_seconds": 300,
+        "max_spread": null,
+        "min_edge": 0.06,
+        "min_seconds": 5,
+        "model": "calibrated",
+        "name": "signal_calibrated_e06",
+        "persistence": 1
+      },
+      "daily_pnl": {
+        "2026-09-21": -28.33600000000001,
+        "2026-09-22": -6.4802,
+        "2026-09-23": -7.172299999999998,
+        "2026-09-24": -14.580899999999998,
+        "2026-09-25": -26.77840000000001,
+        "2026-09-26": -7.816899999999999,
+        "2026-09-27": -8.835299999999998,
+        "2026-09-28": 0.0,
+        "2026-09-29": 0.0,
+        "2026-09-30": 0.0
+      },
+      "fees_paid": 18.07,
+      "fill_rate": 0.7284345047923323,
+      "filled_markets": 456,
+      "max_drawdown_cost_basis": 101.309,
+      "name": "signal_calibrated_e06",
+      "orders_submitted": 626,
+      "pnl_without_top_three_winners": -118.4195,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "promotion_eligible": false,
+      "realized_net_pnl": -100.0,
+      "settled_markets": 456,
+      "stressed_pnl": {
+        "1": -137.1668,
+        "2": -174.2848
+      },
+      "volatility_regimes": {
+        "high": {
+          "pnl": 5.694599999999999,
+          "settled": 5
+        },
+        "low": {
+          "pnl": -22.00079999999999,
+          "settled": 272
+        },
+        "medium": {
+          "pnl": -83.69380000000004,
+          "settled": 179
+        },
+        "unknown": {
+          "pnl": 0.0,
+          "settled": 0
+        }
+      }
+    }
+  ],
+  "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+  "end_segment": 4344,
+  "events_replayed": 425326032,
+  "gate_pass_counts": {
+    "All gates": 0,
+    "At least 100 settlements": 32,
+    "Log loss no worse than raw 4% reference": 6,
+    "Maximum drawdown no greater than $20": 11,
+    "Positive after removing three largest winners": 0,
+    "Positive headline P&L": 7,
+    "Positive in at least four of five chronological blocks": 0,
+    "Positive on more than half of UTC dates": 0,
+    "Positive with two-cent worse fills": 1
+  },
+  "interpretation": "Development-only. No configuration passed all preregistered gates; no winner.",
+  "observed_utc_days": [
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30"
+  ],
+  "processed_segments": 4345,
+  "quality": {
+    "clock_adjustments": 0,
+    "gaps": 22,
+    "malformed": 0
+  },
+  "raw_reference_log_loss": 0.5148963080793824,
+  "receipt_cutoff_ns": 1790731855033973815,
+  "registration_sha256": "db6e4b812a94576c18ba6cd6bc9be82f95d8abda57192c5341641a0ebd6d58b1",
+  "selection": {
+    "development_only": true,
+    "eligible": [],
+    "requires_new_prospective_study": true,
+    "winner": null
+  },
+  "source_sha256": "504fb4ad9fedfba2889c9d651f544743ee669aa25e5a3115aa448a5588f254f1",
+  "start_segment": 0,
+  "state": "complete",
+  "study": "004",
+  "trade_examples": {
+    "signal_calibrated_e04": {
+      "top_winners": [
+        {
+          "cost": "0.8181",
+          "created_ns": 1790574000002692601,
+          "fast_rms_bps": 1.347122103207174,
+          "fees": "0.0531",
+          "fill_price": "0.0090",
+          "filled": 85,
+          "payout": "85",
+          "pnl": "84.1819",
+          "probability": 0.05415746659326916,
+          "settled_day": "2026-09-28",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP280145-45"
+        },
+        {
+          "cost": "0.9806",
+          "created_ns": 1790641511001096781,
+          "fast_rms_bps": 0.6279353695958783,
+          "fees": "0.0626",
+          "fill_price": "0.0270",
+          "filled": 34,
+          "payout": "34",
+          "pnl": "33.0194",
+          "probability": 0.08534011201929292,
+          "settled_day": "2026-09-29",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP282030-30"
+        },
+        {
+          "cost": "0.8938",
+          "created_ns": 1790086201002425665,
+          "fast_rms_bps": 0.7357641851033019,
+          "fees": "0.0568",
+          "fill_price": "0.0310",
+          "filled": 27,
+          "payout": "27",
+          "pnl": "26.1062",
+          "probability": 0.08061557845155913,
+          "settled_day": "2026-09-22",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP221015-15"
+        },
+        {
+          "cost": "0.9526",
+          "created_ns": 1790605500017958231,
+          "fast_rms_bps": 0.7974819395024504,
+          "fees": "0.0596",
+          "fill_price": "0.0470",
+          "filled": 19,
+          "payout": "19",
+          "pnl": "18.0474",
+          "probability": 0.10335841168276816,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP281030-30"
+        },
+        {
+          "cost": "0.8953",
+          "created_ns": 1790606410022915277,
+          "fast_rms_bps": 1.0270414215062857,
+          "fees": "0.0553",
+          "fill_price": "0.0600",
+          "filled": 14,
+          "payout": "14",
+          "pnl": "13.1047",
+          "probability": 0.16629183051521845,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP281045-45"
+        }
+      ],
+      "worst_losses": [
+        {
+          "cost": "0.9999",
+          "created_ns": 1790133900020280717,
+          "fast_rms_bps": 0.9122724991935092,
+          "fees": "0.0639",
+          "fill_price": "0.0260",
+          "filled": 36,
+          "payout": "0",
+          "pnl": "-0.9999",
+          "probability": 0.06798139936034131,
+          "settled_day": "2026-09-23",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP222330-30"
+        },
+        {
+          "cost": "0.9999",
+          "created_ns": 1790477916000438591,
+          "fast_rms_bps": 0.1866116274000564,
+          "fees": "0.0639",
+          "fill_price": "0.0260",
+          "filled": 36,
+          "payout": "0",
+          "pnl": "-0.9999",
+          "probability": 0.10710605833133319,
+          "settled_day": "2026-09-27",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP262300-00"
+        },
+        {
+          "cost": "0.9993",
+          "created_ns": 1790553492058906758,
+          "fast_rms_bps": 0.8273725280164743,
+          "fees": "0.0653",
+          "fill_price": "0.0020",
+          "filled": 467,
+          "payout": "0",
+          "pnl": "-0.9993",
+          "probability": 0.04323292115387134,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP272000-00"
+        },
+        {
+          "cost": "0.9990",
+          "created_ns": 1790442725000407638,
+          "fast_rms_bps": 0.2237148319683543,
+          "fees": "0.0630",
+          "fill_price": "0.0390",
+          "filled": 24,
+          "payout": "0",
+          "pnl": "-0.9990",
+          "probability": 0.08613919132573239,
+          "settled_day": "2026-09-26",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP261315-15"
+        },
+        {
+          "cost": "0.9982",
+          "created_ns": 1790106000000220041,
+          "fast_rms_bps": 0.8203463259276412,
+          "fees": "0.0622",
+          "fill_price": "0.0520",
+          "filled": 18,
+          "payout": "0",
+          "pnl": "-0.9982",
+          "probability": 0.1125957069169153,
+          "settled_day": "2026-09-22",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP221545-45"
+        }
+      ]
+    },
+    "signal_raw_e04": {
+      "top_winners": [
+        {
+          "cost": "0.9392",
+          "created_ns": 1790268174002713683,
+          "fast_rms_bps": 1.0013328462271582,
+          "fees": "0.0592",
+          "fill_price": "0.0400",
+          "filled": 22,
+          "payout": "22",
+          "pnl": "21.0608",
+          "probability": 0.08801362705739746,
+          "settled_day": "2026-09-24",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP241245-45"
+        },
+        {
+          "cost": "0.9433",
+          "created_ns": 1790605543055085675,
+          "fast_rms_bps": 0.8311732777023942,
+          "fees": "0.0583",
+          "fill_price": "0.0590",
+          "filled": 15,
+          "payout": "15",
+          "pnl": "14.0567",
+          "probability": 0.10571815265485873,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP281030-30"
+        },
+        {
+          "cost": "0.9250",
+          "created_ns": 1790606431002339421,
+          "fast_rms_bps": 1.0190818042133574,
+          "fees": "0.0570",
+          "fill_price": "0.0620",
+          "filled": 14,
+          "payout": "14",
+          "pnl": "13.0750",
+          "probability": 0.10972961688335037,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP281045-45"
+        },
+        {
+          "cost": "0.9202",
+          "created_ns": 1790043141006079235,
+          "fast_rms_bps": 0.8994890212850494,
+          "fees": "0.0562",
+          "fill_price": "0.0720",
+          "filled": 12,
+          "payout": "12",
+          "pnl": "11.0798",
+          "probability": 0.12481279893556735,
+          "settled_day": "2026-09-22",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP212215-15"
+        },
+        {
+          "cost": "0.9574",
+          "created_ns": 1790701041012320092,
+          "fast_rms_bps": 0.7426718326696461,
+          "fees": "0.0574",
+          "fill_price": "0.0900",
+          "filled": 10,
+          "payout": "10",
+          "pnl": "9.0426",
+          "probability": 0.1412873771292827,
+          "settled_day": "2026-09-29",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP291300-00"
+        }
+      ],
+      "worst_losses": [
+        {
+          "cost": "1.0000",
+          "created_ns": 1790134896005175504,
+          "fast_rms_bps": 1.2714752586084896,
+          "fees": "0.0640",
+          "fill_price": "0.0240",
+          "filled": 39,
+          "payout": "0",
+          "pnl": "-1.0000",
+          "probability": 0.06732154420436132,
+          "settled_day": "2026-09-23",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP222345-45"
+        },
+        {
+          "cost": "1.0000",
+          "created_ns": 1790320201005398982,
+          "fast_rms_bps": 1.057400350068201,
+          "fees": "0.0640",
+          "fill_price": "0.0240",
+          "filled": 39,
+          "payout": "0",
+          "pnl": "-1.0000",
+          "probability": 0.06619571328518847,
+          "settled_day": "2026-09-25",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP250315-15"
+        },
+        {
+          "cost": "0.9992",
+          "created_ns": 1790178924005699454,
+          "fast_rms_bps": 1.1308889767890646,
+          "fees": "0.0632",
+          "fill_price": "0.0360",
+          "filled": 26,
+          "payout": "0",
+          "pnl": "-0.9992",
+          "probability": 0.07908127624845895,
+          "settled_day": "2026-09-23",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP231200-00"
+        },
+        {
+          "cost": "0.9950",
+          "created_ns": 1790431800000984080,
+          "fast_rms_bps": 0.19528646298157143,
+          "fees": "0.0350",
+          "fill_price": "0.4800",
+          "filled": 2,
+          "payout": "0",
+          "pnl": "-0.9950",
+          "probability": 0.5637022883992384,
+          "settled_day": "2026-09-26",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP261015-15"
+        },
+        {
+          "cost": "0.9932",
+          "created_ns": 1790604763000421167,
+          "fast_rms_bps": 0.8951093085429274,
+          "fees": "0.0632",
+          "fill_price": "0.0300",
+          "filled": 31,
+          "payout": "0",
+          "pnl": "-0.9932",
+          "probability": 0.07541440567850533,
+          "settled_day": "2026-09-28",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP281015-15"
+        }
+      ]
+    },
+    "window_blend25_e06_30_180": {
+      "top_winners": [
+        {
+          "cost": "0.9342",
+          "created_ns": 1790492238000038533,
+          "fast_rms_bps": 0.3216464415033838,
+          "fees": "0.0592",
+          "fill_price": "0.0350",
+          "filled": 25,
+          "payout": "25",
+          "pnl": "24.0658",
+          "probability": 0.13095836885324494,
+          "settled_day": "2026-09-27",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP270300-00"
+        },
+        {
+          "cost": "0.4713",
+          "created_ns": 1790043185000214260,
+          "fast_rms_bps": 1.3743541346131485,
+          "fees": "0.0303",
+          "fill_price": "0.0210",
+          "filled": 21,
+          "payout": "21",
+          "pnl": "20.5287",
+          "probability": 0.1267022055574702,
+          "settled_day": "2026-09-22",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP212215-15"
+        },
+        {
+          "cost": "0.9349",
+          "created_ns": 1790010744019260029,
+          "fast_rms_bps": 0.7917217888399826,
+          "fees": "0.0549",
+          "fill_price": "0.1100",
+          "filled": 8,
+          "payout": "8",
+          "pnl": "7.0651",
+          "probability": 0.18406589776722182,
+          "settled_day": "2026-09-21",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP211315-15"
+        },
+        {
+          "cost": "0.8180",
+          "created_ns": 1790510284005722501,
+          "fast_rms_bps": 0.05789513831152342,
+          "fees": "0.0480",
+          "fill_price": "0.1100",
+          "filled": 7,
+          "payout": "7",
+          "pnl": "6.1820",
+          "probability": 0.2448347977018286,
+          "settled_day": "2026-09-27",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP270800-00"
+        },
+        {
+          "cost": "0.8180",
+          "created_ns": 1790628171000687030,
+          "fast_rms_bps": 0.35002335953251895,
+          "fees": "0.0480",
+          "fill_price": "0.1100",
+          "filled": 7,
+          "payout": "7",
+          "pnl": "6.1820",
+          "probability": 0.20121354269728375,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP281645-45"
+        }
+      ],
+      "worst_losses": [
+        {
+          "cost": "0.9992",
+          "created_ns": 1790674092015129191,
+          "fast_rms_bps": 1.335109258642077,
+          "fees": "0.0632",
+          "fill_price": "0.0360",
+          "filled": 26,
+          "payout": "0",
+          "pnl": "-0.9992",
+          "probability": 0.10164615225916696,
+          "settled_day": "2026-09-29",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP290530-30"
+        },
+        {
+          "cost": "0.9990",
+          "created_ns": 1790071021001984816,
+          "fast_rms_bps": 1.2872758975670078,
+          "fees": "0.0630",
+          "fill_price": "0.0390",
+          "filled": 24,
+          "payout": "0",
+          "pnl": "-0.9990",
+          "probability": 0.10650752321630752,
+          "settled_day": "2026-09-22",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP220600-00"
+        },
+        {
+          "cost": "0.9950",
+          "created_ns": 1790050348000907341,
+          "fast_rms_bps": 0.3621118922869768,
+          "fees": "0.0350",
+          "fill_price": "0.4800",
+          "filled": 2,
+          "payout": "0",
+          "pnl": "-0.9950",
+          "probability": 0.578145229541836,
+          "settled_day": "2026-09-22",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP220015-15"
+        },
+        {
+          "cost": "0.9911",
+          "created_ns": 1790590375001195194,
+          "fast_rms_bps": 0.8396885940939033,
+          "fees": "0.0611",
+          "fill_price": "0.0620",
+          "filled": 15,
+          "payout": "0",
+          "pnl": "-0.9911",
+          "probability": 0.12654458631164278,
+          "settled_day": "2026-09-28",
+          "side": "no",
+          "ticker": "KXBTC15M-26SEP280615-15"
+        },
+        {
+          "cost": "0.9806",
+          "created_ns": 1790428320010021774,
+          "fast_rms_bps": 0.9576576313214146,
+          "fees": "0.0626",
+          "fill_price": "0.0270",
+          "filled": 34,
+          "payout": "0",
+          "pnl": "-0.9806",
+          "probability": 0.09767415749822081,
+          "settled_day": "2026-09-26",
+          "side": "yes",
+          "ticker": "KXBTC15M-26SEP260915-15"
+        }
+      ]
+    }
+  }
+}

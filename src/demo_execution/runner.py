@@ -20,10 +20,10 @@ from research_lab.engine import STRATEGIES, Replay, entry_fee
 from research_lab.market import Book
 from research_lab.research import source_hash
 from research_lab.settings import Experiment
-from research_lab.storage import Store
 
 from .client import WS, DemoClient
 from .journal import Journal, dumps
+from .recording import DemoRecording, archive_one
 
 RISK_PER_MARKET = Decimal('3.00')
 CONFIG_REVISION = 'risk-cap-3-20260924'
@@ -104,9 +104,13 @@ class Runner:
                                if self.strategy == 'tail_underdog' else {})
         self.journal.register_shadow_variants(
             {name: cfg.to_dict() for name, cfg in self.shadow_configs.items()})
-        self.raw = Store(self.root / 'events.sqlite3')
         self.replay = Replay(self.cfg)
         self.state = self.replay.state
+        demo_hash = hashlib.sha256(b''.join(p.name.encode() + p.read_bytes()
+                                           for p in sorted(Path(__file__).parent.glob('*.py'))))
+        self.raw = DemoRecording(self.root / 'events-v2', strategy=self.strategy,
+                                 source_sha256=demo_hash.hexdigest())
+        self.archive_status = {'state': 'starting'}
         self.status = {'environment': 'demo', 'strategy': self.strategy, 'state': 'starting',
                        'bankroll': str(self.starting_cash), 'risk_per_market': str(RISK_PER_MARKET),
                        'config_revision': CONFIG_REVISION, 'exchange_index': 2,
@@ -119,7 +123,6 @@ class Runner:
         self.snapshot_at = 0
         self.account_at = 0
         self.settlement_at = 0
-        demo_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted(Path(__file__).parent.glob('*.py'))))
         self.record('demo_start', {'config': self.cfg.to_dict(), 'strategy': self.strategy,
                                   'research_source': source_hash(),
                                   'demo_source': demo_hash.hexdigest(), 'environment': 'demo'})
@@ -142,9 +145,25 @@ class Runner:
         event = self.raw.append(kind, payload)
         self.raw.commit()
         self.state.apply(event)
-        if self.raw.stats()['bytes'] > 256_000_000:
-            raise RuntimeError('Demo recording capacity reached; preserved data, stopped new orders')
         return event
+
+    async def archive_loop(self):
+        hot_limit = int(os.environ.get('LAB_DEMO_HOT_MAX_BYTES', '750000000'))
+        while True:
+            try:
+                result = await asyncio.to_thread(archive_one, self.raw.root)
+                self.archive_status = {**result, 'updated_ns': time.time_ns()}
+                if self.raw.stats()['bytes'] > hot_limit:
+                    raise RuntimeError('Demo hot recording budget reached; preserved segments, stopped new orders')
+                await asyncio.sleep(1 if result['state'] == 'complete' else 5)
+            except asyncio.CancelledError:
+                raise
+            except Exception as exc:
+                self.archive_status = {'state': 'waiting_io', 'error': f'{type(exc).__name__}: {exc}',
+                                       'updated_ns': time.time_ns()}
+                if self.raw.stats()['bytes'] > hot_limit:
+                    raise RuntimeError('Demo hot recording budget reached; preserved segments, stopped new orders')
+                await asyncio.sleep(5)
 
     async def read(self, path, params=None):
         started = time.time_ns()
@@ -388,6 +407,8 @@ class Runner:
                            recent_orders=[{'ticker': r['ticker'], 'state': r['state'], 'error': r['error'],
                                            'order': json.loads(r['exchange_order']) if r['exchange_order'] else None}
                                           for r in rows[-10:]])
+        self.status['recording'] = {**self.raw.stats(), 'archive_job': self.archive_status,
+                                    'legacy_single_file_preserved': (self.root / 'events.sqlite3').exists()}
         if self.shadow_configs:
             self.status['shadow'] = self.journal.shadow_summary(self.shadow_configs)
         path = self.root / 'status.tmp'
@@ -412,6 +433,7 @@ class Runner:
             async with asyncio.TaskGroup() as group:
                 group.create_task(self.benchmark())
                 group.create_task(self.loop())
+                group.create_task(self.archive_loop())
         except Exception as exc:
             errors = list(exc.exceptions) if isinstance(exc, ExceptionGroup) else [exc]
             reasons = [str(e) if isinstance(e, RuntimeError) else type(e).__name__ for e in errors]
