@@ -220,3 +220,30 @@ readiness returned 200. Protected status reported `adaptive_volatility`, the unc
 115 fills and settlements, +$32.997000 demo P&L, zero unresolved orders and an active sizing report with no
 eligible post-deployment settlements yet. Candidate Study 003 remained active and unchanged at four forward
 UTC dates.
+
+## October 3 UTC — v6 recorder storage recovery
+
+The recorder had reached its 512 MB local dataset guard because seven sealed segments, 6,055–6,061, had not
+been archived. The private archive was only 18.705 GB of its fixed 60 GB quota, and the Railway volume still
+had about 1.38 GB available, so neither paid-storage limit was the cause. The maintenance worker was rejecting
+its checkpoint because a web-app state reference and an offline audit CLI command changed a package-wide
+source hash even though all prospective recorder and replay dependencies were byte-for-byte unchanged from
+the registered source commit.
+
+Source `bc56284` narrows new prospective registrations to the recorder, normalization, strategy engine,
+settings, raw storage and checkpoint modules. It accepts the original v6 registration only while those modules
+match frozen digest `66ed1e8f...b6dd`, and it preserves the original registration in every later checkpoint and
+report. Changes to any prospective dependency still fail closed. All 130 tests and Ruff passed, including a
+legacy-v6 archive/resume regression.
+
+Railway deployment `34815efc-4526-41cc-952f-8b7e76b082ba` archived all seven queued segments after full
+event-chain verification and read-back checksums. The dataset fell from 509.1 MB to 281.6 MB. After restart
+deployment `cae821c5-4a78-4b38-9dc6-f44d270556c4`, health and readiness returned 200 and both order-book and
+benchmark connections were current. The first post-recovery segment, 6,062, sealed with terminal digest
+`7cac2ae2...248ae`, linked to segment 6,061 digest `2b135679...320a`, archived successfully, and advanced both
+the forward checkpoint and Candidate Study 003 to segment 6,063. The adaptive demo runner remained unchanged
+at `adaptive_volatility`, fixed $3 maximum, with zero unresolved orders.
+
+No budget or storage limit was raised. Railway reported $5.9754 used and an $11.9334 period estimate against
+the unchanged $10 hard cap for the period ending October 16. The estimate therefore remains an availability
+risk: Railway can stop the workspace at $10 before the 20-day study gate unless ongoing cost is reduced.
