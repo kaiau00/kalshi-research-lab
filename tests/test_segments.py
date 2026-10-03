@@ -9,7 +9,6 @@ from test_engine import prepared
 from research_lab.checkpoint import decode, encode
 from research_lab.demo import create_demo
 from research_lab.engine import Replay
-from research_lab.research import source_hash
 from research_lab.segments import SegmentedStore, archive_events, checksum, process_one, restore
 from research_lab.settings import Experiment
 from research_lab.storage import Store, canonical
@@ -51,7 +50,8 @@ def test_segment_archive_retry_restore_and_continuous_accounts(tmp_path, monkeyp
     monkeypatch.setenv('LAB_SEGMENT_EVENTS', '500')
     root = tmp_path / 'live'
     writer = SegmentedStore(root)
-    writer.append('experiment_registration', {'config': Experiment().to_dict(), 'source_sha256': source_hash()},
+    legacy_source = 'c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc'
+    writer.append('experiment_registration', {'config': Experiment().to_dict(), 'source_sha256': legacy_source},
                   received_ns=1799999998 * 10**9)
     demo = tmp_path / 'demo.db'
     create_demo(demo, markets=2)
@@ -74,6 +74,7 @@ def test_segment_archive_retry_restore_and_continuous_accounts(tmp_path, monkeyp
     assert (root / rows[0]['path']).exists()  # No deletion on failed upload.
     cp = json.loads((root / 'checkpoint.json').read_text())
     assert cp['data']['next_segment'] == 1
+    assert cp['data']['source'] == legacy_source
     bucket.fail = False
     for _ in rows:
         assert process_one(root, bucket)['state'] == 'complete'

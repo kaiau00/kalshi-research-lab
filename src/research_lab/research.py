@@ -28,6 +28,28 @@ LIMITATIONS = [
     'Confidence intervals describe observed daily variation, not a guarantee or correction for strategy selection.',
 ]
 
+# These modules define the raw observations, their normalization, the simulated
+# execution model, and the checkpoint representation.  Web routes, dashboards,
+# and offline CLI commands do not change a prospective replay and must not halt
+# archival when they are extended.
+PROSPECTIVE_SOURCE_FILES = (
+    'checkpoint.py',
+    'engine.py',
+    'history.py',
+    'market.py',
+    'recorder.py',
+    'settings.py',
+    'storage.py',
+)
+
+# segments-v6 was registered before the source hash was narrowed to the
+# prospective dependency set.  Its old package-wide hash is accepted only while
+# those frozen dependencies have this exact digest.
+LEGACY_SOURCE_COMPATIBILITY = {
+    'c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc':
+        '66ed1e8f00dbfd1e2b23fea0f3d133cc1de269d236900aea31fb3af6f3e1b6dd',
+}
+
 
 def write_json(path, value):
     path = Path(path)
@@ -52,10 +74,16 @@ def code_revision():
 
 def source_hash():
     h = hashlib.sha256()
-    for path in sorted(Path(__file__).parent.glob('*.py')):
+    for name in PROSPECTIVE_SOURCE_FILES:
+        path = Path(__file__).with_name(name)
         h.update(path.name.encode())
         h.update(path.read_bytes())
     return h.hexdigest()
+
+
+def source_compatible(recorded):
+    current = source_hash()
+    return recorded == current or LEGACY_SOURCE_COMPATIBILITY.get(recorded) == current
 
 
 def partition(markets):
@@ -137,7 +165,7 @@ def backtest(path, output, cfg=None, split='train', unlock_holdout=False, end_id
         groups = partition(markets)
         if split == 'forward':
             if (not registration or registration.get('config') != cfg.to_dict()
-                    or registration.get('source_sha256') != source_hash()):
+                    or not source_compatible(registration.get('source_sha256'))):
                 raise ValueError('Forward replay requires matching code/config registered before collection began.')
         allowed = list(markets) if split in ('all', 'forward') else groups[split]
         replay = Replay(cfg, set(allowed))
@@ -147,8 +175,9 @@ def backtest(path, output, cfg=None, split='train', unlock_holdout=False, end_id
         days = {days_by_market[t] for t in allowed}
         for account in report['accounts'].values():
             account['uncertainty'] = daily_interval(account, days)
+        report_source = registration.get('source_sha256') if split == 'forward' else source_hash()
         report['manifest'] = {
-            'created_ns': time.time_ns(), 'code_revision': code_revision(), 'source_sha256': source_hash(),
+            'created_ns': time.time_ns(), 'code_revision': code_revision(), 'source_sha256': report_source,
             'data': {'last_event_id': end, 'sha256_chain': digest},
             'config': cfg.to_dict(), 'config_sha256': hashlib.sha256(canonical(cfg.to_dict())).hexdigest(),
             'split': split, 'partitions': groups, 'holdout_disclosed': split in ('holdout', 'all'),

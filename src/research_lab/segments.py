@@ -14,7 +14,7 @@ from pathlib import Path
 
 from .checkpoint import decode, encode
 from .engine import Replay
-from .research import LIMITATIONS, render_report, source_hash, write_json
+from .research import LIMITATIONS, render_report, source_compatible, source_hash, write_json
 from .settings import Experiment
 from .storage import Event, Store, canonical
 
@@ -210,13 +210,15 @@ def _process_one(root, bucket):
         dataset = cat.execute("SELECT value FROM settings WHERE key='dataset'").fetchone()[0]
         checkpoint = root / 'checkpoint.json'
         replay, next_segment = Replay(), 0
+        registered_source = source_hash()
         if checkpoint.exists():
             envelope = json.loads(checkpoint.read_text())
             data = envelope['data']
             if hashlib.sha256(canonical(data)).hexdigest() != envelope['sha256']:
                 raise ValueError('Checkpoint checksum mismatch')
-            if data['source'] != source_hash() or data['dataset'] != dataset:
+            if not source_compatible(data['source']) or data['dataset'] != dataset:
                 raise ValueError('Checkpoint source/dataset mismatch')
+            registered_source = data['source']
             replay, next_segment = decode(data['replay']), data['next_segment']
             if replay.cfg.to_dict() != Experiment().to_dict():
                 raise ValueError('Checkpoint experiment mismatch')
@@ -240,7 +242,8 @@ def _process_one(root, bucket):
                         raise ValueError('Segment hash mismatch')
                     if e.id == 1:
                         if row['id'] == 0:
-                            if (e.kind != 'experiment_registration' or e.payload.get('source_sha256') != source_hash()
+                            registered_source = e.payload.get('source_sha256')
+                            if (e.kind != 'experiment_registration' or not source_compatible(registered_source)
                                     or e.payload.get('config') != replay.cfg.to_dict()):
                                 raise ValueError('Missing matching forward registration')
                         elif (e.kind != 'segment_start' or e.payload.get('dataset') != dataset
@@ -253,14 +256,15 @@ def _process_one(root, bucket):
                 raise ValueError('Sealed prefix mismatch')
         finally:
             store.close()
-        data = {'source': source_hash(), 'dataset': dataset, 'next_segment': row['id'] + 1,
+        data = {'source': registered_source, 'dataset': dataset, 'next_segment': row['id'] + 1,
                 'last_digest': digest, 'replay': encode(replay)}
         if len(canonical(data)) > 50_000_000:
             raise ValueError('Checkpoint capacity reached')
         if next_segment == row['id']:
             durable_json(checkpoint, {'data': data, 'sha256': hashlib.sha256(canonical(data)).hexdigest()})
         report = replay.results()
-        report['manifest'] = {'config': replay.cfg.to_dict(), 'split': 'forward', 'source_sha256': source_hash(),
+        report['manifest'] = {'config': replay.cfg.to_dict(), 'split': 'forward',
+                              'source_sha256': registered_source,
                               'dataset': dataset, 'last_segment': row['id'], 'last_digest': digest,
                               'limitations': LIMITATIONS, 'incremental': True,
                               'selection_warning': 'Fixed prospective settings; no holdout claim or parameter tuning.'}
