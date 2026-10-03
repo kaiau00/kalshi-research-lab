@@ -30,7 +30,7 @@ def create_app(record=True):
         nonlocal runner, task, candidate, candidate_task, parameter, parameter_task
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1':
-                runner = Runner()
+                runner = Runner(production_state_provider=lambda: application.state.research_recorder.state)
                 task = asyncio.create_task(runner.run())
             if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') == '1':
                 candidate = CandidateRunner()

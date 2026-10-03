@@ -105,6 +105,7 @@ def create_app(record=True):
         timer = None
         if record:
             recorder = Recorder(db_path())
+            app.state.research_recorder = recorder
             worker = asyncio.create_task(recorder.run())
             timer = asyncio.create_task(periodic())
         try:

@@ -42,6 +42,14 @@ def main():
     restore = sub.add_parser('restore-segments', help='Restore verified sealed archives to a new SQLite file')
     restore.add_argument('--root', type=Path, required=True)
     restore.add_argument('--output', type=Path, required=True)
+    audit_demo = sub.add_parser(
+        'audit-demo-production',
+        help='Match settled demo fills to the independent production-data adaptive replay',
+    )
+    audit_demo.add_argument('--demo-db', type=Path, required=True)
+    audit_demo.add_argument('--pre-checkpoint', type=Path, required=True)
+    audit_demo.add_argument('--candidate-checkpoint', type=Path, required=True)
+    audit_demo.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -58,6 +66,11 @@ def main():
         elif args.command == 'restore-segments':
             from .segments import restore
             print(json.dumps(restore(args.root, args.output)))
+        elif args.command == 'audit-demo-production':
+            from demo_execution.production_audit import compare_checkpoints
+            report = compare_checkpoints(args.demo_db, args.pre_checkpoint,
+                                         args.candidate_checkpoint, args.output)
+            print(json.dumps(report['summary'], indent=2))
         elif args.command == 'backtest':
             from .research import backtest
             cfg = Experiment(**json.loads(args.config.read_text())) if args.config else Experiment()

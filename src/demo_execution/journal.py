@@ -33,6 +33,10 @@ class Journal:
                 variant TEXT NOT NULL, ticker TEXT NOT NULL, created_ns INTEGER NOT NULL,
                 decision TEXT NOT NULL, PRIMARY KEY (variant, ticker)
             );
+            CREATE TABLE IF NOT EXISTS production_audits (
+                client_id TEXT NOT NULL, stage TEXT NOT NULL, captured_ns INTEGER NOT NULL,
+                snapshot TEXT NOT NULL, PRIMARY KEY (client_id, stage)
+            );
         ''')
 
     def register(self, config, identity, strategy='basic_fair_value', revision=None):
@@ -103,6 +107,26 @@ class Journal:
                 'counts': {name: len(self.shadow_rows(name)) for name in variants},
                 'recent': [{**r, 'decision': json.loads(r['decision'])}
                            for r in self.shadow_rows()[-10:]]}
+
+    def production_audit(self, client_id, stage, snapshot):
+        if stage not in ('signal', 'arrival'):
+            raise ValueError('Unknown production audit stage')
+        result = self.db.execute('INSERT OR IGNORE INTO production_audits VALUES (?,?,?,?)',
+                                 (client_id, stage, time.time_ns(), dumps(snapshot)))
+        self.db.commit()
+        return result.rowcount == 1
+
+    def production_audit_summary(self):
+        counts = {row[0]: row[1] for row in self.db.execute(
+            'SELECT stage,COUNT(*) FROM production_audits GROUP BY stage')}
+        latest = self.db.execute(
+            'SELECT client_id,stage,captured_ns,snapshot FROM production_audits '
+            'ORDER BY captured_ns DESC LIMIT 2').fetchall()
+        return {
+            'counts': counts,
+            'latest': [{'client_id': row[0], 'stage': row[1], 'captured_ns': row[2],
+                        'snapshot': json.loads(row[3])} for row in latest],
+        }
 
     def rows(self, ticker=None):
         return [dict(r) for r in self.db.execute(

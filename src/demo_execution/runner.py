@@ -23,6 +23,7 @@ from research_lab.settings import Experiment
 
 from .client import WS, DemoClient
 from .journal import Journal, dumps
+from .production_audit import production_snapshot
 from .recording import DemoRecording, archive_one
 
 RISK_PER_MARKET = Decimal('3.00')
@@ -78,7 +79,7 @@ def order_payload(decision, max_order_cost=Decimal('1.00')):
 
 
 class Runner:
-    def __init__(self, root=None):
+    def __init__(self, root=None, production_state_provider=None):
         self.strategy = os.environ.get('LAB_DEMO_STRATEGY', DEFAULT_STRATEGY)
         if self.strategy not in STRATEGIES:
             raise ValueError('Unsupported demo strategy')
@@ -90,6 +91,7 @@ class Runner:
         if not self.starting_cash.is_finite() or self.starting_cash < RISK_PER_MARKET:
             raise ValueError('Invalid demo starting cash')
         self.root = Path(root or os.environ.get('LAB_DEMO_DIR', '/data/demo-fair-value-001'))
+        self.production_state_provider = production_state_provider
         self.root.mkdir(parents=True, exist_ok=True)
         self.lock = (self.root / 'runner.lock').open('a')
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -146,6 +148,25 @@ class Runner:
         self.raw.commit()
         self.state.apply(event)
         return event
+
+    def capture_production_audit(self, client_id, stage, decision):
+        target_ns = int(decision['created_ns'] if stage == 'signal' else decision['arrival_ns'])
+        captured_ns = time.time_ns()
+        try:
+            state = self.production_state_provider() if self.production_state_provider else None
+            snapshot = (production_snapshot(state, decision['ticker'], decision['side'], captured_ns, self.cfg)
+                        if state else {'available': False, 'reason': 'production_state_unavailable',
+                                       'captured_ns': captured_ns, 'ticker': decision['ticker'],
+                                       'side': decision['side']})
+        except Exception as exc:
+            snapshot = {'available': False, 'reason': 'audit_capture_error',
+                        'error': type(exc).__name__, 'captured_ns': captured_ns,
+                        'ticker': decision['ticker'], 'side': decision['side']}
+        snapshot['target_ns'] = target_ns
+        snapshot['capture_delay_ms'] = (captured_ns - target_ns) / 1e6
+        if self.journal.production_audit(client_id, stage, snapshot):
+            self.record('production_audit_snapshot', {'client_id': client_id, 'stage': stage,
+                                                      'snapshot': snapshot})
 
     async def archive_loop(self):
         hot_limit = int(os.environ.get('LAB_DEMO_HOT_MAX_BYTES', '750000000'))
@@ -379,6 +400,7 @@ class Runner:
             if payload is None:
                 continue
             self.journal.intent(payload, decision)
+            self.capture_production_audit(payload['client_order_id'], 'signal', decision)
             self.record('demo_order_intent', {'payload': payload, 'decision': json.loads(dumps(decision))})
             started = time.time_ns()
             try:
@@ -394,6 +416,10 @@ class Runner:
             except httpx.RequestError as exc:
                 self.journal.error(payload['client_order_id'], type(exc).__name__)
             await self.reconcile()
+            delay = (int(decision['arrival_ns']) - time.time_ns()) / 1e9
+            if delay > 0:
+                await asyncio.sleep(delay)
+            self.capture_production_audit(payload['client_order_id'], 'arrival', decision)
 
     def snapshot(self):
         rows = self.journal.rows()
@@ -411,6 +437,7 @@ class Runner:
                                     'legacy_single_file_preserved': (self.root / 'events.sqlite3').exists()}
         if self.shadow_configs:
             self.status['shadow'] = self.journal.shadow_summary(self.shadow_configs)
+        self.status['production_audit'] = self.journal.production_audit_summary()
         path = self.root / 'status.tmp'
         path.write_text(dumps(self.status))
         os.replace(path, self.root / 'status.json')
