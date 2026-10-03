@@ -185,3 +185,10 @@ The report evaluates only 500 ms arrival snapshots that qualify in production, h
 for the proposed integer size and later receive an official result. It places no order and does not change
 Candidate Study 003, the active strategy, its signals or its actual sizing. Earlier observations without an
 exact snapshot remain excluded.
+
+Source `b631b09` passed all 126 tests and Ruff, and Railway deployment
+`0d516a76-d7e8-43f3-b11b-adadc7329b2f` reached SUCCESS with one running instance. Public health and
+readiness returned 200. Protected status reported `adaptive_volatility`, the unchanged `$3.00` actual cap,
+115 fills and settlements, +$32.997000 demo P&L, zero unresolved orders and an active sizing report with no
+eligible post-deployment settlements yet. Candidate Study 003 remained active and unchanged at four forward
+UTC dates.
