@@ -7,6 +7,8 @@ one-eighth Kelly, one-quarter Kelly and one-half Kelly sizes against the product
 $100 reference bankroll, modeled fees, displayed depth and a hard $3 cap. These are shadow calculations;
 they cannot submit or resize an order. Only officially settled markets with a qualifying production quote
 and enough displayed depth contribute results. Earlier trades are not backfilled with invented quotes.
+The frozen eligibility and review rules are in
+[`RISK_SIZING_AUDIT_001_PROTOCOL.md`](RISK_SIZING_AUDIT_001_PROTOCOL.md).
 
 **October 3 production comparison:** the first 114 settled adaptive demo fills made +$32.7159, but only 14
 had a same-side production replay fill within two seconds. Those close matches contributed +$4.4283 of demo

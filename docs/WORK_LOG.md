@@ -186,6 +186,12 @@ for the proposed integer size and later receive an official result. It places no
 Candidate Study 003, the active strategy, its signals or its actual sizing. Earlier observations without an
 exact snapshot remain excluded.
 
+Preregistered `RISK_SIZING_AUDIT_001_PROTOCOL.md` before the first eligible sizing result settled. Formal
+selection requires at least 20 UTC dates and 50 production-qualified common-depth observations, plus positive
+P&L after fees, positive P&L without the three largest winners, positive one-cent slippage stress, a majority
+of positive days and no more than $15 maximum drawdown. Candidate Study 003 must independently pass before
+any sizing method can advance.
+
 Source `b631b09` passed all 126 tests and Ruff, and Railway deployment
 `0d516a76-d7e8-43f3-b11b-adadc7329b2f` reached SUCCESS with one running instance. Public health and
 readiness returned 200. Protected status reported `adaptive_volatility`, the unchanged `$3.00` actual cap,
