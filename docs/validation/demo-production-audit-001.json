@@ -1,0 +1,5954 @@
+{
+  "comparisons": [
+    {
+      "demo": {
+        "created_ns": 1790695500690566567,
+        "effective_threshold": 83384.355,
+        "fees": "0.020600",
+        "fill_cost": "2.670000",
+        "filled_quantity": "3.00",
+        "limit": "0.8900",
+        "pnl": "0.309400",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-09-29T15:30:11.707219Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP291130-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790698204606394595,
+        "effective_threshold": 82996.915,
+        "fees": "0.087500",
+        "fill_cost": "2.450000",
+        "filled_quantity": "5.00",
+        "limit": "0.4900",
+        "pnl": "-2.537500",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-29T16:15:11.753742Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790698212002882142,
+          "effective_threshold": 82996.915,
+          "fill_price": "0.2700",
+          "filled": 3,
+          "limit": "0.2700",
+          "net_edge": 0.043100453812304595,
+          "probability": 0.3269004538123046,
+          "production_pnl": "2.1486",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 7.396487547
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291215-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790701102659544294,
+        "effective_threshold": 83031.075,
+        "fees": "0.125700",
+        "fill_cost": "2.720000",
+        "filled_quantity": "8.00",
+        "limit": "0.3400",
+        "pnl": "5.154300",
+        "requested_quantity": 8,
+        "result": "yes",
+        "settled_time": "2026-09-29T17:00:11.548939Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP291300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790702700627894237,
+        "effective_threshold": 83110.22499999999,
+        "fees": "0.134800",
+        "fill_cost": "2.790000",
+        "filled_quantity": "9.00",
+        "limit": "0.3100",
+        "pnl": "6.075200",
+        "requested_quantity": 9,
+        "result": "yes",
+        "settled_time": "2026-09-29T17:30:11.329133Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790702711002027753,
+          "effective_threshold": 83110.22499999999,
+          "fill_price": "0.5500",
+          "filled": 1,
+          "limit": "0.5500",
+          "net_edge": 0.04746453937078765,
+          "probability": 0.6148645393707877,
+          "production_pnl": "-0.5674",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 10.374133516
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790708101407257444,
+        "effective_threshold": 83626.595,
+        "fees": "0.067200",
+        "fill_cost": "2.400000",
+        "filled_quantity": "4.00",
+        "limit": "0.6000",
+        "pnl": "1.532800",
+        "requested_quantity": 4,
+        "result": "no",
+        "settled_time": "2026-09-29T19:00:10.220096Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790708165001187322,
+          "effective_threshold": 83626.595,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.8100",
+          "net_edge": 0.053622190593519026,
+          "probability": 0.874422190593519,
+          "production_pnl": "0.1983",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 63.593929878
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790708165001187322,
+          "effective_threshold": 83626.595,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.8100",
+          "net_edge": 0.053622190593519026,
+          "probability": 0.874422190593519,
+          "production_pnl": "0.1983",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 63.593929878
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790708165001187322,
+          "effective_threshold": 83626.595,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.8100",
+          "net_edge": 0.053622190593519026,
+          "probability": 0.874422190593519,
+          "production_pnl": "0.1983",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 63.593929878
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291500-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790709000778285071,
+        "effective_threshold": 83603.75499999999,
+        "fees": "0.145600",
+        "fill_cost": "2.600000",
+        "filled_quantity": "13.00",
+        "limit": "0.2000",
+        "pnl": "10.254400",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-09-29T19:15:11.22101Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790709000074443941,
+          "effective_threshold": 83603.75499999999,
+          "fill_price": "0.7000",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.09259343158766853,
+          "probability": 0.8170934315876686,
+          "production_pnl": "-0.7147",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.70384113
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291515-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790710006055140631,
+        "effective_threshold": 83568.295,
+        "fees": "0.067800",
+        "fill_cost": "2.360000",
+        "filled_quantity": "4.00",
+        "limit": "0.5900",
+        "pnl": "1.572200",
+        "requested_quantity": 4,
+        "result": "no",
+        "settled_time": "2026-09-29T19:30:11.219357Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790709946000033180,
+          "effective_threshold": 83568.295,
+          "fill_price": "0.6800",
+          "filled": 1,
+          "limit": "0.7000",
+          "net_edge": 0.07825041252494291,
+          "probability": 0.7929504125249429,
+          "production_pnl": "-0.6953",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -60.055107451
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291530-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790710805840093101,
+        "effective_threshold": 83519.14499999999,
+        "fees": "0.087500",
+        "fill_cost": "2.550000",
+        "filled_quantity": "5.00",
+        "limit": "0.5100",
+        "pnl": "2.362500",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-29T19:45:10.218527Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790710805001444648,
+          "effective_threshold": 83519.14499999999,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.4000",
+          "net_edge": 0.06302571602288082,
+          "probability": 0.4798257160228808,
+          "production_pnl": "-0.7727",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.838648453
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291545-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790712600850628767,
+        "effective_threshold": 83558.125,
+        "fees": "0.155000",
+        "fill_cost": "2.700000",
+        "filled_quantity": "15.00",
+        "limit": "0.1800",
+        "pnl": "-2.855000",
+        "requested_quantity": 15,
+        "result": "no",
+        "settled_time": "2026-09-29T20:15:10.839007Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790712604001793997,
+          "effective_threshold": 83558.125,
+          "fill_price": "0.1600",
+          "filled": 5,
+          "limit": "0.1600",
+          "net_edge": 0.05218550007599046,
+          "probability": 0.22168550007599047,
+          "production_pnl": "-0.8471",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 3.15116523
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790712604001793997,
+          "effective_threshold": 83558.125,
+          "fill_price": "0.1600",
+          "filled": 5,
+          "limit": "0.1600",
+          "net_edge": 0.05218550007599046,
+          "probability": 0.22168550007599047,
+          "production_pnl": "-0.8471",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 3.15116523
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790712604001793997,
+          "effective_threshold": 83558.125,
+          "fill_price": "0.1600",
+          "filled": 5,
+          "limit": "0.1600",
+          "net_edge": 0.05218550007599046,
+          "probability": 0.22168550007599047,
+          "production_pnl": "-0.8471",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 3.15116523
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291615-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790713507314009550,
+        "effective_threshold": 83532.065,
+        "fees": "0.022500",
+        "fill_cost": "0.330000",
+        "filled_quantity": "11.00",
+        "limit": "0.0300",
+        "pnl": "-0.352500",
+        "requested_quantity": 93,
+        "result": "yes",
+        "settled_time": "2026-09-29T20:30:10.738578Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790713500024087579,
+          "effective_threshold": 83532.065,
+          "fill_price": "0.8500",
+          "filled": 1,
+          "limit": "0.8500",
+          "net_edge": 0.06824860328037508,
+          "probability": 0.9272486032803751,
+          "production_pnl": "0.1410",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -7.289921971
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291630-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790714586791708447,
+        "effective_threshold": 83606.83499999999,
+        "fees": "0.022200",
+        "fill_cost": "2.640000",
+        "filled_quantity": "3.00",
+        "limit": "0.8800",
+        "pnl": "0.337800",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-29T20:45:10.06868Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790714420022375599,
+          "effective_threshold": 83606.83499999999,
+          "fill_price": "0.5900",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.12299776875248258,
+          "probability": 0.7299977687524826,
+          "production_pnl": "-0.6070",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -166.769332848
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291645-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790715303987551561,
+        "effective_threshold": 83616.775,
+        "fees": "0.087500",
+        "fill_cost": "2.550000",
+        "filled_quantity": "5.00",
+        "limit": "0.5100",
+        "pnl": "-2.637500",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-29T21:00:10.069976Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790715358005072865,
+          "effective_threshold": 83616.775,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.055505796487415604,
+          "probability": 0.7800057964874156,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 54.017521304
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790715358005072865,
+          "effective_threshold": 83616.775,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.055505796487415604,
+          "probability": 0.7800057964874156,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 54.017521304
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790715358005072865,
+          "effective_threshold": 83616.775,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.055505796487415604,
+          "probability": 0.7800057964874156,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 54.017521304
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291700-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790718954139325586,
+        "effective_threshold": 83486.705,
+        "fees": "0.017900",
+        "fill_cost": "1.700000",
+        "filled_quantity": "2.00",
+        "limit": "0.8500",
+        "pnl": "0.282100",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-09-29T22:00:10.193944Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790718909008988627,
+          "effective_threshold": 83486.705,
+          "fill_price": "0.7100",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.040817929752579585,
+          "probability": 0.7653179297525796,
+          "production_pnl": "0.2755",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -45.130336959
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790718909008988627,
+          "effective_threshold": 83486.705,
+          "fill_price": "0.7100",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.040817929752579585,
+          "probability": 0.7653179297525796,
+          "production_pnl": "0.2755",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -45.130336959
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790718909008988627,
+          "effective_threshold": 83486.705,
+          "fill_price": "0.7100",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.040817929752579585,
+          "probability": 0.7653179297525796,
+          "production_pnl": "0.2755",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -45.130336959
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291800-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790726153167740386,
+        "effective_threshold": 83623.325,
+        "fees": "0.087500",
+        "fill_cost": "2.550000",
+        "filled_quantity": "5.00",
+        "limit": "0.5100",
+        "pnl": "2.362500",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-09-30T00:00:13.2252Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790726156001609516,
+          "effective_threshold": 83623.325,
+          "fill_price": "0.3300",
+          "filled": 2,
+          "limit": "0.3300",
+          "net_edge": 0.07113582745943953,
+          "probability": 0.4166358274594395,
+          "production_pnl": "-0.6910",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 2.83386913
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP292000-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790728131045025661,
+        "effective_threshold": 83513.22499999999,
+        "fees": "0.020600",
+        "fill_cost": "2.670000",
+        "filled_quantity": "3.00",
+        "limit": "0.8900",
+        "pnl": "0.309400",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T01:20:48.537826Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790727900013833061,
+          "effective_threshold": 83513.22499999999,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.7900",
+          "net_edge": 0.06872077173181756,
+          "probability": 0.8704207717318175,
+          "production_pnl": "-0.8017",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -231.0311926
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP292030-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790732400730702888,
+        "effective_threshold": 83420.045,
+        "fees": "0.023800",
+        "fill_cost": "2.610000",
+        "filled_quantity": "3.00",
+        "limit": "0.8700",
+        "pnl": "0.366200",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-09-30T01:45:10.238326Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790732410002047453,
+          "effective_threshold": 83420.045,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9230",
+          "net_edge": 0.04121015932868355,
+          "probability": 0.9692101593286836,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 9.271344565
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790732447001065841,
+          "effective_threshold": 83420.045,
+          "fill_price": "0.9450",
+          "filled": 1,
+          "limit": "0.9450",
+          "net_edge": 0.040229103411070555,
+          "probability": 0.9889291034110705,
+          "production_pnl": "0.0513",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 46.270362953
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790732410002047453,
+          "effective_threshold": 83420.045,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9230",
+          "net_edge": 0.04121015932868355,
+          "probability": 0.9692101593286836,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 9.271344565
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26SEP292145-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790733421498343401,
+        "effective_threshold": 83399.78499999999,
+        "fees": "0.012600",
+        "fill_cost": "0.200000",
+        "filled_quantity": "2.00",
+        "limit": "0.1000",
+        "pnl": "1.787400",
+        "requested_quantity": 28,
+        "result": "yes",
+        "settled_time": "2026-09-30T02:00:10.236479Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790733333004084201,
+          "effective_threshold": 83399.78499999999,
+          "fill_price": "0.4600",
+          "filled": 2,
+          "limit": "0.4800",
+          "net_edge": 0.059407373077777825,
+          "probability": 0.5569073730777778,
+          "production_pnl": "-0.9548",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -88.4942592
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": {
+          "created_ns": 1790733302004137685,
+          "effective_threshold": 83399.78499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.5600",
+          "net_edge": 0.04974954303114176,
+          "probability": 0.6270495430311418,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -119.494205716
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP292200-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790736000764834554,
+        "effective_threshold": 83380.965,
+        "fees": "0.038500",
+        "fill_cost": "0.590800",
+        "filled_quantity": "8.44",
+        "limit": "0.0700",
+        "pnl": "-0.629300",
+        "requested_quantity": 40,
+        "result": "no",
+        "settled_time": "2026-09-30T02:45:11.186369Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790736000038868673,
+          "effective_threshold": 83380.965,
+          "fill_price": "0.8100",
+          "filled": 1,
+          "limit": "0.8600",
+          "net_edge": 0.07645782253023903,
+          "probability": 0.9449578225302391,
+          "production_pnl": "0.1792",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.725965881
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP292245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790737809534617636,
+        "effective_threshold": 83334.155,
+        "fees": "0.002300",
+        "fill_cost": "0.072800",
+        "filled_quantity": "0.13",
+        "limit": "0.5600",
+        "pnl": "-0.075100",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-30T03:15:10.768684Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790737807005436138,
+          "effective_threshold": 83334.155,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.3700",
+          "net_edge": 0.08644991198536961,
+          "probability": 0.47284991198536963,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -2.529181498
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP292315-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790738700590840560,
+        "effective_threshold": 83296.47499999999,
+        "fees": "0.172000",
+        "fill_cost": "2.700000",
+        "filled_quantity": "30.00",
+        "limit": "0.0900",
+        "pnl": "-2.872000",
+        "requested_quantity": 31,
+        "result": "no",
+        "settled_time": "2026-09-30T03:30:20.743318Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790738700000075964,
+          "effective_threshold": 83296.47499999999,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7800",
+          "net_edge": 0.05900950747657985,
+          "probability": 0.8511095074765799,
+          "production_pnl": "0.2176",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.590764596
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP292330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790739607552050883,
+        "effective_threshold": 83283.655,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T03:45:10.619321Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790739608030222738,
+          "effective_threshold": 83283.655,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9110",
+          "net_edge": 0.0408814265372629,
+          "probability": 0.9575814265372629,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 0.478171855
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": {
+          "created_ns": 1790739608030222738,
+          "effective_threshold": 83283.655,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9110",
+          "net_edge": 0.0408814265372629,
+          "probability": 0.9575814265372629,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 0.478171855
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP292345-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790750442933466138,
+        "effective_threshold": 83128.905,
+        "fees": "0.020600",
+        "fill_cost": "0.330000",
+        "filled_quantity": "3.00",
+        "limit": "0.1100",
+        "pnl": "-0.350600",
+        "requested_quantity": 25,
+        "result": "no",
+        "settled_time": "2026-09-30T06:45:10.61462Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790750447000292656,
+          "effective_threshold": 83128.905,
+          "fill_price": "0.1300",
+          "filled": 7,
+          "limit": "0.1300",
+          "net_edge": 0.05918786376914276,
+          "probability": 0.19718786376914277,
+          "production_pnl": "-0.9655",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 4.066826518
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790750447000292656,
+          "effective_threshold": 83128.905,
+          "fill_price": "0.1300",
+          "filled": 7,
+          "limit": "0.1300",
+          "net_edge": 0.05918786376914276,
+          "probability": 0.19718786376914277,
+          "production_pnl": "-0.9655",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 4.066826518
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790750447000292656,
+          "effective_threshold": 83128.905,
+          "fill_price": "0.1300",
+          "filled": 7,
+          "limit": "0.1300",
+          "net_edge": 0.05918786376914276,
+          "probability": 0.19718786376914277,
+          "production_pnl": "-0.9655",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 4.066826518
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP300245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790751318940723229,
+        "effective_threshold": 83075.86499999999,
+        "fees": "0.079200",
+        "fill_cost": "1.300000",
+        "filled_quantity": "10.00",
+        "limit": "0.1300",
+        "pnl": "-1.379200",
+        "requested_quantity": 21,
+        "result": "no",
+        "settled_time": "2026-09-30T07:00:11.61809Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790751300060825042,
+          "effective_threshold": 83075.86499999999,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.060543592916277755,
+          "probability": 0.6675435929162777,
+          "production_pnl": "0.4029",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -18.879898187
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP300300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790755169108790214,
+        "effective_threshold": 83383.765,
+        "fees": "0.017500",
+        "fill_cost": "0.470000",
+        "filled_quantity": "1.00",
+        "limit": "0.4700",
+        "pnl": "0.512500",
+        "requested_quantity": 6,
+        "result": "no",
+        "settled_time": "2026-09-30T08:00:10.618778Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790754923000055485,
+          "effective_threshold": 83383.765,
+          "fill_price": "0.2600",
+          "filled": 3,
+          "limit": "0.2600",
+          "net_edge": 0.11252420826706194,
+          "probability": 0.38602420826706196,
+          "production_pnl": "-0.8205",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -246.108734729
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP300400-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790757601454551433,
+        "effective_threshold": 83118.575,
+        "fees": "0.063000",
+        "fill_cost": "1.000000",
+        "filled_quantity": "10.00",
+        "limit": "0.1000",
+        "pnl": "-1.063000",
+        "requested_quantity": 28,
+        "result": "no",
+        "settled_time": "2026-09-30T08:45:10.615187Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790757621000961256,
+          "effective_threshold": 83118.575,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.3400",
+          "net_edge": 0.06982626735761566,
+          "probability": 0.42562626735761566,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 19.546409823
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790757632006035968,
+          "effective_threshold": 83118.575,
+          "fill_price": "0.2600",
+          "filled": 3,
+          "limit": "0.2600",
+          "net_edge": 0.052527399101926275,
+          "probability": 0.3260273991019263,
+          "production_pnl": "-0.8205",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 30.551484535
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790757621000961256,
+          "effective_threshold": 83118.575,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.3400",
+          "net_edge": 0.06982626735761566,
+          "probability": 0.42562626735761566,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 19.546409823
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP300445-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790758689120299816,
+        "effective_threshold": 83036.39499999999,
+        "fees": "0.104900",
+        "fill_cost": "2.880000",
+        "filled_quantity": "6.00",
+        "limit": "0.4800",
+        "pnl": "3.015100",
+        "requested_quantity": 6,
+        "result": "yes",
+        "settled_time": "2026-09-30T09:00:09.620375Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790758569000126735,
+          "effective_threshold": 83036.39499999999,
+          "fill_price": "0.6600",
+          "filled": 1,
+          "limit": "0.6600",
+          "net_edge": 0.05812925005287206,
+          "probability": 0.733929250052872,
+          "production_pnl": "-0.6758",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -120.120173081
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP300500-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790760300867906212,
+        "effective_threshold": 83246.905,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T09:30:10.620253Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP300530-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790767500510834980,
+        "effective_threshold": 83806.515,
+        "fees": "0.087500",
+        "fill_cost": "2.450000",
+        "filled_quantity": "5.00",
+        "limit": "0.4900",
+        "pnl": "2.462500",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-09-30T11:30:10.617838Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP300730-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790781900874676090,
+        "effective_threshold": 83924.595,
+        "fees": "0.020600",
+        "fill_cost": "2.670000",
+        "filled_quantity": "3.00",
+        "limit": "0.8900",
+        "pnl": "0.309400",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-09-30T16:17:08.655125Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790781900004453540,
+          "effective_threshold": 83924.595,
+          "fill_price": "0.0200",
+          "filled": 44,
+          "limit": "0.0210",
+          "net_edge": 0.04637703973900855,
+          "probability": 0.06887703973900855,
+          "production_pnl": "-0.9404",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.87022255
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301130-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790783700512663970,
+        "effective_threshold": 84078.67499999999,
+        "fees": "0.019800",
+        "fill_cost": "0.300000",
+        "filled_quantity": "5.00",
+        "limit": "0.0600",
+        "pnl": "-0.319800",
+        "requested_quantity": 46,
+        "result": "yes",
+        "settled_time": "2026-09-30T16:00:10.785237Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790783705004282770,
+          "effective_threshold": 84078.67499999999,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7400",
+          "net_edge": 0.04140501657194018,
+          "probability": 0.7949050165719401,
+          "production_pnl": "0.2465",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 4.4916188
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301200-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790786626628681749,
+        "effective_threshold": 84260.235,
+        "fees": "0.038400",
+        "fill_cost": "2.280000",
+        "filled_quantity": "3.00",
+        "limit": "0.7600",
+        "pnl": "0.681600",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T16:45:11.221216Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790786459000040805,
+          "effective_threshold": 84260.235,
+          "fill_price": "0.5700",
+          "filled": 1,
+          "limit": "0.6000",
+          "net_edge": 0.04522385142244467,
+          "probability": 0.6620238514224447,
+          "production_pnl": "-0.5872",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -167.628640944
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": {
+          "created_ns": 1790786441004193551,
+          "effective_threshold": 84260.235,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.2700",
+          "net_edge": 0.052050832290401694,
+          "probability": 0.3358508322904017,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -185.624488198
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP301245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790787339884769437,
+        "effective_threshold": 84308.22499999999,
+        "fees": "0.030700",
+        "fill_cost": "0.892500",
+        "filled_quantity": "1.75",
+        "limit": "0.5100",
+        "pnl": "-0.923200",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-30T17:00:10.214159Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790787325000006203,
+          "effective_threshold": 84308.22499999999,
+          "fill_price": "0.4500",
+          "filled": 2,
+          "limit": "0.4500",
+          "net_edge": 0.04367977716039989,
+          "probability": 0.5110797771603999,
+          "production_pnl": "1.0653",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -14.884763234
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790790003803315859,
+        "effective_threshold": 84153.435,
+        "fees": "0.003400",
+        "fill_cost": "0.950000",
+        "filled_quantity": "1.00",
+        "limit": "0.9500",
+        "pnl": "0.046600",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-09-30T17:45:11.860485Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP301345-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790790934392319813,
+        "effective_threshold": 83975.805,
+        "fees": "0.033600",
+        "fill_cost": "1.200000",
+        "filled_quantity": "2.00",
+        "limit": "0.6000",
+        "pnl": "-1.233600",
+        "requested_quantity": 4,
+        "result": "yes",
+        "settled_time": "2026-09-30T18:00:10.348281Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790790952010228496,
+          "effective_threshold": 83975.805,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4700",
+          "net_edge": 0.1526521066281213,
+          "probability": 0.6401521066281213,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 17.617908683
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790790963000038818,
+          "effective_threshold": 83975.805,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.4100",
+          "net_edge": 0.05745272268327578,
+          "probability": 0.48445272268327577,
+          "production_pnl": "-0.7727",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 28.607719005
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790790952010228496,
+          "effective_threshold": 83975.805,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4700",
+          "net_edge": 0.1526521066281213,
+          "probability": 0.6401521066281213,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 17.617908683
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP301400-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790791823874115193,
+        "effective_threshold": 84009.305,
+        "fees": "0.069300",
+        "fill_cost": "2.200000",
+        "filled_quantity": "4.00",
+        "limit": "0.5500",
+        "pnl": "-2.269300",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-30T18:15:11.905529Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790791801000836957,
+          "effective_threshold": 84009.305,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4700",
+          "net_edge": 0.08065958104010168,
+          "probability": 0.5681595810401017,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -22.873278236
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790791849003456507,
+          "effective_threshold": 84009.305,
+          "fill_price": "0.4800",
+          "filled": 2,
+          "limit": "0.4800",
+          "net_edge": 0.09465564433744017,
+          "probability": 0.5921556443374402,
+          "production_pnl": "-0.9950",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 25.129341314
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790791801000836957,
+          "effective_threshold": 84009.305,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4700",
+          "net_edge": 0.08065958104010168,
+          "probability": 0.5681595810401017,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -22.873278236
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP301415-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790794520864413016,
+        "effective_threshold": 83837.44499999999,
+        "fees": "0.010800",
+        "fill_cost": "0.810000",
+        "filled_quantity": "1.00",
+        "limit": "0.8100",
+        "pnl": "0.179200",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T19:00:11.201721Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP301500-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790796331434392842,
+        "effective_threshold": 83728.92499999999,
+        "fees": "0.150900",
+        "fill_cost": "2.660000",
+        "filled_quantity": "14.00",
+        "limit": "0.1900",
+        "pnl": "-2.810900",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-09-30T19:30:11.897714Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790796317000371430,
+          "effective_threshold": 83728.92499999999,
+          "fill_price": "0.8600",
+          "filled": 1,
+          "limit": "0.8600",
+          "net_edge": 0.06067886500151687,
+          "probability": 0.9291788650015169,
+          "production_pnl": "0.1315",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -14.434021412
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301530-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790797262447184932,
+        "effective_threshold": 83725.03499999999,
+        "fees": "0.002700",
+        "fill_cost": "0.040000",
+        "filled_quantity": "1.00",
+        "limit": "0.0400",
+        "pnl": "-0.042700",
+        "requested_quantity": 70,
+        "result": "yes",
+        "settled_time": "2026-09-30T19:45:10.978729Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790797226002255681,
+          "effective_threshold": 83725.03499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.0510",
+          "net_edge": 0.042551289664165,
+          "probability": 0.096951289664165,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -36.444929251
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": {
+          "created_ns": 1790797226002255681,
+          "effective_threshold": 83725.03499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.0510",
+          "net_edge": 0.042551289664165,
+          "probability": 0.096951289664165,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -36.444929251
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301545-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790799245344701210,
+        "effective_threshold": 83567.105,
+        "fees": "0.012400",
+        "fill_cost": "0.770000",
+        "filled_quantity": "1.00",
+        "limit": "0.7700",
+        "pnl": "0.217600",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-09-30T20:15:10.811204Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790799050001234272,
+          "effective_threshold": 83567.105,
+          "fill_price": "0.4000",
+          "filled": 2,
+          "limit": "0.4000",
+          "net_edge": 0.07132478820384108,
+          "probability": 0.4881247882038411,
+          "production_pnl": "-0.8336",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -195.343466938
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP301615-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790800800804906184,
+        "effective_threshold": 83703.305,
+        "fees": "0.062900",
+        "fill_cost": "0.987300",
+        "filled_quantity": "10.97",
+        "limit": "0.0900",
+        "pnl": "-1.050200",
+        "requested_quantity": 31,
+        "result": "no",
+        "settled_time": "2026-09-30T20:45:13.95417Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790800800007521953,
+          "effective_threshold": 83703.305,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3000",
+          "net_edge": 0.07545150800412637,
+          "probability": 0.39015150800412635,
+          "production_pnl": "-0.9441",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.797384231
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790800800007521953,
+          "effective_threshold": 83703.305,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3000",
+          "net_edge": 0.07545150800412637,
+          "probability": 0.39015150800412635,
+          "production_pnl": "-0.9441",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.797384231
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790800800007521953,
+          "effective_threshold": 83703.305,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3000",
+          "net_edge": 0.07545150800412637,
+          "probability": 0.39015150800412635,
+          "production_pnl": "-0.9441",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.797384231
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301645-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790801700567410392,
+        "effective_threshold": 83645.495,
+        "fees": "0.070000",
+        "fill_cost": "2.000000",
+        "filled_quantity": "4.00",
+        "limit": "0.5000",
+        "pnl": "-2.070000",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-30T21:00:12.059746Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790801701010296115,
+          "effective_threshold": 83645.495,
+          "fill_price": "0.5900",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.04820829475611865,
+          "probability": 0.6552082947561186,
+          "production_pnl": "-0.6070",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.442885723
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790801701010296115,
+          "effective_threshold": 83645.495,
+          "fill_price": "0.5900",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.04820829475611865,
+          "probability": 0.6552082947561186,
+          "production_pnl": "-0.6070",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.442885723
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790801701010296115,
+          "effective_threshold": 83645.495,
+          "fill_price": "0.5900",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.04820829475611865,
+          "probability": 0.6552082947561186,
+          "production_pnl": "-0.6070",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.442885723
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP301700-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790817904971455970,
+        "effective_threshold": 83554.455,
+        "fees": "0.010600",
+        "fill_cost": "1.258400",
+        "filled_quantity": "1.43",
+        "limit": "0.8800",
+        "pnl": "0.161000",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-01T01:30:11.295947Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP302130-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790818805923478341,
+        "effective_threshold": 83587.915,
+        "fees": "0.008400",
+        "fill_cost": "0.125000",
+        "filled_quantity": "2.50",
+        "limit": "0.0500",
+        "pnl": "-0.133400",
+        "requested_quantity": 56,
+        "result": "no",
+        "settled_time": "2026-10-01T01:45:10.886302Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790818866052674435,
+          "effective_threshold": 83587.915,
+          "fill_price": "0.0970",
+          "filled": 4,
+          "limit": "0.1200",
+          "net_edge": 0.047345626074880964,
+          "probability": 0.17474562607488098,
+          "production_pnl": "-0.4126",
+          "side": "yes",
+          "status": "partial_ioc",
+          "time_difference_seconds": 60.129196094
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790818866052674435,
+          "effective_threshold": 83587.915,
+          "fill_price": "0.0970",
+          "filled": 4,
+          "limit": "0.1200",
+          "net_edge": 0.047345626074880964,
+          "probability": 0.17474562607488098,
+          "production_pnl": "-0.4126",
+          "side": "yes",
+          "status": "partial_ioc",
+          "time_difference_seconds": 60.129196094
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790818866052674435,
+          "effective_threshold": 83587.915,
+          "fill_price": "0.0970",
+          "filled": 4,
+          "limit": "0.1200",
+          "net_edge": 0.047345626074880964,
+          "probability": 0.17474562607488098,
+          "production_pnl": "-0.4126",
+          "side": "yes",
+          "status": "partial_ioc",
+          "time_difference_seconds": 60.129196094
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP302145-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790819766147859162,
+        "effective_threshold": 83546.415,
+        "fees": "0.005100",
+        "fill_cost": "0.074800",
+        "filled_quantity": "1.87",
+        "limit": "0.0400",
+        "pnl": "-0.079900",
+        "requested_quantity": 70,
+        "result": "no",
+        "settled_time": "2026-10-01T02:00:12.883612Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790819701003332746,
+          "effective_threshold": 83546.415,
+          "fill_price": "0.0860",
+          "filled": 10,
+          "limit": "0.0870",
+          "net_edge": 0.05575814764628852,
+          "probability": 0.14835814764628852,
+          "production_pnl": "-0.9151",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -65.144526416
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790819701003332746,
+          "effective_threshold": 83546.415,
+          "fill_price": "0.0860",
+          "filled": 10,
+          "limit": "0.0870",
+          "net_edge": 0.05575814764628852,
+          "probability": 0.14835814764628852,
+          "production_pnl": "-0.9151",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -65.144526416
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790819701003332746,
+          "effective_threshold": 83546.415,
+          "fill_price": "0.0860",
+          "filled": 10,
+          "limit": "0.0870",
+          "net_edge": 0.05575814764628852,
+          "probability": 0.14835814764628852,
+          "production_pnl": "-0.9151",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -65.144526416
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP302200-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790820606765546898,
+        "effective_threshold": 83463.28499999999,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-01T02:15:10.882327Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26SEP302215-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790824315882671316,
+        "effective_threshold": 83447.465,
+        "fees": "0.115500",
+        "fill_cost": "2.660000",
+        "filled_quantity": "7.00",
+        "limit": "0.3800",
+        "pnl": "4.224500",
+        "requested_quantity": 7,
+        "result": "no",
+        "settled_time": "2026-10-01T03:15:10.884719Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP302315-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790825326393226599,
+        "effective_threshold": 83430.78499999999,
+        "fees": "0.039400",
+        "fill_cost": "2.250000",
+        "filled_quantity": "3.00",
+        "limit": "0.7500",
+        "pnl": "0.710600",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-01T03:30:10.885531Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790825110005196670,
+          "effective_threshold": 83430.78499999999,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.7900",
+          "net_edge": 0.056449035404511516,
+          "probability": 0.8581490354045115,
+          "production_pnl": "-0.8017",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -216.388029929
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP302330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790826905755075809,
+        "effective_threshold": 83663.765,
+        "fees": "0.011800",
+        "fill_cost": "0.495000",
+        "filled_quantity": "0.75",
+        "limit": "0.6600",
+        "pnl": "0.243200",
+        "requested_quantity": 4,
+        "result": "yes",
+        "settled_time": "2026-10-01T04:00:10.143569Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790826908000190161,
+          "effective_threshold": 83663.765,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.13886325442255787,
+          "probability": 0.7458632544225579,
+          "production_pnl": "0.4029",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 2.245114352
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790826908000190161,
+          "effective_threshold": 83663.765,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.13886325442255787,
+          "probability": 0.7458632544225579,
+          "production_pnl": "0.4029",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 2.245114352
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790826908000190161,
+          "effective_threshold": 83663.765,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5900",
+          "net_edge": 0.13886325442255787,
+          "probability": 0.7458632544225579,
+          "production_pnl": "0.4029",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 2.245114352
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010000-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790828704600752175,
+        "effective_threshold": 83860.655,
+        "fees": "0.034900",
+        "fill_cost": "2.370000",
+        "filled_quantity": "3.00",
+        "limit": "0.7900",
+        "pnl": "0.595100",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-01T04:30:10.142639Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26OCT010030-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790833200676517968,
+        "effective_threshold": 84230.325,
+        "fees": "0.010600",
+        "fill_cost": "0.202800",
+        "filled_quantity": "0.78",
+        "limit": "0.2600",
+        "pnl": "0.566600",
+        "requested_quantity": 10,
+        "result": "no",
+        "settled_time": "2026-10-01T05:45:10.142392Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790833202000008585,
+          "effective_threshold": 84230.325,
+          "fill_price": "0.3100",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.06312362370713137,
+          "probability": 0.39842362370713136,
+          "production_pnl": "1.3500",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 1.323490617
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790833202000008585,
+          "effective_threshold": 84230.325,
+          "fill_price": "0.3100",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.06312362370713137,
+          "probability": 0.39842362370713136,
+          "production_pnl": "1.3500",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 1.323490617
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790833202000008585,
+          "effective_threshold": 84230.325,
+          "fill_price": "0.3100",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.06312362370713137,
+          "probability": 0.39842362370713136,
+          "production_pnl": "1.3500",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 1.323490617
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010145-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790835109257145881,
+        "effective_threshold": 84234.415,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-01T06:15:10.141231Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790835027003669156,
+          "effective_threshold": 84234.415,
+          "fill_price": "0.7200",
+          "filled": 1,
+          "limit": "0.7200",
+          "net_edge": 0.04305511684522534,
+          "probability": 0.7772551168452253,
+          "production_pnl": "0.2658",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -82.253476725
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790835027003669156,
+          "effective_threshold": 84234.415,
+          "fill_price": "0.7200",
+          "filled": 1,
+          "limit": "0.7200",
+          "net_edge": 0.04305511684522534,
+          "probability": 0.7772551168452253,
+          "production_pnl": "0.2658",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -82.253476725
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790835027003669156,
+          "effective_threshold": 84234.415,
+          "fill_price": "0.7200",
+          "filled": 1,
+          "limit": "0.7200",
+          "net_edge": 0.04305511684522534,
+          "probability": 0.7772551168452253,
+          "production_pnl": "0.2658",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -82.253476725
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010215-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790850379906991056,
+        "effective_threshold": 83658.595,
+        "fees": "0.026300",
+        "fill_cost": "0.500000",
+        "filled_quantity": "2.00",
+        "limit": "0.2500",
+        "pnl": "-0.526300",
+        "requested_quantity": 11,
+        "result": "no",
+        "settled_time": "2026-10-01T10:30:11.072554Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790850332002530025,
+          "effective_threshold": 83658.595,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.0764749487888472,
+          "probability": 0.4117749487888472,
+          "production_pnl": "-0.6705",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -47.904461031
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790850332002530025,
+          "effective_threshold": 83658.595,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.0764749487888472,
+          "probability": 0.4117749487888472,
+          "production_pnl": "-0.6705",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -47.904461031
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790850332002530025,
+          "effective_threshold": 83658.595,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.0764749487888472,
+          "probability": 0.4117749487888472,
+          "production_pnl": "-0.6705",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -47.904461031
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010630-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790853008580790246,
+        "effective_threshold": 83936.715,
+        "fees": "0.013700",
+        "fill_cost": "2.790000",
+        "filled_quantity": "3.00",
+        "limit": "0.9300",
+        "pnl": "0.196300",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-01T11:15:11.025373Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790853011001116188,
+          "effective_threshold": 83936.715,
+          "fill_price": "0.9310",
+          "filled": 1,
+          "limit": "0.9350",
+          "net_edge": 0.04166591263239705,
+          "probability": 0.9809659126323971,
+          "production_pnl": "0.0645",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 2.420325942
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790853011001116188,
+          "effective_threshold": 83936.715,
+          "fill_price": "0.9310",
+          "filled": 1,
+          "limit": "0.9350",
+          "net_edge": 0.04166591263239705,
+          "probability": 0.9809659126323971,
+          "production_pnl": "0.0645",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 2.420325942
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790853011001116188,
+          "effective_threshold": 83936.715,
+          "fill_price": "0.9310",
+          "filled": 1,
+          "limit": "0.9350",
+          "net_edge": 0.04166591263239705,
+          "probability": 0.9809659126323971,
+          "production_pnl": "0.0645",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 2.420325942
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT010715-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790855835550487614,
+        "effective_threshold": 83928.485,
+        "fees": "0.037200",
+        "fill_cost": "2.310000",
+        "filled_quantity": "3.00",
+        "limit": "0.7700",
+        "pnl": "-2.347200",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-01T12:00:10.074012Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790855709002718590,
+          "effective_threshold": 83928.485,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5800",
+          "net_edge": 0.08771874607727592,
+          "probability": 0.6848187460772759,
+          "production_pnl": "-0.5971",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -126.547769024
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790855709002718590,
+          "effective_threshold": 83928.485,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5800",
+          "net_edge": 0.08771874607727592,
+          "probability": 0.6848187460772759,
+          "production_pnl": "-0.5971",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -126.547769024
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790855709002718590,
+          "effective_threshold": 83928.485,
+          "fill_price": "0.5800",
+          "filled": 1,
+          "limit": "0.5800",
+          "net_edge": 0.08771874607727592,
+          "probability": 0.6848187460772759,
+          "production_pnl": "-0.5971",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -126.547769024
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010800-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790858400565876942,
+        "effective_threshold": 83902.39499999999,
+        "fees": "0.008400",
+        "fill_cost": "0.240000",
+        "filled_quantity": "0.48",
+        "limit": "0.5000",
+        "pnl": "-0.248400",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-10-01T12:45:11.083186Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790858402001143261,
+          "effective_threshold": 83902.39499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7500",
+          "net_edge": 0.04831166789481389,
+          "probability": 0.8115116678948139,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 1.435266319
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790858412001728414,
+          "effective_threshold": 83902.39499999999,
+          "fill_price": "0.8100",
+          "filled": 1,
+          "limit": "0.8100",
+          "net_edge": 0.04932107221578996,
+          "probability": 0.8701210722157899,
+          "production_pnl": "-0.8208",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 11.435851472
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790858402001143261,
+          "effective_threshold": 83902.39499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7500",
+          "net_edge": 0.04831166789481389,
+          "probability": 0.8115116678948139,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 1.435266319
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT010845-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790861195701957911,
+        "effective_threshold": 83495.405,
+        "fees": "0.057700",
+        "fill_cost": "2.840000",
+        "filled_quantity": "4.00",
+        "limit": "0.7100",
+        "pnl": "1.102300",
+        "requested_quantity": 4,
+        "result": "no",
+        "settled_time": "2026-10-01T13:30:11.025877Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790861127000745495,
+          "effective_threshold": 83495.405,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4300",
+          "net_edge": 0.08635533122993772,
+          "probability": 0.5335553312299377,
+          "production_pnl": "1.1461",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -68.701212416
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790861127000745495,
+          "effective_threshold": 83495.405,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4300",
+          "net_edge": 0.08635533122993772,
+          "probability": 0.5335553312299377,
+          "production_pnl": "1.1461",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -68.701212416
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790861127000745495,
+          "effective_threshold": 83495.405,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4300",
+          "net_edge": 0.08635533122993772,
+          "probability": 0.5335553312299377,
+          "production_pnl": "1.1461",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -68.701212416
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT010930-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790862916357230138,
+        "effective_threshold": 83888.11499999999,
+        "fees": "0.085800",
+        "fill_cost": "2.850000",
+        "filled_quantity": "5.00",
+        "limit": "0.5700",
+        "pnl": "2.064200",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-10-01T14:00:12.073246Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790862901002174529,
+          "effective_threshold": 83888.11499999999,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.3700",
+          "net_edge": 0.084833769895927,
+          "probability": 0.471233769895927,
+          "production_pnl": "-0.7727",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -15.355055609
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT011000-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790863800627063641,
+        "effective_threshold": 83888.89499999999,
+        "fees": "0.014700",
+        "fill_cost": "0.300000",
+        "filled_quantity": "1.00",
+        "limit": "0.3000",
+        "pnl": "-0.314700",
+        "requested_quantity": 9,
+        "result": "no",
+        "settled_time": "2026-10-01T14:15:10.076243Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790863873000708720,
+          "effective_threshold": 83888.89499999999,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.04377313994549964,
+          "probability": 0.3790731399454996,
+          "production_pnl": "1.3295",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 72.373645079
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT011015-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790865752279340864,
+        "effective_threshold": 84108.67499999999,
+        "fees": "0.023800",
+        "fill_cost": "2.610000",
+        "filled_quantity": "3.00",
+        "limit": "0.8700",
+        "pnl": "0.366200",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-01T14:45:10.07386Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790865601003051301,
+          "effective_threshold": 84108.67499999999,
+          "fill_price": "0.2700",
+          "filled": 3,
+          "limit": "0.2800",
+          "net_edge": 0.04461257344777925,
+          "probability": 0.33881257344777926,
+          "production_pnl": "2.1486",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -151.276289563
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790865601003051301,
+          "effective_threshold": 84108.67499999999,
+          "fill_price": "0.2700",
+          "filled": 3,
+          "limit": "0.2800",
+          "net_edge": 0.04461257344777925,
+          "probability": 0.33881257344777926,
+          "production_pnl": "2.1486",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -151.276289563
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790865601003051301,
+          "effective_threshold": 84108.67499999999,
+          "fill_price": "0.2700",
+          "filled": 3,
+          "limit": "0.2800",
+          "net_edge": 0.04461257344777925,
+          "probability": 0.33881257344777926,
+          "production_pnl": "2.1486",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -151.276289563
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT011045-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790867446134938017,
+        "effective_threshold": 83980.205,
+        "fees": "0.006700",
+        "fill_cost": "0.119700",
+        "filled_quantity": "0.57",
+        "limit": "0.2100",
+        "pnl": "0.443600",
+        "requested_quantity": 13,
+        "result": "yes",
+        "settled_time": "2026-10-01T15:15:11.022441Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790867439001635752,
+          "effective_threshold": 83980.205,
+          "fill_price": "0.7300",
+          "filled": 1,
+          "limit": "0.7300",
+          "net_edge": 0.04890597738853519,
+          "probability": 0.7927059773885352,
+          "production_pnl": "-0.7438",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -7.133302265
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT011115-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790959265272409825,
+        "effective_threshold": 85181.705,
+        "fees": "0.004900",
+        "fill_cost": "0.074900",
+        "filled_quantity": "1.07",
+        "limit": "0.0700",
+        "pnl": "-0.079800",
+        "requested_quantity": 40,
+        "result": "no",
+        "settled_time": "2026-10-02T16:45:10.908127Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790959383000184766,
+          "effective_threshold": 85181.705,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.8600",
+          "net_edge": 0.09801995505501282,
+          "probability": 0.9665199550550129,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 117.727774941
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790959404003125915,
+          "effective_threshold": 85181.705,
+          "fill_price": "0.0560",
+          "filled": 15,
+          "limit": "0.0590",
+          "net_edge": 0.08796971977106184,
+          "probability": 0.15086971977106184,
+          "production_pnl": "-0.8956",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 138.73071609
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790959394000489254,
+          "effective_threshold": 85181.705,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.0880",
+          "net_edge": 0.08023139212653058,
+          "probability": 0.17393139212653058,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 128.728079429
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT021245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790960101585090197,
+        "effective_threshold": 85156.36499999999,
+        "fees": "0.104900",
+        "fill_cost": "2.880000",
+        "filled_quantity": "6.00",
+        "limit": "0.4800",
+        "pnl": "3.015100",
+        "requested_quantity": 6,
+        "result": "no",
+        "settled_time": "2026-10-02T17:00:11.90766Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790961068957376789,
+        "effective_threshold": 85128.17499999999,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-02T17:15:11.58958Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790961004003105804,
+          "effective_threshold": 85128.17499999999,
+          "fill_price": "0.7000",
+          "filled": 1,
+          "limit": "0.7000",
+          "net_edge": 0.044129118376841414,
+          "probability": 0.7588291183768414,
+          "production_pnl": "0.2853",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -64.954270985
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790961004003105804,
+          "effective_threshold": 85128.17499999999,
+          "fill_price": "0.7000",
+          "filled": 1,
+          "limit": "0.7000",
+          "net_edge": 0.044129118376841414,
+          "probability": 0.7588291183768414,
+          "production_pnl": "0.2853",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -64.954270985
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790961004003105804,
+          "effective_threshold": 85128.17499999999,
+          "fill_price": "0.7000",
+          "filled": 1,
+          "limit": "0.7000",
+          "net_edge": 0.044129118376841414,
+          "probability": 0.7588291183768414,
+          "production_pnl": "0.2853",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -64.954270985
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021315-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790961900949032257,
+        "effective_threshold": 84953.295,
+        "fees": "0.001400",
+        "fill_cost": "0.020400",
+        "filled_quantity": "1.02",
+        "limit": "0.0200",
+        "pnl": "-0.021800",
+        "requested_quantity": 140,
+        "result": "no",
+        "settled_time": "2026-10-02T17:30:10.59228Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790961900000421927,
+          "effective_threshold": 84953.295,
+          "fill_price": "0.0330",
+          "filled": 20,
+          "limit": "0.0450",
+          "net_edge": 0.08947117626336995,
+          "probability": 0.13757117626336995,
+          "production_pnl": "-0.7047",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.94861033
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790961900000421927,
+          "effective_threshold": 84953.295,
+          "fill_price": "0.0330",
+          "filled": 20,
+          "limit": "0.0450",
+          "net_edge": 0.08947117626336995,
+          "probability": 0.13757117626336995,
+          "production_pnl": "-0.7047",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.94861033
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790961900000421927,
+          "effective_threshold": 84953.295,
+          "fill_price": "0.0330",
+          "filled": 20,
+          "limit": "0.0450",
+          "net_edge": 0.08947117626336995,
+          "probability": 0.13757117626336995,
+          "production_pnl": "-0.7047",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.94861033
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790963700505810053,
+        "effective_threshold": 84596.135,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-02T18:00:11.58784Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790963700003787632,
+          "effective_threshold": 84596.135,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9370",
+          "net_edge": 0.04963603001256556,
+          "probability": 0.9908360300125656,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -0.502022421
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790963722022979131,
+          "effective_threshold": 84596.135,
+          "fill_price": "0.9300",
+          "filled": 1,
+          "limit": "0.9310",
+          "net_edge": 0.043943309409514186,
+          "probability": 0.9794433094095142,
+          "production_pnl": "0.0654",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 21.517169078
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790963700003787632,
+          "effective_threshold": 84596.135,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9370",
+          "net_edge": 0.04963603001256556,
+          "probability": 0.9908360300125656,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -0.502022421
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT021400-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790964601031094669,
+        "effective_threshold": 84787.325,
+        "fees": "0.058800",
+        "fill_cost": "1.200000",
+        "filled_quantity": "4.00",
+        "limit": "0.3000",
+        "pnl": "-1.258800",
+        "requested_quantity": 9,
+        "result": "yes",
+        "settled_time": "2026-10-02T18:15:11.586877Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790964635001631789,
+          "effective_threshold": 84787.325,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.3700",
+          "net_edge": 0.04931545580001956,
+          "probability": 0.4357154558000196,
+          "production_pnl": "-0.7727",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 33.97053712
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790964635001631789,
+          "effective_threshold": 84787.325,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.3700",
+          "net_edge": 0.04931545580001956,
+          "probability": 0.4357154558000196,
+          "production_pnl": "-0.7727",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 33.97053712
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790964635001631789,
+          "effective_threshold": 84787.325,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.3700",
+          "net_edge": 0.04931545580001956,
+          "probability": 0.4357154558000196,
+          "production_pnl": "-0.7727",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 33.97053712
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021415-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790966434898942727,
+        "effective_threshold": 84596.565,
+        "fees": "0.002100",
+        "fill_cost": "0.030000",
+        "filled_quantity": "1.00",
+        "limit": "0.0300",
+        "pnl": "-0.032100",
+        "requested_quantity": 93,
+        "result": "no",
+        "settled_time": "2026-10-02T18:45:10.588769Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790966413002972849,
+          "effective_threshold": 84596.565,
+          "fill_price": "0.0100",
+          "filled": 93,
+          "limit": "0.0100",
+          "net_edge": 0.040971657614911935,
+          "probability": 0.05167165761491194,
+          "production_pnl": "-0.9945",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -21.895969878
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790966413002972849,
+          "effective_threshold": 84596.565,
+          "fill_price": "0.0100",
+          "filled": 93,
+          "limit": "0.0100",
+          "net_edge": 0.040971657614911935,
+          "probability": 0.05167165761491194,
+          "production_pnl": "-0.9945",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -21.895969878
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790966413002972849,
+          "effective_threshold": 84596.565,
+          "fill_price": "0.0100",
+          "filled": 93,
+          "limit": "0.0100",
+          "net_edge": 0.040971657614911935,
+          "probability": 0.05167165761491194,
+          "production_pnl": "-0.9945",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -21.895969878
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021445-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790970001158653556,
+        "effective_threshold": 84124.89499999999,
+        "fees": "0.031000",
+        "fill_cost": "2.460000",
+        "filled_quantity": "3.00",
+        "limit": "0.8200",
+        "pnl": "0.509000",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-02T19:45:10.570574Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790970000019439352,
+          "effective_threshold": 84124.89499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.8600",
+          "net_edge": 0.040158512476090036,
+          "probability": 0.9086585124760901,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -1.139214204
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790970027110860001,
+          "effective_threshold": 84124.89499999999,
+          "fill_price": "0.8900",
+          "filled": 1,
+          "limit": "0.8900",
+          "net_edge": 0.04037380647041966,
+          "probability": 0.9372738064704197,
+          "production_pnl": "0.1031",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 25.952206445
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790970000019439352,
+          "effective_threshold": 84124.89499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.8600",
+          "net_edge": 0.040158512476090036,
+          "probability": 0.9086585124760901,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -1.139214204
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT021545-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790970900963725529,
+        "effective_threshold": 84153.265,
+        "fees": "0.103400",
+        "fill_cost": "1.800000",
+        "filled_quantity": "10.00",
+        "limit": "0.1800",
+        "pnl": "-1.903400",
+        "requested_quantity": 15,
+        "result": "yes",
+        "settled_time": "2026-10-02T20:00:12.622204Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790970905000156647,
+          "effective_threshold": 84153.265,
+          "fill_price": "0.1900",
+          "filled": 4,
+          "limit": "0.1900",
+          "net_edge": 0.04270348640448404,
+          "probability": 0.24350348640448405,
+          "production_pnl": "-0.8031",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 4.036431118
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790970905000156647,
+          "effective_threshold": 84153.265,
+          "fill_price": "0.1900",
+          "filled": 4,
+          "limit": "0.1900",
+          "net_edge": 0.04270348640448404,
+          "probability": 0.24350348640448405,
+          "production_pnl": "-0.8031",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 4.036431118
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790970905000156647,
+          "effective_threshold": 84153.265,
+          "fill_price": "0.1900",
+          "filled": 4,
+          "limit": "0.1900",
+          "net_edge": 0.04270348640448404,
+          "probability": 0.24350348640448405,
+          "production_pnl": "-0.8031",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 4.036431118
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021600-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790971803486351288,
+        "effective_threshold": 84282.625,
+        "fees": "0.042200",
+        "fill_cost": "0.700000",
+        "filled_quantity": "5.00",
+        "limit": "0.1400",
+        "pnl": "-0.742200",
+        "requested_quantity": 20,
+        "result": "yes",
+        "settled_time": "2026-10-02T20:15:10.574281Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790971822001375882,
+          "effective_threshold": 84282.625,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.1400",
+          "net_edge": 0.04089190848042454,
+          "probability": 0.18939190848042453,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 18.515024594
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790971860005698225,
+          "effective_threshold": 84282.625,
+          "fill_price": "0.0670",
+          "filled": 13,
+          "limit": "0.0710",
+          "net_edge": 0.04418041961602169,
+          "probability": 0.1198804196160217,
+          "production_pnl": "-0.9279",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 56.519346937
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790971822001375882,
+          "effective_threshold": 84282.625,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.1400",
+          "net_edge": 0.04089190848042454,
+          "probability": 0.18939190848042453,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 18.515024594
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT021615-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790972886668886448,
+        "effective_threshold": 84364.155,
+        "fees": "0.013200",
+        "fill_cost": "0.250000",
+        "filled_quantity": "1.00",
+        "limit": "0.2500",
+        "pnl": "0.736800",
+        "requested_quantity": 11,
+        "result": "no",
+        "settled_time": "2026-10-02T20:30:11.56981Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790972713001816039,
+          "effective_threshold": 84364.155,
+          "fill_price": "0.0570",
+          "filled": 16,
+          "limit": "0.0570",
+          "net_edge": 0.045875075070280956,
+          "probability": 0.10667507507028096,
+          "production_pnl": "15.0277",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -173.667070409
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790972713001816039,
+          "effective_threshold": 84364.155,
+          "fill_price": "0.0570",
+          "filled": 16,
+          "limit": "0.0570",
+          "net_edge": 0.045875075070280956,
+          "probability": 0.10667507507028096,
+          "production_pnl": "15.0277",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -173.667070409
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790972713001816039,
+          "effective_threshold": 84364.155,
+          "fill_price": "0.0570",
+          "filled": 16,
+          "limit": "0.0570",
+          "net_edge": 0.045875075070280956,
+          "probability": 0.10667507507028096,
+          "production_pnl": "15.0277",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -173.667070409
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021630-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790975400733442410,
+        "effective_threshold": 84445.845,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-02T21:15:17.637409Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790975400004404769,
+          "effective_threshold": 84445.845,
+          "fill_price": "0.8500",
+          "filled": 1,
+          "limit": "0.8500",
+          "net_edge": 0.10662548095204549,
+          "probability": 0.9656254809520455,
+          "production_pnl": "0.1410",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.729037641
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790975400004404769,
+          "effective_threshold": 84445.845,
+          "fill_price": "0.8500",
+          "filled": 1,
+          "limit": "0.8500",
+          "net_edge": 0.10662548095204549,
+          "probability": 0.9656254809520455,
+          "production_pnl": "0.1410",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.729037641
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790975400004404769,
+          "effective_threshold": 84445.845,
+          "fill_price": "0.8500",
+          "filled": 1,
+          "limit": "0.8500",
+          "net_edge": 0.10662548095204549,
+          "probability": 0.9656254809520455,
+          "production_pnl": "0.1410",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.729037641
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021715-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790978106244242691,
+        "effective_threshold": 84503.875,
+        "fees": "0.047200",
+        "fill_cost": "1.020000",
+        "filled_quantity": "3.00",
+        "limit": "0.3400",
+        "pnl": "-1.067200",
+        "requested_quantity": 8,
+        "result": "yes",
+        "settled_time": "2026-10-02T22:00:11.199407Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790978100004312670,
+          "effective_threshold": 84503.875,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4100",
+          "net_edge": 0.0890560485550887,
+          "probability": 0.5160560485550887,
+          "production_pnl": "-0.8539",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -6.239930021
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790978100004312670,
+          "effective_threshold": 84503.875,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4100",
+          "net_edge": 0.0890560485550887,
+          "probability": 0.5160560485550887,
+          "production_pnl": "-0.8539",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -6.239930021
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790978100004312670,
+          "effective_threshold": 84503.875,
+          "fill_price": "0.4100",
+          "filled": 2,
+          "limit": "0.4100",
+          "net_edge": 0.0890560485550887,
+          "probability": 0.5160560485550887,
+          "production_pnl": "-0.8539",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -6.239930021
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021800-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790979001613343906,
+        "effective_threshold": 84509.605,
+        "fees": "0.049600",
+        "fill_cost": "2.442400",
+        "filled_quantity": "3.44",
+        "limit": "0.7100",
+        "pnl": "-2.492000",
+        "requested_quantity": 4,
+        "result": "yes",
+        "settled_time": "2026-10-02T22:15:10.200914Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790979000003610376,
+          "effective_threshold": 84509.605,
+          "fill_price": "0.7500",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.1493164064589806,
+          "probability": 0.9125164064589806,
+          "production_pnl": "-0.7632",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.60973353
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790979000003610376,
+          "effective_threshold": 84509.605,
+          "fill_price": "0.7500",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.1493164064589806,
+          "probability": 0.9125164064589806,
+          "production_pnl": "-0.7632",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.60973353
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790979000003610376,
+          "effective_threshold": 84509.605,
+          "fill_price": "0.7500",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.1493164064589806,
+          "probability": 0.9125164064589806,
+          "production_pnl": "-0.7632",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.60973353
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021815-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790979905136536529,
+        "effective_threshold": 84515.135,
+        "fees": "0.036100",
+        "fill_cost": "2.340000",
+        "filled_quantity": "3.00",
+        "limit": "0.7800",
+        "pnl": "-2.376100",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-02T22:30:10.198673Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790979900005229236,
+          "effective_threshold": 84515.135,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.6900",
+          "net_edge": 0.11516423911298646,
+          "probability": 0.8201642391129864,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -5.131307293
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790979900005229236,
+          "effective_threshold": 84515.135,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.6900",
+          "net_edge": 0.11516423911298646,
+          "probability": 0.8201642391129864,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -5.131307293
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790979900005229236,
+          "effective_threshold": 84515.135,
+          "fill_price": "0.6900",
+          "filled": 1,
+          "limit": "0.6900",
+          "net_edge": 0.11516423911298646,
+          "probability": 0.8201642391129864,
+          "production_pnl": "-0.7050",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -5.131307293
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021830-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790980804355469213,
+        "effective_threshold": 84503.135,
+        "fees": "0.070000",
+        "fill_cost": "2.000000",
+        "filled_quantity": "4.00",
+        "limit": "0.5000",
+        "pnl": "1.930000",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-10-02T22:45:11.204849Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790980800001035834,
+          "effective_threshold": 84503.135,
+          "fill_price": "0.2900",
+          "filled": 3,
+          "limit": "0.2900",
+          "net_edge": 0.21541252647948927,
+          "probability": 0.5199125264794893,
+          "production_pnl": "-0.9133",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -4.354433379
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021845-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790981743801285872,
+        "effective_threshold": 84498.485,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-02T23:00:10.198554Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790981700107218944,
+          "effective_threshold": 84498.485,
+          "fill_price": "0.7600",
+          "filled": 1,
+          "limit": "0.7600",
+          "net_edge": 0.09225756477739877,
+          "probability": 0.8650575647773988,
+          "production_pnl": "0.2272",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -43.694066928
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790981700107218944,
+          "effective_threshold": 84498.485,
+          "fill_price": "0.7600",
+          "filled": 1,
+          "limit": "0.7600",
+          "net_edge": 0.09225756477739877,
+          "probability": 0.8650575647773988,
+          "production_pnl": "0.2272",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -43.694066928
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790981700107218944,
+          "effective_threshold": 84498.485,
+          "fill_price": "0.7600",
+          "filled": 1,
+          "limit": "0.7600",
+          "net_edge": 0.09225756477739877,
+          "probability": 0.8650575647773988,
+          "production_pnl": "0.2272",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -43.694066928
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021900-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790983659398375861,
+        "effective_threshold": 84479.00499999999,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-02T23:30:10.198441Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790983544014517289,
+          "effective_threshold": 84479.00499999999,
+          "fill_price": "0.8300",
+          "filled": 1,
+          "limit": "0.8300",
+          "net_edge": 0.07158363621866082,
+          "probability": 0.9114836362186608,
+          "production_pnl": "0.1601",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -115.383858572
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790983544014517289,
+          "effective_threshold": 84479.00499999999,
+          "fill_price": "0.8300",
+          "filled": 1,
+          "limit": "0.8300",
+          "net_edge": 0.07158363621866082,
+          "probability": 0.9114836362186608,
+          "production_pnl": "0.1601",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -115.383858572
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790983544014517289,
+          "effective_threshold": 84479.00499999999,
+          "fill_price": "0.8300",
+          "filled": 1,
+          "limit": "0.8300",
+          "net_edge": 0.07158363621866082,
+          "probability": 0.9114836362186608,
+          "production_pnl": "0.1601",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -115.383858572
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021930-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790984459873175254,
+        "effective_threshold": 84545.765,
+        "fees": "0.004900",
+        "fill_cost": "0.074900",
+        "filled_quantity": "1.07",
+        "limit": "0.0700",
+        "pnl": "-0.079800",
+        "requested_quantity": 40,
+        "result": "no",
+        "settled_time": "2026-10-02T23:45:10.200834Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790984400006344820,
+          "effective_threshold": 84545.765,
+          "fill_price": "0.8500",
+          "filled": 1,
+          "limit": "0.8500",
+          "net_edge": 0.08928823181473966,
+          "probability": 0.9482882318147396,
+          "production_pnl": "0.1410",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -59.866830434
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021945-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790986216099331756,
+        "effective_threshold": 84503.955,
+        "fees": "0.000100",
+        "fill_cost": "0.000600",
+        "filled_quantity": "0.02",
+        "limit": "0.0300",
+        "pnl": "-0.000700",
+        "requested_quantity": 93,
+        "result": "no",
+        "settled_time": "2026-10-03T00:15:10.697347Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790986200025360375,
+          "effective_threshold": 84503.955,
+          "fill_price": "0.9350",
+          "filled": 1,
+          "limit": "0.9350",
+          "net_edge": 0.059699999999999975,
+          "probability": 0.999,
+          "production_pnl": "0.0607",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -16.073971381
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022015-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790987101103487491,
+        "effective_threshold": 84497.765,
+        "fees": "0.026800",
+        "fill_cost": "2.550000",
+        "filled_quantity": "3.00",
+        "limit": "0.8500",
+        "pnl": "0.423200",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T00:30:10.694863Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790987100018997706,
+          "effective_threshold": 84497.765,
+          "fill_price": "0.8000",
+          "filled": 1,
+          "limit": "0.8000",
+          "net_edge": 0.12503250066988048,
+          "probability": 0.9362325006698805,
+          "production_pnl": "0.1888",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.084489785
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790987100018997706,
+          "effective_threshold": 84497.765,
+          "fill_price": "0.8000",
+          "filled": 1,
+          "limit": "0.8000",
+          "net_edge": 0.12503250066988048,
+          "probability": 0.9362325006698805,
+          "production_pnl": "0.1888",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.084489785
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790987100018997706,
+          "effective_threshold": 84497.765,
+          "fill_price": "0.8000",
+          "filled": 1,
+          "limit": "0.8000",
+          "net_edge": 0.12503250066988048,
+          "probability": 0.9362325006698805,
+          "production_pnl": "0.1888",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.084489785
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022030-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790990057477742289,
+        "effective_threshold": 84643.385,
+        "fees": "0.137200",
+        "fill_cost": "2.000000",
+        "filled_quantity": "100.00",
+        "limit": "0.0200",
+        "pnl": "-2.137200",
+        "requested_quantity": 140,
+        "result": "no",
+        "settled_time": "2026-10-03T01:15:11.696301Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790989823003599977,
+          "effective_threshold": 84643.385,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.04403302445174995,
+          "probability": 0.8264330244517499,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -234.474142312
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790989823003599977,
+          "effective_threshold": 84643.385,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.04403302445174995,
+          "probability": 0.8264330244517499,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -234.474142312
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790989823003599977,
+          "effective_threshold": 84643.385,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.04403302445174995,
+          "probability": 0.8264330244517499,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -234.474142312
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022115-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790990700596900251,
+        "effective_threshold": 84634.22499999999,
+        "fees": "0.013300",
+        "fill_cost": "0.233700",
+        "filled_quantity": "1.23",
+        "limit": "0.1900",
+        "pnl": "-0.247000",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-10-03T01:30:10.697043Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790990787006554542,
+          "effective_threshold": 84634.22499999999,
+          "fill_price": "0.8800",
+          "filled": 1,
+          "limit": "0.8800",
+          "net_edge": 0.04139315501456653,
+          "probability": 0.9287931550145665,
+          "production_pnl": "0.1126",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 86.409654291
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022130-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790992560765228550,
+        "effective_threshold": 84621.595,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "-2.718900",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T02:00:11.696117Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790992500005621302,
+          "effective_threshold": 84621.595,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.17483863759468432,
+          "probability": 0.9380386375946843,
+          "production_pnl": "-0.7535",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -60.759607248
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790992500005621302,
+          "effective_threshold": 84621.595,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.17483863759468432,
+          "probability": 0.9380386375946843,
+          "production_pnl": "-0.7535",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -60.759607248
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790992500005621302,
+          "effective_threshold": 84621.595,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7500",
+          "net_edge": 0.17483863759468432,
+          "probability": 0.9380386375946843,
+          "production_pnl": "-0.7535",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -60.759607248
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022200-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790995200537229618,
+        "effective_threshold": 84642.17499999999,
+        "fees": "0.036400",
+        "fill_cost": "1.081600",
+        "filled_quantity": "2.08",
+        "limit": "0.5200",
+        "pnl": "0.962000",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-10-03T02:45:22.698306Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790995243001001327,
+          "effective_threshold": 84642.17499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7300",
+          "net_edge": 0.06929899615693613,
+          "probability": 0.8130989961569361,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 42.463771709
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790995263002805020,
+          "effective_threshold": 84642.17499999999,
+          "fill_price": "0.7900",
+          "filled": 1,
+          "limit": "0.7900",
+          "net_edge": 0.09665929511055582,
+          "probability": 0.8983592951105558,
+          "production_pnl": "0.1983",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 62.465575402
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790995243001001327,
+          "effective_threshold": 84642.17499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7300",
+          "net_edge": 0.06929899615693613,
+          "probability": 0.8130989961569361,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 42.463771709
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT022245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1790996109628260195,
+        "effective_threshold": 84665.215,
+        "fees": "0.013700",
+        "fill_cost": "2.790000",
+        "filled_quantity": "3.00",
+        "limit": "0.9300",
+        "pnl": "0.196300",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T03:00:10.695673Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790996100028916766,
+          "effective_threshold": 84665.215,
+          "fill_price": "0.9320",
+          "filled": 1,
+          "limit": "0.9320",
+          "net_edge": 0.0551146058584141,
+          "probability": 0.9916146058584141,
+          "production_pnl": "0.0635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -9.599343429
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790996100028916766,
+          "effective_threshold": 84665.215,
+          "fill_price": "0.9320",
+          "filled": 1,
+          "limit": "0.9320",
+          "net_edge": 0.0551146058584141,
+          "probability": 0.9916146058584141,
+          "production_pnl": "0.0635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -9.599343429
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790996100028916766,
+          "effective_threshold": 84665.215,
+          "fill_price": "0.9320",
+          "filled": 1,
+          "limit": "0.9320",
+          "net_edge": 0.0551146058584141,
+          "probability": 0.9916146058584141,
+          "production_pnl": "0.0635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -9.599343429
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT022300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790999701208694748,
+        "effective_threshold": 84634.805,
+        "fees": "0.036100",
+        "fill_cost": "2.340000",
+        "filled_quantity": "3.00",
+        "limit": "0.7800",
+        "pnl": "0.623900",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T04:00:10.700203Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790999700001511532,
+          "effective_threshold": 84634.805,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.15301798063397298,
+          "probability": 0.935417980633973,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.207183216
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790999700001511532,
+          "effective_threshold": 84634.805,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.15301798063397298,
+          "probability": 0.935417980633973,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.207183216
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790999700001511532,
+          "effective_threshold": 84634.805,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.15301798063397298,
+          "probability": 0.935417980633973,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -1.207183216
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030000-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791000600704773862,
+        "effective_threshold": 84681.455,
+        "fees": "0.039400",
+        "fill_cost": "2.250000",
+        "filled_quantity": "3.00",
+        "limit": "0.7500",
+        "pnl": "0.710600",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T04:15:10.694963Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791000640003298242,
+          "effective_threshold": 84681.455,
+          "fill_price": "0.8700",
+          "filled": 1,
+          "limit": "0.8700",
+          "net_edge": 0.048262908543780125,
+          "probability": 0.9262629085437801,
+          "production_pnl": "0.1220",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 39.29852438
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791000640003298242,
+          "effective_threshold": 84681.455,
+          "fill_price": "0.8700",
+          "filled": 1,
+          "limit": "0.8700",
+          "net_edge": 0.048262908543780125,
+          "probability": 0.9262629085437801,
+          "production_pnl": "0.1220",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 39.29852438
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791000640003298242,
+          "effective_threshold": 84681.455,
+          "fill_price": "0.8700",
+          "filled": 1,
+          "limit": "0.8700",
+          "net_edge": 0.048262908543780125,
+          "probability": 0.9262629085437801,
+          "production_pnl": "0.1220",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 39.29852438
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030015-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791002424862927125,
+        "effective_threshold": 84520.58499999999,
+        "fees": "0.036100",
+        "fill_cost": "2.340000",
+        "filled_quantity": "3.00",
+        "limit": "0.7800",
+        "pnl": "0.623900",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T04:45:10.696501Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791002400002065351,
+          "effective_threshold": 84520.58499999999,
+          "fill_price": "0.1300",
+          "filled": 7,
+          "limit": "0.1300",
+          "net_edge": 0.08318059571777092,
+          "probability": 0.22118059571777093,
+          "production_pnl": "-0.9655",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -24.860861774
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030045-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791003300734564143,
+        "effective_threshold": 84539.705,
+        "fees": "0.018900",
+        "fill_cost": "2.700000",
+        "filled_quantity": "3.00",
+        "limit": "0.9000",
+        "pnl": "0.281100",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T05:00:10.693458Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791003302000140163,
+          "effective_threshold": 84539.705,
+          "fill_price": "0.9000",
+          "filled": 1,
+          "limit": "0.9000",
+          "net_edge": 0.041216654303868894,
+          "probability": 0.9475166543038689,
+          "production_pnl": "0.0937",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 1.26557602
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791003302000140163,
+          "effective_threshold": 84539.705,
+          "fill_price": "0.9000",
+          "filled": 1,
+          "limit": "0.9000",
+          "net_edge": 0.041216654303868894,
+          "probability": 0.9475166543038689,
+          "production_pnl": "0.0937",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 1.26557602
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791003302000140163,
+          "effective_threshold": 84539.705,
+          "fill_price": "0.9000",
+          "filled": 1,
+          "limit": "0.9000",
+          "net_edge": 0.041216654303868894,
+          "probability": 0.9475166543038689,
+          "production_pnl": "0.0937",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 1.26557602
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030100-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791004205307253422,
+        "effective_threshold": 84571.36499999999,
+        "fees": "0.007200",
+        "fill_cost": "0.162800",
+        "filled_quantity": "0.44",
+        "limit": "0.3700",
+        "pnl": "-0.170000",
+        "requested_quantity": 7,
+        "result": "no",
+        "settled_time": "2026-10-03T05:15:10.695767Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791004201000093339,
+          "effective_threshold": 84571.36499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4900",
+          "net_edge": 0.12220847782527255,
+          "probability": 0.6297084778252725,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -4.307160083
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT030115-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791007165389835917,
+        "effective_threshold": 84625.50499999999,
+        "fees": "0.013200",
+        "fill_cost": "0.250000",
+        "filled_quantity": "1.00",
+        "limit": "0.2500",
+        "pnl": "0.736800",
+        "requested_quantity": 11,
+        "result": "no",
+        "settled_time": "2026-10-03T06:00:09.696048Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791006900084102256,
+          "effective_threshold": 84625.50499999999,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3100",
+          "net_edge": 0.08045692633300666,
+          "probability": 0.4054569263330067,
+          "production_pnl": "2.0559",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -265.305733661
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791006900084102256,
+          "effective_threshold": 84625.50499999999,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3100",
+          "net_edge": 0.08045692633300666,
+          "probability": 0.4054569263330067,
+          "production_pnl": "2.0559",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -265.305733661
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791006900084102256,
+          "effective_threshold": 84625.50499999999,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3100",
+          "net_edge": 0.08045692633300666,
+          "probability": 0.4054569263330067,
+          "production_pnl": "2.0559",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -265.305733661
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030200-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791007801012402727,
+        "effective_threshold": 84621.875,
+        "fees": "0.014000",
+        "fill_cost": "0.250000",
+        "filled_quantity": "1.25",
+        "limit": "0.2000",
+        "pnl": "0.986000",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-10-03T06:15:10.697507Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791007801001186356,
+          "effective_threshold": 84621.875,
+          "fill_price": "0.2200",
+          "filled": 4,
+          "limit": "0.2200",
+          "net_edge": 0.09778367993892254,
+          "probability": 0.32988367993892254,
+          "production_pnl": "3.0719",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.011216371
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791007801001186356,
+          "effective_threshold": 84621.875,
+          "fill_price": "0.2200",
+          "filled": 4,
+          "limit": "0.2200",
+          "net_edge": 0.09778367993892254,
+          "probability": 0.32988367993892254,
+          "production_pnl": "3.0719",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.011216371
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791007801001186356,
+          "effective_threshold": 84621.875,
+          "fill_price": "0.2200",
+          "filled": 4,
+          "limit": "0.2200",
+          "net_edge": 0.09778367993892254,
+          "probability": 0.32988367993892254,
+          "production_pnl": "3.0719",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.011216371
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030215-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791008700835921162,
+        "effective_threshold": 84619.875,
+        "fees": "0.058800",
+        "fill_cost": "2.800000",
+        "filled_quantity": "4.00",
+        "limit": "0.7000",
+        "pnl": "1.141200",
+        "requested_quantity": 4,
+        "result": "yes",
+        "settled_time": "2026-10-03T06:30:09.695682Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791008700001796809,
+          "effective_threshold": 84619.875,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7400",
+          "net_edge": 0.07403899945301817,
+          "probability": 0.8275389994530181,
+          "production_pnl": "0.2465",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.834124353
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791008700001796809,
+          "effective_threshold": 84619.875,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7400",
+          "net_edge": 0.07403899945301817,
+          "probability": 0.8275389994530181,
+          "production_pnl": "0.2465",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.834124353
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791008700001796809,
+          "effective_threshold": 84619.875,
+          "fill_price": "0.7400",
+          "filled": 1,
+          "limit": "0.7400",
+          "net_edge": 0.07403899945301817,
+          "probability": 0.8275389994530181,
+          "production_pnl": "0.2465",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.834124353
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030230-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1791009601468708764,
+        "effective_threshold": 84634.86499999999,
+        "fees": "0.085800",
+        "fill_cost": "2.850000",
+        "filled_quantity": "5.00",
+        "limit": "0.5700",
+        "pnl": "2.064200",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-10-03T06:45:09.697868Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791009614002244056,
+          "effective_threshold": 84634.86499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.6100",
+          "net_edge": 0.043828271641488614,
+          "probability": 0.6705282716414886,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_no_integer_depth",
+          "time_difference_seconds": 12.533535292
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791009624006488744,
+          "effective_threshold": 84634.86499999999,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.04640561259270981,
+          "probability": 0.6829056125927098,
+          "production_pnl": "0.3635",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 22.53777998
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791009614002244056,
+          "effective_threshold": 84634.86499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.6100",
+          "net_edge": 0.043828271641488614,
+          "probability": 0.6705282716414886,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_no_integer_depth",
+          "time_difference_seconds": 12.533535292
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030245-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791011420642194235,
+        "effective_threshold": 84559.58499999999,
+        "fees": "0.031000",
+        "fill_cost": "2.460000",
+        "filled_quantity": "3.00",
+        "limit": "0.8200",
+        "pnl": "0.509000",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T07:15:09.694233Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791011400002274156,
+          "effective_threshold": 84559.58499999999,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.07842738725394893,
+          "probability": 0.8608273872539489,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -20.639920079
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791011400002274156,
+          "effective_threshold": 84559.58499999999,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.07842738725394893,
+          "probability": 0.8608273872539489,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -20.639920079
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791011400002274156,
+          "effective_threshold": 84559.58499999999,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.07842738725394893,
+          "probability": 0.8608273872539489,
+          "production_pnl": "0.2176",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -20.639920079
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030315-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791012320661603715,
+        "effective_threshold": 84598.405,
+        "fees": "0.125700",
+        "fill_cost": "2.720000",
+        "filled_quantity": "8.00",
+        "limit": "0.3400",
+        "pnl": "5.154300",
+        "requested_quantity": 8,
+        "result": "yes",
+        "settled_time": "2026-10-03T07:30:09.696054Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791012320001531370,
+          "effective_threshold": 84598.405,
+          "fill_price": "0.4300",
+          "filled": 1,
+          "limit": "0.4900",
+          "net_edge": 0.11482988478945155,
+          "probability": 0.6223298847894515,
+          "production_pnl": "-0.4472",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.660072345
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1791013329577269680,
+        "effective_threshold": 84608.845,
+        "fees": "0.039400",
+        "fill_cost": "2.250000",
+        "filled_quantity": "3.00",
+        "limit": "0.7500",
+        "pnl": "0.710600",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T07:45:09.699699Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791013258000948860,
+          "effective_threshold": 84608.845,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5700",
+          "net_edge": 0.13503486245616958,
+          "probability": 0.7222348624561696,
+          "production_pnl": "-0.5375",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -71.57632082
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030345-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791014101232094869,
+        "effective_threshold": 84570.125,
+        "fees": "0.087000",
+        "fill_cost": "2.700000",
+        "filled_quantity": "5.00",
+        "limit": "0.5400",
+        "pnl": "2.213000",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-10-03T08:00:10.69449Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791014100007957146,
+          "effective_threshold": 84570.125,
+          "fill_price": "0.3000",
+          "filled": 3,
+          "limit": "0.3000",
+          "net_edge": 0.223834325831749,
+          "probability": 0.538534325831749,
+          "production_pnl": "-0.9441",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.224137723
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030400-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791015000774903135,
+        "effective_threshold": 84571.605,
+        "fees": "0.023800",
+        "fill_cost": "2.610000",
+        "filled_quantity": "3.00",
+        "limit": "0.8700",
+        "pnl": "0.366200",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T08:15:09.696466Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": null,
+        "nearest_order": null,
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 0
+      },
+      "ticker": "KXBTC15M-26OCT030415-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791017706172197740,
+        "effective_threshold": 84615.345,
+        "fees": "0.031000",
+        "fill_cost": "2.460000",
+        "filled_quantity": "3.00",
+        "limit": "0.8200",
+        "pnl": "-2.491000",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T09:00:09.69651Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791017700000894603,
+          "effective_threshold": 84615.345,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.06850352202085963,
+          "probability": 0.8509035220208596,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -6.171303137
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791017700000894603,
+          "effective_threshold": 84615.345,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.06850352202085963,
+          "probability": 0.8509035220208596,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -6.171303137
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791017700000894603,
+          "effective_threshold": 84615.345,
+          "fill_price": "0.7700",
+          "filled": 1,
+          "limit": "0.7700",
+          "net_edge": 0.06850352202085963,
+          "probability": 0.8509035220208596,
+          "production_pnl": "-0.7824",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -6.171303137
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030500-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791020401378707183,
+        "effective_threshold": 84585.67499999999,
+        "fees": "0.017200",
+        "fill_cost": "1.361200",
+        "filled_quantity": "1.66",
+        "limit": "0.8200",
+        "pnl": "0.281600",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T09:45:10.696139Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791020400004013423,
+          "effective_threshold": 84585.67499999999,
+          "fill_price": "0.8200",
+          "filled": 1,
+          "limit": "0.8200",
+          "net_edge": 0.10712529420197037,
+          "probability": 0.9375252942019704,
+          "production_pnl": "0.1696",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.37469376
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791020400004013423,
+          "effective_threshold": 84585.67499999999,
+          "fill_price": "0.8200",
+          "filled": 1,
+          "limit": "0.8200",
+          "net_edge": 0.10712529420197037,
+          "probability": 0.9375252942019704,
+          "production_pnl": "0.1696",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.37469376
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791020400004013423,
+          "effective_threshold": 84585.67499999999,
+          "fill_price": "0.8200",
+          "filled": 1,
+          "limit": "0.8200",
+          "net_edge": 0.10712529420197037,
+          "probability": 0.9375252942019704,
+          "production_pnl": "0.1696",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.37469376
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030545-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791021303554877693,
+        "effective_threshold": 84578.44499999999,
+        "fees": "0.094100",
+        "fill_cost": "2.443500",
+        "filled_quantity": "5.43",
+        "limit": "0.4500",
+        "pnl": "2.892400",
+        "requested_quantity": 6,
+        "result": "yes",
+        "settled_time": "2026-10-03T10:00:10.695529Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791021302018566017,
+          "effective_threshold": 84578.44499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4600",
+          "net_edge": 0.07634905991042823,
+          "probability": 0.5537490599104282,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -1.536311676
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030600-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791022201472751719,
+        "effective_threshold": 84584.025,
+        "fees": "0.034700",
+        "fill_cost": "1.100000",
+        "filled_quantity": "2.00",
+        "limit": "0.5500",
+        "pnl": "0.865300",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-10-03T10:15:10.694525Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791022260000072996,
+          "effective_threshold": 84584.025,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.05302070024272976,
+          "probability": 0.6895207002427297,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 58.527321277
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791022260000072996,
+          "effective_threshold": 84584.025,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.05302070024272976,
+          "probability": 0.6895207002427297,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 58.527321277
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791022260000072996,
+          "effective_threshold": 84584.025,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.05302070024272976,
+          "probability": 0.6895207002427297,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 58.527321277
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030615-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791023100633476752,
+        "effective_threshold": 84575.045,
+        "fees": "0.062000",
+        "fill_cost": "2.680000",
+        "filled_quantity": "4.00",
+        "limit": "0.6700",
+        "pnl": "-2.742000",
+        "requested_quantity": 4,
+        "result": "yes",
+        "settled_time": "2026-10-03T10:30:10.698203Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791023100004176494,
+          "effective_threshold": 84575.045,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7000",
+          "net_edge": 0.10213347066356726,
+          "probability": 0.8168334706635673,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -0.629300258
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791023124004195806,
+          "effective_threshold": 84575.045,
+          "fill_price": "0.5000",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.23977684634908647,
+          "probability": 0.7572768463490864,
+          "production_pnl": "-0.5175",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 23.370719054
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791023100004176494,
+          "effective_threshold": 84575.045,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.7000",
+          "net_edge": 0.10213347066356726,
+          "probability": 0.8168334706635673,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -0.629300258
+        },
+        "orders_on_ticker": 3
+      },
+      "ticker": "KXBTC15M-26OCT030630-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1791024002114420486,
+        "effective_threshold": 84597.33499999999,
+        "fees": "0.030100",
+        "fill_cost": "0.752500",
+        "filled_quantity": "1.75",
+        "limit": "0.4300",
+        "pnl": "-0.782600",
+        "requested_quantity": 6,
+        "result": "no",
+        "settled_time": "2026-10-03T10:45:10.694256Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791024011000035277,
+          "effective_threshold": 84597.33499999999,
+          "fill_price": "0.4400",
+          "filled": 2,
+          "limit": "0.4600",
+          "net_edge": 0.047100573056744366,
+          "probability": 0.5245005730567444,
+          "production_pnl": "1.0855",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 8.885614791
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030645-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791025803347022622,
+        "effective_threshold": 84626.78499999999,
+        "fees": "0.015300",
+        "fill_cost": "0.320000",
+        "filled_quantity": "1.00",
+        "limit": "0.3200",
+        "pnl": "0.664700",
+        "requested_quantity": 8,
+        "result": "no",
+        "settled_time": "2026-10-03T11:15:10.697157Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791025801000005138,
+          "effective_threshold": 84626.78499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.5400",
+          "net_edge": 0.14795878613028668,
+          "probability": 0.7053587861302867,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -2.347017484
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791025840002986253,
+          "effective_threshold": 84626.78499999999,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.04398579531103247,
+          "probability": 0.37928579531103246,
+          "production_pnl": "1.3295",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 36.655963631
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791025840002986253,
+          "effective_threshold": 84626.78499999999,
+          "fill_price": "0.3200",
+          "filled": 2,
+          "limit": "0.3200",
+          "net_edge": 0.04398579531103247,
+          "probability": 0.37928579531103246,
+          "production_pnl": "1.3295",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 36.655963631
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030715-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791026700903006747,
+        "effective_threshold": 84621.605,
+        "fees": "0.017100",
+        "fill_cost": "0.580000",
+        "filled_quantity": "1.00",
+        "limit": "0.5800",
+        "pnl": "0.402900",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-10-03T11:30:10.696055Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791026709018199246,
+          "effective_threshold": 84621.605,
+          "fill_price": "0.6400",
+          "filled": 1,
+          "limit": "0.6400",
+          "net_edge": 0.06587456070879882,
+          "probability": 0.7220745607087988,
+          "production_pnl": "0.3438",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 8.115192499
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791026709018199246,
+          "effective_threshold": 84621.605,
+          "fill_price": "0.6400",
+          "filled": 1,
+          "limit": "0.6400",
+          "net_edge": 0.06587456070879882,
+          "probability": 0.7220745607087988,
+          "production_pnl": "0.3438",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 8.115192499
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791026709018199246,
+          "effective_threshold": 84621.605,
+          "fill_price": "0.6400",
+          "filled": 1,
+          "limit": "0.6400",
+          "net_edge": 0.06587456070879882,
+          "probability": 0.7220745607087988,
+          "production_pnl": "0.3438",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 8.115192499
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030730-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1791027662068343357,
+        "effective_threshold": 84634.385,
+        "fees": "0.036100",
+        "fill_cost": "2.340000",
+        "filled_quantity": "3.00",
+        "limit": "0.7800",
+        "pnl": "0.623900",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T11:45:10.693489Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791027600018359855,
+          "effective_threshold": 84634.385,
+          "fill_price": "0.1700",
+          "filled": 5,
+          "limit": "0.1700",
+          "net_edge": 0.042707151630371254,
+          "probability": 0.22260715163037126,
+          "production_pnl": "-0.8994",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -62.049983502
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030745-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791028581792491026,
+        "effective_threshold": 84646.44499999999,
+        "fees": "0.001400",
+        "fill_cost": "0.020400",
+        "filled_quantity": "1.02",
+        "limit": "0.0200",
+        "pnl": "-0.021800",
+        "requested_quantity": 140,
+        "result": "yes",
+        "settled_time": "2026-10-03T12:00:10.695089Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791028581000611656,
+          "effective_threshold": 84646.44499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.8200",
+          "net_edge": 0.16274249615115233,
+          "probability": 0.9931424961511524,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -0.79187937
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791028591007137581,
+          "effective_threshold": 84646.44499999999,
+          "fill_price": "0.1200",
+          "filled": 7,
+          "limit": "0.1200",
+          "net_edge": 0.05423783428988854,
+          "probability": 0.18163783428988856,
+          "production_pnl": "-0.8918",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 9.214646555
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791028591007137581,
+          "effective_threshold": 84646.44499999999,
+          "fill_price": "0.1200",
+          "filled": 7,
+          "limit": "0.1200",
+          "net_edge": 0.05423783428988854,
+          "probability": 0.18163783428988856,
+          "production_pnl": "-0.8918",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 9.214646555
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030800-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791029433008396852,
+        "effective_threshold": 84656.185,
+        "fees": "0.038400",
+        "fill_cost": "2.280000",
+        "filled_quantity": "3.00",
+        "limit": "0.7600",
+        "pnl": "0.681600",
+        "requested_quantity": 3,
+        "result": "yes",
+        "settled_time": "2026-10-03T12:15:10.698708Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791029504000568722,
+          "effective_threshold": 84656.185,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9120",
+          "net_edge": 0.0422473179676075,
+          "probability": 0.9599473179676075,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 70.99217187
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791029515000388331,
+          "effective_threshold": 84656.185,
+          "fill_price": "0.9200",
+          "filled": 1,
+          "limit": "0.9200",
+          "net_edge": 0.04853204108118614,
+          "probability": 0.9737320410811862,
+          "production_pnl": "0.0748",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 81.991991479
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791029504000568722,
+          "effective_threshold": 84656.185,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9120",
+          "net_edge": 0.0422473179676075,
+          "probability": 0.9599473179676075,
+          "production_pnl": null,
+          "side": "yes",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": 70.99217187
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030815-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791031322026840088,
+        "effective_threshold": 84847.03499999999,
+        "fees": "0.022400",
+        "fill_cost": "0.400000",
+        "filled_quantity": "2.00",
+        "limit": "0.2000",
+        "pnl": "-0.422400",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-10-03T12:45:10.697157Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791031200018392739,
+          "effective_threshold": 84847.03499999999,
+          "fill_price": "0.2500",
+          "filled": 3,
+          "limit": "0.2500",
+          "net_edge": 0.10343522081310774,
+          "probability": 0.36663522081310773,
+          "production_pnl": "2.2106",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -122.008447349
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030845-45"
+    },
+    {
+      "demo": {
+        "created_ns": 1791033000947855213,
+        "effective_threshold": 84872.715,
+        "fees": "0.007900",
+        "fill_cost": "0.120000",
+        "filled_quantity": "2.00",
+        "limit": "0.0600",
+        "pnl": "-0.127900",
+        "requested_quantity": 46,
+        "result": "no",
+        "settled_time": "2026-10-03T13:15:10.696006Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791033000000916922,
+          "effective_threshold": 84872.715,
+          "fill_price": "0.7300",
+          "filled": 1,
+          "limit": "0.7300",
+          "net_edge": 0.2552,
+          "probability": 0.999,
+          "production_pnl": "0.2562",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.946938291
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030915-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1791036600933967782,
+        "effective_threshold": 84856.015,
+        "fees": "0.007900",
+        "fill_cost": "1.880000",
+        "filled_quantity": "2.00",
+        "limit": "0.9400",
+        "pnl": "0.112100",
+        "requested_quantity": 3,
+        "result": "no",
+        "settled_time": "2026-10-03T14:15:09.69329Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791036600006664350,
+          "effective_threshold": 84856.015,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9530",
+          "net_edge": 0.04279999999999995,
+          "probability": 0.999,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_no_integer_depth",
+          "time_difference_seconds": -0.927303432
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1791036613017330359,
+          "effective_threshold": 84856.015,
+          "fill_price": "0.9560",
+          "filled": 1,
+          "limit": "0.9560",
+          "net_edge": 0.040000000000000036,
+          "probability": 0.999,
+          "production_pnl": "0.0410",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 12.083362577
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1791036600006664350,
+          "effective_threshold": 84856.015,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.9530",
+          "net_edge": 0.04279999999999995,
+          "probability": 0.999,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_no_integer_depth",
+          "time_difference_seconds": -0.927303432
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT031015-15"
+    }
+  ],
+  "created_ns": 1791038247467796376,
+  "scope": "Retrospective match against independent production-data adaptive replay. A matching production fill means the fixed production replay selected the same side; absence is not reconstructed proof of the exact production quote at the demo timestamp.",
+  "sources": {
+    "candidate_checkpoint": "/data/candidate-studies/003/checkpoint.json",
+    "candidate_last_digest": "28e7dd64eba1ea97346819e45beccacd83318f0bff02b2dae161b723c6d6dc62",
+    "candidate_next_segment": 6055,
+    "pre_checkpoint": "/data/comparisons/v6-002/checkpoint.json",
+    "pre_last_digest": "cf620d41eb95df0912d1a26ec1708d9545a821dbb3a3442647f09bab8055f786",
+    "pre_next_segment": 4345
+  },
+  "summary": {
+    "demo_net_pnl": "32.715900",
+    "demo_pnl_on_within_2_second_matches": "4.428300",
+    "demo_pnl_without_within_2_second_match": "28.287600",
+    "demo_settled_fills": 114,
+    "maximum_effective_threshold_difference": 0.0,
+    "production_replay_pnl_on_within_2_second_matches": "3.4251",
+    "same_side_production_fill_any_time": 64,
+    "same_side_production_fill_within_10_seconds": 25,
+    "same_side_production_fill_within_2_seconds": 14,
+    "same_side_production_fill_within_60_seconds": 46,
+    "same_ticker_production_order": 106,
+    "top_five_demo_wins_within_2_second_match": 0
+  },
+  "top_ten_demo_wins": [
+    {
+      "demo": {
+        "created_ns": 1790709000778285071,
+        "effective_threshold": 83603.75499999999,
+        "fees": "0.145600",
+        "fill_cost": "2.600000",
+        "filled_quantity": "13.00",
+        "limit": "0.2000",
+        "pnl": "10.254400",
+        "requested_quantity": 14,
+        "result": "no",
+        "settled_time": "2026-09-29T19:15:11.22101Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790709000074443941,
+          "effective_threshold": 83603.75499999999,
+          "fill_price": "0.7000",
+          "filled": 1,
+          "limit": "0.7100",
+          "net_edge": 0.09259343158766853,
+          "probability": 0.8170934315876686,
+          "production_pnl": "-0.7147",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.70384113
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291515-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790702700627894237,
+        "effective_threshold": 83110.22499999999,
+        "fees": "0.134800",
+        "fill_cost": "2.790000",
+        "filled_quantity": "9.00",
+        "limit": "0.3100",
+        "pnl": "6.075200",
+        "requested_quantity": 9,
+        "result": "yes",
+        "settled_time": "2026-09-29T17:30:11.329133Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790702711002027753,
+          "effective_threshold": 83110.22499999999,
+          "fill_price": "0.5500",
+          "filled": 1,
+          "limit": "0.5500",
+          "net_edge": 0.04746453937078765,
+          "probability": 0.6148645393707877,
+          "production_pnl": "-0.5674",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": 10.374133516
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790701102659544294,
+        "effective_threshold": 83031.075,
+        "fees": "0.125700",
+        "fill_cost": "2.720000",
+        "filled_quantity": "8.00",
+        "limit": "0.3400",
+        "pnl": "5.154300",
+        "requested_quantity": 8,
+        "result": "yes",
+        "settled_time": "2026-09-29T17:00:11.548939Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790701041012320092,
+          "effective_threshold": 83031.075,
+          "fill_price": "0.0900",
+          "filled": 10,
+          "limit": "0.0900",
+          "net_edge": 0.04548737712928269,
+          "probability": 0.1412873771292827,
+          "production_pnl": "9.0426",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -61.647224202
+        },
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP291300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791012320661603715,
+        "effective_threshold": 84598.405,
+        "fees": "0.125700",
+        "fill_cost": "2.720000",
+        "filled_quantity": "8.00",
+        "limit": "0.3400",
+        "pnl": "5.154300",
+        "requested_quantity": 8,
+        "result": "yes",
+        "settled_time": "2026-10-03T07:30:09.696054Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791012320001531370,
+          "effective_threshold": 84598.405,
+          "fill_price": "0.4300",
+          "filled": 1,
+          "limit": "0.4900",
+          "net_edge": 0.11482988478945155,
+          "probability": 0.6223298847894515,
+          "production_pnl": "-0.4472",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -0.660072345
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT030330-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790824315882671316,
+        "effective_threshold": 83447.465,
+        "fees": "0.115500",
+        "fill_cost": "2.660000",
+        "filled_quantity": "7.00",
+        "limit": "0.3800",
+        "pnl": "4.224500",
+        "requested_quantity": 7,
+        "result": "no",
+        "settled_time": "2026-10-01T03:15:10.884719Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790824206000170792,
+          "effective_threshold": 83447.465,
+          "fill_price": "0.6200",
+          "filled": 1,
+          "limit": "0.6200",
+          "net_edge": 0.11164221877453406,
+          "probability": 0.748142218774534,
+          "production_pnl": "0.3635",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -109.882500524
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP302315-15"
+    },
+    {
+      "demo": {
+        "created_ns": 1790758689120299816,
+        "effective_threshold": 83036.39499999999,
+        "fees": "0.104900",
+        "fill_cost": "2.880000",
+        "filled_quantity": "6.00",
+        "limit": "0.4800",
+        "pnl": "3.015100",
+        "requested_quantity": 6,
+        "result": "yes",
+        "settled_time": "2026-09-30T09:00:09.620375Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790758569000126735,
+          "effective_threshold": 83036.39499999999,
+          "fill_price": "0.6600",
+          "filled": 1,
+          "limit": "0.6600",
+          "net_edge": 0.05812925005287206,
+          "probability": 0.733929250052872,
+          "production_pnl": "-0.6758",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -120.120173081
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26SEP300500-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790960101585090197,
+        "effective_threshold": 85156.36499999999,
+        "fees": "0.104900",
+        "fill_cost": "2.880000",
+        "filled_quantity": "6.00",
+        "limit": "0.4800",
+        "pnl": "3.015100",
+        "requested_quantity": 6,
+        "result": "no",
+        "settled_time": "2026-10-02T17:00:11.90766Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790960100001404034,
+          "effective_threshold": 85156.36499999999,
+          "fill_price": "0.5200",
+          "filled": 1,
+          "limit": "0.5300",
+          "net_edge": 0.04068998341179686,
+          "probability": 0.5881899834117968,
+          "production_pnl": "0.4625",
+          "side": "no",
+          "status": "filled",
+          "time_difference_seconds": -1.583686163
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26OCT021300-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1791021303554877693,
+        "effective_threshold": 84578.44499999999,
+        "fees": "0.094100",
+        "fill_cost": "2.443500",
+        "filled_quantity": "5.43",
+        "limit": "0.4500",
+        "pnl": "2.892400",
+        "requested_quantity": 6,
+        "result": "yes",
+        "settled_time": "2026-10-03T10:00:10.695529Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1791021302018566017,
+          "effective_threshold": 84578.44499999999,
+          "fill_price": null,
+          "filled": null,
+          "limit": "0.4600",
+          "net_edge": 0.07634905991042823,
+          "probability": 0.5537490599104282,
+          "production_pnl": null,
+          "side": "no",
+          "status": "canceled_limit_not_marketable",
+          "time_difference_seconds": -1.536311676
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 2
+      },
+      "ticker": "KXBTC15M-26OCT030600-00"
+    },
+    {
+      "demo": {
+        "created_ns": 1790767500510834980,
+        "effective_threshold": 83806.515,
+        "fees": "0.087500",
+        "fill_cost": "2.450000",
+        "filled_quantity": "5.00",
+        "limit": "0.4900",
+        "pnl": "2.462500",
+        "requested_quantity": 5,
+        "result": "yes",
+        "settled_time": "2026-09-30T11:30:10.617838Z",
+        "side": "yes"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "nearest_same_side_fill": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "nearest_same_side_order": {
+          "created_ns": 1790767501000796353,
+          "effective_threshold": 83806.515,
+          "fill_price": "0.4800",
+          "filled": 1,
+          "limit": "0.5000",
+          "net_edge": 0.1001601317751355,
+          "probability": 0.6176601317751355,
+          "production_pnl": "0.5025",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": 0.489961373
+        },
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP300730-30"
+    },
+    {
+      "demo": {
+        "created_ns": 1790710805840093101,
+        "effective_threshold": 83519.14499999999,
+        "fees": "0.087500",
+        "fill_cost": "2.550000",
+        "filled_quantity": "5.00",
+        "limit": "0.5100",
+        "pnl": "2.362500",
+        "requested_quantity": 5,
+        "result": "no",
+        "settled_time": "2026-09-29T19:45:10.218527Z",
+        "side": "no"
+      },
+      "production": {
+        "effective_threshold_difference": 0.0,
+        "nearest_order": {
+          "created_ns": 1790710805001444648,
+          "effective_threshold": 83519.14499999999,
+          "fill_price": "0.3700",
+          "filled": 2,
+          "limit": "0.4000",
+          "net_edge": 0.06302571602288082,
+          "probability": 0.4798257160228808,
+          "production_pnl": "-0.7727",
+          "side": "yes",
+          "status": "filled",
+          "time_difference_seconds": -0.838648453
+        },
+        "nearest_same_side_fill": null,
+        "nearest_same_side_order": null,
+        "orders_on_ticker": 1
+      },
+      "ticker": "KXBTC15M-26SEP291545-45"
+    }
+  ]
+}

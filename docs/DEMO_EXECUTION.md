@@ -1,5 +1,13 @@
 # Kalshi demo strategy experiments
 
+**October 3 production comparison:** the first 114 settled adaptive demo fills made +$32.7159, but only 14
+had a same-side production replay fill within two seconds. Those close matches contributed +$4.4283 of demo
+P&L and +$3.4251 in the separately sized production replay. None of the five largest demo wins had a close
+same-side production fill. The contract thresholds matched, so the divergence comes from price, quote timing
+or availability rather than different contract terms. New demo orders now save exact production snapshots at
+signal time and after 500 ms without changing strategy execution. See
+[`DEMO_PRODUCTION_AUDIT_001.md`](DEMO_PRODUCTION_AUDIT_001.md).
+
 **September 29, 2026 status:** adaptive-volatility experiment 001 is deployed successfully on Railway as `d0771b3b-a2e4-4384-bb83-3962ac97dc53`, source `4792d34`. The runner is connected to BRTI, discovering BTC `KXBTC15M` Predictions markets, and reports `watching` with a $3 maximum modeled cost per market. Its isolated ledger started at the verified $156.8536 exchange-2 balance. The first order bought three NO contracts at $0.89 with $0.0206 in fees after the model estimated 98.06% NO probability and 8.37 percentage points of net edge. It settled NO for +$0.3094. At the 17:44 UTC follow-up snapshot, the ledger had four fills, four official settlements, +$9.001400 realized P&L, $165.8550 cash and no unresolved orders. A transient demo API HTTP error cleared automatically and the runner returned to `watching`. `/demo` is available with the existing dashboard credentials.
 
 The completed fair-value ledger is frozen under `/data/demo-fair-value-001`: 133 attempts, 132 exchange fills, 132 official settlements, no unresolved orders, and +$32.563000 realized P&L. The tail-underdog ledger is frozen under `/data/demo-tail-underdog-001`: 11 attempts, 10 exchange fills, 10 official settlements, no unresolved orders, and -$0.709400 realized P&L. Its signal-only study recorded five qualifying 135-second signals and six qualifying 180-second signals. These demo-liquidity samples do not establish a profitable real-market edge.
