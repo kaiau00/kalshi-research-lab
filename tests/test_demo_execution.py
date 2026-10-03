@@ -14,6 +14,7 @@ from demo_execution.app import create_app
 from demo_execution.client import BASE, READ_BASES, DemoClient, validate_order
 from demo_execution.journal import Journal
 from demo_execution.runner import CONFIG_REVISION, Runner, market_close_timestamp, order_payload, parse_book
+from demo_execution.sizing import sizing_plan, summarize_sizing
 
 
 def pem():
@@ -63,6 +64,45 @@ def test_sizing_retains_configured_limit_with_conservative_fee_reserve(price):
         validate_order(p, cap)
         qty = int(p['count'])
         assert qty * price + entry_fee(price, qty, Experiment()) <= cap
+
+
+def test_shadow_kelly_uses_calibrated_probability_and_three_dollar_cap():
+    from research_lab.settings import Experiment
+
+    plan = sizing_plan("yes", .60, Decimal(".50"), Decimal("100"), Experiment())
+    assert plan["execution"] == "shadow_only_no_order"
+    assert Decimal(plan["maximum_risk_per_market"]) == Decimal("3.00")
+    assert Decimal(plan["variants"]["fixed_3"]["modeled_cost"]) <= Decimal("3.00")
+    assert Decimal(plan["variants"]["quarter_kelly_cap_3"]["target_budget"]) <= Decimal("3.00")
+    assert Decimal(plan["variants"]["half_kelly_cap_3"]["target_budget"]) == Decimal("3.00")
+
+
+def test_shadow_kelly_goes_to_zero_without_calibrated_edge():
+    from research_lab.settings import Experiment
+
+    plan = sizing_plan("yes", .45, Decimal(".50"), Decimal("100"), Experiment())
+    for name in ("eighth_kelly_cap_3", "quarter_kelly_cap_3", "half_kelly_cap_3"):
+        assert plan["variants"][name]["contracts"] == 0
+
+
+def test_sizing_summary_requires_depth_and_official_result():
+    from research_lab.settings import Experiment
+
+    win = sizing_plan("yes", .60, Decimal(".50"), Decimal("100"), Experiment())
+    shallow = sizing_plan("yes", .60, Decimal(".50"), Decimal("1"), Experiment())
+    report = summarize_sizing([
+        {"risk_sizing": win, "side": "yes", "market_result": "yes",
+         "production_qualified": True},
+        {"risk_sizing": shallow, "side": "yes", "market_result": "no",
+         "production_qualified": True},
+        {"risk_sizing": win, "side": "yes", "market_result": None,
+         "production_qualified": True},
+    ])
+    fixed = report["results"]["fixed_3"]
+    assert fixed["signals"] == 2
+    assert fixed["evaluated"] == 1
+    assert fixed["insufficient_depth"] == 1
+    assert Decimal(fixed["net_pnl"]) > 0
 
 
 def test_demo_request_signing_scope_and_no_retries():

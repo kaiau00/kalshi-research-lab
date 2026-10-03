@@ -85,6 +85,8 @@ def create_app(record=True):
         border-radius:12px}a{color:#7bd8ea}</style><h1>Strategy experiment · Kalshi demo</h1>
         <p>Configured practice bankroll · $3 maximum per market · BTC 15-minute markets</p>
         <p>Exchange-reported demo execution. Demo liquidity and profits do not establish real-market returns.</p>
+        <p>Actual demo orders remain capped at $3. Risk sizing is compared separately against production
+        arrival quotes and never changes or submits an order.</p>
         <p><a href="/">Research dashboard</a></p><pre id="status">Loading…</pre><script>
         async function refresh(){try{let r=await fetch('/api/demo/status');if(!r.ok)throw new Error(r.status);
         document.getElementById('status').textContent=JSON.stringify(await r.json(),null,2);}

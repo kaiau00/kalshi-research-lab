@@ -438,6 +438,7 @@ class Runner:
         if self.shadow_configs:
             self.status['shadow'] = self.journal.shadow_summary(self.shadow_configs)
         self.status['production_audit'] = self.journal.production_audit_summary()
+        self.status['risk_sizing_shadow'] = self.journal.risk_sizing_summary()
         path = self.root / 'status.tmp'
         path.write_text(dumps(self.status))
         os.replace(path, self.root / 'status.json')

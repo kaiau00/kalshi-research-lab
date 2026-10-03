@@ -6,6 +6,8 @@ import time
 from decimal import Decimal
 from pathlib import Path
 
+from .sizing import summarize_sizing
+
 
 def dumps(value):
     return json.dumps(value, default=str, sort_keys=True, separators=(',', ':'))
@@ -127,6 +129,22 @@ class Journal:
             'latest': [{'client_id': row[0], 'stage': row[1], 'captured_ns': row[2],
                         'snapshot': json.loads(row[3])} for row in latest],
         }
+
+    def risk_sizing_summary(self):
+        rows = []
+        for snapshot, decision, response in self.db.execute(
+                "SELECT p.snapshot,i.decision,s.response FROM production_audits p "
+                "JOIN intents i ON i.client_id=p.client_id "
+                "JOIN settlements s ON s.ticker=i.ticker "
+                "WHERE p.stage='arrival' ORDER BY i.created_ns"):
+            snapshot, decision, response = json.loads(snapshot), json.loads(decision), json.loads(response)
+            rows.append({
+                "risk_sizing": snapshot.get("risk_sizing"),
+                "side": decision.get("side"),
+                "market_result": response.get("market_result"),
+                "production_qualified": snapshot.get("qualifies", False),
+            })
+        return summarize_sizing(rows)
 
     def rows(self, ticker=None):
         return [dict(r) for r in self.db.execute(

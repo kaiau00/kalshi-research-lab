@@ -174,3 +174,14 @@ Railway then reported $5.5064 current usage and an $11.6001 period estimate agai
 Matched all 114 settled adaptive demo fills against the existing verified production adaptive checkpoints, avoiding a second download and replay of 189 million events. Only 14 demo trades had a same-side production fill within two seconds. Those trades contributed +$4.4283 in demo P&L and +$3.4251 in the separately sized $1-cap production replay. The other demo trades contributed +$28.2876, and none of the five largest demo wins had a close same-side production fill. All comparable inferred thresholds matched exactly. Ten trades had an opposite-side production decision within two seconds and contributed +$19.5350 of demo P&L. The result indicates that demo-book prices or availability, rather than different contract terms, explain most of the unusually strong demo return.
 
 Source `9bb746f` adds the repeatable checkpoint comparison and direct production snapshots for every future demo order. Signal and 500 ms snapshots record the production threshold, both asks, displayed depth, quote age, adaptive forecast, fees, edge and qualification without delaying the demo POST or adding a production-order path. All 123 tests and Ruff passed. Deployment `0cc46d37-aeef-4510-bf9f-f34fbb6b8d5c` reached SUCCESS; health/readiness were 200, the adaptive runner returned to `watching` with 114 settlements, +$32.7159 and zero unresolved orders, and Candidate Study 003 remained active and unchanged.
+
+## October 3 UTC — production-quote risk sizing shadow
+
+Kept actual adaptive demo execution at its existing fixed $3 maximum per market. Added an isolated risk
+sizing report for future production audit snapshots: fixed $1, fixed $3, one-eighth Kelly, one-quarter Kelly
+and one-half Kelly, all normalized to a $100 bankroll and hard-capped at $3. Kelly inputs use the frozen
+Candidate Study 003 temperature calibration, production ask, modeled fees and displayed production depth.
+The report evaluates only 500 ms arrival snapshots that qualify in production, have enough displayed depth
+for the proposed integer size and later receive an official result. It places no order and does not change
+Candidate Study 003, the active strategy, its signals or its actual sizing. Earlier observations without an
+exact snapshot remain excluded.

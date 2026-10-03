@@ -14,6 +14,8 @@ from research_lab.checkpoint import decode
 from research_lab.engine import entry_fee
 from research_lab.storage import canonical
 
+from .sizing import sizing_plan
+
 
 def _decimal(value):
     return Decimal(str(value))
@@ -99,6 +101,8 @@ def production_snapshot(state, ticker, side, now_ns, cfg):
             "market_active": active,
             "qualifies": bool(fresh and fees and active and edge >= cfg.min_edge),
         })
+        result["risk_sizing"] = sizing_plan(
+            side, forecast["yes_probability"], price, depth, cfg)
         return result
     except (KeyError, ValueError, TypeError, ArithmeticError) as exc:
         return result | {"reason": "snapshot_error", "error": type(exc).__name__}

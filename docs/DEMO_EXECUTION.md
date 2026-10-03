@@ -1,5 +1,13 @@
 # Kalshi demo strategy experiments
 
+**October 3 risk sizing study:** actual adaptive demo orders remain unchanged at a $3 maximum cost per
+market. For each new demo signal, the existing production audit now calculates fixed $1, fixed $3,
+one-eighth Kelly, one-quarter Kelly and one-half Kelly sizes against the production quote observed at the
+500 ms arrival target. Every Kelly result uses the frozen Candidate Study 003 temperature calibration, a
+$100 reference bankroll, modeled fees, displayed depth and a hard $3 cap. These are shadow calculations;
+they cannot submit or resize an order. Only officially settled markets with a qualifying production quote
+and enough displayed depth contribute results. Earlier trades are not backfilled with invented quotes.
+
 **October 3 production comparison:** the first 114 settled adaptive demo fills made +$32.7159, but only 14
 had a same-side production replay fill within two seconds. Those close matches contributed +$4.4283 of demo
 P&L and +$3.4251 in the separately sized production replay. None of the five largest demo wins had a close
