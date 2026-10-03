@@ -192,6 +192,28 @@ P&L after fees, positive P&L without the three largest winners, positive one-cen
 of positive days and no more than $15 maximum drawdown. Candidate Study 003 must independently pass before
 any sizing method can advance.
 
+## October 3 UTC — formal edge-validation report
+
+Added a separately packaged, read-only proof-of-edge report that verifies the frozen Candidate Study 003
+registration and checkpoint checksums before calculating every promotion gate. It reports net P&L, top-three
+winner concentration, one- and two-cent adverse fills, positive-day share, cost-basis drawdown, Brier score,
+binary log loss, deterministic daily bootstrap uncertainty and unresolved exposure. It writes a checksummed
+derived report under `/data/edge-validation/001` and never chooses an automatic winner or submits an order.
+Candidate Study 003 source files and registration remained unchanged.
+
+Source `bbe5e67` passed 129 tests, Ruff, GitHub test and container checks. Railway deployment
+`8a0cbfe0-97bf-4f2c-a981-86f862847c98` reached SUCCESS. The protected edge endpoint verified the live
+checkpoint in 0.48 seconds at segment 6,062 and reported four observed UTC dates, so all candidates remain
+below the 20-day review gate. Current exploratory results were baseline -$14.1133, market blend +$4.4705,
+calibrated +$24.7042 and guarded -$7.6532. Every candidate failed at least one robustness gate; notably, the
+calibrated result became -$53.3836 without its three largest winners and -$6.8859 under one-cent adverse
+fills. These four-day values are visible interim evidence, not a formal conclusion.
+
+Deployment verification also found the v6 recorder stopped with `storage_limit_reached`; health and readiness
+returned 503. Candidate Study 003 remained intact and waiting at its last verified segment, while the adaptive
+demo runner stayed active with the unchanged $3 cap and zero unresolved orders. New production-data days will
+not accumulate until the separate recorder-storage issue is reviewed and recovered.
+
 Source `b631b09` passed all 126 tests and Ruff, and Railway deployment
 `0d516a76-d7e8-43f3-b11b-adadc7329b2f` reached SUCCESS with one running instance. Public health and
 readiness returned 200. Protected status reported `adaptive_volatility`, the unchanged `$3.00` actual cap,
