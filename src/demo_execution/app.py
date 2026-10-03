@@ -8,6 +8,7 @@ from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
 from candidate_study.runner import CandidateRunner
+from edge_validation import EdgeValidationReporter
 from research_lab.app import authenticated
 from research_lab.app import create_app as research_app
 from walk_forward_study.runner import ParameterRunner
@@ -24,10 +25,11 @@ def create_app(record=True):
     candidate_task = None
     parameter = None
     parameter_task = None
+    edge_reporter = None
 
     @asynccontextmanager
     async def lifespan(application):
-        nonlocal runner, task, candidate, candidate_task, parameter, parameter_task
+        nonlocal runner, task, candidate, candidate_task, parameter, parameter_task, edge_reporter
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1':
                 runner = Runner(production_state_provider=lambda: application.state.research_recorder.state)
@@ -35,6 +37,7 @@ def create_app(record=True):
             if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') == '1':
                 candidate = CandidateRunner()
                 candidate_task = asyncio.create_task(candidate.run())
+                edge_reporter = EdgeValidationReporter(candidate.root)
             if os.environ.get('LAB_PARAMETER_STUDY_ENABLED') == '1':
                 parameter = ParameterRunner()
                 parameter_task = asyncio.create_task(parameter.run())
@@ -76,6 +79,27 @@ def create_app(record=True):
         return {**parameter.status,
                 'runner_active': bool(parameter_task and not parameter_task.done())}
 
+    @app.get('/api/edge-validation/status', dependencies=[Depends(authenticated)])
+    async def edge_validation_status():
+        if not edge_reporter:
+            return {'study': 'edge-validation-001', 'state': 'disabled'}
+        return await asyncio.to_thread(edge_reporter.refresh)
+
+    @app.get('/edge-validation', dependencies=[Depends(authenticated)])
+    async def edge_validation_dashboard():
+        return HTMLResponse('''<!doctype html><html lang="en"><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1"><title>Edge validation</title>
+        <style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:0 20px;background:#101820;
+        color:#edf4f7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#192934;padding:20px;
+        border-radius:12px}a{color:#7bd8ea}</style><h1>Candidate Study 003 · edge validation</h1>
+        <p>Production-data replay · frozen candidates · no order-submission path</p>
+        <p><a href="/">Research dashboard</a> · <a href="/demo">Demo status</a></p>
+        <pre id="status">Loading…</pre><script>
+        async function refresh(){try{let r=await fetch('/api/edge-validation/status');
+        if(!r.ok)throw new Error(r.status);document.getElementById('status').textContent=
+        JSON.stringify(await r.json(),null,2);}catch(e){document.getElementById('status').textContent=
+        'Status unavailable: '+e.message;}}refresh();</script></html>''')
+
     @app.get('/demo', dependencies=[Depends(authenticated)])
     async def dashboard():
         return HTMLResponse('''<!doctype html><html lang="en"><meta charset="utf-8">
@@ -87,7 +111,8 @@ def create_app(record=True):
         <p>Exchange-reported demo execution. Demo liquidity and profits do not establish real-market returns.</p>
         <p>Actual demo orders remain capped at $3. Risk sizing is compared separately against production
         arrival quotes and never changes or submits an order.</p>
-        <p><a href="/">Research dashboard</a></p><pre id="status">Loading…</pre><script>
+        <p><a href="/">Research dashboard</a> · <a href="/edge-validation">Edge validation</a></p>
+        <pre id="status">Loading…</pre><script>
         async function refresh(){try{let r=await fetch('/api/demo/status');if(!r.ok)throw new Error(r.status);
         document.getElementById('status').textContent=JSON.stringify(await r.json(),null,2);}
         catch(e){document.getElementById('status').textContent='Status unavailable: '+e.message;}}
