@@ -1,19 +1,20 @@
 """Optional demo execution in the existing service, without changing research registration."""
 import asyncio
 import contextlib
+import json
 import os
+import sys
 from contextlib import asynccontextmanager
 
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
-from candidate_study.runner import CandidateRunner
-from edge_validation import EdgeValidationReporter
 from research_lab.app import authenticated
 from research_lab.app import create_app as research_app
 from walk_forward_study.runner import ParameterRunner
 
 from .runner import Runner
+from .study_worker import candidate_work_ready, latest_candidate_status, latest_edge_status
 
 
 def create_app(record=True):
@@ -21,23 +22,60 @@ def create_app(record=True):
     original = app.router.lifespan_context
     runner = None
     task = None
-    candidate = None
     candidate_task = None
+    candidate_process = None
+    candidate_worker_status = {'study': '003', 'state': 'starting'}
     parameter = None
     parameter_task = None
-    edge_reporter = None
+
+    async def candidate_supervisor():
+        nonlocal candidate_process, candidate_worker_status
+        while True:
+            try:
+                ready = await asyncio.to_thread(candidate_work_ready)
+                if not ready:
+                    candidate_worker_status = latest_candidate_status()
+                    await asyncio.sleep(2)
+                    continue
+                candidate_process = await asyncio.create_subprocess_exec(
+                    sys.executable, '-m', 'demo_execution.study_worker',
+                    stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+                )
+                stdout, stderr = await candidate_process.communicate()
+                if candidate_process.returncode:
+                    candidate_worker_status = {
+                        'study': '003', 'state': 'worker_error',
+                        'error': stderr.decode()[-500:],
+                    }
+                    await asyncio.sleep(30)
+                else:
+                    try:
+                        candidate_worker_status = json.loads(stdout.decode().splitlines()[-1])
+                    except (ValueError, IndexError):
+                        candidate_worker_status = latest_candidate_status()
+                candidate_process = None
+            except asyncio.CancelledError:
+                if candidate_process and candidate_process.returncode is None:
+                    candidate_process.terminate()
+                    with contextlib.suppress(ProcessLookupError):
+                        await candidate_process.wait()
+                raise
+            except Exception as exc:
+                candidate_worker_status = {
+                    'study': '003', 'state': 'worker_error',
+                    'error': f'{type(exc).__name__}: {exc}',
+                }
+                await asyncio.sleep(30)
 
     @asynccontextmanager
     async def lifespan(application):
-        nonlocal runner, task, candidate, candidate_task, parameter, parameter_task, edge_reporter
+        nonlocal runner, task, candidate_task, parameter, parameter_task
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1':
                 runner = Runner(production_state_provider=lambda: application.state.research_recorder.state)
                 task = asyncio.create_task(runner.run())
             if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') == '1':
-                candidate = CandidateRunner()
-                candidate_task = asyncio.create_task(candidate.run())
-                edge_reporter = EdgeValidationReporter(candidate.root)
+                candidate_task = asyncio.create_task(candidate_supervisor())
             if os.environ.get('LAB_PARAMETER_STUDY_ENABLED') == '1':
                 parameter = ParameterRunner()
                 parameter_task = asyncio.create_task(parameter.run())
@@ -52,8 +90,6 @@ def create_app(record=True):
                         continue
                     with contextlib.suppress(asyncio.CancelledError, Exception):
                         await background
-                if candidate:
-                    candidate.close()
                 if parameter:
                     parameter.close()
 
@@ -67,10 +103,12 @@ def create_app(record=True):
 
     @app.get('/api/candidate-study/status', dependencies=[Depends(authenticated)])
     async def candidate_status():
-        if not candidate:
+        if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') != '1':
             return {'study': '003', 'state': 'disabled'}
-        return {**candidate.status,
-                'runner_active': bool(candidate_task and not candidate_task.done())}
+        saved = await asyncio.to_thread(latest_candidate_status)
+        if candidate_worker_status.get('state') == 'worker_error':
+            saved = candidate_worker_status
+        return {**saved, 'runner_active': bool(candidate_process and candidate_process.returncode is None)}
 
     @app.get('/api/parameter-study/status', dependencies=[Depends(authenticated)])
     async def parameter_status():
@@ -81,9 +119,9 @@ def create_app(record=True):
 
     @app.get('/api/edge-validation/status', dependencies=[Depends(authenticated)])
     async def edge_validation_status():
-        if not edge_reporter:
+        if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') != '1':
             return {'study': 'edge-validation-001', 'state': 'disabled'}
-        return await asyncio.to_thread(edge_reporter.refresh)
+        return await asyncio.to_thread(latest_edge_status)
 
     @app.get('/edge-validation', dependencies=[Depends(authenticated)])
     async def edge_validation_dashboard():

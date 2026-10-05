@@ -172,7 +172,8 @@ class Runner:
         hot_limit = int(os.environ.get('LAB_DEMO_HOT_MAX_BYTES', '750000000'))
         while True:
             try:
-                result = await asyncio.to_thread(archive_one, self.raw.root)
+                result = (await asyncio.to_thread(archive_one, self.raw.root)
+                          if self.raw.has_sealed() else {'state': 'idle'})
                 self.archive_status = {**result, 'updated_ns': time.time_ns()}
                 if self.raw.stats()['bytes'] > hot_limit:
                     raise RuntimeError('Demo hot recording budget reached; preserved segments, stopped new orders')

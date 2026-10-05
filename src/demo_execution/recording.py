@@ -7,7 +7,14 @@ import hashlib
 import os
 from pathlib import Path
 
-from research_lab.segments import Bucket, SegmentedStore, catalog, checksum
+from research_lab.segments import (
+    Bucket,
+    SegmentedStore,
+    archive_compression_level,
+    catalog,
+    checksum,
+    remove_segment_artifacts,
+)
 from research_lab.storage import Store, canonical
 
 FORMAT = "demo-segments-v1"
@@ -47,8 +54,6 @@ def _archive_one(root, bucket=None):
     cat = catalog(root)
     output = None
     try:
-        for archived in cat.execute("SELECT path FROM segments WHERE status='archived'"):
-            (root / archived["path"]).unlink(missing_ok=True)
         row = cat.execute("SELECT * FROM segments WHERE status='sealed' ORDER BY id LIMIT 1").fetchone()
         if row is None:
             return {"state": "idle"}
@@ -68,7 +73,7 @@ def _archive_one(root, bucket=None):
         digest = "0" * 64
         count = 0
         try:
-            with gzip.open(output, "wb", compresslevel=3) as stream:
+            with gzip.open(output, "wb", compresslevel=archive_compression_level()) as stream:
                 for event in source.events(row["count"]):
                     digest = hashlib.sha256(bytes.fromhex(digest) + canonical(
                         [event.received_ns, event.source_ns, event.kind, event.payload])).hexdigest()
@@ -105,7 +110,7 @@ def _archive_one(root, bucket=None):
         cat.execute("UPDATE segments SET status='archived',archive_key=?,archive_sha=?,archive_bytes=? WHERE id=?",
                     (key, sha, output.stat().st_size, row["id"]))
         cat.commit()
-        (root / row["path"]).unlink()
+        remove_segment_artifacts(root / row["path"])
         output.unlink()
         return {"state": "complete", "segment": row["id"], "events": count,
                 "digest": digest, "archive_sha256": sha, "archive_key": key}

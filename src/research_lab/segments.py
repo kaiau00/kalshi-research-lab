@@ -56,6 +56,23 @@ def durable_json(path, value):
         os.close(fd)
 
 
+def archive_compression_level():
+    return min(9, max(1, int(os.environ.get('LAB_ARCHIVE_GZIP_LEVEL', '6'))))
+
+
+def remove_segment_artifacts(path):
+    """Remove only disposable local replicas after their archive is verified."""
+    path = Path(path)
+    for artifact in (path, Path(str(path) + '-wal'), Path(str(path) + '-shm'),
+                     Path(str(path) + '.lock')):
+        artifact.unlink(missing_ok=True)
+
+
+def cleanup_archived_artifacts(root, cat):
+    for row in cat.execute("SELECT path FROM segments WHERE status='archived'"):
+        remove_segment_artifacts(Path(root) / row['path'])
+
+
 class SegmentedStore:
     def __init__(self, root):
         self.root = Path(root)
@@ -63,12 +80,17 @@ class SegmentedStore:
         self.lock = (self.root / 'recording.lock').open('a')
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         self.cat = catalog(root)
+        # Older releases removed the database but left its empty lock/WAL/SHM
+        # sidecars. Archived rows prove those local replicas are disposable.
+        cleanup_archived_artifacts(self.root, self.cat)
         row = self.cat.execute("SELECT value FROM settings WHERE key='dataset'").fetchone()
         self.dataset = row[0] if row else uuid.uuid4().hex
         self.cat.execute("INSERT OR IGNORE INTO settings VALUES('dataset',?)", (self.dataset,))
         self.cat.commit()
-        self.limit = int(os.environ.get('LAB_SEGMENT_EVENTS', '100000'))
-        self.seconds = int(os.environ.get('LAB_SEGMENT_SECONDS', '300'))
+        self.limit = int(os.environ.get('LAB_SEGMENT_EVENTS', '250000'))
+        self.seconds = int(os.environ.get('LAB_SEGMENT_SECONDS', '900'))
+        self._bytes_cache = None
+        self._bytes_checked = 0.0
         row = self.cat.execute("SELECT * FROM segments WHERE status='open'").fetchone()
         if row:
             self.segment = row['id']
@@ -124,11 +146,18 @@ class SegmentedStore:
         return {'last_event_id': sealed + p['last_event_id'], 'sha256_chain': p['sha256_chain'], 'segment': self.segment}
 
     def stats(self):
-        return {'prefix': self.prefix(), 'bytes': sum(p.stat().st_size for p in self.root.rglob('*') if p.is_file()),
+        now = time.monotonic()
+        if self._bytes_cache is None or now - self._bytes_checked >= 30:
+            self._bytes_cache = sum(p.stat().st_size for p in self.root.rglob('*') if p.is_file())
+            self._bytes_checked = now
+        return {'prefix': self.prefix(), 'bytes': self._bytes_cache,
                 'streams': self.active.stats()['streams'], 'dataset': self.dataset,
                 'sealed_segments': self.cat.execute("SELECT COUNT(*) FROM segments WHERE status='sealed'").fetchone()[0],
                 'archived_segments': self.cat.execute("SELECT COUNT(*) FROM segments WHERE status='archived'").fetchone()[0],
                 'archive_bytes': self.cat.execute('SELECT COALESCE(SUM(archive_bytes),0) FROM segments').fetchone()[0]}
+
+    def has_sealed(self):
+        return self.cat.execute("SELECT 1 FROM segments WHERE status='sealed' LIMIT 1").fetchone() is not None
 
     def close(self):
         self.commit()
@@ -202,8 +231,6 @@ def _process_one(root, bucket):
     cat = catalog(root)
     try:
         row = cat.execute("SELECT * FROM segments WHERE status='sealed' ORDER BY id LIMIT 1").fetchone()
-        for archived in cat.execute("SELECT path FROM segments WHERE status='archived'"):
-            (root / archived['path']).unlink(missing_ok=True)
         if row is None:
             return {'state': 'idle'}
         row = dict(row)
@@ -230,11 +257,11 @@ def _process_one(root, bucket):
             raise ValueError('Missing predecessor checkpoint')
         store = Store(root / row['path'], readonly=True)
         try:
-            if row['count'] > int(os.environ.get('LAB_SEGMENT_EVENTS', '100000')) + 1:
+            if row['count'] > int(os.environ.get('LAB_SEGMENT_EVENTS', '250000')) + 1:
                 raise ValueError('Segment exceeds bounded processing limit')
             output = root / 'archive-pending.jsonl.gz'
             digest = '0' * 64
-            with gzip.open(output, 'wb', compresslevel=3) as f:
+            with gzip.open(output, 'wb', compresslevel=archive_compression_level()) as f:
                 for e in store.events(row['count']):
                     digest = hashlib.sha256(bytes.fromhex(digest) + canonical(
                         [e.received_ns, e.source_ns, e.kind, e.payload])).hexdigest()
@@ -262,20 +289,26 @@ def _process_one(root, bucket):
             raise ValueError('Checkpoint capacity reached')
         if next_segment == row['id']:
             durable_json(checkpoint, {'data': data, 'sha256': hashlib.sha256(canonical(data)).hexdigest()})
-        report = replay.results()
-        report['manifest'] = {'config': replay.cfg.to_dict(), 'split': 'forward',
-                              'source_sha256': registered_source,
-                              'dataset': dataset, 'last_segment': row['id'], 'last_digest': digest,
-                              'limitations': LIMITATIONS, 'incremental': True,
-                              'selection_warning': 'Fixed prospective settings; no holdout claim or parameter tuning.'}
         out = root / 'reports'
         out.mkdir(exist_ok=True)
-        name = f'{time.time_ns()}-{uuid.uuid4().hex[:8]}'
-        write_json(out / (name + '.json'), report)
-        (out / (name + '.html')).write_text(render_report(report))
-        for old in sorted(out.glob('*.json'))[:-5]:
-            old.unlink()
-            old.with_suffix('.html').unlink(missing_ok=True)
+        interval = max(0, int(os.environ.get('LAB_REPORT_INTERVAL_SECONDS', '3600')))
+        existing_reports = sorted(out.glob('*.json'))
+        due = (not existing_reports or interval == 0
+               or time.time() - existing_reports[-1].stat().st_mtime >= interval)
+        name = None
+        if due:
+            report = replay.results()
+            report['manifest'] = {'config': replay.cfg.to_dict(), 'split': 'forward',
+                                  'source_sha256': registered_source,
+                                  'dataset': dataset, 'last_segment': row['id'], 'last_digest': digest,
+                                  'limitations': LIMITATIONS, 'incremental': True,
+                                  'selection_warning': 'Fixed prospective settings; no holdout claim or parameter tuning.'}
+            name = f'{time.time_ns()}-{uuid.uuid4().hex[:8]}'
+            write_json(out / (name + '.json'), report)
+            (out / (name + '.html')).write_text(render_report(report))
+            for old in sorted(out.glob('*.json'))[:-5]:
+                old.unlink()
+                old.with_suffix('.html').unlink(missing_ok=True)
         used = cat.execute('SELECT COALESCE(SUM(archive_bytes),0) FROM segments').fetchone()[0]
         if used + output.stat().st_size > int(os.environ.get('LAB_ARCHIVE_MAX_BYTES', '20000000000')):
             raise ValueError('Archive budget capacity reached; preserve local data and stop')
@@ -283,19 +316,25 @@ def _process_one(root, bucket):
         key = f'{dataset}/segment-{row["id"]:08d}-{digest}.jsonl.gz'
         sha = bucket.put_verified(key, output)
         # Keep a recovery checkpoint alongside each archive; catalog is recoverable from segment headers.
+        checkpoint_every = max(1, int(os.environ.get('LAB_REMOTE_CHECKPOINT_EVERY_SEGMENTS', '4')))
+        checkpoint_uploaded = row['id'] % checkpoint_every == 0
         cp_path = root / 'checkpoint-upload.json.gz'
-        with gzip.open(cp_path, 'wb', compresslevel=3) as f:
-            f.write(checkpoint.read_bytes())
-        bucket.put_verified(f'{dataset}/checkpoint-slot-{row["id"] % 2}.json.gz', cp_path)
+        if checkpoint_uploaded:
+            with gzip.open(cp_path, 'wb', compresslevel=archive_compression_level()) as f:
+                f.write(checkpoint.read_bytes())
+            slot = (row['id'] // checkpoint_every) % 2
+            bucket.put_verified(f'{dataset}/checkpoint-slot-{slot}.json.gz', cp_path)
         cat.execute("UPDATE segments SET status='archived',archive_key=?,archive_sha=?,archive_bytes=? WHERE id=?",
                     (key, sha, output.stat().st_size, row['id']))
         cat.commit()
-        # Only remove a hot replica after its raw bytes and replay checkpoint are remotely verified.
-        (root / row['path']).unlink()
+        # The raw segment is remotely verified; the current checkpoint remains durable on the volume.
+        remove_segment_artifacts(root / row['path'])
         output.unlink()
-        cp_path.unlink()
-        return {'state': 'complete', 'segment': row['id'], 'report': name + '.json',
-                'events_replayed': replay.event_count, 'archive_sha256': sha}
+        cp_path.unlink(missing_ok=True)
+        return {'state': 'complete', 'segment': row['id'],
+                'report': name + '.json' if name else None,
+                'events_replayed': replay.event_count, 'archive_sha256': sha,
+                'checkpoint_uploaded': checkpoint_uploaded}
     finally:
         cat.close()
 

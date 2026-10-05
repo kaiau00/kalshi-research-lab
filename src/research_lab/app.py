@@ -93,7 +93,9 @@ def create_app(record=True):
         while True:
             await asyncio.sleep(10 if os.environ.get('LAB_SEGMENTED') == '1' else
                                 max(300, int(os.environ.get('LAB_REPORT_INTERVAL_SECONDS', '3600'))))
-            if recorder and recorder.status['last_benchmark_ns']:
+            segmented = os.environ.get('LAB_SEGMENTED') == '1'
+            work_ready = (not segmented or recorder.store.has_sealed()) if recorder else False
+            if recorder and recorder.status['last_benchmark_ns'] and work_ready:
                 try:
                     jobs.start('forward')
                 except HTTPException:

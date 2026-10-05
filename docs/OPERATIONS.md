@@ -13,6 +13,10 @@ Create a **new** project; never deploy into the old Kalyx project. Set service v
 | `LAB_MAX_STORAGE_BYTES` | `2000000000` |
 | `LAB_MAX_REPLAY_EVENTS` | `2000000` |
 | `LAB_REPORT_INTERVAL_SECONDS` | `3600` |
+| `LAB_SEGMENT_EVENTS` | `250000` |
+| `LAB_SEGMENT_SECONDS` | `900` |
+| `LAB_ARCHIVE_GZIP_LEVEL` | `6` |
+| `LAB_REMOTE_CHECKPOINT_EVERY_SEGMENTS` | `4` |
 | `KALSHI_API_KEY_ID` | Your key ID, when commissioning the authenticated feeds |
 | `KALSHI_PRIVATE_KEY_PEM` | Your PEM private key as a secret variable; B64 is an alternative |
 
@@ -24,7 +28,7 @@ The app registers default experiment settings and a source hash when the empty d
 
 Railway meters actual CPU, memory, volume and network use. One small process and SQLite avoid a separately billed database. Initially consider 256 MB memory and 0.1 vCPU **only after verifying those limits against measured peak memory and collector lag**. If replay cannot run reliably within that allowance, run less frequent or offline replay rather than silently increasing spend. The project budget is a target, not a service-level dollar cap.
 
-Check actual Railway usage during commissioning and again after one day. Storage halts at approximately 2 GB; derived report history rotates to 20 reports. Replay halts beyond two million recorded events. These are explicit safety stops, not a long-term archival strategy. High-frequency books may reach the replay cap well before a multi-week experiment; budgeted archival and larger offline replay are the next capacity milestone.
+Check actual Railway usage during commissioning and again after one day. The segmented recorder seals at 250,000 events or 15 minutes, uses gzip level 6, writes its durable local checkpoint after every segment, and rotates two remotely verified checkpoint slots every fourth segment. Raw archives still upload for every segment. These settings reduce repeated work without sampling or discarding observations. Storage and replay limits remain explicit safety stops, not a long-term archival strategy.
 
 Workspace spending limits affect other projects. Do not raise or remove them without a separate user decision. On 2026-09-14, project creation was rejected by Railway because the existing workspace hard usage limit had been reached. No new service, volume, or successful deployment was created by that attempt.
 

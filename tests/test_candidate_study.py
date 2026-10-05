@@ -12,6 +12,7 @@ from candidate_study.engine import (
     calibrated_probability,
 )
 from candidate_study.runner import DATASET, SEED_DIGEST, START_SEGMENT, CandidateRunner
+from demo_execution.study_worker import candidate_work_ready
 from research_lab.checkpoint import encode
 from research_lab.demo import book_frame
 from research_lab.engine import Replay
@@ -154,3 +155,29 @@ def test_runner_processes_verified_hot_segment_and_resumes(tmp_path, monkeypatch
         assert resumed.engine.replay.event_count == 1
     finally:
         resumed.close()
+
+
+def test_short_lived_worker_starts_only_for_a_closed_segment(tmp_path, monkeypatch):
+    segments = tmp_path / "segments-v6"
+    segments.mkdir()
+    candidate = tmp_path / "candidate-studies" / "003"
+    candidate.mkdir(parents=True)
+    (candidate / "latest-report.json").write_text(json.dumps({"next_segment": 9}))
+    cat = catalog(segments)
+    try:
+        cat.execute(
+            "INSERT INTO segments(id,path,status) VALUES(?,?,?)",
+            (9, "segment-00000009.sqlite3", "open"),
+        )
+        cat.commit()
+    finally:
+        cat.close()
+    monkeypatch.setenv("LAB_DATA_DIR", str(tmp_path))
+    assert not candidate_work_ready()
+    cat = catalog(segments)
+    try:
+        cat.execute("UPDATE segments SET status='sealed' WHERE id=9")
+        cat.commit()
+    finally:
+        cat.close()
+    assert candidate_work_ready()

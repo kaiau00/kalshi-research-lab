@@ -2,6 +2,7 @@ import gzip
 import hashlib
 import json
 import shutil
+from pathlib import Path
 
 import pytest
 from test_engine import prepared
@@ -9,6 +10,7 @@ from test_engine import prepared
 from research_lab.checkpoint import decode, encode
 from research_lab.demo import create_demo
 from research_lab.engine import Replay
+from research_lab.research import source_hash
 from research_lab.segments import SegmentedStore, archive_events, checksum, process_one, restore
 from research_lab.settings import Experiment
 from research_lab.storage import Store, canonical
@@ -103,6 +105,33 @@ def test_segment_archive_retry_restore_and_continuous_accounts(tmp_path, monkeyp
     first_archive.write_bytes(b'corrupt')
     with pytest.raises(ValueError, match='checksum'):
         restore(root, tmp_path / 'bad-restore.db', bucket)
+
+
+def test_operational_cadence_preserves_every_event_and_cleans_sidecars(tmp_path, monkeypatch):
+    monkeypatch.setenv('LAB_SEGMENT_EVENTS', '2')
+    monkeypatch.setenv('LAB_REMOTE_CHECKPOINT_EVERY_SEGMENTS', '2')
+    monkeypatch.setenv('LAB_REPORT_INTERVAL_SECONDS', '3600')
+    root = tmp_path / 'live'
+    writer = SegmentedStore(root)
+    writer.append('experiment_registration', {
+        'config': Experiment().to_dict(), 'source_sha256': source_hash(),
+    }, received_ns=1)
+    for value in range(4):
+        writer.append('diagnostic', {'value': value}, received_ns=value + 2)
+    writer.seal()
+    rows = list(writer.cat.execute("SELECT * FROM segments WHERE status='sealed' ORDER BY id"))
+    assert [row['count'] for row in rows] == [2, 2, 2, 2]
+    for row in rows:
+        Path(str(root / row['path']) + '-shm').write_bytes(b'stale')
+
+    bucket = FakeBucket(tmp_path / 'bucket')
+    results = [process_one(root, bucket) for _ in rows]
+    assert [result['checkpoint_uploaded'] for result in results] == [True, False, True, False]
+    assert results[0]['report'] and all(result['report'] is None for result in results[1:])
+    assert len(list((tmp_path / 'bucket').rglob('segment-*.jsonl.gz'))) == 4
+    assert len(list((tmp_path / 'bucket').rglob('checkpoint-slot-*.json.gz'))) == 2
+    assert not any(root.glob('segment-0000000[0-3].sqlite3*'))
+    writer.close()
 
 
 @pytest.mark.parametrize('legacy', [False, True])
