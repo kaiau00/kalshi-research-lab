@@ -4,13 +4,17 @@ from __future__ import annotations
 import fcntl
 import gzip
 import hashlib
+import io
 import json
 import os
 import shutil
 import sqlite3
 import time
 import uuid
+from contextlib import contextmanager
 from pathlib import Path
+
+import zstandard
 
 from .checkpoint import decode, encode
 from .engine import Replay
@@ -56,8 +60,55 @@ def durable_json(path, value):
         os.close(fd)
 
 
-def archive_compression_level():
+def archive_gzip_level():
     return min(9, max(1, int(os.environ.get('LAB_ARCHIVE_GZIP_LEVEL', '6'))))
+
+
+def archive_format():
+    value = os.environ.get('LAB_ARCHIVE_COMPRESSION', 'zstd').lower()
+    if value not in {'gzip', 'zstd'}:
+        raise ValueError('LAB_ARCHIVE_COMPRESSION must be gzip or zstd')
+    return value
+
+
+def archive_zstd_level():
+    return min(22, max(1, int(os.environ.get('LAB_ARCHIVE_ZSTD_LEVEL', '9'))))
+
+
+def archive_suffix():
+    return '.jsonl.zst' if archive_format() == 'zstd' else '.jsonl.gz'
+
+
+@contextmanager
+def archive_writer(path):
+    """Write the configured raw archive format; checkpoints remain gzip."""
+    if archive_format() == 'gzip':
+        with gzip.open(path, 'wb', compresslevel=archive_gzip_level()) as stream:
+            yield stream
+        return
+    with Path(path).open('wb') as raw:
+        with zstandard.ZstdCompressor(level=archive_zstd_level()).stream_writer(
+                raw, closefd=False) as stream:
+            yield stream
+
+
+@contextmanager
+def archive_reader(path):
+    """Read gzip or Zstandard by magic bytes, independent of a temporary filename."""
+    path = Path(path)
+    with path.open('rb') as probe:
+        magic = probe.read(4)
+    if magic.startswith(b'\x1f\x8b'):
+        with gzip.open(path, 'rt') as stream:
+            yield stream
+        return
+    if magic == b'\x28\xb5\x2f\xfd':
+        with path.open('rb') as raw:
+            with zstandard.ZstdDecompressor().stream_reader(raw, closefd=False) as decoded:
+                with io.TextIOWrapper(decoded) as stream:
+                    yield stream
+        return
+    raise ValueError('Unknown archive compression format')
 
 
 def remove_segment_artifacts(path):
@@ -87,8 +138,8 @@ class SegmentedStore:
         self.dataset = row[0] if row else uuid.uuid4().hex
         self.cat.execute("INSERT OR IGNORE INTO settings VALUES('dataset',?)", (self.dataset,))
         self.cat.commit()
-        self.limit = int(os.environ.get('LAB_SEGMENT_EVENTS', '250000'))
-        self.seconds = int(os.environ.get('LAB_SEGMENT_SECONDS', '900'))
+        self.limit = int(os.environ.get('LAB_SEGMENT_EVENTS', '500000'))
+        self.seconds = int(os.environ.get('LAB_SEGMENT_SECONDS', '1800'))
         self._bytes_cache = None
         self._bytes_checked = 0.0
         row = self.cat.execute("SELECT * FROM segments WHERE status='open'").fetchone()
@@ -202,7 +253,7 @@ class Bucket:
 def archive_events(path, row):
     digest = '0' * 64
     count = 0
-    with gzip.open(path, 'rt') as f:
+    with archive_reader(path) as f:
         for line in f:
             fields = json.loads(line)
             if len(fields) not in (5, 6):
@@ -257,11 +308,11 @@ def _process_one(root, bucket):
             raise ValueError('Missing predecessor checkpoint')
         store = Store(root / row['path'], readonly=True)
         try:
-            if row['count'] > int(os.environ.get('LAB_SEGMENT_EVENTS', '250000')) + 1:
+            if row['count'] > int(os.environ.get('LAB_SEGMENT_EVENTS', '500000')) + 1:
                 raise ValueError('Segment exceeds bounded processing limit')
-            output = root / 'archive-pending.jsonl.gz'
+            output = root / ('archive-pending' + archive_suffix())
             digest = '0' * 64
-            with gzip.open(output, 'wb', compresslevel=archive_compression_level()) as f:
+            with archive_writer(output) as f:
                 for e in store.events(row['count']):
                     digest = hashlib.sha256(bytes.fromhex(digest) + canonical(
                         [e.received_ns, e.source_ns, e.kind, e.payload])).hexdigest()
@@ -313,14 +364,14 @@ def _process_one(root, bucket):
         if used + output.stat().st_size > int(os.environ.get('LAB_ARCHIVE_MAX_BYTES', '20000000000')):
             raise ValueError('Archive budget capacity reached; preserve local data and stop')
         bucket = bucket or Bucket()
-        key = f'{dataset}/segment-{row["id"]:08d}-{digest}.jsonl.gz'
+        key = f'{dataset}/segment-{row["id"]:08d}-{digest}{archive_suffix()}'
         sha = bucket.put_verified(key, output)
         # Keep a recovery checkpoint alongside each archive; catalog is recoverable from segment headers.
         checkpoint_every = max(1, int(os.environ.get('LAB_REMOTE_CHECKPOINT_EVERY_SEGMENTS', '4')))
         checkpoint_uploaded = row['id'] % checkpoint_every == 0
         cp_path = root / 'checkpoint-upload.json.gz'
         if checkpoint_uploaded:
-            with gzip.open(cp_path, 'wb', compresslevel=archive_compression_level()) as f:
+            with gzip.open(cp_path, 'wb', compresslevel=archive_gzip_level()) as f:
                 f.write(checkpoint.read_bytes())
             slot = (row['id'] // checkpoint_every) % 2
             bucket.put_verified(f'{dataset}/checkpoint-slot-{slot}.json.gz', cp_path)

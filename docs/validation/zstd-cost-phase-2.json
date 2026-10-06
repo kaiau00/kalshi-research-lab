@@ -1,0 +1,23 @@
+{
+  "measured_at_utc": "2026-10-06",
+  "source": "production segment 00006961",
+  "source_compressed_bytes": 5826837,
+  "uncompressed_bytes": 107884075,
+  "uncompressed_sha256": "63a93e3c18c5e5e0540ec22cef2ff3839b529dda456c4a4e6d7ec3f5bc2bb5e8",
+  "results": [
+    {"format": "gzip", "level": 6, "bytes": 5826815, "seconds": 0.614446},
+    {"format": "gzip", "level": 9, "bytes": 5487717, "seconds": 1.541449},
+    {"format": "zstd", "level": 3, "bytes": 5873600, "seconds": 0.070784},
+    {"format": "zstd", "level": 6, "bytes": 4986679, "seconds": 0.352889},
+    {"format": "zstd", "level": 9, "bytes": 4522108, "seconds": 0.545957}
+  ],
+  "selected": {"format": "zstd", "level": 9},
+  "selected_size_reduction_vs_gzip_6_percent": 22.39,
+  "production_writer_roundtrip": {
+    "events": 250000,
+    "bytes": 4522001,
+    "terminal_digest": "b0b8c56eb43a64771e13f6eec0a8e4483e9d5610ff3bb02287aafdec257bc2d5",
+    "archive_events_verified": true
+  },
+  "verification": "Every candidate decompressed to the exact original bytes and SHA-256. The production stream writer was then read through archive_events and reproduced all 250,000 events and the exact recorded terminal digest."
+}

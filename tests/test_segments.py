@@ -1,4 +1,3 @@
-import gzip
 import hashlib
 import json
 import shutil
@@ -11,7 +10,14 @@ from research_lab.checkpoint import decode, encode
 from research_lab.demo import create_demo
 from research_lab.engine import Replay
 from research_lab.research import source_hash
-from research_lab.segments import SegmentedStore, archive_events, checksum, process_one, restore
+from research_lab.segments import (
+    SegmentedStore,
+    archive_events,
+    archive_writer,
+    checksum,
+    process_one,
+    restore,
+)
 from research_lab.settings import Experiment
 from research_lab.storage import Store, canonical
 
@@ -101,7 +107,7 @@ def test_segment_archive_retry_restore_and_continuous_accounts(tmp_path, monkeyp
     # A tampered checkpoint fails before touching archives or resetting accounts.
     cp['data']['source'] = 'bad'
     (root / 'checkpoint.json').write_text(json.dumps(cp))
-    first_archive = next((tmp_path / 'bucket').rglob('segment-*.gz'))
+    first_archive = next((tmp_path / 'bucket').rglob('segment-*'))
     first_archive.write_bytes(b'corrupt')
     with pytest.raises(ValueError, match='checksum'):
         restore(root, tmp_path / 'bad-restore.db', bucket)
@@ -128,27 +134,37 @@ def test_operational_cadence_preserves_every_event_and_cleans_sidecars(tmp_path,
     results = [process_one(root, bucket) for _ in rows]
     assert [result['checkpoint_uploaded'] for result in results] == [True, False, True, False]
     assert results[0]['report'] and all(result['report'] is None for result in results[1:])
-    assert len(list((tmp_path / 'bucket').rglob('segment-*.jsonl.gz'))) == 4
+    assert len(list((tmp_path / 'bucket').rglob('segment-*.jsonl.zst'))) == 4
     assert len(list((tmp_path / 'bucket').rglob('checkpoint-slot-*.json.gz'))) == 2
     assert not any(root.glob('segment-0000000[0-3].sqlite3*'))
     writer.close()
 
 
+@pytest.mark.parametrize('compression', ['gzip', 'zstd'])
 @pytest.mark.parametrize('legacy', [False, True])
-def test_archive_formats_reconstruct_exact_hash_and_reject_changed_payload(tmp_path, legacy):
+def test_archive_formats_reconstruct_exact_hash_and_reject_changed_payload(
+        tmp_path, monkeypatch, compression, legacy):
+    monkeypatch.setenv('LAB_ARCHIVE_COMPRESSION', compression)
     fields = [1, 1800000000000000000, None, 'diagnostic', {'value': 42}]
     digest = hashlib.sha256(bytes.fromhex('0' * 64) + canonical(fields[1:])).hexdigest()
     row = {'count': 1, 'digest': digest}
     if legacy:
         fields.append(digest)
-    path = tmp_path / 'archive.gz'
-    with gzip.open(path, 'wb') as f:
+    path = tmp_path / 'archive'
+    with archive_writer(path) as f:
         f.write(canonical(fields) + b'\n')
     events = list(archive_events(path, row))
     assert events[0].digest == digest
     assert events[0].payload == {'value': 42}
     fields[4]['value'] = 43
-    with gzip.open(path, 'wb') as f:
+    with archive_writer(path) as f:
         f.write(canonical(fields) + b'\n')
     with pytest.raises(ValueError, match='integrity|prefix'):
         list(archive_events(path, row))
+
+
+def test_archive_reader_rejects_unknown_compression(tmp_path):
+    path = tmp_path / 'archive'
+    path.write_bytes(b'not an archive')
+    with pytest.raises(ValueError, match='compression'):
+        list(archive_events(path, {'count': 0, 'digest': '0' * 64}))

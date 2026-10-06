@@ -1,11 +1,10 @@
-import gzip
 import hashlib
 import json
 
 import pytest
 
 from demo_execution.recording import DemoRecording, archive_one
-from research_lab.segments import catalog
+from research_lab.segments import archive_reader, catalog
 
 
 class MemoryBucket:
@@ -41,8 +40,10 @@ def test_demo_segments_archive_only_after_verified_upload(tmp_path, monkeypatch)
     assert not (tmp_path / row["path"]).exists()
     c.close()
 
-    lines = [json.loads(line) for line in gzip.decompress(
-        bucket.objects[result["archive_key"]]).splitlines()]
+    archive = tmp_path / "downloaded-archive"
+    archive.write_bytes(bucket.objects[result["archive_key"]])
+    with archive_reader(archive) as stream:
+        lines = [json.loads(line) for line in stream]
     assert [line[3] for line in lines] == ["demo_recording_registration", "demo_start"]
     assert all(len(line) == 6 for line in lines)
     assert recording.active.events().__next__().kind == "segment_start"
@@ -62,7 +63,7 @@ def test_demo_archive_failure_preserves_sealed_segment(tmp_path, monkeypatch):
     row = c.execute("SELECT * FROM segments WHERE id=0").fetchone()
     assert row["status"] == "sealed"
     assert (tmp_path / row["path"]).exists()
-    assert not list(tmp_path.glob("archive-pending-*.jsonl.gz"))
+    assert not list(tmp_path.glob("archive-pending-*.jsonl.*"))
     c.close()
     recording.close()
 

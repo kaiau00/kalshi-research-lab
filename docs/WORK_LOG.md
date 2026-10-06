@@ -247,3 +247,18 @@ at `adaptive_volatility`, fixed $3 maximum, with zero unresolved orders.
 No budget or storage limit was raised. Railway reported $5.9754 used and an $11.9334 period estimate against
 the unchanged $10 hard cap for the period ending October 16. The estimate therefore remains an availability
 risk: Railway can stop the workspace at $10 before the 20-day study gate unless ongoing cost is reduced.
+
+## October 6 UTC — archive and segment cost phase 2
+
+A 250,000-event production segment containing 107,884,075 uncompressed bytes was benchmarked without
+changing its contents. Zstandard level 9 produced a 4,522,108-byte one-shot archive versus 5,826,815 bytes
+for gzip level 6, a 22.39% reduction, and completed compression faster in the local benchmark. The production
+stream writer produced 4,522,001 bytes. The normal archive reader reconstructed all 250,000 events and the
+exact recorded terminal digest `b0b8c56e...c2d5`. The benchmark is preserved in
+`docs/validation/zstd-cost-phase-2.json`.
+
+New raw archives use Zstandard level 9 and readers detect gzip or Zstandard from their signatures, preserving
+access to every existing gzip object. Recovery checkpoints remain gzip. Segment cadence increases from
+250,000 events or 15 minutes to 500,000 events or 30 minutes, reducing archiver and study startup frequency
+without sampling or discarding observations. Strategy, sizing, demo execution and Candidate Study 003
+parameters remain unchanged. All 135 tests and Ruff passed before deployment.

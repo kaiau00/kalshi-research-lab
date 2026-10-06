@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import fcntl
-import gzip
 import hashlib
 import os
 from pathlib import Path
@@ -10,7 +9,8 @@ from pathlib import Path
 from research_lab.segments import (
     Bucket,
     SegmentedStore,
-    archive_compression_level,
+    archive_suffix,
+    archive_writer,
     catalog,
     checksum,
     remove_segment_artifacts,
@@ -69,11 +69,11 @@ def _archive_one(root, bucket=None):
             raise ValueError("Broken demo segment predecessor")
 
         source = Store(root / row["path"], readonly=True)
-        output = root / f"archive-pending-{row['id']:08d}.jsonl.gz"
+        output = root / f"archive-pending-{row['id']:08d}{archive_suffix()}"
         digest = "0" * 64
         count = 0
         try:
-            with gzip.open(output, "wb", compresslevel=archive_compression_level()) as stream:
+            with archive_writer(output) as stream:
                 for event in source.events(row["count"]):
                     digest = hashlib.sha256(bytes.fromhex(digest) + canonical(
                         [event.received_ns, event.source_ns, event.kind, event.payload])).hexdigest()
@@ -103,7 +103,7 @@ def _archive_one(root, bucket=None):
         if used + output.stat().st_size > limit:
             raise ValueError("Demo archive budget reached; preserved local segment")
         bucket = bucket or Bucket()
-        key = f"demo/{strategy}/{dataset}/segment-{row['id']:08d}-{digest}.jsonl.gz"
+        key = f"demo/{strategy}/{dataset}/segment-{row['id']:08d}-{digest}{archive_suffix()}"
         sha = bucket.put_verified(key, output)
         if checksum(output) != sha:
             raise ValueError("Demo archive local checksum changed")
