@@ -262,3 +262,16 @@ access to every existing gzip object. Recovery checkpoints remain gzip. Segment 
 250,000 events or 15 minutes to 500,000 events or 30 minutes, reducing archiver and study startup frequency
 without sampling or discarding observations. Strategy, sizing, demo execution and Candidate Study 003
 parameters remain unchanged. All 135 tests and Ruff passed before deployment.
+
+## October 6 UTC — live-equivalence audit 002
+
+The exact production-arrival snapshots now cover 152 settled adaptive-volatility demo fills over four UTC
+dates. The full demo set made +$74.1665, but only 41 trades, 26.97%, met the same production edge, fee, depth
+and $3-cap requirements. Those same 41 made -$1.6325 in demo and an estimated -$2.1620 at the captured
+production quotes. One- and two-cent adverse-price tests produced -$4.5052 and -$6.8328. Production-equivalent
+P&L excluding its three largest winners was -$21.9106, with a $17.6133 maximum drawdown.
+
+The primary mismatch was price: 106 demo fills did not retain the required 4% edge in production. Only two
+arrival captures were more than 250 ms from their target; excluding them produced -$2.3752 and did not change
+the decision. No production order was submitted. The report is preserved in
+`docs/LIVE_EQUIVALENCE_AUDIT_002.md` and `docs/validation/live-equivalence-audit-002.json`.

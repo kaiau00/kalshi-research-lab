@@ -1,0 +1,91 @@
+{
+  "audit_created_utc": "2026-10-06T16:28:10Z",
+  "arrival_capture_delay_ms": {
+    "maximum": 1873.516694,
+    "mean": 39.44328456578947,
+    "median": 0.823291,
+    "over_250ms": 2,
+    "over_500ms": 2,
+    "p95": 96.006846
+  },
+  "demo_all_exact_capture": {
+    "losses": 51,
+    "maximum_drawdown": "8.284900",
+    "net_pnl": "74.166500",
+    "observed_utc_dates": ["2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06"],
+    "pnl_without_top_three_winners": "28.915500",
+    "positive_day_share": 1.0,
+    "top_three_share_of_positive_pnl": 0.3333819581355188,
+    "top_three_winner_pnl": "45.251000",
+    "trades": 152,
+    "wins": 101
+  },
+  "demo_fills_with_settled_exact_capture": 152,
+  "demo_on_transferable_subset": {
+    "losses": 14,
+    "maximum_drawdown": "6.661000",
+    "net_pnl": "-1.632500",
+    "observed_utc_dates": ["2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06"],
+    "pnl_without_top_three_winners": "-8.099000",
+    "positive_day_share": 0.25,
+    "top_three_share_of_positive_pnl": 0.397131978136707,
+    "top_three_winner_pnl": "6.466500",
+    "trades": 41,
+    "wins": 27
+  },
+  "limitations": [
+    "Displayed production depth is not a guaranteed fill.",
+    "The audit tests whether demo-selected trades transfer to production; it does not invent production-only signals.",
+    "One position per ticker is assumed after the first hypothetical production fill."
+  ],
+  "non_transfer_reasons": {
+    "insufficient_displayed_depth": 1,
+    "missing_market_or_terms": 3,
+    "missing_or_invalid_book": 1,
+    "production_edge_below_threshold": 106
+  },
+  "production_equivalent_fixed_3": {
+    "losses": 14,
+    "maximum_drawdown": "17.6133",
+    "net_pnl": "-2.1620",
+    "observed_utc_dates": ["2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06"],
+    "pnl_without_top_three_winners": "-21.9106",
+    "positive_day_share": 0.75,
+    "top_three_share_of_positive_pnl": 0.5335887535834039,
+    "top_three_winner_pnl": "19.7486",
+    "trades": 41,
+    "wins": 27
+  },
+  "production_equivalent_within_250ms_of_arrival": {
+    "losses": 14,
+    "maximum_drawdown": "17.6133",
+    "net_pnl": "-2.3752",
+    "pnl_without_top_three_winners": "-22.1238",
+    "trades": 40,
+    "wins": 26
+  },
+  "production_transfer_rate": 0.26973684210526316,
+  "scope": "Settled demo fills with exact production arrival snapshots; same side; fixed $3 cap.",
+  "stress": {
+    "1_cent_worse": {
+      "losses": 14,
+      "maximum_drawdown": "18.1706",
+      "net_pnl": "-4.5052",
+      "pnl_without_top_three_winners": "-23.9653",
+      "top_three_winner_pnl": "19.4601",
+      "trades": 41,
+      "unfillable_after_stress": 0,
+      "wins": 27
+    },
+    "2_cent_worse": {
+      "losses": 14,
+      "maximum_drawdown": "18.6669",
+      "net_pnl": "-6.8328",
+      "pnl_without_top_three_winners": "-24.5828",
+      "top_three_winner_pnl": "17.7500",
+      "trades": 41,
+      "unfillable_after_stress": 0,
+      "wins": 27
+    }
+  }
+}
