@@ -1,8 +1,9 @@
 # Kalshi Research Lab
 
-A BTC-only, 15-minute market recorder and strategy research system. It can place orders in Kalshi's demo
-environment, but **production orders are prohibited**.
-The purpose is to reject weak ideas and measure promising ones, not to promise a return on $100.
+A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
+authorized production pilot is limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
+with a $100 bankroll baseline and a fixed $3 maximum per market. The purpose is to reject weak ideas and measure
+promising ones, not to promise a return on $100.
 
 ## What is implemented
 
@@ -12,12 +13,13 @@ The purpose is to reject weak ideas and measure promising ones, not to promise a
 - Historical minute-quote download and screening in a separate database. These do **not** claim fills or executable returns.
 - Frozen data-prefix replay, source/config hashes, chronological market-level 60/20/20 partitions, explicit holdout disclosure, calibration and daily bootstrap uncertainty when the sample is large enough.
 - A password-protected dashboard, fresh-data readiness, persistent SQLite storage, and hourly replay of the fixed strategy definitions registered before collection started.
+- Separate demo and production adapters and ledgers. Railway refuses to start both execution adapters together.
 
 The initial strategies are hypotheses. The underdog filter alone is not an edge: its estimated probability must exceed the executable quote plus assumed fees and a margin. A Gaussian forecast can be wrong, especially near expiry or during jumps. The three models are related, not three independent discoveries.
 
 ## Adaptive-volatility strategy math
 
-The currently running demo strategy estimates the chance that the official final-minute BRTI average will finish
+The adaptive strategy estimates the chance that the official final-minute BRTI average will finish
 above the market threshold. It does not forecast a short-term trend. Its expected future BTC price is the latest
 BRTI observation, with uncertainty estimated from recent one-second returns.
 
@@ -88,8 +90,9 @@ n = max integer n such that n * q + fee(n, q) <= $3
 
 There is no Kelly sizing and no early exit. A filled position is held through the official finalized outcome. The
 research execution model uses a 500 ms arrival delay, limit-price enforcement, and displayed best-level depth.
-The demo runner submits an actual IOC order to Kalshi's demo exchange; the production-equivalence audit separately
-checks the real production book at the declared 500 ms arrival time.
+The production runner waits until the declared 500 ms arrival time, verifies that the original limit is still
+marketable against a fresh production book, and submits an IOC order. It never creates a resting order or retries
+an order POST. It writes a durable intent first and blocks all further orders if the request cannot be reconciled.
 
 This probability is a model estimate, not a guaranteed edge. It assumes zero short-horizon drift, locally stable
 diffusion, and approximately normal price movement. Jumps, regime changes, BRTI/market timing differences, and
@@ -100,6 +103,9 @@ book. Of 152 settled demo fills with exact production arrival snapshots, only 41
 edge, fee, quote, and depth rules. Those 41 produced -$2.1620 at displayed production quotes, -$4.5052 with one
 cent of adverse movement, and -$6.8328 with two cents. This is evidence against treating demo-account returns as
 live-account expectations. See [Live-equivalence audit 002](docs/LIVE_EQUIVALENCE_AUDIT_002.md).
+
+The user authorized the real-money pilot despite that negative audit. That decision does not promote the strategy
+or prove an edge. Candidate Study 003 and Risk Sizing Audit 001 remain independent, frozen research studies.
 
 ## Run locally
 
@@ -152,4 +158,4 @@ The initial hourly comparison is a preregistered forward benchmark across the th
 
 Open positions are shown at cost for drawdown, **not** liquidation value. Reports retain unavailable outcomes and locked capital. Confidence intervals remain unavailable below 20 observed UTC days and 50 settled markets; reaching those counts alone is not proof of an edge. Daily resampling does not account for all serial dependence or multiple testing.
 
-See [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).
+See [production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).

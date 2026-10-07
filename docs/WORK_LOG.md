@@ -275,3 +275,12 @@ The primary mismatch was price: 106 demo fills did not retain the required 4% ed
 arrival captures were more than 250 ms from their target; excluding them produced -$2.3752 and did not change
 the decision. No production order was submitted. The report is preserved in
 `docs/LIVE_EQUIVALENCE_AUDIT_002.md` and `docs/validation/live-equivalence-audit-002.json`.
+# 2026-10-07 — Production pilot adapter
+
+- Added a separate production-only adapter for the explicitly authorized BTC 15-minute adaptive-volatility pilot.
+- Froze the pilot to a $100 bankroll baseline, fixed $3 all-in maximum, 5–300 second window, 4% modeled net edge,
+  60/600-second 70%/30% variance blend, exchange index 2, subaccount 0, and delayed IOC execution.
+- Added durable pre-POST intents, exact client-ID reconciliation, no POST retries, account exposure guards,
+  production status endpoints, and a deployment authorization token.
+- Preserved the demo ledger and all research studies; the app rejects simultaneous demo and production runners.
+- Validation before deployment: Ruff clean and 145 tests passed.

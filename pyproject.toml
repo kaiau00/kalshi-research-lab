@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "kalshi-research-lab"
 version = "0.1.0"
-description = "BTC 15-minute event-market recording and reproducible research; no live orders"
+description = "BTC 15-minute event-market recording, research, and guarded execution"
 requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.28,<0.29",
@@ -25,7 +25,7 @@ dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/research_lab", "src/demo_execution", "src/candidate_study", "src/walk_forward_study",
-            "src/edge_validation"]
+            "src/edge_validation", "src/production_execution"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
