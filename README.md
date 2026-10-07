@@ -1,18 +1,105 @@
 # Kalshi Research Lab
 
-A BTC-only, 15-minute market recorder and strategy research system. **No live-order capability.**
+A BTC-only, 15-minute market recorder and strategy research system. It can place orders in Kalshi's demo
+environment, but **production orders are prohibited**.
 The purpose is to reject weak ideas and measure promising ones, not to promise a return on $100.
 
 ## What is implemented
 
 - Raw market metadata, authenticated order-book updates, public trades, and official BRTI index observations, stored in receipt order with a SHA-256 chain.
-- Independent $100 paper accounts for basic fair value, a late underdog near the threshold, and adaptive volatility. Each risks at most $1 including modeled entry fees per market.
+- Independent $100 research accounts for basic fair value, a late underdog near the threshold, and adaptive volatility. The original fixed comparison risks at most $1 including modeled entry fees per market. The currently running adaptive-volatility demo account uses a fixed maximum risk of $3 per market.
 - One execution model: delayed IOC buys, available best-level depth, integer contracts, limit-price enforcement, fees, reserved cash, and official outcome settlement. No assumed maker fills.
 - Historical minute-quote download and screening in a separate database. These do **not** claim fills or executable returns.
 - Frozen data-prefix replay, source/config hashes, chronological market-level 60/20/20 partitions, explicit holdout disclosure, calibration and daily bootstrap uncertainty when the sample is large enough.
 - A password-protected dashboard, fresh-data readiness, persistent SQLite storage, and hourly replay of the fixed strategy definitions registered before collection started.
 
 The initial strategies are hypotheses. The underdog filter alone is not an edge: its estimated probability must exceed the executable quote plus assumed fees and a margin. A Gaussian forecast can be wrong, especially near expiry or during jumps. The three models are related, not three independent discoveries.
+
+## Adaptive-volatility strategy math
+
+The currently running demo strategy estimates the chance that the official final-minute BRTI average will finish
+above the market threshold. It does not forecast a short-term trend. Its expected future BTC price is the latest
+BRTI observation, with uncertainty estimated from recent one-second returns.
+
+For consecutive one-second BRTI prices, calculate log returns:
+
+```text
+r_t = ln(P_t / P_(t-1))
+```
+
+Calculate the mean squared return over the most recent 60 seconds and 600 seconds, then blend them:
+
+```text
+v_fast = mean(r_t^2 over 60 seconds)
+v_slow = mean(r_t^2 over 600 seconds)
+v       = 0.70 * v_fast + 0.30 * v_slow
+```
+
+The strategy requires at least 60 usable returns. It does not subtract an estimated drift or impose an artificial
+volatility floor. The heavier 60-second weight is what makes the volatility estimate adaptive.
+
+The contract settles on the average of the 60 BRTI source seconds in `[close - 60 seconds, close)`. Already
+observed settlement-window prices are known. Each unobserved second has conditional expected price equal to the
+latest BRTI price `S`, so the expected settlement average is:
+
+```text
+mu = (sum(observed settlement prices) + future_second_count * S) / 60
+```
+
+Let `F` be the unobserved source seconds and let `h_i` be the time from the latest observation to future second
+`i`. The Brownian approximation accounts for correlation between future prices:
+
+```text
+C     = sum over i,j in F of min(h_i, h_j)
+sigma = S * sqrt(v * C) / 60
+```
+
+For threshold `K`, the model applies a half-cent continuity correction to match the contract's strict or inclusive
+comparison, then converts the standardized distance into a probability with the normal CDF:
+
+```text
+K_effective = K - 0.005  for greater-than-or-equal contracts
+K_effective = K + 0.005  for strictly-greater-than contracts
+z           = (mu - K_effective) / sigma
+p_yes       = Phi(z)
+p_no        = 1 - p_yes
+```
+
+For each side, let `q` be its best ask. The modeled quadratic taker fee for `n` contracts is:
+
+```text
+fee(n, q) = 0.07 * n * q * (1 - q)
+```
+
+The implementation rounds fees and total debits conservatively to the configured account precision. It evaluates
+the best side using the one-contract all-in cost:
+
+```text
+edge = p_side - (q + fee(1, q))
+```
+
+An entry requires at least `0.04`, or four percentage points, of modeled edge after fees. It must also have 5 to
+300 seconds remaining, fresh BRTI and order-book data, a supported fee schedule, and a valid two-sided quote.
+The strategy buys the largest integer number of contracts whose price plus fees fits within the fixed $3 maximum:
+
+```text
+n = max integer n such that n * q + fee(n, q) <= $3
+```
+
+There is no Kelly sizing and no early exit. A filled position is held through the official finalized outcome. The
+research execution model uses a 500 ms arrival delay, limit-price enforcement, and displayed best-level depth.
+The demo runner submits an actual IOC order to Kalshi's demo exchange; the production-equivalence audit separately
+checks the real production book at the declared 500 ms arrival time.
+
+This probability is a model estimate, not a guaranteed edge. It assumes zero short-horizon drift, locally stable
+diffusion, and approximately normal price movement. Jumps, regime changes, BRTI/market timing differences, and
+miscalibration can make its probability wrong.
+
+The latest production-equivalence audit found that the strong demo P&L did not transfer to the production order
+book. Of 152 settled demo fills with exact production arrival snapshots, only 41 met the unchanged production
+edge, fee, quote, and depth rules. Those 41 produced -$2.1620 at displayed production quotes, -$4.5052 with one
+cent of adverse movement, and -$6.8328 with two cents. This is evidence against treating demo-account returns as
+live-account expectations. See [Live-equivalence audit 002](docs/LIVE_EQUIVALENCE_AUDIT_002.md).
 
 ## Run locally
 
