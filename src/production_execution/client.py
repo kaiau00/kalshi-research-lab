@@ -16,7 +16,7 @@ TICKER = re.compile(r"KXBTC15M-[A-Z0-9-]+\Z")
 
 
 class ProductionClient:
-    """Narrow production client: portfolio reads and one IOC order endpoint."""
+    """Narrow production client: portfolio reads and guarded IOC orders."""
 
     def __init__(self, key_id=None, pem=None, *, max_order_cost="3.00", transport=None):
         self.key_id = key_id or os.environ["KALSHI_API_KEY_ID"]
@@ -97,14 +97,17 @@ def validate_order(payload, max_order_cost=Decimal("3.00")):
         "exchange_index",
         "subaccount",
     }
-    if set(payload) != required or not TICKER.fullmatch(payload["ticker"]):
+    allowed = required | {"reduce_only"}
+    if set(payload) - allowed or not required <= set(payload) or not TICKER.fullmatch(payload["ticker"]):
         raise ValueError("Only BTC 15-minute production IOC orders are supported")
+    reduce_only = payload.get("reduce_only", False)
     if (
         payload["side"] not in ("bid", "ask")
         or payload["time_in_force"] != "immediate_or_cancel"
         or payload["self_trade_prevention_type"] != "taker_at_cross"
         or payload["exchange_index"] != 2
         or payload["subaccount"] != 0
+        or not isinstance(reduce_only, bool)
     ):
         raise ValueError("Invalid production execution scope")
     count, price = Decimal(payload["count"]), Decimal(payload["price"])
@@ -116,13 +119,13 @@ def validate_order(payload, max_order_cost=Decimal("3.00")):
         or not 0 < price < 1
     ):
         raise ValueError("Invalid production order price or quantity")
-    outcome_price = price if payload["side"] == "bid" else 1 - price
-    fee = (Decimal(".07") * count * outcome_price * (1 - outcome_price)).quantize(
-        Decimal(".000001"), rounding=ROUND_CEILING
-    )
-    limit = Decimal(max_order_cost)
-    if (count * outcome_price + fee).quantize(Decimal(".0001"), rounding=ROUND_CEILING) > limit:
-        raise ValueError("Production order cost exceeds configured limit")
+    if not reduce_only:
+        outcome_price = price if payload["side"] == "bid" else 1 - price
+        fee = (Decimal(".07") * count * outcome_price * (1 - outcome_price)).quantize(
+            Decimal(".000001"), rounding=ROUND_CEILING
+        )
+        limit = Decimal(max_order_cost)
+        if (count * outcome_price + fee).quantize(Decimal(".0001"), rounding=ROUND_CEILING) > limit:
+            raise ValueError("Production order cost exceeds configured limit")
     if not re.fullmatch(r"prod-[a-f0-9]{32}", payload["client_order_id"]):
         raise ValueError("Invalid persistent production client order ID")
-

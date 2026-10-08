@@ -16,20 +16,33 @@ separate from `demo_execution` and uses a new durable ledger at
 - Entry window: 5 to 300 seconds before close
 - Minimum modeled net edge: 0.04 after the configured taker fee
 - Variance: 70% of the last 60 seconds plus 30% of the last 600 seconds
-- Execution: 500 ms delayed IOC, at most three attempts and one fill per ticker
-- Exit: official settlement; no early exit
+- Entry execution: 500 ms delayed IOC, at most three signal attempts and one entry fill per ticker
+- Position monitoring: once per second from the live production order book and updated BRTI forecast
+- Exit execution: reduce-only IOC against displayed best-bid depth, at most three exit attempts per ticker
+- Take profit: estimated net exit profit of at least $0.05 per contract after the modeled exit fee
+- Value exit: net executable value exceeds the updated modeled settlement value by at least $0.02 per contract
+- Thesis exit: updated modeled probability is at or below the entry all-in basis per contract
+- Otherwise: hold to official settlement
 
 ## Required deployment guards
 
 Production execution starts only when `LAB_PRODUCTION_ENABLED=1` and
-`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`. The application refuses to run demo and
-production execution simultaneously. The account must initially expose exactly $100 on exchange index 2 and no
-positions or resting orders.
+`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`. Monitored exits additionally require
+`LAB_PRODUCTION_EXIT_AUTHORIZATION=real-btc-15m-adaptive-monitored-exit-2026-10-07`. The application refuses to
+run demo and production execution simultaneously. The account must initially expose exactly $100 on exchange
+index 2 and no positions or resting orders.
 
 Before every submission, the runner verifies exchange and shard status, account cash, the absence of any nonzero
 shard-2 position or resting order, a fresh production order book, and that the original limit remains marketable
-at the modeled arrival time. It writes the intent with SQLite `synchronous=FULL` before the POST. There are no
+at the modeled arrival time. Every signal is written before its 500 ms delay, so arrival cancellations count
+toward the same three-attempt limit as replay. It writes entry and exit intents with SQLite `synchronous=FULL`
+before each POST. Exit orders set `reduce_only=true`, so Kalshi caps them at the current position. There are no
 automatic POST retries. An unknown request result blocks later orders until the exact client order ID is found.
+
+The monitor verifies that the signed exchange position exactly matches the durable ledger before evaluating an
+exit. It uses the displayed best bid and available depth, never a midpoint or last trade. A partial IOC fill is
+recorded and only the remaining verified position may be offered later. Any foreign or mismatched exposure stops
+new execution.
 
 The production client contains no transfer or withdrawal method. Funding is a separate one-time commissioning
 operation. Production status is password protected at `/api/production/status` and `/production`.
