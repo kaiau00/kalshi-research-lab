@@ -284,3 +284,16 @@ the decision. No production order was submitted. The report is preserved in
   production status endpoints, and a deployment authorization token.
 - Preserved the demo ledger and all research studies; the app rejects simultaneous demo and production runners.
 - Validation before deployment: Ruff clean and 145 tests passed.
+# 2026-10-07 — Production pilot paused and audited
+
+- Paused the authorized production runner with its persistent stop file after 23 officially settled trades.
+- Preserved $75.7562 shard-2 cash, -$24.2438 realized P&L, all fills and settlements, and zero unresolved orders.
+- Verified all 23 thresholds, outcome sides, results, costs, fees, and the $3 cap; execution accounting reconciled.
+- Found severe model overconfidence: 75.85% mean predicted probability versus 52.17% realized wins. Five entries
+  at or below $0.35 all lost, and the live model's +$9.7792 expected P&L became -$24.2438.
+- The full registered production replay's +$53.7390 depends on $86.1073 from its top three winners; without them it
+  is -$32.3683, with 8 of 18 positive UTC days.
+- Found a live/replay parity defect: arrival cancellations that never reach the exchange are not journaled or
+  counted toward the frozen three-attempt limit. The paused runner must not resume unchanged.
+- Recorded the evidence and required remediation in `PRODUCTION_PILOT_001_POSTMORTEM.md`. No strategy parameter,
+  order, balance, or settlement was modified during the investigation.

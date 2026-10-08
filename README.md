@@ -1,9 +1,10 @@
 # Kalshi Research Lab
 
 A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
-authorized production pilot is limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
-with a $100 bankroll baseline and a fixed $3 maximum per market. The purpose is to reject weak ideas and measure
-promising ones, not to promise a return on $100.
+authorized production pilot was limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
+with a $100 bankroll baseline and a fixed $3 maximum per market. That pilot is now paused after losing $24.2438
+across 23 settled trades; see the [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). The
+purpose is to reject weak ideas and measure promising ones, not to promise a return on $100.
 
 ## What is implemented
 
@@ -158,4 +159,4 @@ The initial hourly comparison is a preregistered forward benchmark across the th
 
 Open positions are shown at cost for drawdown, **not** liquidation value. Reports retain unavailable outcomes and locked capital. Confidence intervals remain unavailable below 20 observed UTC days and 50 settled markets; reaching those counts alone is not proof of an edge. Daily resampling does not account for all serial dependence or multiple testing.
 
-See [production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).
+See [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md), [production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).
