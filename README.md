@@ -166,3 +166,6 @@ The initial hourly comparison is a preregistered forward benchmark across the th
 Open positions are shown at cost for drawdown, **not** liquidation value. Reports retain unavailable outcomes and locked capital. Confidence intervals remain unavailable below 20 observed UTC days and 50 settled markets; reaching those counts alone is not proof of an edge. Daily resampling does not account for all serial dependence or multiple testing.
 
 See [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md), [production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).
+
+The complete paused live record is summarized in
+[Production live audit 001](docs/PRODUCTION_LIVE_AUDIT_001.md).

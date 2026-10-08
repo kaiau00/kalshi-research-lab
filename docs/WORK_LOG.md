@@ -311,3 +311,9 @@ At the user's request, paused new real-money entries while leaving recording and
 entry filled immediately before the initial emergency stop became visible. Replaced the broad stop with the
 durable `PAUSE_ENTRIES` control so the runner continues exact position verification, official-settlement
 reconciliation, uncertain-order checks, and the historical exit audit without evaluating or submitting new entries.
+
+Completed Production Live Audit 001 after all 37 fills officially resolved. The live account realized -$37.0860;
+holding every identical entry would have produced -$25.0750, while the monitored exits reduced P&L by $12.0110.
+The model expected 22.54 wins and +$24.7023 hold P&L but observed 17 wins and -$25.0750 hold P&L. Every tested
+side, price band, and modeled-edge band lost on a hold basis, so the audit does not promote a simple filter. The
+production strategy remains paused pending a frozen, forward-validated candidate.
