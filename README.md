@@ -6,7 +6,8 @@ with a $100 bankroll baseline and a fixed $2 maximum per future entry. Its first
 after losing $24.2438 across 23 settled trades; see the
 [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). A later monitored-exit phase is preserved
 in the durable ledger and exit-versus-hold audit. The current production revision verifies each position against
-that ledger and holds it to Kalshi's official settlement; early-exit submission is disabled. The purpose is to
+that ledger and holds it to Kalshi's official settlement; early-exit submission is disabled. New production
+entries are currently paused while the live-fill audit is performed; recording and research continue. The purpose is to
 reject weak ideas and measure promising ones, not to promise a return on $100.
 
 ## What is implemented

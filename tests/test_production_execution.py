@@ -15,6 +15,7 @@ from production_execution.client import BASE, ProductionClient, validate_order
 from production_execution.journal import Journal
 from production_execution.runner import (
     AUTHORIZATION,
+    ENTRY_PAUSE_FILE,
     HOLD_AUTHORIZATION,
     HOLD_REVISION,
     RISK_AUTHORIZATION,
@@ -427,6 +428,43 @@ def test_live_position_monitor_holds_and_has_no_exit_submission_path(tmp_path, m
         assert runner.status["state"] == "holding_to_settlement"
         assert runner.status["open_position"]["quantity"] == "4"
         assert runner.journal.exit_rows() == []
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_entry_pause_keeps_reconciliation_active_but_skips_new_signals(tmp_path, monkeypatch):
+    replay, _, _, _ = prepared(risk_per_market="2.00")
+
+    class PauseClient(FakeClient):
+        def __init__(self):
+            self.reads = []
+
+        async def get(self, path, params=None):
+            self.reads.append((path, params))
+            if path == "/portfolio/positions":
+                return {"market_positions": [], "cursor": ""}
+            if path == "/portfolio/balance":
+                return {"balance_dollars": "100.00", "portfolio_value": 10000}
+            raise AssertionError(f"unexpected read: {path}")
+
+    monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
+    client = PauseClient()
+    runner = Runner(lambda: replay.state, tmp_path, client=client)
+    (tmp_path / ENTRY_PAUSE_FILE).touch()
+    runner.signal = lambda *args, **kwargs: pytest.fail("paused runner evaluated an entry signal")
+    try:
+        asyncio.run(runner.step())
+        runner.snapshot()
+        assert runner.status["state"] == "entries_paused"
+        assert runner.status["entries_paused"] is True
+        assert [path for path, _ in client.reads] == [
+            "/portfolio/positions",
+            "/portfolio/balance",
+        ]
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()

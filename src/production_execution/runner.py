@@ -28,6 +28,7 @@ RISK_AUTHORIZATION = "real-btc-15m-adaptive-2usd-2026-10-08"
 RISK_REVISION = "adaptive-fixed-risk-002-20261008"
 HOLD_AUTHORIZATION = "real-btc-15m-adaptive-hold-settlement-2026-10-08"
 HOLD_REVISION = "adaptive-hold-settlement-002-20261008"
+ENTRY_PAUSE_FILE = "PAUSE_ENTRIES"
 TAKE_PROFIT_PER_CONTRACT = Decimal("0.05")
 EXIT_VALUE_MARGIN = Decimal("0.02")
 
@@ -410,6 +411,9 @@ class Runner:
         if not self.journal.rows() and cash != STARTING_CASH:
             self.status["state"] = "waiting_initial_production_funding"
             return
+        if (self.root / ENTRY_PAUSE_FILE).exists():
+            self.status.update(state="entries_paused", markets=self.current_markets())
+            return
         markets = self.current_markets()
         self.status.update(state="watching", markets=markets)
         for ticker in markets:
@@ -496,6 +500,8 @@ class Runner:
         counterfactual_advantage = counterfactual_actual - counterfactual_hold
         self.status.update(
             updated_ns=time.time_ns(),
+            entries_paused=(self.root / ENTRY_PAUSE_FILE).exists(),
+            stop_exists=(self.root / "STOP").exists(),
             submitted_attempts=len(rows),
             recorded_signal_attempts=len(attempts),
             arrival_cancellations=sum(row["state"] == "arrival_canceled" for row in attempts),

@@ -42,6 +42,11 @@ order ID is found.
 The monitor verifies that the signed exchange position exactly matches the durable ledger and then waits for the
 official result. It has no early-exit order path. Any foreign or mismatched exposure stops new execution.
 
+`/data/production-adaptive-001/PAUSE_ENTRIES` pauses only new entry evaluation. Settlement reconciliation,
+uncertain-order reconciliation, position verification, and historical exit auditing continue while that file is
+present. The broader `STOP` file remains an emergency process-loop stop and should not be used for a routine entry
+pause when a position may still require verification or settlement bookkeeping.
+
 ## Exit-versus-hold audit
 
 Every filled monitored exit remains linked to its original entry. After Kalshi publishes the official binary

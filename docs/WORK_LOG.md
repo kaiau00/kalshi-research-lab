@@ -304,3 +304,10 @@ At the user's request, lowered the adaptive production runner's fixed all-in max
 entries. Preserved the original $3 registration and all prior trades in the same durable ledger, and added the
 immutable risk revision `adaptive-fixed-risk-002-20261008`. The adaptive signal, 5–300 second window, 4% minimum
 modeled net edge, IOC entry execution, $100 bankroll baseline, and hold-to-official-settlement policy are unchanged.
+
+## 2026-10-08 — New production entries paused for audit
+
+At the user's request, paused new real-money entries while leaving recording and research active. One $2-policy
+entry filled immediately before the initial emergency stop became visible. Replaced the broad stop with the
+durable `PAUSE_ENTRIES` control so the runner continues exact position verification, official-settlement
+reconciliation, uncertain-order checks, and the historical exit audit without evaluating or submitting new entries.
