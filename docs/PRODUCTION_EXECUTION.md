@@ -17,32 +17,27 @@ separate from `demo_execution` and uses a new durable ledger at
 - Minimum modeled net edge: 0.04 after the configured taker fee
 - Variance: 70% of the last 60 seconds plus 30% of the last 600 seconds
 - Entry execution: 500 ms delayed IOC, at most three signal attempts and one entry fill per ticker
-- Position monitoring: once per second from the live production order book and updated BRTI forecast
-- Exit execution: reduce-only IOC against displayed best-bid depth, at most three exit attempts per ticker
-- Take profit: estimated net exit profit of at least $0.05 per contract after the modeled exit fee
-- Value exit: net executable value exceeds the updated modeled settlement value by at least $0.02 per contract
-- Thesis exit: updated modeled probability is at or below the entry all-in basis per contract
-- Otherwise: hold to official settlement
+- Position policy: hold every future fill to Kalshi's official settlement
+- Position monitoring: verify the signed exchange position against the durable ledger once per second
+- Early-exit submission: disabled under `adaptive-hold-settlement-002-20261008`
 
 ## Required deployment guards
 
 Production execution starts only when `LAB_PRODUCTION_ENABLED=1` and
-`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`. Monitored exits additionally require
-`LAB_PRODUCTION_EXIT_AUTHORIZATION=real-btc-15m-adaptive-monitored-exit-2026-10-07`. The application refuses to
+`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`. Hold-only execution additionally requires
+`LAB_PRODUCTION_HOLD_AUTHORIZATION=real-btc-15m-adaptive-hold-settlement-2026-10-08`. The application refuses to
 run demo and production execution simultaneously. The account must initially expose exactly $100 on exchange
 index 2 and no positions or resting orders.
 
 Before every submission, the runner verifies exchange and shard status, account cash, the absence of any nonzero
 shard-2 position or resting order, a fresh production order book, and that the original limit remains marketable
 at the modeled arrival time. Every signal is written before its 500 ms delay, so arrival cancellations count
-toward the same three-attempt limit as replay. It writes entry and exit intents with SQLite `synchronous=FULL`
-before each POST. Exit orders set `reduce_only=true`, so Kalshi caps them at the current position. There are no
-automatic POST retries. An unknown request result blocks later orders until the exact client order ID is found.
+toward the same three-attempt limit as replay. It writes entry intents with SQLite `synchronous=FULL` before each
+POST. There are no automatic POST retries. An unknown request result blocks later orders until the exact client
+order ID is found.
 
-The monitor verifies that the signed exchange position exactly matches the durable ledger before evaluating an
-exit. It uses the displayed best bid and available depth, never a midpoint or last trade. A partial IOC fill is
-recorded and only the remaining verified position may be offered later. Any foreign or mismatched exposure stops
-new execution.
+The monitor verifies that the signed exchange position exactly matches the durable ledger and then waits for the
+official result. It has no early-exit order path. Any foreign or mismatched exposure stops new execution.
 
 ## Exit-versus-hold audit
 
@@ -55,8 +50,12 @@ result, the runner writes one immutable counterfactual record with:
 
 A positive exit advantage means the exit saved money relative to holding; a negative value means the exit cost
 money. The protected production status reports resolved and pending comparisons, aggregate actual and hold P&L,
-helped/hurt counts, and the ten most recent market-level records. This audit submits no orders and does not change
-the frozen entry, sizing, or exit rules.
+helped/hurt counts, and the ten most recent market-level records. This audit is retained for the completed
+`adaptive-monitored-exit-001-20261007` phase and submits no orders. New fills use the hold-only policy above.
+
+Kalshi settlement records may report gross YES and NO quantities after a reduce-only offset. Historical partial
+exits are reconciled by verifying the signed net quantity (`YES - NO`) against the durable remaining position;
+future hold-only positions normally settle with only the originally purchased side.
 
 The production client contains no transfer or withdrawal method. Funding is a separate one-time commissioning
 operation. Production status is password protected at `/api/production/status` and `/production`.

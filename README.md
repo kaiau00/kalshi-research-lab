@@ -4,9 +4,10 @@ A BTC-only, 15-minute market recorder, strategy research system, and tightly sco
 authorized production pilot is limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
 with a $100 bankroll baseline and a fixed $3 maximum per market. Its first hold-to-settlement phase was paused
 after losing $24.2438 across 23 settled trades; see the
-[production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). The production runner now supports
-one-second position monitoring and reduce-only IOC exits under a separately authorized, durably logged revision. The
-purpose is to reject weak ideas and measure promising ones, not to promise a return on $100.
+[production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). A later monitored-exit phase is preserved
+in the durable ledger and exit-versus-hold audit. The current production revision verifies each position against
+that ledger and holds it to Kalshi's official settlement; early-exit submission is disabled. The purpose is to
+reject weak ideas and measure promising ones, not to promise a return on $100.
 
 ## What is implemented
 

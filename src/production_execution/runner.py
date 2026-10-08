@@ -23,8 +23,8 @@ STARTING_CASH = Decimal("100.00")
 RISK_PER_MARKET = Decimal("3.00")
 CONFIG_REVISION = "adaptive-production-001-20261007"
 AUTHORIZATION = "real-btc-15m-adaptive-3usd-2026-10-07"
-EXIT_AUTHORIZATION = "real-btc-15m-adaptive-monitored-exit-2026-10-07"
-EXIT_REVISION = "adaptive-monitored-exit-001-20261007"
+HOLD_AUTHORIZATION = "real-btc-15m-adaptive-hold-settlement-2026-10-08"
+HOLD_REVISION = "adaptive-hold-settlement-002-20261008"
 TAKE_PROFIT_PER_CONTRACT = Decimal("0.05")
 EXIT_VALUE_MARGIN = Decimal("0.02")
 
@@ -76,8 +76,8 @@ class Runner:
     def __init__(self, state_provider, root=None, client=None):
         if os.environ.get("LAB_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
             raise RuntimeError("Production execution authorization token is absent")
-        if os.environ.get("LAB_PRODUCTION_EXIT_AUTHORIZATION") != EXIT_AUTHORIZATION:
-            raise RuntimeError("Production monitored-exit authorization token is absent")
+        if os.environ.get("LAB_PRODUCTION_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
+            raise RuntimeError("Production hold-to-settlement authorization token is absent")
         if state_provider is None:
             raise ValueError("Production market-state provider is required")
         self.state_provider = state_provider
@@ -90,15 +90,12 @@ class Runner:
         self.journal = Journal(self.root / "orders.sqlite3", max_order_cost=RISK_PER_MARKET)
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
         self.journal.register(self.cfg.to_dict(), identity, STRATEGY, CONFIG_REVISION)
-        self.journal.register_exit(
+        self.journal.register_hold_policy(
             {
-                "revision": EXIT_REVISION,
-                "monitor_interval_seconds": 1,
-                "take_profit_per_contract": str(TAKE_PROFIT_PER_CONTRACT),
-                "exit_value_margin": str(EXIT_VALUE_MARGIN),
-                "thesis_invalidation": "probability_at_or_below_entry_all_in_basis",
-                "execution": "reduce-only IOC against displayed best bid",
-                "maximum_exit_attempts_per_market": 3,
+                "revision": HOLD_REVISION,
+                "position_policy": "hold_to_official_settlement",
+                "monitor": "verify exact signed exchange position against durable ledger",
+                "early_exit_submission": "disabled",
             }
         )
         self.status = {
@@ -111,8 +108,8 @@ class Runner:
             "config_revision": CONFIG_REVISION,
             "exchange_index": 2,
             "subaccount": 0,
-            "execution": "500ms delayed entry IOC; 1s monitored reduce-only exit IOC; no POST retry",
-            "exit_revision": EXIT_REVISION,
+            "execution": "500ms delayed entry IOC; hold to official settlement; no POST retry",
+            "position_policy_revision": HOLD_REVISION,
             "strategy_parameters": {
                 "min_seconds_left": self.cfg.min_seconds_left,
                 "max_seconds_left": self.cfg.max_seconds_left,
@@ -121,9 +118,8 @@ class Runner:
                 "slow_window_seconds": self.cfg.slow_window_seconds,
                 "variance_blend": "70% fast + 30% slow",
                 "sizing": "fixed",
-                "take_profit_per_contract": str(TAKE_PROFIT_PER_CONTRACT),
-                "exit_value_margin": str(EXIT_VALUE_MARGIN),
-                "thesis_invalidation": "probability_at_or_below_entry_all_in_basis",
+                "position_management": "hold_to_official_settlement",
+                "early_exit_submission": "disabled",
             },
             "started_ns": time.time_ns(),
         }
@@ -277,7 +273,7 @@ class Runner:
         if exchange_quantity != expected:
             raise RuntimeError("Production account position differs from durable ledger")
         self.status.update(
-            state="monitoring_position",
+            state="holding_to_settlement",
             open_position={
                 "ticker": ticker,
                 "side": position["side"],
@@ -285,43 +281,6 @@ class Runner:
                 "basis_per_contract": str(position["basis_per_contract"]),
             },
         )
-        decision = self.exit_decision(position)
-        if decision is None:
-            return True
-        if not await self.exchange_ready():
-            self.status["state"] = "exchange_paused_with_position"
-            return True
-        payload = exit_payload(
-            ticker,
-            position["side"],
-            decision["quantity"],
-            decision["outcome_bid"],
-        )
-        if payload is None:
-            return True
-        self.journal.exit_intent(payload, decision)
-        started_ns = time.time_ns()
-        try:
-            response = await self.client.submit(payload)
-            self.status["last_exit_ack"] = {
-                "client_order_id": payload["client_order_id"],
-                "ticker": ticker,
-                "received": bool(response),
-                "elapsed_ms": (time.time_ns() - started_ns) / 1e6,
-                "triggers": decision["triggers"],
-            }
-        except httpx.HTTPStatusError as exc:
-            definitive = exc.response.status_code in (400, 401, 403, 422, 429)
-            self.journal.error(
-                payload["client_order_id"],
-                "HTTP_" + str(exc.response.status_code),
-                definitive=definitive,
-            )
-            if exc.response.status_code in (401, 403):
-                raise RuntimeError("Production credential lacks exit-order permission") from None
-        except httpx.RequestError as exc:
-            self.journal.error(payload["client_order_id"], type(exc).__name__)
-        await self.reconcile()
         return True
 
     async def account(self):

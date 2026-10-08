@@ -75,6 +75,18 @@ class Journal:
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('exit_registration',?)", (value,))
         self.db.commit()
 
+    def register_hold_policy(self, config):
+        value = dumps(config)
+        old = self.db.execute(
+            "SELECT value FROM metadata WHERE key='hold_policy_registration'"
+        ).fetchone()
+        if old and old[0] != value:
+            raise RuntimeError("Production hold policy registration changed; preserve and review")
+        self.db.execute(
+            "INSERT OR IGNORE INTO metadata VALUES ('hold_policy_registration',?)", (value,)
+        )
+        self.db.commit()
+
     def rows(self, ticker=None):
         return [
             dict(row)
@@ -430,12 +442,19 @@ class Journal:
         position = self.entry_position(ticker)
         if not position or position["remaining"] <= 0:
             raise RuntimeError("Production settlement has no remaining tracked position")
-        quantities = {"yes": Decimal(0), "no": Decimal(0)}
-        quantities[position["side"]] = position["remaining"]
+        yes_count = Decimal(str(response.get("yes_count_fp", "NaN")))
+        no_count = Decimal(str(response.get("no_count_fp", "NaN")))
+        expected_net_yes = (
+            position["remaining"] if position["side"] == "yes" else -position["remaining"]
+        )
         if (
             response.get("ticker") != ticker
             or response.get("exchange_index") != 2
-            or any(Decimal(str(response[side + "_count_fp"])) != quantities[side] for side in ("yes", "no"))
+            or not yes_count.is_finite()
+            or not no_count.is_finite()
+            or yes_count < 0
+            or no_count < 0
+            or yes_count - no_count != expected_net_yes
             or response.get("market_result") not in ("yes", "no")
         ):
             raise RuntimeError("Production settlement differs from tracked fills; review account activity")

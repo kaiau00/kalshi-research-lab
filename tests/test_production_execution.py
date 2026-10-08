@@ -15,7 +15,8 @@ from production_execution.client import BASE, ProductionClient, validate_order
 from production_execution.journal import Journal
 from production_execution.runner import (
     AUTHORIZATION,
-    EXIT_AUTHORIZATION,
+    HOLD_AUTHORIZATION,
+    HOLD_REVISION,
     Runner,
     exit_payload,
     order_payload,
@@ -81,6 +82,11 @@ def test_production_client_is_fixed_to_real_host_and_cannot_transfer():
         try:
             with pytest.raises(httpx.HTTPStatusError):
                 await client.submit(intent())
+            assert len(calls) == 1
+            with pytest.raises(ValueError, match="early-exit submissions are disabled"):
+                await client.submit(
+                    exit_payload("KXBTC15M-26OCT071415-15", "yes", 4, Decimal(".61"))
+                )
             assert len(calls) == 1
             with pytest.raises(httpx.HTTPStatusError):
                 await client.get("/markets/KXBTC15M-26OCT071415-15")
@@ -189,6 +195,65 @@ def test_production_journal_tracks_reduce_only_exit_and_realized_pnl(tmp_path):
     journal.db.close()
 
 
+def test_partial_exit_settlement_reconciles_gross_yes_and_no_counts(tmp_path):
+    journal = Journal(tmp_path / "orders.sqlite3")
+    entry = order_payload(
+        {
+            "ticker": "KXBTC15M-26OCT080100-00",
+            "limit": Decimal(".11"),
+            "quantity": 25,
+            "side": "no",
+        }
+    )
+    journal.intent(entry, {"side": "no"})
+    filled_entry = result(entry, fill="25")
+    filled_entry.update(
+        taker_fill_cost_dollars="2.750000",
+        taker_fees_dollars=".171400",
+        yes_price_dollars=".89",
+        no_price_dollars=".11",
+    )
+    journal.reconcile(entry["client_order_id"], filled_entry)
+
+    first_exit = exit_payload(entry["ticker"], "no", 25, Decimal(".066"))
+    journal.exit_intent(first_exit, {"triggers": ["entry_thesis_invalidated"]})
+    first_fill = result(first_exit, fill=".02")
+    first_fill.update(
+        taker_fill_cost_dollars=".018680",
+        taker_fees_dollars=".000120",
+        yes_price_dollars=".934",
+        no_price_dollars=".066",
+    )
+    journal.reconcile_exit(first_exit["client_order_id"], first_fill)
+
+    second_exit = exit_payload(entry["ticker"], "no", 24, Decimal(".062"))
+    journal.exit_intent(second_exit, {"triggers": ["entry_thesis_invalidated"]})
+    second_fill = result(second_exit, fill="24")
+    second_fill.update(
+        taker_fill_cost_dollars="22.488000",
+        taker_fees_dollars=".099200",
+        yes_price_dollars=".938",
+        no_price_dollars=".062",
+    )
+    journal.reconcile_exit(second_exit["client_order_id"], second_fill)
+    assert journal.entry_position(entry["ticker"])["remaining"] == Decimal(".98")
+
+    settlement = {
+        "ticker": entry["ticker"],
+        "exchange_index": 2,
+        "yes_count_fp": "24.02",
+        "no_count_fp": "25.00",
+        "market_result": "yes",
+    }
+    journal.settlement(entry["ticker"], settlement)
+    assert Decimal(journal.settled()[0]["pnl"]) == Decimal("-.11451888")
+    comparison = journal.record_counterfactual(entry["ticker"], "yes", finalized_ns=123)
+    assert comparison["actual_pnl"] == "-1.53140000"
+    assert comparison["hold_pnl"] == "-2.921400"
+    assert comparison["exit_advantage"] == "1.39000000"
+    journal.db.close()
+
+
 def test_arrival_cancellations_count_toward_three_signal_limit(tmp_path):
     journal = Journal(tmp_path / "orders.sqlite3")
     decision = {"ticker": "KXBTC15M-26OCT071415-15", "side": "yes"}
@@ -214,7 +279,7 @@ def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monk
 
     client = MarketResultClient()
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_PRODUCTION_EXIT_AUTHORIZATION", EXIT_AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=client)
     try:
         entry = intent("yes")
@@ -273,7 +338,11 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
 
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_PRODUCTION_EXIT_AUTHORIZATION", EXIT_AUTHORIZATION)
+    monkeypatch.delenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", raising=False)
+    with pytest.raises(RuntimeError, match="hold-to-settlement authorization token"):
+        Runner(lambda: replay.state, tmp_path, client=FakeClient())
+
+    monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=FakeClient())
     try:
         signal = runner.signal(ticker, Decimal("100"), now_ns=now)
@@ -282,6 +351,8 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         assert runner.status["strategy"] == "adaptive_volatility"
         assert runner.status["risk_per_market"] == "3.00"
         assert runner.status["bankroll_baseline"] == "100.00"
+        assert runner.status["position_policy_revision"] == HOLD_REVISION
+        assert runner.status["strategy_parameters"]["early_exit_submission"] == "disabled"
         registration = json.loads(
             runner.journal.db.execute(
                 "SELECT value FROM metadata WHERE key='registration'"
@@ -289,31 +360,45 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         )
         assert registration["environment"] == "production"
         assert registration["exchange_index"] == 2
+        hold_policy = json.loads(
+            runner.journal.db.execute(
+                "SELECT value FROM metadata WHERE key='hold_policy_registration'"
+            ).fetchone()[0]
+        )
+        assert hold_policy["revision"] == HOLD_REVISION
+        assert hold_policy["position_policy"] == "hold_to_official_settlement"
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()
         runner.lock.close()
 
 
-def test_live_position_monitor_uses_executable_bid_and_triggers_take_profit(tmp_path, monkeypatch):
-    replay, ticker, _, now = prepared(risk_per_market="3.00")
-    replay.state.books[ticker].yes = {Decimal(".50"): Decimal("4")}
+def test_live_position_monitor_holds_and_has_no_exit_submission_path(tmp_path, monkeypatch):
+    replay, ticker, _, _ = prepared(risk_per_market="3.00")
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_PRODUCTION_EXIT_AUTHORIZATION", EXIT_AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=FakeClient())
     try:
-        decision = runner.exit_decision(
-            {
-                "ticker": ticker,
-                "side": "yes",
-                "remaining": Decimal("4"),
-                "basis_per_contract": Decimal(".40"),
-            },
-            now_ns=now,
+        entry = intent("yes")
+        entry["ticker"] = ticker
+        runner.journal.intent(entry, {"side": "yes"})
+        filled_entry = result(entry, fill="4")
+        filled_entry.update(
+            taker_fill_cost_dollars="1.5200",
+            taker_fees_dollars=".0500",
+            yes_price_dollars=".38",
+            no_price_dollars=".62",
         )
-        assert decision["outcome_bid"] == Decimal(".50")
-        assert decision["quantity"] == 4
-        assert "take_profit" in decision["triggers"]
+        runner.journal.reconcile(entry["client_order_id"], filled_entry)
+
+        managed = asyncio.run(
+            runner.manage_position([{"ticker": ticker, "position_fp": "4.00"}])
+        )
+
+        assert managed is True
+        assert runner.status["state"] == "holding_to_settlement"
+        assert runner.status["open_position"]["quantity"] == "4"
+        assert runner.journal.exit_rows() == []
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()

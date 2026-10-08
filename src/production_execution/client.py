@@ -73,6 +73,8 @@ class ProductionClient:
 
     async def submit(self, payload):
         validate_order(payload, self.max_order_cost)
+        if payload.get("reduce_only"):
+            raise ValueError("Production early-exit submissions are disabled")
         path = PREFIX + "/portfolio/events/orders"
         response = await self.http.post(
             BASE + path,
