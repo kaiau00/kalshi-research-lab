@@ -297,3 +297,10 @@ the decision. No production order was submitted. The report is preserved in
   counted toward the frozen three-attempt limit. The paused runner must not resume unchanged.
 - Recorded the evidence and required remediation in `PRODUCTION_PILOT_001_POSTMORTEM.md`. No strategy parameter,
   order, balance, or settlement was modified during the investigation.
+
+## 2026-10-08 — Production risk lowered to $2
+
+At the user's request, lowered the adaptive production runner's fixed all-in maximum from $3 to $2 for future
+entries. Preserved the original $3 registration and all prior trades in the same durable ledger, and added the
+immutable risk revision `adaptive-fixed-risk-002-20261008`. The adaptive signal, 5–300 second window, 4% minimum
+modeled net edge, IOC entry execution, $100 bankroll baseline, and hold-to-official-settlement policy are unchanged.

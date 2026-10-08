@@ -11,7 +11,7 @@ separate from `demo_execution` and uses a new durable ledger at
 - Subaccount: 0
 - Strategy: `adaptive_volatility`
 - Bankroll baseline: $100; profits do not increase sizing
-- Maximum all-in entry cost: $3 per market
+- Maximum all-in entry cost: $2 per market for future entries under `adaptive-fixed-risk-002-20261008`
 - Sizing: fixed; no Kelly sizing
 - Entry window: 5 to 300 seconds before close
 - Minimum modeled net edge: 0.04 after the configured taker fee
@@ -23,8 +23,11 @@ separate from `demo_execution` and uses a new durable ledger at
 
 ## Required deployment guards
 
-Production execution starts only when `LAB_PRODUCTION_ENABLED=1` and
-`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`. Hold-only execution additionally requires
+Production execution starts only when `LAB_PRODUCTION_ENABLED=1`,
+`LAB_PRODUCTION_AUTHORIZATION=real-btc-15m-adaptive-3usd-2026-10-07`, and
+`LAB_PRODUCTION_RISK_AUTHORIZATION=real-btc-15m-adaptive-2usd-2026-10-08`. The original authorization and
+registration are retained as immutable history; the risk authorization lowers all future entry orders to a $2
+all-in maximum. Hold-only execution additionally requires
 `LAB_PRODUCTION_HOLD_AUTHORIZATION=real-btc-15m-adaptive-hold-settlement-2026-10-08`. The application refuses to
 run demo and production execution simultaneously. The account must initially expose exactly $100 on exchange
 index 2 and no positions or resting orders.

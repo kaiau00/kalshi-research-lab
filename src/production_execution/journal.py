@@ -16,7 +16,7 @@ def fill_count(order):
 
 
 class Journal:
-    def __init__(self, path, max_order_cost="3.00"):
+    def __init__(self, path, max_order_cost="2.00"):
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.max_order_cost = Decimal(max_order_cost)
         self.db = sqlite3.connect(path)
@@ -73,6 +73,18 @@ class Journal:
         if old and old[0] != value:
             raise RuntimeError("Production exit registration changed; preserve this ledger and review")
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES ('exit_registration',?)", (value,))
+        self.db.commit()
+
+    def register_risk_policy(self, config):
+        value = dumps(config)
+        old = self.db.execute(
+            "SELECT value FROM metadata WHERE key='risk_policy_registration'"
+        ).fetchone()
+        if old and old[0] != value:
+            raise RuntimeError("Production risk policy registration changed; preserve and review")
+        self.db.execute(
+            "INSERT OR IGNORE INTO metadata VALUES ('risk_policy_registration',?)", (value,)
+        )
         self.db.commit()
 
     def register_hold_policy(self, config):

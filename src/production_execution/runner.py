@@ -20,9 +20,12 @@ from .journal import Journal, dumps, fill_count
 
 STRATEGY = "adaptive_volatility"
 STARTING_CASH = Decimal("100.00")
-RISK_PER_MARKET = Decimal("3.00")
+INITIAL_RISK_PER_MARKET = Decimal("3.00")
+RISK_PER_MARKET = Decimal("2.00")
 CONFIG_REVISION = "adaptive-production-001-20261007"
 AUTHORIZATION = "real-btc-15m-adaptive-3usd-2026-10-07"
+RISK_AUTHORIZATION = "real-btc-15m-adaptive-2usd-2026-10-08"
+RISK_REVISION = "adaptive-fixed-risk-002-20261008"
 HOLD_AUTHORIZATION = "real-btc-15m-adaptive-hold-settlement-2026-10-08"
 HOLD_REVISION = "adaptive-hold-settlement-002-20261008"
 TAKE_PROFIT_PER_CONTRACT = Decimal("0.05")
@@ -76,6 +79,8 @@ class Runner:
     def __init__(self, state_provider, root=None, client=None):
         if os.environ.get("LAB_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
             raise RuntimeError("Production execution authorization token is absent")
+        if os.environ.get("LAB_PRODUCTION_RISK_AUTHORIZATION") != RISK_AUTHORIZATION:
+            raise RuntimeError("Production two-dollar risk authorization token is absent")
         if os.environ.get("LAB_PRODUCTION_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
             raise RuntimeError("Production hold-to-settlement authorization token is absent")
         if state_provider is None:
@@ -85,11 +90,23 @@ class Runner:
         self.root.mkdir(parents=True, exist_ok=True)
         self.lock = (self.root / "runner.lock").open("a")
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        initial_cfg = Experiment(
+            bankroll=str(STARTING_CASH), risk_per_market=str(INITIAL_RISK_PER_MARKET)
+        )
         self.cfg = Experiment(bankroll=str(STARTING_CASH), risk_per_market=str(RISK_PER_MARKET))
         self.client = client or ProductionClient(max_order_cost=RISK_PER_MARKET)
         self.journal = Journal(self.root / "orders.sqlite3", max_order_cost=RISK_PER_MARKET)
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
-        self.journal.register(self.cfg.to_dict(), identity, STRATEGY, CONFIG_REVISION)
+        self.journal.register(initial_cfg.to_dict(), identity, STRATEGY, CONFIG_REVISION)
+        self.journal.register_risk_policy(
+            {
+                "revision": RISK_REVISION,
+                "previous_maximum_all_in_entry_cost": str(INITIAL_RISK_PER_MARKET),
+                "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
+                "sizing": "fixed",
+                "effective_scope": "future entry orders",
+            }
+        )
         self.journal.register_hold_policy(
             {
                 "revision": HOLD_REVISION,
@@ -105,6 +122,7 @@ class Runner:
             "state": "starting",
             "bankroll_baseline": str(STARTING_CASH),
             "risk_per_market": str(RISK_PER_MARKET),
+            "risk_policy_revision": RISK_REVISION,
             "config_revision": CONFIG_REVISION,
             "exchange_index": 2,
             "subaccount": 0,
@@ -118,6 +136,7 @@ class Runner:
                 "slow_window_seconds": self.cfg.slow_window_seconds,
                 "variance_blend": "70% fast + 30% slow",
                 "sizing": "fixed",
+                "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
                 "position_management": "hold_to_official_settlement",
                 "early_exit_submission": "disabled",
             },

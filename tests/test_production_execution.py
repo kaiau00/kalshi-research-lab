@@ -17,6 +17,8 @@ from production_execution.runner import (
     AUTHORIZATION,
     HOLD_AUTHORIZATION,
     HOLD_REVISION,
+    RISK_AUTHORIZATION,
+    RISK_REVISION,
     Runner,
     exit_payload,
     order_payload,
@@ -119,11 +121,19 @@ def test_production_client_is_fixed_to_real_host_and_cannot_transfer():
         {"subaccount": 1},
     ],
 )
-def test_production_scope_and_three_dollar_cap_are_enforced(change):
+def test_production_scope_and_two_dollar_cap_are_enforced(change):
     payload = intent()
     payload.update(change)
     with pytest.raises(ValueError):
         validate_order(payload)
+
+
+def test_production_entry_builder_and_validator_enforce_two_dollar_cap():
+    payload = intent()
+    assert payload["count"] == "5"
+    validate_order(payload)
+    with pytest.raises(ValueError, match="cost exceeds"):
+        validate_order(dict(payload, count="6"))
 
 
 def test_reduce_only_exit_uses_opposite_v2_book_side_and_cannot_open_risk():
@@ -196,7 +206,7 @@ def test_production_journal_tracks_reduce_only_exit_and_realized_pnl(tmp_path):
 
 
 def test_partial_exit_settlement_reconciles_gross_yes_and_no_counts(tmp_path):
-    journal = Journal(tmp_path / "orders.sqlite3")
+    journal = Journal(tmp_path / "orders.sqlite3", max_order_cost="3.00")
     entry = order_payload(
         {
             "ticker": "KXBTC15M-26OCT080100-00",
@@ -205,6 +215,8 @@ def test_partial_exit_settlement_reconciles_gross_yes_and_no_counts(tmp_path):
             "side": "no",
         }
     )
+    # Preserve the exact historical $3-cap entry after the live builder moved to $2.
+    entry["count"] = "25"
     journal.intent(entry, {"side": "no"})
     filled_entry = result(entry, fill="25")
     filled_entry.update(
@@ -267,7 +279,7 @@ def test_arrival_cancellations_count_toward_three_signal_limit(tmp_path):
 
 
 def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monkeypatch):
-    replay, ticker, _, _ = prepared(risk_per_market="3.00")
+    replay, ticker, _, _ = prepared(risk_per_market="2.00")
 
     class MarketResultClient(FakeClient):
         def __init__(self):
@@ -279,6 +291,7 @@ def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monk
 
     client = MarketResultClient()
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
     monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=client)
     try:
@@ -330,7 +343,7 @@ class FakeClient:
 
 
 def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tmp_path, monkeypatch):
-    replay, ticker, _, now = prepared(risk_per_market="3.00")
+    replay, ticker, _, now = prepared(risk_per_market="2.00")
     expected = replay.accounts["adaptive_volatility"]
     replay._decide(expected, ticker, now)
     monkeypatch.delenv("LAB_PRODUCTION_AUTHORIZATION", raising=False)
@@ -338,6 +351,11 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
 
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.delenv("LAB_PRODUCTION_RISK_AUTHORIZATION", raising=False)
+    with pytest.raises(RuntimeError, match="two-dollar risk authorization token"):
+        Runner(lambda: replay.state, tmp_path, client=FakeClient())
+
+    monkeypatch.setenv("LAB_PRODUCTION_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
     monkeypatch.delenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", raising=False)
     with pytest.raises(RuntimeError, match="hold-to-settlement authorization token"):
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
@@ -349,7 +367,8 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         for field in ("side", "limit", "quantity", "probability", "edge", "arrival_ns"):
             assert signal[field] == expected.pending[ticker][field]
         assert runner.status["strategy"] == "adaptive_volatility"
-        assert runner.status["risk_per_market"] == "3.00"
+        assert runner.status["risk_per_market"] == "2.00"
+        assert runner.status["risk_policy_revision"] == RISK_REVISION
         assert runner.status["bankroll_baseline"] == "100.00"
         assert runner.status["position_policy_revision"] == HOLD_REVISION
         assert runner.status["strategy_parameters"]["early_exit_submission"] == "disabled"
@@ -360,6 +379,14 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
         )
         assert registration["environment"] == "production"
         assert registration["exchange_index"] == 2
+        assert registration["config"]["risk_per_market"] == "3.00"
+        risk_policy = json.loads(
+            runner.journal.db.execute(
+                "SELECT value FROM metadata WHERE key='risk_policy_registration'"
+            ).fetchone()[0]
+        )
+        assert risk_policy["revision"] == RISK_REVISION
+        assert risk_policy["maximum_all_in_entry_cost"] == "2.00"
         hold_policy = json.loads(
             runner.journal.db.execute(
                 "SELECT value FROM metadata WHERE key='hold_policy_registration'"
@@ -374,8 +401,9 @@ def test_runner_requires_explicit_deployment_token_and_reuses_adaptive_signal(tm
 
 
 def test_live_position_monitor_holds_and_has_no_exit_submission_path(tmp_path, monkeypatch):
-    replay, ticker, _, _ = prepared(risk_per_market="3.00")
+    replay, ticker, _, _ = prepared(risk_per_market="2.00")
     monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
     monkeypatch.setenv("LAB_PRODUCTION_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=FakeClient())
     try:

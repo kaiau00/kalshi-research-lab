@@ -2,7 +2,7 @@
 
 A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
 authorized production pilot is limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
-with a $100 bankroll baseline and a fixed $3 maximum per market. Its first hold-to-settlement phase was paused
+with a $100 bankroll baseline and a fixed $2 maximum per future entry. Its first hold-to-settlement phase was paused
 after losing $24.2438 across 23 settled trades; see the
 [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). A later monitored-exit phase is preserved
 in the durable ledger and exit-versus-hold audit. The current production revision verifies each position against
@@ -86,10 +86,12 @@ edge = p_side - (q + fee(1, q))
 
 An entry requires at least `0.04`, or four percentage points, of modeled edge after fees. It must also have 5 to
 300 seconds remaining, fresh BRTI and order-book data, a supported fee schedule, and a valid two-sided quote.
-The strategy buys the largest integer number of contracts whose price plus fees fits within the fixed $3 maximum:
+The research/demo strategy buys the largest integer number of contracts whose price plus fees fits within its
+fixed $3 maximum. The current production revision applies the same calculation with a lower $2 maximum:
 
 ```text
-n = max integer n such that n * q + fee(n, q) <= $3
+n_demo = max integer n such that n * q + fee(n, q) <= $3
+n_live = max integer n such that n * q + fee(n, q) <= $2
 ```
 
 There is no Kelly sizing and no early exit. A filled position is held through the official finalized outcome. The
