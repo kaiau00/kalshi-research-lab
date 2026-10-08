@@ -44,6 +44,20 @@ exit. It uses the displayed best bid and available depth, never a midpoint or la
 recorded and only the remaining verified position may be offered later. Any foreign or mismatched exposure stops
 new execution.
 
+## Exit-versus-hold audit
+
+Every filled monitored exit remains linked to its original entry. After Kalshi publishes the official binary
+result, the runner writes one immutable counterfactual record with:
+
+- actual net P&L from the exit, including entry and exit fees, plus any officially settled remainder;
+- net P&L that the original full entry would have earned if held to the official result; and
+- exit advantage, defined as actual net P&L minus hold-to-settlement net P&L.
+
+A positive exit advantage means the exit saved money relative to holding; a negative value means the exit cost
+money. The protected production status reports resolved and pending comparisons, aggregate actual and hold P&L,
+helped/hurt counts, and the ten most recent market-level records. This audit submits no orders and does not change
+the frozen entry, sizing, or exit rules.
+
 The production client contains no transfer or withdrawal method. Funding is a separate one-time commissioning
 operation. Production status is password protected at `/api/production/status` and `/production`.
 

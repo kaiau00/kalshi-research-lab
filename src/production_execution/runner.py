@@ -129,6 +129,7 @@ class Runner:
         }
         self.account_at = 0.0
         self.settlement_at = 0.0
+        self.counterfactual_at = 0.0
 
     async def read(self, path, params=None):
         return await self.client.get(path, params)
@@ -362,6 +363,33 @@ class Runner:
                 self.journal.settlement(ticker, matches[0])
         self.settlement_at = time.time()
 
+    async def update_counterfactuals(self):
+        if time.time() - self.counterfactual_at < 30:
+            return
+        state = self.state_provider()
+        done = self.journal.counterfactual_tickers()
+        for ticker in self.journal.exited_tickers() - done:
+            market = state.markets.get(ticker, {})
+            if market.get("status") != "finalized" or market.get("result") not in ("yes", "no"):
+                try:
+                    try:
+                        response = await self.read("/markets/" + ticker)
+                    except httpx.HTTPStatusError as exc:
+                        if exc.response.status_code != 404:
+                            raise
+                        response = await self.read("/historical/markets/" + ticker)
+                    market = response.get("market", response)
+                    if market.get("ticker") != ticker:
+                        raise RuntimeError("Counterfactual market response changed ticker")
+                except (httpx.HTTPError, RuntimeError, KeyError) as exc:
+                    self.status["exit_counterfactual_error"] = type(exc).__name__
+                    continue
+            if market.get("status") != "finalized" or market.get("result") not in ("yes", "no"):
+                continue
+            self.journal.record_counterfactual(ticker, market["result"])
+            self.status.pop("exit_counterfactual_error", None)
+        self.counterfactual_at = time.time()
+
     async def exposure_clear(self):
         positions = await self.read("/portfolio/positions", {"exchange_index": 2, "limit": 1000})
         orders = await self.read(
@@ -392,6 +420,7 @@ class Runner:
         if not await self.reconcile():
             self.status["state"] = "blocked_unconfirmed_order"
             return
+        await self.update_counterfactuals()
         positions_data = await self.read(
             "/portfolio/positions", {"exchange_index": 2, "limit": 1000}
         )
@@ -479,6 +508,14 @@ class Runner:
         settled = self.journal.settled()
         exits = self.journal.exit_rows()
         attempts = self.journal.recorded_attempts()
+        counterfactuals = self.journal.counterfactuals()
+        counterfactual_actual = sum(
+            (Decimal(row["actual_pnl"]) for row in counterfactuals), Decimal(0)
+        )
+        counterfactual_hold = sum(
+            (Decimal(row["hold_pnl"]) for row in counterfactuals), Decimal(0)
+        )
+        counterfactual_advantage = counterfactual_actual - counterfactual_hold
         self.status.update(
             updated_ns=time.time_ns(),
             submitted_attempts=len(rows),
@@ -497,6 +534,25 @@ class Runner:
                 if row["exchange_order"]
             ),
             early_exit_net_pnl=str(self.journal.exit_pnl()),
+            exit_counterfactual={
+                "officially_resolved": len(counterfactuals),
+                "pending_official_results": len(
+                    self.journal.exited_tickers() - self.journal.counterfactual_tickers()
+                ),
+                "actual_net_pnl": str(counterfactual_actual),
+                "hold_to_settlement_net_pnl": str(counterfactual_hold),
+                "exit_advantage": str(counterfactual_advantage),
+                "exits_helped": sum(Decimal(row["exit_advantage"]) > 0 for row in counterfactuals),
+                "exits_hurt": sum(Decimal(row["exit_advantage"]) < 0 for row in counterfactuals),
+                "ties": sum(Decimal(row["exit_advantage"]) == 0 for row in counterfactuals),
+                "recent": [
+                    {
+                        **json.loads(row["details"]),
+                        "finalized_ns": row["finalized_ns"],
+                    }
+                    for row in counterfactuals[-10:]
+                ],
+            },
             unresolved_orders=len(self.journal.pending()) + len(self.journal.pending_exits()),
             recent_orders=[
                 {

@@ -53,13 +53,14 @@ class ProductionClient:
         }
 
     async def get(self, path, params=None):
+        market_result = re.fullmatch(r"/(?:historical/)?markets/(KXBTC15M-[A-Z0-9-]+)", path)
         if path not in (
             "/exchange/status",
             "/portfolio/balance",
             "/portfolio/orders",
             "/portfolio/positions",
             "/portfolio/settlements",
-        ):
+        ) and not market_result:
             raise ValueError("Unsupported production read path")
         signed_path = PREFIX + path
         response = await self.http.get(

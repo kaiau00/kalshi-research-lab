@@ -82,6 +82,11 @@ def test_production_client_is_fixed_to_real_host_and_cannot_transfer():
             with pytest.raises(httpx.HTTPStatusError):
                 await client.submit(intent())
             assert len(calls) == 1
+            with pytest.raises(httpx.HTTPStatusError):
+                await client.get("/markets/KXBTC15M-26OCT071415-15")
+            with pytest.raises(httpx.HTTPStatusError):
+                await client.get("/historical/markets/KXBTC15M-26OCT071415-15")
+            assert len(calls) == 3
             for path in (
                 "/portfolio/intra_exchange_instance_transfer",
                 "/portfolio/target_balance_allocation",
@@ -90,7 +95,7 @@ def test_production_client_is_fixed_to_real_host_and_cannot_transfer():
             ):
                 with pytest.raises(ValueError):
                     await client.get(path)
-            assert len(calls) == 1
+            assert len(calls) == 3
         finally:
             await client.close()
 
@@ -176,6 +181,11 @@ def test_production_journal_tracks_reduce_only_exit_and_realized_pnl(tmp_path):
     assert journal.entry_position(entry["ticker"])["remaining"] == 0
     assert journal.exit_pnl() == Decimal(".36")
     assert not journal.open_positions()
+    comparison = journal.record_counterfactual(entry["ticker"], "no", finalized_ns=123)
+    assert comparison["actual_pnl"] == "0.3600"
+    assert comparison["hold_pnl"] == "-1.5700"
+    assert comparison["exit_advantage"] == "1.9300"
+    assert journal.record_counterfactual(entry["ticker"], "no", finalized_ns=123) == comparison
     journal.db.close()
 
 
@@ -189,6 +199,63 @@ def test_arrival_cancellations_count_toward_three_signal_limit(tmp_path):
     with pytest.raises(RuntimeError, match="attempt or fill limit"):
         journal.begin_attempt("signal-four", decision)
     journal.db.close()
+
+
+def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monkeypatch):
+    replay, ticker, _, _ = prepared(risk_per_market="3.00")
+
+    class MarketResultClient(FakeClient):
+        def __init__(self):
+            self.reads = []
+
+        async def get(self, path, params=None):
+            self.reads.append((path, params))
+            return {"market": {"ticker": ticker, "status": "finalized", "result": "no"}}
+
+    client = MarketResultClient()
+    monkeypatch.setenv("LAB_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_PRODUCTION_EXIT_AUTHORIZATION", EXIT_AUTHORIZATION)
+    runner = Runner(lambda: replay.state, tmp_path, client=client)
+    try:
+        entry = intent("yes")
+        entry["ticker"] = ticker
+        runner.journal.intent(entry, {"side": "yes"})
+        filled_entry = result(entry, fill="4")
+        filled_entry.update(
+            taker_fill_cost_dollars="1.5200",
+            taker_fees_dollars=".0500",
+            yes_price_dollars=".38",
+            no_price_dollars=".62",
+        )
+        runner.journal.reconcile(entry["client_order_id"], filled_entry)
+        exit_order = exit_payload(ticker, "yes", 4, Decimal(".50"))
+        runner.journal.exit_intent(exit_order, {"triggers": ["take_profit"]})
+        filled_exit = result(exit_order, fill="4")
+        filled_exit.update(
+            taker_fill_cost_dollars="2.0000",
+            taker_fees_dollars=".0700",
+            yes_price_dollars=".50",
+            no_price_dollars=".50",
+        )
+        runner.journal.reconcile_exit(exit_order["client_order_id"], filled_exit)
+        replay.state.markets[ticker].update(status="closed", result="")
+
+        asyncio.run(runner.update_counterfactuals())
+        runner.snapshot()
+
+        assert client.reads == [("/markets/" + ticker, None)]
+        report = runner.status["exit_counterfactual"]
+        assert report["officially_resolved"] == 1
+        assert report["pending_official_results"] == 0
+        assert report["actual_net_pnl"] == "0.3600"
+        assert report["hold_to_settlement_net_pnl"] == "-1.5700"
+        assert report["exit_advantage"] == "1.9300"
+        assert report["exits_helped"] == 1
+        assert report["exits_hurt"] == 0
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
 
 class FakeClient:
     key_id = "production-test"

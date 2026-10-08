@@ -41,6 +41,11 @@ class Journal:
                 payload TEXT NOT NULL, trigger TEXT NOT NULL, state TEXT NOT NULL,
                 exchange_order TEXT, error TEXT, pnl TEXT
             );
+            CREATE TABLE IF NOT EXISTS exit_counterfactuals (
+                ticker TEXT PRIMARY KEY, finalized_ns INTEGER NOT NULL, result TEXT NOT NULL,
+                actual_pnl TEXT NOT NULL, hold_pnl TEXT NOT NULL,
+                exit_advantage TEXT NOT NULL, details TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
         """)
 
@@ -346,11 +351,77 @@ class Journal:
         )
         self.db.commit()
 
-    def exit_pnl(self):
+    def exit_pnl(self, ticker=None):
         return sum(
-            (Decimal(row["pnl"]) for row in self.exit_rows() if row["pnl"] is not None),
+            (Decimal(row["pnl"]) for row in self.exit_rows(ticker) if row["pnl"] is not None),
             Decimal(0),
         )
+
+    def counterfactuals(self):
+        return [
+            dict(row)
+            for row in self.db.execute("SELECT * FROM exit_counterfactuals ORDER BY finalized_ns")
+        ]
+
+    def counterfactual_tickers(self):
+        return {row["ticker"] for row in self.counterfactuals()}
+
+    def exited_tickers(self):
+        return {
+            row["ticker"]
+            for row in self.exit_rows()
+            if row["exchange_order"] and fill_count(json.loads(row["exchange_order"])) > 0
+        }
+
+    def record_counterfactual(self, ticker, result, finalized_ns=None):
+        if result not in ("yes", "no"):
+            raise ValueError("Counterfactual requires an official binary result")
+        if ticker not in self.exited_tickers():
+            raise RuntimeError("Counterfactual requires an executed monitored exit")
+        position = self.entry_position(ticker)
+        if not position:
+            raise RuntimeError("Counterfactual has no tracked entry")
+        settlement = self.db.execute(
+            "SELECT * FROM settlements WHERE ticker=?", (ticker,)
+        ).fetchone()
+        if position["remaining"] > 0 and settlement is None:
+            return None
+        settlement_pnl = Decimal(settlement["pnl"]) if settlement else Decimal(0)
+        actual_pnl = self.exit_pnl(ticker) + settlement_pnl
+        hold_payout = position["entered"] if result == position["side"] else Decimal(0)
+        hold_pnl = hold_payout - position["entry_cost"]
+        advantage = actual_pnl - hold_pnl
+        details = {
+            "ticker": ticker,
+            "entry_side": position["side"],
+            "entry_quantity": position["entered"],
+            "entry_cost": position["entry_cost"],
+            "exited_quantity": position["entered"] - position["remaining"],
+            "settled_quantity": position["remaining"],
+            "official_result": result,
+            "actual_exit_pnl": self.exit_pnl(ticker),
+            "actual_settlement_pnl": settlement_pnl,
+            "actual_total_pnl": actual_pnl,
+            "hold_to_settlement_pnl": hold_pnl,
+            "exit_advantage": advantage,
+        }
+        finalized_ns = int(finalized_ns or time.time_ns())
+        existing = self.db.execute(
+            "SELECT * FROM exit_counterfactuals WHERE ticker=?", (ticker,)
+        ).fetchone()
+        value = (ticker, finalized_ns, result, str(actual_pnl), str(hold_pnl), str(advantage), dumps(details))
+        if existing:
+            comparable = tuple(existing[key] for key in (
+                "ticker", "finalized_ns", "result", "actual_pnl", "hold_pnl", "exit_advantage", "details"
+            ))
+            if comparable != value:
+                raise RuntimeError("Official counterfactual changed after it was recorded")
+            return dict(existing)
+        self.db.execute("INSERT INTO exit_counterfactuals VALUES (?,?,?,?,?,?,?)", value)
+        self.db.commit()
+        return dict(self.db.execute(
+            "SELECT * FROM exit_counterfactuals WHERE ticker=?", (ticker,)
+        ).fetchone())
 
     def settled(self):
         return [dict(row) for row in self.db.execute("SELECT * FROM settlements")]
