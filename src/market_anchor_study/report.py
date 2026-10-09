@@ -21,6 +21,11 @@ MAX_BINARY_SPREAD = Decimal("0.02")
 MINIMUM_SETTLEMENTS = 100
 MINIMUM_UTC_DATES = 20
 MAXIMUM_DRAWDOWN = 20.0
+PROSPECTIVE_START_ISO = "2026-10-10T00:00:00Z"
+PROSPECTIVE_START_NS = 1_791_580_800_000_000_000
+SOURCE_DATASET = "e2d5cb33e7c44660809b531f03d4b4e3"
+SOURCE_REGISTRATION_SHA256 = "40879e6c4a912838074963672443c25f94284603d5eedcf3f6135b8eb5e125d3"
+SOURCE_ACCOUNT = "adaptive_baseline"
 
 
 def registration():
@@ -64,6 +69,23 @@ def registration():
 
 def registration_hash():
     return hashlib.sha256(canonical(registration())).hexdigest()
+
+
+def prospective_registration():
+    return {
+        "study": STUDY,
+        "candidate_registration_sha256": registration_hash(),
+        "candidate_registration_commit": "3fd26aa",
+        "prospective_start": PROSPECTIVE_START_ISO,
+        "prospective_start_ns": PROSPECTIVE_START_NS,
+        "source": {
+            "study": "003",
+            "dataset": SOURCE_DATASET,
+            "registration_sha256": SOURCE_REGISTRATION_SHA256,
+            "account": SOURCE_ACCOUNT,
+        },
+        "scope": "Future simulated baseline fills only; no order submission path",
+    }
 
 
 def qualifies(trade):
@@ -161,11 +183,25 @@ def summarize(trades, *, observed_dates=None):
     return result
 
 
-def checkpoint_report(path, account, *, created_after_ns=None, observed_dates=None, phase="development"):
+def checkpoint_report(
+    path,
+    account,
+    *,
+    created_after_ns=None,
+    observed_dates=None,
+    phase="development",
+    expected_dataset=None,
+    expected_registration_sha256=None,
+):
     envelope = json.loads(Path(path).read_text())
     data = envelope["data"]
     if hashlib.sha256(canonical(data)).hexdigest() != envelope["sha256"]:
         raise ValueError("Checkpoint checksum mismatch")
+    if expected_dataset is not None and data.get("dataset") != expected_dataset:
+        raise ValueError("Checkpoint dataset mismatch")
+    if (expected_registration_sha256 is not None
+            and data.get("registration_sha256") != expected_registration_sha256):
+        raise ValueError("Checkpoint registration mismatch")
     state = decode(data["state"])
     replay = state["replay"]
     if account not in replay.accounts:
@@ -173,6 +209,8 @@ def checkpoint_report(path, account, *, created_after_ns=None, observed_dates=No
     trades = replay.accounts[account].closed
     if created_after_ns is not None:
         trades = [trade for trade in trades if trade["created_ns"] >= created_after_ns]
+    if observed_dates is None:
+        observed_dates = sorted({trade["settled_day"] for trade in trades})
     report = {
         "study": STUDY,
         "candidate": CANDIDATE,
@@ -195,3 +233,35 @@ def checkpoint_report(path, account, *, created_after_ns=None, observed_dates=No
     report["report_sha256"] = hashlib.sha256(canonical(report)).hexdigest()
     return report
 
+
+def prospective_status(root, *, now_ns=None):
+    root = Path(root)
+    checkpoint = root / "candidate-studies" / "003" / "checkpoint.json"
+    if not checkpoint.exists():
+        return {"study": STUDY, "candidate": CANDIDATE, "state": "waiting_for_source"}
+    try:
+        report = checkpoint_report(
+            checkpoint,
+            SOURCE_ACCOUNT,
+            created_after_ns=PROSPECTIVE_START_NS,
+            phase="prospective",
+            expected_dataset=SOURCE_DATASET,
+            expected_registration_sha256=SOURCE_REGISTRATION_SHA256,
+        )
+        report["prospective_registration"] = prospective_registration()
+        report["state"] = (
+            "waiting_for_start"
+            if (now_ns if now_ns is not None else datetime.now(timezone.utc).timestamp() * 1e9)
+            < PROSPECTIVE_START_NS
+            else "collecting"
+        )
+        report.pop("report_sha256")
+        report["report_sha256"] = hashlib.sha256(canonical(report)).hexdigest()
+        return report
+    except (KeyError, OSError, TypeError, ValueError) as exc:
+        return {
+            "study": STUDY,
+            "candidate": CANDIDATE,
+            "state": "report_error",
+            "error": f"{type(exc).__name__}: {exc}",
+        }

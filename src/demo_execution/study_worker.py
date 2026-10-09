@@ -12,6 +12,7 @@ import os
 import sqlite3
 from pathlib import Path
 
+from market_anchor_study.report import prospective_status
 from research_lab.storage import canonical
 
 
@@ -44,6 +45,10 @@ def latest_edge_status():
         return report
     except (OSError, ValueError, TypeError):
         return {"study": "edge-validation-001", "state": "stale_report_invalid"}
+
+
+def latest_market_anchor_status():
+    return prospective_status(volume_root())
 
 
 def candidate_work_ready():

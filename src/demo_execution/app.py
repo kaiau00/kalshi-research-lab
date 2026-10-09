@@ -15,7 +15,12 @@ from research_lab.app import create_app as research_app
 from walk_forward_study.runner import ParameterRunner
 
 from .runner import Runner
-from .study_worker import candidate_work_ready, latest_candidate_status, latest_edge_status
+from .study_worker import (
+    candidate_work_ready,
+    latest_candidate_status,
+    latest_edge_status,
+    latest_market_anchor_status,
+)
 
 
 def create_app(record=True):
@@ -142,6 +147,10 @@ def create_app(record=True):
         if os.environ.get('LAB_CANDIDATE_STUDY_ENABLED') != '1':
             return {'study': 'edge-validation-001', 'state': 'disabled'}
         return await asyncio.to_thread(latest_edge_status)
+
+    @app.get('/api/market-anchor/status', dependencies=[Depends(authenticated)])
+    async def market_anchor_status():
+        return await asyncio.to_thread(latest_market_anchor_status)
 
     @app.get('/edge-validation', dependencies=[Depends(authenticated)])
     async def edge_validation_dashboard():

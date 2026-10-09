@@ -7,8 +7,17 @@ after losing $24.2438 across 23 settled trades; see the
 [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). A later monitored-exit phase is preserved
 in the durable ledger and exit-versus-hold audit. The current production revision verifies each position against
 that ledger and holds it to Kalshi's official settlement; early-exit submission is disabled. New production
-entries are currently paused while the live-fill audit is performed; recording and research continue. The purpose is to
+entries are currently paused after the completed live-fill audit; recording and research continue. The purpose is to
 reject weak ideas and measure promising ones, not to promise a return on $100.
+
+The live-fill audit is now complete: the original production strategy lost $37.0860 across all 37 resolved
+fills, or $25.0750 under identical-entry hold-to-settlement accounting. New real-money entries remain paused.
+The current research lead is Market Anchor Study 005, a frozen filter that avoids extreme quotes and requires
+the BTC model to remain close to Kalshi's own implied probability. It was positive in two retrospective
+ten-day windows, but one consistency gate failed and the results are not prospective proof. A new protected
+prospective window begins on October 10, 2026; see the
+[protocol](docs/MARKET_ANCHOR_STUDY_005_PROTOCOL.md) and
+[interim results](docs/MARKET_ANCHOR_STUDY_005_RESULTS.md).
 
 ## What is implemented
 

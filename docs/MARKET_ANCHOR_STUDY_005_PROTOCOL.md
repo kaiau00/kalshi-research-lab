@@ -36,8 +36,12 @@ model, use settlement outcomes at decision time, change sizing, or add exits.
 3. Regardless of the secondary result, start a new prospective observation window after the registration
    and source code are frozen. Only that future window can satisfy the formal gate.
 
+The prospective window is frozen to begin at **2026-10-10 00:00:00 UTC**. It filters only new simulated
+`adaptive_baseline` fills created at or after that instant from Candidate Study 003. The protected
+`/api/market-anchor/status` report reads the existing verified checkpoint, so this adds no second raw-event
+replay and no trading path.
+
 Formal review requires at least 20 prospective UTC dates and 100 official settlements. Net P&L, P&L after
 removing the three largest winners, one-cent and two-cent adverse-fill P&L, more than 50% positive days,
 at least four positive chronological blocks out of five, and maximum drawdown no greater than $20 must all
 pass. A passing result permits another untouched confirmation; it does not authorize live trading.
-
