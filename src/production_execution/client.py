@@ -18,7 +18,7 @@ TICKER = re.compile(r"KXBTC15M-[A-Z0-9-]+\Z")
 class ProductionClient:
     """Narrow production client: portfolio reads and guarded IOC orders."""
 
-    def __init__(self, key_id=None, pem=None, *, max_order_cost="2.00", transport=None):
+    def __init__(self, key_id=None, pem=None, *, max_order_cost="1.00", transport=None):
         self.key_id = key_id or os.environ["KALSHI_API_KEY_ID"]
         if pem is None:
             pem_text = os.environ.get("KALSHI_PRIVATE_KEY_PEM", "")
@@ -88,7 +88,7 @@ class ProductionClient:
         await self.http.aclose()
 
 
-def validate_order(payload, max_order_cost=Decimal("2.00")):
+def validate_order(payload, max_order_cost=Decimal("1.00")):
     required = {
         "ticker",
         "client_order_id",

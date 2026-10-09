@@ -338,3 +338,12 @@ replay, and has no order path. All 157 tests and Ruff passed. Railway deployment
 `2a02684f-a4ec-4d57-87fc-029c5a7801a9` reached SUCCESS. Post-deploy verification showed Study 005
 `waiting_for_start`, the recorder and Candidate Study 003 healthy, and production still `entries_paused` with
 the unchanged 37 fills, no position, and no unresolved order.
+
+## 2026-10-09 — Market Anchor live pilot authorized
+
+At the user's explicit request, prepared the frozen `market_agreement_band_001` candidate for a small real-money
+pilot with a $1 all-in maximum per market. The production implementation reuses the adaptive 4% signal and applies
+the exact Study 005 decision-time price, market-agreement, and spread filters. It uses 500 ms delayed IOC entries,
+holds fills to official settlement, retains the uncertainty and foreign-exposure blocks, and writes to a new
+durable ledger at `/data/production-market-anchor-001`. The completed 37-fill adaptive ledger remains preserved.
+This authorization precedes the prospective Study 005 gate and does not change that study or establish an edge.

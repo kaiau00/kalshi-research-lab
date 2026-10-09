@@ -12,22 +12,31 @@ from pathlib import Path
 
 import httpx
 
+from market_anchor_study.report import (
+    CANDIDATE,
+    MAX_BINARY_SPREAD,
+    MAX_DECISION_PRICE,
+    MAX_MODEL_MARKET_GAP,
+    MIN_DECISION_PRICE,
+    qualifies,
+    registration_hash,
+)
 from research_lab.engine import Replay, entry_fee
 from research_lab.settings import Experiment
 
 from .client import ProductionClient
 from .journal import Journal, dumps, fill_count
 
-STRATEGY = "adaptive_volatility"
-STARTING_CASH = Decimal("100.00")
-INITIAL_RISK_PER_MARKET = Decimal("3.00")
-RISK_PER_MARKET = Decimal("2.00")
-CONFIG_REVISION = "adaptive-production-001-20261007"
-AUTHORIZATION = "real-btc-15m-adaptive-3usd-2026-10-07"
-RISK_AUTHORIZATION = "real-btc-15m-adaptive-2usd-2026-10-08"
-RISK_REVISION = "adaptive-fixed-risk-002-20261008"
-HOLD_AUTHORIZATION = "real-btc-15m-adaptive-hold-settlement-2026-10-08"
-HOLD_REVISION = "adaptive-hold-settlement-002-20261008"
+STRATEGY = CANDIDATE
+SOURCE_STRATEGY = "adaptive_volatility"
+STARTING_CASH = Decimal("57.9544")
+RISK_PER_MARKET = Decimal("1.00")
+CONFIG_REVISION = "market-anchor-production-001-20261009"
+AUTHORIZATION = "real-btc-15m-market-anchor-001-2026-10-09"
+RISK_AUTHORIZATION = "real-btc-15m-market-anchor-1usd-2026-10-09"
+RISK_REVISION = "market-anchor-fixed-risk-001-20261009"
+HOLD_AUTHORIZATION = "real-btc-15m-market-anchor-hold-2026-10-09"
+HOLD_REVISION = "market-anchor-hold-settlement-001-20261009"
 ENTRY_PAUSE_FILE = "PAUSE_ENTRIES"
 TAKE_PROFIT_PER_CONTRACT = Decimal("0.05")
 EXIT_VALUE_MARGIN = Decimal("0.02")
@@ -78,34 +87,35 @@ def exit_payload(ticker, held_side, count, outcome_bid):
 
 class Runner:
     def __init__(self, state_provider, root=None, client=None):
-        if os.environ.get("LAB_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
-            raise RuntimeError("Production execution authorization token is absent")
-        if os.environ.get("LAB_PRODUCTION_RISK_AUTHORIZATION") != RISK_AUTHORIZATION:
-            raise RuntimeError("Production two-dollar risk authorization token is absent")
-        if os.environ.get("LAB_PRODUCTION_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
-            raise RuntimeError("Production hold-to-settlement authorization token is absent")
+        if os.environ.get("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
+            raise RuntimeError("Market Anchor production authorization token is absent")
+        if os.environ.get("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION") != RISK_AUTHORIZATION:
+            raise RuntimeError("Market Anchor one-dollar risk authorization token is absent")
+        if os.environ.get("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
+            raise RuntimeError("Market Anchor hold-to-settlement authorization token is absent")
         if state_provider is None:
             raise ValueError("Production market-state provider is required")
         self.state_provider = state_provider
-        self.root = Path(root or os.environ.get("LAB_PRODUCTION_DIR", "/data/production-adaptive-001"))
+        self.root = Path(
+            root
+            or os.environ.get(
+                "LAB_MARKET_ANCHOR_PRODUCTION_DIR", "/data/production-market-anchor-001"
+            )
+        )
         self.root.mkdir(parents=True, exist_ok=True)
         self.lock = (self.root / "runner.lock").open("a")
         fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        initial_cfg = Experiment(
-            bankroll=str(STARTING_CASH), risk_per_market=str(INITIAL_RISK_PER_MARKET)
-        )
         self.cfg = Experiment(bankroll=str(STARTING_CASH), risk_per_market=str(RISK_PER_MARKET))
         self.client = client or ProductionClient(max_order_cost=RISK_PER_MARKET)
         self.journal = Journal(self.root / "orders.sqlite3", max_order_cost=RISK_PER_MARKET)
         identity = hashlib.sha256(self.client.key_id.encode()).hexdigest()
-        self.journal.register(initial_cfg.to_dict(), identity, STRATEGY, CONFIG_REVISION)
+        self.journal.register(self.cfg.to_dict(), identity, STRATEGY, CONFIG_REVISION)
         self.journal.register_risk_policy(
             {
                 "revision": RISK_REVISION,
-                "previous_maximum_all_in_entry_cost": str(INITIAL_RISK_PER_MARKET),
                 "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
                 "sizing": "fixed",
-                "effective_scope": "future entry orders",
+                "effective_scope": "all entries in this production revision",
             }
         )
         self.journal.register_hold_policy(
@@ -125,6 +135,7 @@ class Runner:
             "risk_per_market": str(RISK_PER_MARKET),
             "risk_policy_revision": RISK_REVISION,
             "config_revision": CONFIG_REVISION,
+            "candidate_registration_sha256": registration_hash(),
             "exchange_index": 2,
             "subaccount": 0,
             "execution": "500ms delayed entry IOC; hold to official settlement; no POST retry",
@@ -136,6 +147,10 @@ class Runner:
                 "fast_window_seconds": self.cfg.fast_window_seconds,
                 "slow_window_seconds": self.cfg.slow_window_seconds,
                 "variance_blend": "70% fast + 30% slow",
+                "minimum_selected_side_ask": str(MIN_DECISION_PRICE),
+                "maximum_selected_side_ask_exclusive": str(MAX_DECISION_PRICE),
+                "maximum_absolute_raw_vs_market_yes_probability_gap": MAX_MODEL_MARKET_GAP,
+                "maximum_binary_spread": str(MAX_BINARY_SPREAD),
                 "sizing": "fixed",
                 "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
                 "position_management": "hold_to_official_settlement",
@@ -166,9 +181,10 @@ class Runner:
         return sorted(current)
 
     def signal(self, ticker, cash, now_ns=None):
+        now_ns = now_ns or time.time_ns()
         model = Replay(self.cfg)
         model.state = self.state_provider()
-        account = model.accounts[STRATEGY]
+        account = model.accounts[SOURCE_STRATEGY]
         account.cash = min(STARTING_CASH, cash)
         attempts = self.journal.attempts(ticker)
         account.attempts[ticker] = len(attempts)
@@ -176,9 +192,42 @@ class Runner:
             account.last_attempt[ticker] = attempts[-1]["created_ns"]
         if self.journal.entry_position(ticker):
             account.traded.add(ticker)
-        model._decide(account, ticker, now_ns or time.time_ns())
+        model._decide(account, ticker, now_ns)
         self.status["last_rejections"] = account.rejected
-        return account.pending.get(ticker)
+        decision = account.pending.get(ticker)
+        if decision is None:
+            return None
+        book = model._fresh_book(ticker, now_ns)
+        yes_ask = book.best_ask("yes") if book else None
+        no_ask = book.best_ask("no") if book else None
+        if yes_ask is None or no_ask is None:
+            return None
+        decision.update(
+            raw_model_probability=decision["forecast"]["yes_probability"],
+            market_yes_probability=float((yes_ask + Decimal(1) - no_ask) / 2),
+            probability_transform="unchanged_adaptive",
+            quoted_binary_spread=yes_ask + no_ask - Decimal(1),
+        )
+        accepted = qualifies(decision)
+        self.status["last_market_anchor_evaluation"] = {
+            "ticker": ticker,
+            "accepted": accepted,
+            "selected_side": decision["side"],
+            "selected_side_ask": str(decision["limit"]),
+            "raw_model_yes_probability": decision["raw_model_probability"],
+            "market_yes_probability": decision["market_yes_probability"],
+            "absolute_model_market_gap": abs(
+                decision["raw_model_probability"] - decision["market_yes_probability"]
+            ),
+            "binary_spread": str(decision["quoted_binary_spread"]),
+            "created_ns": decision["created_ns"],
+        }
+        if not accepted:
+            self.status["market_anchor_filter_rejections"] = (
+                self.status.get("market_anchor_filter_rejections", 0) + 1
+            )
+            return None
+        return decision
 
     async def reconcile(self):
         pending = [("entry", row) for row in self.journal.pending()]

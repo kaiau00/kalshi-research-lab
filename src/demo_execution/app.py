@@ -191,8 +191,8 @@ def create_app(record=True):
         <meta name="viewport" content="width=device-width,initial-scale=1"><title>Production execution</title>
         <style>body{font:16px system-ui;max-width:900px;margin:40px auto;padding:0 20px;background:#101820;
         color:#edf4f7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#192934;padding:20px;
-        border-radius:12px}a{color:#7bd8ea}</style><h1>Adaptive volatility · production</h1>
-        <p>Real-money BTC 15-minute execution · $3 maximum per market · fixed sizing</p>
+        border-radius:12px}a{color:#7bd8ea}</style><h1>Market Anchor · production</h1>
+        <p>Real-money BTC 15-minute execution · $1 maximum per market · fixed sizing</p>
         <p><a href="/">Research dashboard</a> · <a href="/edge-validation">Edge validation</a></p>
         <pre id="status">Loading…</pre><script>
         async function refresh(){try{let r=await fetch('/api/production/status');if(!r.ok)throw new Error(r.status);

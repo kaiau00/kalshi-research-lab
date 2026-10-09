@@ -16,7 +16,7 @@ def fill_count(order):
 
 
 class Journal:
-    def __init__(self, path, max_order_cost="2.00"):
+    def __init__(self, path, max_order_cost="1.00"):
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.max_order_cost = Decimal(max_order_cost)
         self.db = sqlite3.connect(path)

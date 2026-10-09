@@ -1,5 +1,10 @@
 # Production execution 001
 
+This document preserves the completed adaptive-volatility production revision. It is no longer accepting new
+entries. The current authorized runner is documented in
+[Market Anchor live pilot 001](MARKET_ANCHOR_LIVE_PILOT_001.md) and uses a separate ledger with a $1 all-in
+maximum per market.
+
 The production adapter implements the user-authorized October 7, 2026 real-money pilot. It is deliberately
 separate from `demo_execution` and uses a new durable ledger at
 `/data/production-adaptive-001/orders.sqlite3`.

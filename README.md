@@ -1,23 +1,21 @@
 # Kalshi Research Lab
 
-A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
-authorized production pilot is limited to one adaptive-volatility strategy on Kalshi's BTC 15-minute markets,
-with a $100 bankroll baseline and a fixed $2 maximum per future entry. Its first hold-to-settlement phase was paused
-after losing $24.2438 across 23 settled trades; see the
-[production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md). A later monitored-exit phase is preserved
-in the durable ledger and exit-versus-hold audit. The current production revision verifies each position against
-that ledger and holds it to Kalshi's official settlement; early-exit submission is disabled. New production
-entries are currently paused after the completed live-fill audit; recording and research continue. The purpose is to
-reject weak ideas and measure promising ones, not to promise a return on $100.
+A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The current
+authorized production pilot is Market Anchor `market_agreement_band_001`, with a fixed $1 all-in maximum per
+market, IOC entries, and hold-to-official-settlement position management. It uses a separate durable ledger and
+the same production account on exchange index 2. The purpose is to reject weak ideas and measure promising ones,
+not to promise a return.
 
-The live-fill audit is now complete: the original production strategy lost $37.0860 across all 37 resolved
-fills, or $25.0750 under identical-entry hold-to-settlement accounting. New real-money entries remain paused.
+The original adaptive-volatility live-fill audit is complete: it lost $37.0860 across all 37 resolved fills, or
+$25.0750 under identical-entry hold-to-settlement accounting. That revision remains closed and its ledger is
+preserved.
 The current research lead is Market Anchor Study 005, a frozen filter that avoids extreme quotes and requires
 the BTC model to remain close to Kalshi's own implied probability. It was positive in two retrospective
 ten-day windows, but one consistency gate failed and the results are not prospective proof. A new protected
 prospective window begins on October 10, 2026; see the
 [protocol](docs/MARKET_ANCHOR_STUDY_005_PROTOCOL.md) and
-[interim results](docs/MARKET_ANCHOR_STUDY_005_RESULTS.md).
+[interim results](docs/MARKET_ANCHOR_STUDY_005_RESULTS.md). The user authorized a small live pilot before that
+gate completed; this does not promote the candidate or change the prospective study.
 
 ## What is implemented
 
@@ -96,13 +94,16 @@ edge = p_side - (q + fee(1, q))
 
 An entry requires at least `0.04`, or four percentage points, of modeled edge after fees. It must also have 5 to
 300 seconds remaining, fresh BRTI and order-book data, a supported fee schedule, and a valid two-sided quote.
-The research/demo strategy buys the largest integer number of contracts whose price plus fees fits within its
-fixed $3 maximum. The current production revision applies the same calculation with a lower $2 maximum:
+The research strategy buys the largest integer number of contracts whose price plus fees fits within its fixed
+budget. The current Market Anchor production revision applies a $1 maximum:
 
 ```text
-n_demo = max integer n such that n * q + fee(n, q) <= $3
-n_live = max integer n such that n * q + fee(n, q) <= $2
+n_live = max integer n such that n * q + fee(n, q) <= $1
 ```
+
+Market Anchor then accepts the adaptive signal only when the selected-side decision ask is at least $0.30 and
+below $0.95, the absolute difference between the raw model YES probability and Kalshi's two-sided midpoint is at
+most 0.08, and the binary spread is at most $0.02. These filters are evaluated from the decision-time quote.
 
 There is no Kelly sizing and no early exit. A filled position is held through the official finalized outcome. The
 research execution model uses a 500 ms arrival delay, limit-price enforcement, and displayed best-level depth.
@@ -174,7 +175,11 @@ The initial hourly comparison is a preregistered forward benchmark across the th
 
 Open positions are shown at cost for drawdown, **not** liquidation value. Reports retain unavailable outcomes and locked capital. Confidence intervals remain unavailable below 20 observed UTC days and 50 settled markets; reaching those counts alone is not proof of an edge. Daily resampling does not account for all serial dependence or multiple testing.
 
-See [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md), [production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md), [operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and [work log](docs/WORK_LOG.md).
+See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
+[production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md),
+[archived adaptive production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md),
+[operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and
+[work log](docs/WORK_LOG.md).
 
 The complete paused live record is summarized in
 [Production live audit 001](docs/PRODUCTION_LIVE_AUDIT_001.md).
