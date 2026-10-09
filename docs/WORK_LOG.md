@@ -317,3 +317,24 @@ holding every identical entry would have produced -$25.0750, while the monitored
 The model expected 22.54 wins and +$24.7023 hold P&L but observed 17 wins and -$25.0750 hold P&L. Every tested
 side, price band, and modeled-edge band lost on a hold basis, so the audit does not promote a simple filter. The
 production strategy remains paused pending a frozen, forward-validated candidate.
+
+## 2026-10-09 — Market Anchor Study 005
+
+Exploratory analysis of the frozen Study 004 `signal_raw_e04` fills found a simple market-agreement filter that
+avoids extreme quotes. The rule keeps the original adaptive 4% signal only when the selected-side decision ask
+is from $0.30 inclusive to $0.95 exclusive, the raw model and Kalshi midpoint differ by at most 0.08, and the
+binary spread is at most $0.02. It changes neither sizing nor hold-to-settlement execution.
+
+The ten-day Study 004 development window produced 277 settlements, +$13.6701 net P&L, +$7.5333 without its
+three largest winners, +$7.3424 under two-cent adverse fills, eight positive days, four positive chronological
+blocks, and $6.9332 maximum drawdown. After commit `3fd26aa` froze the rule, a one-time secondary application to
+the later ten-day Candidate Study 003 baseline produced 294 settlements, +$8.1592, +$4.1707 without its three
+largest winners, +$1.6809 under two-cent stress, six positive days, three positive blocks, and $5.3735 drawdown.
+The secondary block-consistency gate failed, and both windows are retrospective evidence.
+
+Commit `c3f65d8` adds the protected `/api/market-anchor/status` report and freezes a new prospective start at
+2026-10-10 00:00:00 UTC. The report filters only future Candidate Study 003 baseline fills, adds no raw-event
+replay, and has no order path. All 157 tests and Ruff passed. Railway deployment
+`2a02684f-a4ec-4d57-87fc-029c5a7801a9` reached SUCCESS. Post-deploy verification showed Study 005
+`waiting_for_start`, the recorder and Candidate Study 003 healthy, and production still `entries_paused` with
+the unchanged 37 fills, no position, and no unresolved order.
