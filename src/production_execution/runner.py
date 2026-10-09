@@ -190,7 +190,9 @@ class Runner:
         account.attempts[ticker] = len(attempts)
         if attempts:
             account.last_attempt[ticker] = attempts[-1]["created_ns"]
-        if self.journal.entry_position(ticker):
+        if self.journal.entry_position(ticker) or any(
+            row["state"] == "filter_rejected_marketable" for row in attempts
+        ):
             account.traded.add(ticker)
         model._decide(account, ticker, now_ns)
         self.status["last_rejections"] = account.rejected
@@ -209,6 +211,7 @@ class Runner:
             quoted_binary_spread=yes_ask + no_ask - Decimal(1),
         )
         accepted = qualifies(decision)
+        decision["market_anchor_accepted"] = accepted
         self.status["last_market_anchor_evaluation"] = {
             "ticker": ticker,
             "accepted": accepted,
@@ -226,8 +229,34 @@ class Runner:
             self.status["market_anchor_filter_rejections"] = (
                 self.status.get("market_anchor_filter_rejections", 0) + 1
             )
-            return None
         return decision
+
+    def arrival_fill_preview(self, decision, now_ns=None):
+        now_ns = now_ns or time.time_ns()
+        state = self.state_provider()
+        book = state.books.get(decision["ticker"])
+        meta = state.metadata(decision["ticker"])
+        market = state.markets.get(decision["ticker"], {})
+        levels = book.asks(decision["side"]) if book and book.valid else []
+        if (
+            not meta
+            or now_ns >= meta[2]
+            or market.get("status") != "active"
+            or market.get("result")
+            or not state.fee_supported(self.cfg, decision["ticker"], now_ns)
+            or not levels
+            or now_ns - book.at_ns > self.cfg.max_book_age_ms * 1_000_000
+            or levels[0][0] > Decimal(decision["limit"])
+        ):
+            return None
+        price, displayed = levels[0]
+        quantity = min(int(decision["quantity"]), int(displayed))
+        if quantity < 1:
+            return None
+        cost = price * quantity + entry_fee(price, quantity, self.cfg)
+        if cost > Decimal(decision["reservation"]):
+            return None
+        return {"price": price, "quantity": quantity, "displayed_depth": displayed, "cost": cost}
 
     async def reconcile(self):
         pending = [("entry", row) for row in self.journal.pending()]
@@ -471,6 +500,17 @@ class Runner:
                 continue
             attempt_id = "signal-" + uuid.uuid4().hex
             self.journal.begin_attempt(attempt_id, decision)
+            if not decision["market_anchor_accepted"]:
+                delay = (int(decision["arrival_ns"]) - time.time_ns()) / 1e9
+                if delay > 0:
+                    await asyncio.sleep(delay)
+                if self.arrival_fill_preview(decision) is None:
+                    self.status["state"] = "arrival_ioc_not_marketable"
+                    self.journal.finish_attempt(attempt_id, "arrival_canceled")
+                else:
+                    self.status["state"] = "market_anchor_filtered_out"
+                    self.journal.finish_attempt(attempt_id, "filter_rejected_marketable")
+                continue
             if not await self.exchange_ready():
                 self.status["state"] = "exchange_paused"
                 self.journal.finish_attempt(attempt_id, "arrival_canceled")
@@ -492,21 +532,12 @@ class Runner:
             delay = (int(decision["arrival_ns"]) - time.time_ns()) / 1e9
             if delay > 0:
                 await asyncio.sleep(delay)
-            state = self.state_provider()
-            book = state.books.get(ticker)
-            meta = state.metadata(ticker)
-            levels = book.asks(decision["side"]) if book and book.valid else []
-            if (
-                not meta
-                or time.time_ns() >= meta[2]
-                or not levels
-                or time.time_ns() - book.at_ns > self.cfg.max_book_age_ms * 1_000_000
-                or levels[0][0] > Decimal(decision["limit"])
-            ):
+            preview = self.arrival_fill_preview(decision)
+            if preview is None:
                 self.status["state"] = "arrival_ioc_not_marketable"
                 self.journal.finish_attempt(attempt_id, "arrival_canceled")
                 continue
-            payload = order_payload(decision)
+            payload = order_payload({**decision, "quantity": preview["quantity"]})
             if payload is None:
                 self.journal.finish_attempt(attempt_id, "arrival_canceled")
                 continue
@@ -554,6 +585,9 @@ class Runner:
             submitted_attempts=len(rows),
             recorded_signal_attempts=len(attempts),
             arrival_cancellations=sum(row["state"] == "arrival_canceled" for row in attempts),
+            market_anchor_filtered_marketable=sum(
+                row["state"] == "filter_rejected_marketable" for row in attempts
+            ),
             settled_markets=len(settled),
             realized_net_pnl=str(
                 sum((Decimal(row["pnl"]) for row in settled), Decimal(0))

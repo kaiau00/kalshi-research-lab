@@ -33,6 +33,12 @@ the order intent durably before the POST, never retries an uncertain POST, and b
 client order ID is reconciled. Only one open position can exist at a time. Every fill is compared once per second
 with the signed Kalshi position and held until official settlement.
 
+To match the retrospective filter exactly, every underlying adaptive signal consumes the same 500 ms simulated
+arrival attempt even when Market Anchor rejects it. If that rejected raw attempt would have filled, the market is
+durably marked filtered out and cannot be reconsidered. If it would have canceled, it counts toward the same
+three-attempt limit and ten-second retry interval as the research engine. Accepted orders are capped to the
+integer quantity visible at the best arrival level before submission.
+
 ## Evidence boundary
 
 The candidate earned +$13.6701 in its ten-day development window and +$8.1592 in a later ten-day retrospective

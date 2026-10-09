@@ -158,7 +158,7 @@ class Journal:
         self.db.commit()
 
     def finish_attempt(self, attempt_id, state, client_id=None):
-        if state not in ("arrival_canceled", "submitted"):
+        if state not in ("arrival_canceled", "filter_rejected_marketable", "submitted"):
             raise ValueError("Invalid production attempt state")
         changed = self.db.execute(
             "UPDATE signal_attempts SET state=?,client_id=? WHERE attempt_id=? AND state='signal'",

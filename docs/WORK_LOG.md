@@ -354,3 +354,11 @@ strategy `market_agreement_band_001`, the exact Study 005 candidate hash, $1 ris
 zero fills, no position, no unresolved order, and no runtime error. A volume check confirmed that both the old
 adaptive ledger and the new Market Anchor ledger exist separately. The daily monitor now treats this revision as
 authorized and alerts on drift, safety failures, and 10/25/50-settlement live milestones.
+
+The first post-deployment check found no fill or submitted order, but it exposed a state-fidelity gap: a raw
+adaptive signal rejected by Market Anchor could be evaluated again before the underlying baseline's 500 ms
+attempt outcome was known. Entries were paused with zero fills and zero unresolved orders. The runner now records
+the rejected raw attempt, waits through its modeled arrival, permanently filters the market if that raw attempt
+would have filled, or preserves the ordinary cancellation/retry behavior if it would not. Accepted submissions
+are also capped to the integer depth visible at the best arrival level. All 157 tests and Ruff passed after the
+fix.

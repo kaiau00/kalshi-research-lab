@@ -372,6 +372,7 @@ def test_runner_requires_explicit_tokens_and_applies_market_anchor_filter(tmp_pa
         for field in ("side", "limit", "quantity", "probability", "edge", "arrival_ns"):
             assert signal[field] == expected.pending[ticker][field]
         assert signal["quoted_binary_spread"] == Decimal(".02")
+        assert runner.arrival_fill_preview(signal, now_ns=now)["quantity"] == signal["quantity"]
         assert runner.status["last_market_anchor_evaluation"]["accepted"] is True
         assert runner.status["strategy"] == "market_agreement_band_001"
         assert runner.status["risk_per_market"] == "1.00"
@@ -403,9 +404,15 @@ def test_runner_requires_explicit_tokens_and_applies_market_anchor_filter(tmp_pa
         assert hold_policy["position_policy"] == "hold_to_official_settlement"
 
         replay.state.apply(ws(book_frame(ticker, 3, ".40", ".38"), START + 750.2))
-        assert runner.signal(ticker, Decimal("100"), now_ns=now + 200_000_000) is None
+        rejected = runner.signal(ticker, Decimal("100"), now_ns=now + 200_000_000)
+        assert rejected is not None and rejected["market_anchor_accepted"] is False
         assert runner.status["last_market_anchor_evaluation"]["accepted"] is False
         assert runner.status["market_anchor_filter_rejections"] == 1
+        runner.journal.begin_attempt("filtered", rejected)
+        runner.journal.finish_attempt("filtered", "filter_rejected_marketable")
+        assert runner.signal(ticker, Decimal("100"), now_ns=now + 11_000_000_000) is None
+        runner.snapshot()
+        assert runner.status["market_anchor_filtered_marketable"] == 1
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()
