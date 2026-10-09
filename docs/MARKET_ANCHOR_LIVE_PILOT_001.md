@@ -39,3 +39,11 @@ The candidate earned +$13.6701 in its ten-day development window and +$8.1592 in
 window. The later window passed aggregate P&L, concentration, and two-cent stress checks but was positive in only
 three of five chronological blocks. Both windows were visible before live authorization. Live results and Study
 005 prospective results must be reported separately.
+
+## Deployment
+
+Railway deployment `2cb2d5bc-8f49-4f5c-bc3b-8301901b1c79` reached `SUCCESS` with image digest
+`sha256:ea315c1c6ea9ab131774f64a7dac702ebb1f4e9db3e118adad5fbc651e741849`. Initial verification reported
+`watching`, the exact candidate registration hash, $57.9544 cash, no position, no unresolved order, and zero
+Market Anchor attempts or fills. The completed adaptive ledger and new Market Anchor ledger both existed on the
+persistent volume. The daily monitor was updated to watch this revision and its live milestones.

@@ -347,3 +347,10 @@ the exact Study 005 decision-time price, market-agreement, and spread filters. I
 holds fills to official settlement, retains the uncertainty and foreign-exposure blocks, and writes to a new
 durable ledger at `/data/production-market-anchor-001`. The completed 37-fill adaptive ledger remains preserved.
 This authorization precedes the prospective Study 005 gate and does not change that study or establish an edge.
+
+All 157 tests passed and Ruff was clean. Commit `0f35d01` was deployed as Railway deployment
+`2cb2d5bc-8f49-4f5c-bc3b-8301901b1c79`, which reached `SUCCESS`. Post-deployment status was `watching` with
+strategy `market_agreement_band_001`, the exact Study 005 candidate hash, $1 risk, $57.9544 cash, zero attempts,
+zero fills, no position, no unresolved order, and no runtime error. A volume check confirmed that both the old
+adaptive ledger and the new Market Anchor ledger exist separately. The daily monitor now treats this revision as
+authorized and alerts on drift, safety failures, and 10/25/50-settlement live milestones.
