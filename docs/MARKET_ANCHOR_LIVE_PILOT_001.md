@@ -53,3 +53,8 @@ Railway deployment `2cb2d5bc-8f49-4f5c-bc3b-8301901b1c79` reached `SUCCESS` with
 `watching`, the exact candidate registration hash, $57.9544 cash, no position, no unresolved order, and zero
 Market Anchor attempts or fills. The completed adaptive ledger and new Market Anchor ledger both existed on the
 persistent volume. The daily monitor was updated to watch this revision and its live milestones.
+
+The attempt-fidelity fix was deployed as `e074c389-ed67-4150-a991-ecf98c8bbc9d` with image digest
+`sha256:9d661ee1eb5b29dbbd72113370bb71dad8e3daa00708792a045e5c2c5f8af78e`. It reached `SUCCESS` while entries
+were temporarily paused. Verification showed zero fills, zero submitted orders, no position, no unresolved order,
+and no runtime error. The temporary pause was then removed and the corrected runner returned to `watching`.

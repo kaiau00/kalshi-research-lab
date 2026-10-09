@@ -362,3 +362,8 @@ the rejected raw attempt, waits through its modeled arrival, permanently filters
 would have filled, or preserves the ordinary cancellation/retry behavior if it would not. Accepted submissions
 are also capped to the integer depth visible at the best arrival level. All 157 tests and Ruff passed after the
 fix.
+
+Commit `2dc729b` deployed as `e074c389-ed67-4150-a991-ecf98c8bbc9d` and reached `SUCCESS`. It was verified while
+paused with zero fills, zero submitted orders, no position, no unresolved order, and no runtime error. After the
+temporary pause was removed, the corrected runner returned to `watching` with the $1 cap and exact candidate
+registration unchanged.
