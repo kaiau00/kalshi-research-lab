@@ -1,0 +1,2 @@
+"""Market-anchored candidate research."""
+
