@@ -382,3 +382,17 @@ Exploratory application selected 14 trades in each of two older ten-day windows,
 headline P&L and less than $0.85 drawdown. Both failed the top-three-winner concentration gate. The corresponding
 filter retained only three of the 37 completed live trades and those lost $0.3566. Study 006 is therefore frozen
 as a prospective test beginning 2026-10-10 18:00:00 UTC; it is not promoted or described as proven.
+
+## 2026-10-10 — Conservative Market Anchor live revision deployed
+
+At the user's explicit request, the prior Market Anchor runner was durably paused after 38 filled and settled
+markets. A direct account check then confirmed $50.5066 cash, zero nonzero positions, zero resting orders, and
+zero unresolved orders. That exact cash balance became the baseline for the new isolated ledger at
+`/data/production-market-anchor-conservative-001`.
+
+Commit `fbb3629` was deployed as Railway deployment `d116c901-2b8b-4aea-9d7d-bf19fc9c5aa1`, which reached
+`SUCCESS`. The protected production report verified strategy `market_anchor_conservative_001`, registration
+hash `c5ca04882b762d660fb79f0cdb5724e4e922b5bee3efaf9f12037c28b0411db7`, the frozen filter and risk rules,
+the $1 all-in cap, 500 ms IOC execution, hold-to-settlement policy, and active runner. Initial state was
+`watching` with zero attempts, zero fills, no open position, and no unresolved order. The daily monitor now
+watches the conservative live ledger and Study 006 while preserving the frozen Studies 003 and 005.
