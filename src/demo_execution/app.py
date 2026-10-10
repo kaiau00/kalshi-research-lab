@@ -18,6 +18,7 @@ from .runner import Runner
 from .study_worker import (
     candidate_work_ready,
     latest_candidate_status,
+    latest_conservative_anchor_status,
     latest_edge_status,
     latest_market_anchor_status,
 )
@@ -152,6 +153,10 @@ def create_app(record=True):
     async def market_anchor_status():
         return await asyncio.to_thread(latest_market_anchor_status)
 
+    @app.get('/api/conservative-anchor/status', dependencies=[Depends(authenticated)])
+    async def conservative_anchor_status():
+        return await asyncio.to_thread(latest_conservative_anchor_status)
+
     @app.get('/edge-validation', dependencies=[Depends(authenticated)])
     async def edge_validation_dashboard():
         return HTMLResponse('''<!doctype html><html lang="en"><meta charset="utf-8">
@@ -191,7 +196,7 @@ def create_app(record=True):
         <meta name="viewport" content="width=device-width,initial-scale=1"><title>Production execution</title>
         <style>body{font:16px system-ui;max-width:900px;margin:40px auto;padding:0 20px;background:#101820;
         color:#edf4f7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#192934;padding:20px;
-        border-radius:12px}a{color:#7bd8ea}</style><h1>Market Anchor · production</h1>
+        border-radius:12px}a{color:#7bd8ea}</style><h1>Conservative Market Anchor · production</h1>
         <p>Real-money BTC 15-minute execution · $1 maximum per market · fixed sizing</p>
         <p><a href="/">Research dashboard</a> · <a href="/edge-validation">Edge validation</a></p>
         <pre id="status">Loading…</pre><script>

@@ -7,19 +7,27 @@ import json
 import os
 import time
 import uuid
+from datetime import datetime, timezone
 from decimal import ROUND_CEILING, Decimal
 from pathlib import Path
 
 import httpx
 
-from market_anchor_study.report import (
-    CANDIDATE,
+from conservative_anchor.rules import (
+    ADVERSE_PRICE_BUFFER,
+    COOLDOWN_SECONDS,
+    DAILY_CONSECUTIVE_LOSS_LIMIT,
+    DAILY_LOSS_LIMIT,
     MAX_BINARY_SPREAD,
     MAX_DECISION_PRICE,
     MAX_MODEL_MARKET_GAP,
+    MAXIMUM_REALIZED_DRAWDOWN,
     MIN_DECISION_PRICE,
+    STRATEGY,
+    performance_guard,
     qualifies,
     registration_hash,
+    stressed_edge,
 )
 from research_lab.engine import Replay, entry_fee
 from research_lab.settings import Experiment
@@ -27,16 +35,15 @@ from research_lab.settings import Experiment
 from .client import ProductionClient
 from .journal import Journal, dumps, fill_count
 
-STRATEGY = CANDIDATE
 SOURCE_STRATEGY = "adaptive_volatility"
-STARTING_CASH = Decimal("57.9544")
+STARTING_CASH = Decimal(os.environ.get("LAB_CONSERVATIVE_STARTING_CASH", "50.5066"))
 RISK_PER_MARKET = Decimal("1.00")
-CONFIG_REVISION = "market-anchor-production-001-20261009"
-AUTHORIZATION = "real-btc-15m-market-anchor-001-2026-10-09"
-RISK_AUTHORIZATION = "real-btc-15m-market-anchor-1usd-2026-10-09"
-RISK_REVISION = "market-anchor-fixed-risk-001-20261009"
-HOLD_AUTHORIZATION = "real-btc-15m-market-anchor-hold-2026-10-09"
-HOLD_REVISION = "market-anchor-hold-settlement-001-20261009"
+CONFIG_REVISION = "market-anchor-conservative-production-001-20261010"
+AUTHORIZATION = "real-btc-15m-market-anchor-conservative-001-2026-10-10"
+RISK_AUTHORIZATION = "real-btc-15m-market-anchor-conservative-risk-001-2026-10-10"
+RISK_REVISION = "market-anchor-conservative-risk-001-20261010"
+HOLD_AUTHORIZATION = "real-btc-15m-market-anchor-conservative-hold-2026-10-10"
+HOLD_REVISION = "market-anchor-conservative-hold-001-20261010"
 ENTRY_PAUSE_FILE = "PAUSE_ENTRIES"
 TAKE_PROFIT_PER_CONTRACT = Decimal("0.05")
 EXIT_VALUE_MARGIN = Decimal("0.02")
@@ -87,19 +94,20 @@ def exit_payload(ticker, held_side, count, outcome_bid):
 
 class Runner:
     def __init__(self, state_provider, root=None, client=None):
-        if os.environ.get("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
-            raise RuntimeError("Market Anchor production authorization token is absent")
-        if os.environ.get("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION") != RISK_AUTHORIZATION:
-            raise RuntimeError("Market Anchor one-dollar risk authorization token is absent")
-        if os.environ.get("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
-            raise RuntimeError("Market Anchor hold-to-settlement authorization token is absent")
+        if os.environ.get("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION") != AUTHORIZATION:
+            raise RuntimeError("Conservative Market Anchor production authorization token is absent")
+        if os.environ.get("LAB_CONSERVATIVE_RISK_AUTHORIZATION") != RISK_AUTHORIZATION:
+            raise RuntimeError("Conservative Market Anchor risk authorization token is absent")
+        if os.environ.get("LAB_CONSERVATIVE_HOLD_AUTHORIZATION") != HOLD_AUTHORIZATION:
+            raise RuntimeError("Conservative Market Anchor hold authorization token is absent")
         if state_provider is None:
             raise ValueError("Production market-state provider is required")
         self.state_provider = state_provider
         self.root = Path(
             root
             or os.environ.get(
-                "LAB_MARKET_ANCHOR_PRODUCTION_DIR", "/data/production-market-anchor-001"
+                "LAB_CONSERVATIVE_PRODUCTION_DIR",
+                "/data/production-market-anchor-conservative-001",
             )
         )
         self.root.mkdir(parents=True, exist_ok=True)
@@ -115,6 +123,10 @@ class Runner:
                 "revision": RISK_REVISION,
                 "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
                 "sizing": "fixed",
+                "cooldown_seconds_after_fill": COOLDOWN_SECONDS,
+                "daily_realized_loss_limit": str(DAILY_LOSS_LIMIT),
+                "daily_consecutive_loss_limit": DAILY_CONSECUTIVE_LOSS_LIMIT,
+                "maximum_realized_drawdown": str(MAXIMUM_REALIZED_DRAWDOWN),
                 "effective_scope": "all entries in this production revision",
             }
         )
@@ -151,8 +163,14 @@ class Runner:
                 "maximum_selected_side_ask_exclusive": str(MAX_DECISION_PRICE),
                 "maximum_absolute_raw_vs_market_yes_probability_gap": MAX_MODEL_MARKET_GAP,
                 "maximum_binary_spread": str(MAX_BINARY_SPREAD),
+                "adverse_price_buffer": str(ADVERSE_PRICE_BUFFER),
+                "minimum_edge_after_adverse_price_and_fee": 0.0,
                 "sizing": "fixed",
                 "maximum_all_in_entry_cost": str(RISK_PER_MARKET),
+                "cooldown_seconds_after_fill": COOLDOWN_SECONDS,
+                "daily_realized_loss_limit": str(DAILY_LOSS_LIMIT),
+                "daily_consecutive_loss_limit": DAILY_CONSECUTIVE_LOSS_LIMIT,
+                "maximum_realized_drawdown": str(MAXIMUM_REALIZED_DRAWDOWN),
                 "position_management": "hold_to_official_settlement",
                 "early_exit_submission": "disabled",
             },
@@ -210,9 +228,11 @@ class Runner:
             probability_transform="unchanged_adaptive",
             quoted_binary_spread=yes_ask + no_ask - Decimal(1),
         )
+        decision["adverse_price_buffer"] = str(ADVERSE_PRICE_BUFFER)
+        decision["stressed_edge"] = stressed_edge(decision, self.cfg)
         accepted = qualifies(decision)
-        decision["market_anchor_accepted"] = accepted
-        self.status["last_market_anchor_evaluation"] = {
+        decision["conservative_anchor_accepted"] = accepted
+        self.status["last_conservative_anchor_evaluation"] = {
             "ticker": ticker,
             "accepted": accepted,
             "selected_side": decision["side"],
@@ -223,13 +243,58 @@ class Runner:
                 decision["raw_model_probability"] - decision["market_yes_probability"]
             ),
             "binary_spread": str(decision["quoted_binary_spread"]),
+            "stressed_edge": decision["stressed_edge"],
             "created_ns": decision["created_ns"],
         }
         if not accepted:
-            self.status["market_anchor_filter_rejections"] = (
-                self.status.get("market_anchor_filter_rejections", 0) + 1
+            self.status["conservative_anchor_filter_rejections"] = (
+                self.status.get("conservative_anchor_filter_rejections", 0) + 1
             )
         return decision
+
+    @staticmethod
+    def _settled_ns(response):
+        value = response.get("settled_time")
+        if not value:
+            raise RuntimeError("Production settlement omitted settled_time")
+        return int(datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp() * 1e9)
+
+    def risk_control_state(self, now_ns=None):
+        now_ns = now_ns or time.time_ns()
+        rows = {row["ticker"]: row for row in self.journal.rows()}
+        settlements = []
+        for row in self.journal.settled():
+            response = json.loads(row["response"])
+            settlements.append(
+                {
+                    "ticker": row["ticker"],
+                    "settled_ns": self._settled_ns(response),
+                    "settled_day": datetime.fromtimestamp(
+                        self._settled_ns(response) / 1e9, timezone.utc
+                    ).date().isoformat(),
+                    "pnl": row["pnl"],
+                }
+            )
+        guard = performance_guard(settlements, now_ns)
+        filled = []
+        for row in rows.values():
+            if not row["exchange_order"]:
+                continue
+            order = json.loads(row["exchange_order"])
+            if fill_count(order) > 0:
+                filled.append(row)
+        last_fill_ns = max((row["created_ns"] for row in filled), default=None)
+        cooldown_remaining = 0.0
+        if last_fill_ns is not None:
+            cooldown_remaining = max(
+                0.0,
+                COOLDOWN_SECONDS - (now_ns - last_fill_ns) / 1e9,
+            )
+        guard.update(
+            last_filled_entry_ns=last_fill_ns,
+            cooldown_seconds_remaining=cooldown_remaining,
+        )
+        return guard
 
     def arrival_fill_preview(self, decision, now_ns=None):
         now_ns = now_ns or time.time_ns()
@@ -492,6 +557,17 @@ class Runner:
         if (self.root / ENTRY_PAUSE_FILE).exists():
             self.status.update(state="entries_paused", markets=self.current_markets())
             return
+        risk = self.risk_control_state()
+        self.status["risk_control_state"] = risk
+        if risk["reason"] == "maximum_realized_drawdown":
+            self.status.update(state="risk_halt_drawdown", markets=self.current_markets())
+            return
+        if risk["reason"] in ("daily_loss_limit", "daily_consecutive_loss_limit"):
+            self.status.update(state="risk_halt_daily", markets=self.current_markets())
+            return
+        if risk["cooldown_seconds_remaining"] > 0:
+            self.status.update(state="cooldown", markets=self.current_markets())
+            return
         markets = self.current_markets()
         self.status.update(state="watching", markets=markets)
         for ticker in markets:
@@ -500,7 +576,7 @@ class Runner:
                 continue
             attempt_id = "signal-" + uuid.uuid4().hex
             self.journal.begin_attempt(attempt_id, decision)
-            if not decision["market_anchor_accepted"]:
+            if not decision["conservative_anchor_accepted"]:
                 delay = (int(decision["arrival_ns"]) - time.time_ns()) / 1e9
                 if delay > 0:
                     await asyncio.sleep(delay)
@@ -508,7 +584,7 @@ class Runner:
                     self.status["state"] = "arrival_ioc_not_marketable"
                     self.journal.finish_attempt(attempt_id, "arrival_canceled")
                 else:
-                    self.status["state"] = "market_anchor_filtered_out"
+                    self.status["state"] = "conservative_anchor_filtered_out"
                     self.journal.finish_attempt(attempt_id, "filter_rejected_marketable")
                 continue
             if not await self.exchange_ready():
@@ -585,7 +661,7 @@ class Runner:
             submitted_attempts=len(rows),
             recorded_signal_attempts=len(attempts),
             arrival_cancellations=sum(row["state"] == "arrival_canceled" for row in attempts),
-            market_anchor_filtered_marketable=sum(
+            conservative_anchor_filtered_marketable=sum(
                 row["state"] == "filter_rejected_marketable" for row in attempts
             ),
             settled_markets=len(settled),

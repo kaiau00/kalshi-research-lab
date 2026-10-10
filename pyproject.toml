@@ -25,7 +25,8 @@ dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/research_lab", "src/demo_execution", "src/candidate_study", "src/walk_forward_study",
-            "src/edge_validation", "src/production_execution", "src/market_anchor_study"]
+            "src/edge_validation", "src/production_execution", "src/market_anchor_study",
+            "src/conservative_anchor"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

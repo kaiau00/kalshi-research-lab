@@ -367,3 +367,18 @@ Commit `2dc729b` deployed as `e074c389-ed67-4150-a991-ecf98c8bbc9d` and reached 
 paused with zero fills, zero submitted orders, no position, no unresolved order, and no runtime error. After the
 temporary pause was removed, the corrected runner returned to `watching` with the $1 cap and exact candidate
 registration unchanged.
+
+## 2026-10-10 — Conservative Market Anchor prepared
+
+After 37 Market Anchor live settlements produced -$2.5299, the user authorized tighter qualification and
+additional risk controls. A 50% model/market shrink combined with a two-cent execution buffer produced no trades
+in either prior ten-day window and was rejected as non-viable. The frozen conservative candidate instead keeps
+the raw adaptive signal while requiring a $0.30–$0.85 ask, at most six percentage points of model/market
+disagreement, at most a one-cent binary spread, and nonnegative edge after a two-cent adverse-price buffer and
+fees. It adds a one-hour post-fill cooldown, UTC-day halts at -$2 or three consecutive losses, and a permanent
+$5 realized-drawdown halt. The $1 cap and hold-to-settlement policy remain unchanged.
+
+Exploratory application selected 14 trades in each of two older ten-day windows, with +$0.5380 and +$0.6152
+headline P&L and less than $0.85 drawdown. Both failed the top-three-winner concentration gate. The corresponding
+filter retained only three of the 37 completed live trades and those lost $0.3566. Study 006 is therefore frozen
+as a prospective test beginning 2026-10-10 18:00:00 UTC; it is not promoted or described as proven.

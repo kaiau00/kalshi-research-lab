@@ -294,9 +294,9 @@ def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monk
             return {"market": {"ticker": ticker, "status": "finalized", "result": "no"}}
 
     client = MarketResultClient()
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=client)
     try:
         entry = intent("yes")
@@ -346,38 +346,39 @@ class FakeClient:
         pass
 
 
-def test_runner_requires_explicit_tokens_and_applies_market_anchor_filter(tmp_path, monkeypatch):
+def test_runner_requires_explicit_tokens_and_applies_conservative_anchor_filter(tmp_path, monkeypatch):
     replay, ticker, _, now = prepared(risk_per_market="1.00")
-    replay.state.apply(ws(book_frame(ticker, 2, ".48", ".46"), START + 750.05))
+    replay.state.markets[ticker]["floor_strike"] += 0.08
+    replay.state.apply(ws(book_frame(ticker, 2, ".48", ".479"), START + 750.05))
     expected = replay.accounts["adaptive_volatility"]
     replay._decide(expected, ticker, now)
-    monkeypatch.delenv("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION", raising=False)
+    monkeypatch.delenv("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION", raising=False)
     with pytest.raises(RuntimeError, match="authorization token"):
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
 
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.delenv("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION", raising=False)
-    with pytest.raises(RuntimeError, match="one-dollar risk authorization token"):
+    monkeypatch.setenv("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.delenv("LAB_CONSERVATIVE_RISK_AUTHORIZATION", raising=False)
+    with pytest.raises(RuntimeError, match="risk authorization token"):
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
 
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
-    monkeypatch.delenv("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION", raising=False)
-    with pytest.raises(RuntimeError, match="hold-to-settlement authorization token"):
+    monkeypatch.setenv("LAB_CONSERVATIVE_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
+    monkeypatch.delenv("LAB_CONSERVATIVE_HOLD_AUTHORIZATION", raising=False)
+    with pytest.raises(RuntimeError, match="hold authorization token"):
         Runner(lambda: replay.state, tmp_path, client=FakeClient())
 
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=FakeClient())
     try:
         signal = runner.signal(ticker, Decimal("100"), now_ns=now)
         for field in ("side", "limit", "quantity", "probability", "edge", "arrival_ns"):
             assert signal[field] == expected.pending[ticker][field]
-        assert signal["quoted_binary_spread"] == Decimal(".02")
+        assert signal["quoted_binary_spread"] == Decimal(".001")
         assert runner.arrival_fill_preview(signal, now_ns=now)["quantity"] == signal["quantity"]
-        assert runner.status["last_market_anchor_evaluation"]["accepted"] is True
-        assert runner.status["strategy"] == "market_agreement_band_001"
+        assert runner.status["last_conservative_anchor_evaluation"]["accepted"] is True
+        assert runner.status["strategy"] == "market_anchor_conservative_001"
         assert runner.status["risk_per_market"] == "1.00"
         assert runner.status["risk_policy_revision"] == RISK_REVISION
-        assert runner.status["bankroll_baseline"] == "57.9544"
+        assert runner.status["bankroll_baseline"] == "50.5066"
         assert runner.status["position_policy_revision"] == HOLD_REVISION
         assert runner.status["strategy_parameters"]["early_exit_submission"] == "disabled"
         registration = json.loads(
@@ -405,14 +406,14 @@ def test_runner_requires_explicit_tokens_and_applies_market_anchor_filter(tmp_pa
 
         replay.state.apply(ws(book_frame(ticker, 3, ".40", ".38"), START + 750.2))
         rejected = runner.signal(ticker, Decimal("100"), now_ns=now + 200_000_000)
-        assert rejected is not None and rejected["market_anchor_accepted"] is False
-        assert runner.status["last_market_anchor_evaluation"]["accepted"] is False
-        assert runner.status["market_anchor_filter_rejections"] == 1
+        assert rejected is not None and rejected["conservative_anchor_accepted"] is False
+        assert runner.status["last_conservative_anchor_evaluation"]["accepted"] is False
+        assert runner.status["conservative_anchor_filter_rejections"] == 1
         runner.journal.begin_attempt("filtered", rejected)
         runner.journal.finish_attempt("filtered", "filter_rejected_marketable")
         assert runner.signal(ticker, Decimal("100"), now_ns=now + 11_000_000_000) is None
         runner.snapshot()
-        assert runner.status["market_anchor_filtered_marketable"] == 1
+        assert runner.status["conservative_anchor_filtered_marketable"] == 1
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()
@@ -421,9 +422,9 @@ def test_runner_requires_explicit_tokens_and_applies_market_anchor_filter(tmp_pa
 
 def test_live_position_monitor_holds_and_has_no_exit_submission_path(tmp_path, monkeypatch):
     replay, ticker, _, _ = prepared(risk_per_market="1.00")
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     runner = Runner(lambda: replay.state, tmp_path, client=FakeClient())
     try:
         entry = intent("yes")
@@ -464,12 +465,12 @@ def test_entry_pause_keeps_reconciliation_active_but_skips_new_signals(tmp_path,
             if path == "/portfolio/positions":
                 return {"market_positions": [], "cursor": ""}
             if path == "/portfolio/balance":
-                return {"balance_dollars": "57.9544", "portfolio_value": 0}
+                return {"balance_dollars": "50.5066", "portfolio_value": 0}
             raise AssertionError(f"unexpected read: {path}")
 
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
-    monkeypatch.setenv("LAB_MARKET_ANCHOR_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_PRODUCTION_AUTHORIZATION", AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_RISK_AUTHORIZATION", RISK_AUTHORIZATION)
+    monkeypatch.setenv("LAB_CONSERVATIVE_HOLD_AUTHORIZATION", HOLD_AUTHORIZATION)
     client = PauseClient()
     runner = Runner(lambda: replay.state, tmp_path, client=client)
     (tmp_path / ENTRY_PAUSE_FILE).touch()
