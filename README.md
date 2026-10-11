@@ -1,21 +1,20 @@
 # Kalshi Research Lab
 
 A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The current
-authorized production pilot is Market Anchor `market_agreement_band_001`, with a fixed $1 all-in maximum per
-market, IOC entries, and hold-to-official-settlement position management. It uses a separate durable ledger and
-the same production account on exchange index 2. The purpose is to reject weak ideas and measure promising ones,
-not to promise a return.
+authorized production pilot is Conservative Market Anchor `market_anchor_conservative_001`, with a fixed $1
+all-in maximum per market, IOC entries, hold-to-official-settlement position management, and frozen loss and
+cooldown controls. It uses a separate durable ledger and the same production account on exchange index 2. The
+purpose is to reject weak ideas and measure promising ones, not to promise a return.
 
 The original adaptive-volatility live-fill audit is complete: it lost $37.0860 across all 37 resolved fills, or
 $25.0750 under identical-entry hold-to-settlement accounting. That revision remains closed and its ledger is
 preserved.
-The current research lead is Market Anchor Study 005, a frozen filter that avoids extreme quotes and requires
-the BTC model to remain close to Kalshi's own implied probability. It was positive in two retrospective
-ten-day windows, but one consistency gate failed and the results are not prospective proof. A new protected
-prospective window begins on October 10, 2026; see the
-[protocol](docs/MARKET_ANCHOR_STUDY_005_PROTOCOL.md) and
-[interim results](docs/MARKET_ANCHOR_STUDY_005_RESULTS.md). The user authorized a small live pilot before that
-gate completed; this does not promote the candidate or change the prospective study.
+The current production revision tightens Market Anchor's price, agreement, and spread filters; requires the edge
+to survive a two-cent adverse-price buffer; and adds a one-hour cooldown, daily loss stops, and a $5 realized
+drawdown stop. Its separate prospective Study 006 begins on October 10, 2026. Retrospective results were sparse
+and winner-concentrated, so neither the research study nor the live pilot proves an edge. See the
+[Study 006 protocol](docs/CONSERVATIVE_MARKET_ANCHOR_STUDY_006_PROTOCOL.md) and the
+[advanced strategy research memo](docs/ADVANCED_STRATEGY_RESEARCH.md).
 
 ## What is implemented
 

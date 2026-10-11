@@ -396,3 +396,15 @@ hash `c5ca04882b762d660fb79f0cdb5724e4e922b5bee3efaf9f12037c28b0411db7`, the fro
 the $1 all-in cap, 500 ms IOC execution, hold-to-settlement policy, and active runner. Initial state was
 `watching` with zero attempts, zero fills, no open position, and no unresolved order. The daily monitor now
 watches the conservative live ledger and Study 006 while preserving the frozen Studies 003 and 005.
+
+## 2026-10-10 — Advanced strategy research opened
+
+Opened a separate read-only research track without changing the live runner. The highest-priority candidate is a
+Rollover Bridge model based on the mechanical link between consecutive KXBTC15M contracts. A direct audit of the
+v6 market catalog found 1,893 usable adjacent pairs; in all 1,893, the earlier contract's official expiration
+value exactly matched the next contract's displayed target. Zero mismatches were found. This establishes the
+contract handoff, not a trading edge.
+
+The research memo also specifies a constituent-order-book BRTI replica, a jump-robust regime/particle settlement
+model, a Hawkes order-book execution overlay, and a shrinkage-based probability pool. It ranks data requirements,
+failure modes, and forward robustness gates. None is authorized for production orders.
