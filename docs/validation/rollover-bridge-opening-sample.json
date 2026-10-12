@@ -1,0 +1,42 @@
+{
+  "scope": "Rollover Bridge opening coverage feasibility only; no P&L or strategy-selection claim",
+  "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+  "segments": {
+    "first": 7533,
+    "last": 7540,
+    "count": 8,
+    "last_digest": "aab571dfb5ee829b2fe3f00a06af8ce0cd7d7494e4319ff563e7848b4f44aab4"
+  },
+  "events_replayed": 4000000,
+  "quality": {
+    "gaps": 0,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "markets_observed": 10,
+  "markets_with_usable_decisions": 8,
+  "coverage_by_seconds_after_open": {
+    "5": {"scheduled": 10, "usable_decisions": 8, "quoted_arrivals": 8, "official_results": 9},
+    "15": {"scheduled": 10, "usable_decisions": 8, "quoted_arrivals": 8, "official_results": 9},
+    "30": {"scheduled": 10, "usable_decisions": 8, "quoted_arrivals": 8, "official_results": 9},
+    "60": {"scheduled": 10, "usable_decisions": 8, "quoted_arrivals": 8, "official_results": 9}
+  },
+  "receipt_timing_ms": {
+    "minimum_decision_lag": 0.069583,
+    "maximum_decision_lag": 21.541992,
+    "minimum_arrival_elapsed": 500.022898,
+    "maximum_arrival_elapsed": 529.782794
+  },
+  "absolute_recorded_prior_average_minus_displayed_target_dollars": {
+    "minimum": 0.0006666666595265269,
+    "median": 0.001166666675999295,
+    "maximum": 0.004000000000814907
+  },
+  "excluded_boundaries": [
+    "The first observed market began before the bounded sample had enough warm-up and was recorded as late.",
+    "One fully observed market had no usable two-sided opening quote at any registered offset.",
+    "The final observed market had not officially settled before the bounded sample ended."
+  ],
+  "conclusion": "The archive can support a causal opening decision tape. Full development replay may proceed, while missing opening liquidity must remain an explicit rejection.",
+  "classification": "development-only feasibility sample"
+}

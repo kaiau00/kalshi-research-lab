@@ -14,7 +14,9 @@ to survive a two-cent adverse-price buffer; and adds a one-hour cooldown, daily 
 drawdown stop. Its separate prospective Study 006 begins on October 10, 2026. Retrospective results were sparse
 and winner-concentrated, so neither the research study nor the live pilot proves an edge. See the
 [Study 006 protocol](docs/CONSERVATIVE_MARKET_ANCHOR_STUDY_006_PROTOCOL.md) and the
-[advanced strategy research memo](docs/ADVANCED_STRATEGY_RESEARCH.md).
+[advanced strategy research memo](docs/ADVANCED_STRATEGY_RESEARCH.md). Rollover Bridge implementation has begun
+under a separate [Study 007 development protocol](docs/ROLLOVER_BRIDGE_STUDY_007_PROTOCOL.md). It currently builds
+a read-only, receipt-ordered decision tape and is not connected to demo or production orders.
 
 ## What is implemented
 
@@ -25,6 +27,8 @@ and winner-concentrated, so neither the research study nor the live pilot proves
 - Frozen data-prefix replay, source/config hashes, chronological market-level 60/20/20 partitions, explicit holdout disclosure, calibration and daily bootstrap uncertainty when the sample is large enough.
 - A password-protected dashboard, fresh-data readiness, persistent SQLite storage, and hourly replay of the fixed strategy definitions registered before collection started.
 - Separate demo and production adapters and ledgers. Railway refuses to start both execution adapters together.
+- A read-only Rollover Bridge opening model and 500 ms arrival decision tape. Its archived-data development study
+  is separately registered and cannot submit an exchange order.
 
 The initial strategies are hypotheses. The underdog filter alone is not an edge: its estimated probability must exceed the executable quote plus assumed fees and a margin. A Gaussian forecast can be wrong, especially near expiry or during jumps. The three models are related, not three independent discoveries.
 

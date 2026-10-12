@@ -408,3 +408,22 @@ contract handoff, not a trading edge.
 The research memo also specifies a constituent-order-book BRTI replica, a jump-robust regime/particle settlement
 model, a Hawkes order-book execution overlay, and a shrinkage-based probability pool. It ranks data requirements,
 failure modes, and forward robustness gates. None is authorized for production orders.
+
+## 2026-10-12 — Rollover Bridge Study 007 implementation opened
+
+Registered the Rollover Bridge development source before inspecting its P&L: v6 segments 4,345 through 7,540,
+ending at digest `aab571dfb5ee829b2fe3f00a06af8ce0cd7d7494e4319ff563e7848b4f44aab4`. All results from this range are
+explicitly development evidence. A later candidate must receive a new registration and untouched forward start.
+
+Implemented a causal structural forecast and a read-only decision tape at 5, 15, 30 and 60 seconds after market
+open. The model uses the endpoint-versus-target gap, the complete prior target minute, bipower continuous variance,
+excess jump variation and a causally filtered mean-reverting velocity. The tape records the actual two-sided book
+known at the decision and the first recorded quote at or after 500 ms. It does not contain an order client.
+
+A bounded audit verified eight consecutive archives and 4,000,000 receipt-ordered events. Ten openings were
+observed: eight had complete model inputs and two-sided decision and arrival quotes at every registered offset. The
+first boundary market lacked warm-up, one fully observed market lacked two-sided opening liquidity, and the last
+market was not yet officially settled when the sample ended. Recorded arrival observations occurred 500.02–529.78
+ms after the decision; the replay found zero sequence gaps, malformed events or clock adjustments. No strategy P&L
+was inspected. The resumable full-development runner is prepared for bounded, on-demand execution after the Railway
+billing reset.
