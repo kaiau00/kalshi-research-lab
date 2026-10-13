@@ -1,0 +1,55 @@
+{
+  "scope": "Study 007 scaling and coverage benchmark only; no probability, trade-selection, or P&L inspection",
+  "run_date": "2026-10-12",
+  "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+  "sample": {
+    "first_segment": 7441,
+    "last_segment": 7540,
+    "segments": 100,
+    "events": 50000000,
+    "compressed_bytes": 922687424,
+    "wall_seconds": 834.25,
+    "user_cpu_seconds": 706.90,
+    "system_cpu_seconds": 10.41,
+    "events_per_wall_second": 59934
+  },
+  "coverage_at_each_offset": {
+    "scheduled_markets": 104,
+    "usable_decisions": 102,
+    "quoted_arrivals": 102,
+    "official_results": 103,
+    "offsets_seconds": [5, 15, 30, 60]
+  },
+  "quality": {
+    "gaps": 0,
+    "malformed": 0,
+    "clock_adjustments": 0
+  },
+  "semantic_equivalence": {
+    "original_sample_events": 4000000,
+    "original_sample_report_byte_for_byte_equal_after_optimization": true
+  },
+  "full_registered_manifest": {
+    "first_segment": 4345,
+    "last_segment": 7540,
+    "segments": 3196,
+    "events": 591327720,
+    "compressed_bytes": 14341145472,
+    "maximum_temporary_segment_bytes": 9915441,
+    "projected_wall_hours": 2.87,
+    "manifest_sha256": "ec9d3f4cfc38e44d4f59418f1fe0c858efef38bbb8d6b90aab399098c0620357"
+  },
+  "registered_replay_progress": {
+    "next_segment": 4347,
+    "events_replayed": 200000,
+    "temporary_archives_retained": 0,
+    "development_report_generated": false
+  },
+  "registration_amendment": {
+    "reason": "Performance-only indexing and resumable local execution before P&L inspection",
+    "original_source_sha256": "4330f7104950f2f02988e203ce9868ba4fc1be2408a97fb525ab8f485b18b1da",
+    "original_registration_sha256": "2490545e46fb015097f58303ed36875c3dc9727ec9c2372c58d8ca61e3d84132",
+    "amended_source_sha256": "9cc7d560078892cb157080a02d222c3b59d5d59c67f9503193366209510df1bd",
+    "amended_registration_sha256": "cbc182ee76f8ffc804efc8c8b1a8504460d01011f08bda91a9e32f0b6b6cada2"
+  }
+}

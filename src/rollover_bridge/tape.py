@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import heapq
 from dataclasses import dataclass
 from decimal import Decimal
 
@@ -47,6 +48,9 @@ class DecisionTape:
         self.last_ns = 0
         self.last_decision_second = -1
         self.events = 0
+        self._arrival_heap: list[tuple[int, int, tuple[str, int]]] = []
+        self._arrival_serial = 0
+        self._rows_by_ticker: dict[str, list[tuple[str, int]]] = {}
 
     @classmethod
     def from_seed(cls, market_state, last_ns, last_decision_second, config=None):
@@ -79,7 +83,22 @@ class DecisionTape:
         tape.last_ns = snapshot["last_ns"]
         tape.last_decision_second = snapshot["last_decision_second"]
         tape.events = snapshot["events"]
+        tape._rebuild_indexes()
         return tape
+
+    def _index_row(self, key, row):
+        self._rows_by_ticker.setdefault(row["ticker"], []).append(key)
+        if row.get("arrival_status") == "pending":
+            heapq.heappush(
+                self._arrival_heap, (row["arrival_ns"], self._arrival_serial, key))
+            self._arrival_serial += 1
+
+    def _rebuild_indexes(self):
+        self._arrival_heap.clear()
+        self._arrival_serial = 0
+        self._rows_by_ticker.clear()
+        for key, row in self.rows.items():
+            self._index_row(key, row)
 
     def feed(self, event: Event):
         if event.received_ns < self.last_ns:
@@ -107,10 +126,10 @@ class DecisionTape:
             self.eligible.discard(ticker)
             result = market.get("result")
             if result in ("yes", "no"):
-                for (row_ticker, _), row in self.rows.items():
-                    if row_ticker == ticker:
-                        row["result"] = result
-                        row["finalized_received_ns"] = event.received_ns
+                for key in self._rows_by_ticker.get(ticker, ()):
+                    row = self.rows[key]
+                    row["result"] = result
+                    row["finalized_received_ns"] = event.received_ns
 
     def _capture_decisions(self, now_ns):
         for ticker in tuple(self.eligible):
@@ -149,10 +168,13 @@ class DecisionTape:
                         row["forecast"] = model.to_dict()
                         row["decision_quote"] = quote
                 self.rows[key] = row
+                self._index_row(key, row)
 
     def _capture_arrivals(self, now_ns):
-        for row in self.rows.values():
-            if row["arrival_status"] != "pending" or now_ns < row["arrival_ns"]:
+        while self._arrival_heap and self._arrival_heap[0][0] <= now_ns:
+            _, _, key = heapq.heappop(self._arrival_heap)
+            row = self.rows.get(key)
+            if row is None or row.get("arrival_status") != "pending":
                 continue
             quote = _book_quote(self.state, row["ticker"], now_ns, self.config.maximum_book_age_ms)
             if quote is None:

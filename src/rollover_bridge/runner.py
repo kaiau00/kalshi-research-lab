@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 
 from research_lab.checkpoint import decode, encode
-from research_lab.segments import Bucket, archive_events, catalog, durable_json
+from research_lab.segments import Bucket, archive_events, catalog, checksum, durable_json
 from research_lab.storage import Store, canonical
 
 from .features import HISTORY_SECONDS, PRIOR_MINUTE_SECONDS, VELOCITY_HALF_LIFE_SECONDS
@@ -219,3 +219,150 @@ class RolloverRunner:
     def close(self):
         if not self.lock.closed:
             self.lock.close()
+
+
+class LocalRolloverRunner:
+    """Resumable local replay over the frozen manifest, using one temporary archive."""
+
+    def __init__(self, manifest_path, seed_path, root, *, checkpoint_every=10,
+                 keep_archives=False, bucket=None):
+        self.root = Path(root)
+        self.root.mkdir(parents=True, exist_ok=True)
+        self.archive_root = self.root / "archives"
+        self.archive_root.mkdir(exist_ok=True)
+        self.lock = (self.root / "runner.lock").open("a")
+        try:
+            fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            self.lock.close()
+            raise RuntimeError("Another local Rollover Bridge runner owns this study") from None
+        self.checkpoint_every = max(1, int(checkpoint_every))
+        self.keep_archives = keep_archives
+        self.bucket = bucket or Bucket()
+        self.seed_path = Path(seed_path)
+        self.manifest = json.loads(Path(manifest_path).read_text())
+        self._validate_manifest()
+        self.manifest_sha = _hash(self.manifest)
+        self.registration = registration()
+        self.registration_sha = _hash(self.registration)
+        self.tape, self.next_segment, self.last_digest = self._load_local()
+
+    def _validate_manifest(self):
+        ids = [int(row["id"]) for row in self.manifest]
+        if ids != list(range(START_SEGMENT, TERMINAL_SEGMENT + 1)):
+            raise ValueError("Local manifest does not match the frozen development range")
+        if any(row.get("status") != "archived" for row in self.manifest):
+            raise ValueError("Local manifest contains a non-archived segment")
+        if self.manifest[0]["previous_digest"] != SEED_DIGEST:
+            raise ValueError("Local manifest seed linkage mismatch")
+        for previous, row in zip(self.manifest, self.manifest[1:]):
+            if row["previous_digest"] != previous["digest"]:
+                raise ValueError("Local manifest digest linkage mismatch")
+        if self.manifest[-1]["digest"] != TERMINAL_DIGEST:
+            raise ValueError("Local manifest terminal digest mismatch")
+
+    def _load_local(self):
+        registration_path = self.root / "registration.json"
+        local_registration = {**self.registration, "manifest_sha256": self.manifest_sha}
+        if registration_path.exists():
+            if json.loads(registration_path.read_text()) != local_registration:
+                raise RuntimeError("Local Rollover registration/source mismatch")
+        else:
+            durable_json(registration_path, local_registration)
+        checkpoint_path = self.root / "checkpoint.json"
+        if checkpoint_path.exists():
+            envelope = json.loads(checkpoint_path.read_text())
+            data = envelope["data"]
+            if _hash(data) != envelope["sha256"]:
+                raise ValueError("Local Rollover checkpoint checksum mismatch")
+            if (data["registration_sha256"] != self.registration_sha
+                    or data["manifest_sha256"] != self.manifest_sha
+                    or data["dataset"] != DATASET):
+                raise RuntimeError("Local Rollover checkpoint identity mismatch")
+            return DecisionTape.from_snapshot(decode(data["state"])), data["next_segment"], data["last_digest"]
+
+        envelope = json.loads(self.seed_path.read_text())
+        seed_data = envelope["data"]
+        if _hash(seed_data) != envelope["sha256"]:
+            raise ValueError("Frozen seed checkpoint checksum mismatch")
+        if (seed_data["dataset"] != DATASET or seed_data["next_segment"] != START_SEGMENT
+                or seed_data["last_digest"] != SEED_DIGEST):
+            raise RuntimeError("Frozen seed identity mismatch")
+        replay = decode(seed_data["replay"])
+        tape = DecisionTape.from_seed(replay.state, replay.last_ns, replay.last_decision_second)
+        self._save_local(tape, START_SEGMENT, SEED_DIGEST)
+        return tape, START_SEGMENT, SEED_DIGEST
+
+    def _save_local(self, tape, next_segment, last_digest):
+        data = {
+            "study": STUDY,
+            "registration_sha256": self.registration_sha,
+            "manifest_sha256": self.manifest_sha,
+            "dataset": DATASET,
+            "next_segment": next_segment,
+            "last_digest": last_digest,
+            "state": encode(tape.snapshot()),
+        }
+        if len(canonical(data)) > 50_000_000:
+            raise ValueError("Local Rollover checkpoint capacity reached")
+        durable_json(self.root / "checkpoint.json", {"data": data, "sha256": _hash(data)})
+
+    def _archive_path(self, row):
+        suffix = ".jsonl.zst" if row["archive_key"].endswith(".zst") else ".jsonl.gz"
+        return self.archive_root / f"segment-{int(row['id']):08d}{suffix}"
+
+    def process_next(self):
+        if self.next_segment > TERMINAL_SEGMENT:
+            if self.last_digest != TERMINAL_DIGEST:
+                raise ValueError("Local Rollover terminal digest mismatch")
+            report = self.tape.report()
+            report["registration"] = self.registration
+            report["registration_sha256"] = self.registration_sha
+            report["manifest_sha256"] = self.manifest_sha
+            report["terminal_digest"] = self.last_digest
+            report["development_complete"] = True
+            report["report_sha256"] = _hash(report)
+            durable_json(self.root / "development-report.json", report)
+            return "development_complete"
+
+        row = self.manifest[self.next_segment - START_SEGMENT]
+        if row["previous_digest"] != self.last_digest:
+            raise ValueError("Local Rollover segment predecessor mismatch")
+        path = self._archive_path(row)
+        if path.exists() and checksum(path) != row["archive_sha"]:
+            path.unlink()
+        if not path.exists():
+            self.bucket.get(row["archive_key"], path, row["archive_sha"])
+        for event in archive_events(path, row):
+            self.tape.feed(event)
+
+        completed_segment = int(row["id"])
+        self.next_segment = completed_segment + 1
+        self.last_digest = row["digest"]
+        should_checkpoint = (
+            self.next_segment > TERMINAL_SEGMENT
+            or (self.next_segment - START_SEGMENT) % self.checkpoint_every == 0
+        )
+        if should_checkpoint:
+            self._save_local(self.tape, self.next_segment, self.last_digest)
+        durable_json(self.root / "latest-status.json", {
+            "study": STUDY,
+            "state": "processed_segment",
+            "last_segment": completed_segment,
+            "next_segment": self.next_segment,
+            "last_digest": self.last_digest,
+            "events_replayed": self.tape.events,
+            "rows": len(self.tape.rows),
+            "checkpointed": should_checkpoint,
+            "updated_ns": time.time_ns(),
+        })
+        if not self.keep_archives:
+            path.unlink()
+        return "processed"
+
+    def close(self):
+        if not self.lock.closed:
+            try:
+                self._save_local(self.tape, self.next_segment, self.last_digest)
+            finally:
+                self.lock.close()

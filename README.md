@@ -16,7 +16,9 @@ and winner-concentrated, so neither the research study nor the live pilot proves
 [Study 006 protocol](docs/CONSERVATIVE_MARKET_ANCHOR_STUDY_006_PROTOCOL.md) and the
 [advanced strategy research memo](docs/ADVANCED_STRATEGY_RESEARCH.md). Rollover Bridge implementation has begun
 under a separate [Study 007 development protocol](docs/ROLLOVER_BRIDGE_STUDY_007_PROTOCOL.md). It currently builds
-a read-only, receipt-ordered decision tape and is not connected to demo or production orders.
+a read-only, receipt-ordered decision tape and is not connected to demo or production orders. A 50-million-event
+benchmark validated its resumable local replay path; the complete 591-million-event development extraction has
+started at segment 4,345 without calculating strategy P&L.
 
 ## What is implemented
 

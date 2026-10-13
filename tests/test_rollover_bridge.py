@@ -1,16 +1,24 @@
 import hashlib
 import json
 import math
+import shutil
 
 from research_lab.checkpoint import encode
 from research_lab.demo import book_frame, index_frame, market_fixture
 from research_lab.engine import Replay
 from research_lab.market import MarketState
-from research_lab.segments import catalog
+from research_lab.segments import archive_writer, catalog
 from research_lab.storage import Event, Store, canonical
+from rollover_bridge import runner as rollover_runner
 from rollover_bridge.analysis import development_report
 from rollover_bridge.features import forecast
-from rollover_bridge.runner import DATASET, SEED_DIGEST, START_SEGMENT, RolloverRunner
+from rollover_bridge.runner import (
+    DATASET,
+    SEED_DIGEST,
+    START_SEGMENT,
+    LocalRolloverRunner,
+    RolloverRunner,
+)
 from rollover_bridge.tape import DecisionTape
 
 NS = 10**9
@@ -85,6 +93,26 @@ def test_decision_tape_records_missing_inputs_instead_of_inventing_a_row():
     assert "forecast" not in row
 
 
+def test_decision_tape_rebuilds_pending_arrival_index_after_resume():
+    tape = DecisionTape()
+    market = market_fixture(START, "RESUME")
+    tape.feed(Event(1, (START - 700) * NS, None, "market", {"market": market}))
+    sequence = 0
+    for second in range(START - 700, START + 5):
+        sequence += 1
+        tape.feed(ws(index_frame(second, 80_000), second + 0.01))
+    sequence += 1
+    tape.feed(ws(book_frame(market["ticker"], sequence, ".52", ".50"), START + 5.02))
+    key = (market["ticker"], 5)
+    assert tape.rows[key]["arrival_status"] == "pending"
+
+    resumed = DecisionTape.from_snapshot(tape.snapshot())
+    sequence += 1
+    resumed.feed(ws(book_frame(market["ticker"], sequence, ".53", ".51"), START + 5.60))
+    assert resumed.rows[key]["arrival_status"] == "quoted"
+    assert resumed.rows[key]["arrival_quote"]["yes_ask"] == "0.53"
+
+
 def test_runner_is_registered_resumable_and_verifies_segment_linkage(tmp_path, monkeypatch):
     segment_root = tmp_path / "segments-v6"
     segment_root.mkdir()
@@ -137,6 +165,82 @@ def test_runner_is_registered_resumable_and_verifies_segment_linkage(tmp_path, m
     try:
         assert resumed.next_segment == START_SEGMENT + 1
         assert resumed.tape.events == 1
+    finally:
+        resumed.close()
+
+
+def test_local_runner_downloads_resumes_and_removes_temporary_archives(tmp_path, monkeypatch):
+    dataset = "local-test-dataset"
+    start_segment = 10
+    seed_digest = "1" * 64
+    source_archives = tmp_path / "source"
+    source_archives.mkdir()
+    rows = []
+    previous_digest = seed_digest
+    for segment in (10, 11):
+        payload = {"dataset": dataset, "segment": segment, "previous_digest": previous_digest}
+        received_ns = segment * NS
+        digest = hashlib.sha256(
+            bytes.fromhex("0" * 64)
+            + canonical([received_ns, None, "segment_start", payload])
+        ).hexdigest()
+        archive = source_archives / f"segment-{segment}.zst"
+        with archive_writer(archive) as stream:
+            stream.write(canonical([1, received_ns, None, "segment_start", payload]) + b"\n")
+        archive_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+        rows.append({
+            "id": segment,
+            "status": "archived",
+            "count": 1,
+            "digest": digest,
+            "previous_digest": previous_digest,
+            "archive_key": f"segment-{segment}.zst",
+            "archive_sha": archive_sha,
+        })
+        previous_digest = digest
+
+    monkeypatch.setattr(rollover_runner, "DATASET", dataset)
+    monkeypatch.setattr(rollover_runner, "START_SEGMENT", start_segment)
+    monkeypatch.setattr(rollover_runner, "SEED_DIGEST", seed_digest)
+    monkeypatch.setattr(rollover_runner, "TERMINAL_SEGMENT", 11)
+    monkeypatch.setattr(rollover_runner, "TERMINAL_DIGEST", rows[-1]["digest"])
+    manifest = tmp_path / "manifest.json"
+    manifest.write_bytes(canonical(rows))
+
+    seed = Replay()
+    seed_data = {
+        "dataset": dataset,
+        "next_segment": start_segment,
+        "last_digest": seed_digest,
+        "replay": encode(seed),
+    }
+    seed_path = tmp_path / "seed.json"
+    seed_path.write_bytes(canonical({
+        "data": seed_data,
+        "sha256": hashlib.sha256(canonical(seed_data)).hexdigest(),
+    }))
+
+    class FakeBucket:
+        def get(self, key, destination, expected):
+            source = source_archives / key
+            assert hashlib.sha256(source.read_bytes()).hexdigest() == expected
+            shutil.copyfile(source, destination)
+
+    root = tmp_path / "local-run"
+    runner = LocalRolloverRunner(manifest, seed_path, root, checkpoint_every=10, bucket=FakeBucket())
+    try:
+        assert runner.process_next() == "processed"
+        assert runner.next_segment == 11
+        assert not any((root / "archives").iterdir())
+    finally:
+        runner.close()
+
+    resumed = LocalRolloverRunner(manifest, seed_path, root, checkpoint_every=1, bucket=FakeBucket())
+    try:
+        assert resumed.next_segment == 11
+        assert resumed.process_next() == "processed"
+        assert resumed.process_next() == "development_complete"
+        assert json.loads((root / "development-report.json").read_text())["development_complete"]
     finally:
         resumed.close()
 

@@ -427,3 +427,20 @@ market was not yet officially settled when the sample ended. Recorded arrival ob
 ms after the decision; the replay found zero sequence gaps, malformed events or clock adjustments. No strategy P&L
 was inspected. The resumable full-development runner is prepared for bounded, on-demand execution after the Railway
 billing reset.
+
+## 2026-10-12 — Rollover Bridge scaling benchmark and local replay path
+
+Before inspecting any Study 007 P&L, a scaling review found that the decision tape scanned all historical rows on
+every event. Replaced those scans with a due-time arrival heap and per-market settlement index. The optimized code
+reproduced the original four-million-event report byte for byte. The full test suite remained green.
+
+A read-only 100-segment benchmark then verified 50,000,000 events from segments 7,441–7,540 in 834.25 seconds.
+It observed 104 markets, produced 102 usable decisions and arrival quotes at each of the four frozen offsets, and
+reported zero gaps, malformed events or clock adjustments. The exact manifest shows that the full registered range
+contains 591,327,720 events and 14.341 GB compressed; the measured local projection is about 2.87 hours.
+
+Added a resumable local runner that verifies the frozen seed, manifest, archive SHA-256, event hash chain and
+segment linkage; keeps only one temporary archive; checkpoints every ten segments and on clean shutdown; and
+refuses identity drift. A real start/resume check processed segments 4,345 and 4,346 and saved the checkpoint at
+4,347 with 200,000 events. No model-comparison or P&L report was opened. The protocol records the performance-only
+source-registration amendment and its old/new hashes.

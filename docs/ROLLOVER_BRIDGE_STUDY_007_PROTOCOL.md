@@ -23,6 +23,35 @@ It produces a causal structural probability for the next contract's official out
 All results from this source are development evidence. They are not an untouched holdout, even if a date or block
 was not used to fit a particular model.
 
+## Pre-P&L scaling amendment — 2026-10-12
+
+Before inspecting any Rollover Bridge probability, trade selection or P&L result, the bounded replay exposed an
+algorithmic scaling defect: every receipt event scanned every historical decision row for pending arrivals and a
+finalized market scanned rows belonging to all markets. The implementation now maintains a due-time heap for
+pending arrivals and a per-ticker row index for settlements. Both indexes are derived from the same persisted rows
+and are rebuilt after checkpoint restoration. Strategy inputs, forecast math, offsets, latency, book-age rules,
+execution assumptions and development split are unchanged.
+
+The original eight-segment report was reproduced byte for byte after this change. A separate 100-segment timing
+run covered segments 7,441–7,540 and 50,000,000 events without inspecting strategy P&L. It completed in 834.25
+seconds on the local machine, produced 102 usable openings from 104 observed markets at every registered offset,
+and found zero gaps, malformed events or clock adjustments. The frozen full manifest contains 3,196 segments,
+591,327,720 events and 14.341 GB of compressed archives. The measured projection is about 2.87 hours.
+
+The amended runner downloads and verifies one archive at a time, checkpoints every ten segments and at every clean
+shutdown, removes the temporary archive after processing, and resumes only when the registration, manifest and
+checkpoint hashes match. The first two segments were replayed solely to verify checkpoint/resume behavior; the
+saved checkpoint is at segment 4,347 with 200,000 events and no P&L report has been generated.
+
+- Original source SHA-256: `4330f7104950f2f02988e203ce9868ba4fc1be2408a97fb525ab8f485b18b1da`
+- Original registration SHA-256: `2490545e46fb015097f58303ed36875c3dc9727ec9c2372c58d8ca61e3d84132`
+- Amended source SHA-256: `9cc7d560078892cb157080a02d222c3b59d5d59c67f9503193366209510df1bd`
+- Amended registration SHA-256: `cbc182ee76f8ffc804efc8c8b1a8504460d01011f08bda91a9e32f0b6b6cada2`
+- Frozen manifest SHA-256: `ec9d3f4cfc38e44d4f59418f1fe0c858efef38bbb8d6b90aab399098c0620357`
+
+This amendment supersedes the original code registration for Study 007 before Phase 2 results are inspected. It
+does not change the frozen data range or authorize an order.
+
 ## Phase 1: data and decision tape
 
 Before calculating strategy P&L, audit opening coverage at 5, 15, 30 and 60 seconds after each market opens. A
