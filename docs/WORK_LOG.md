@@ -457,3 +457,9 @@ Preregistered the exact control and three market-prior probability-pool candidat
 results. The primary candidate uses an expanding day-ahead fit, a one-sided 90% probability lower bound, an $0.80
 exclusive price ceiling, a training-prefix 90th-percentile relative-volatility veto and the existing conservative
 risk controls. Study 008 has no order path and cannot promote itself.
+
+Implemented and ran Study 008 against that exact frozen checkpoint. The exact control selected 17 trades for
++$0.1627, but fell to -$0.5578 without its three largest winners and was negative under one- and two-cent price
+stress. Kalshi's midpoint beat both the raw and pooled models on all 643 eligible decisions. Every pooled candidate
+selected zero trades; the best lower-bound edge after common filters was -$0.04566 versus the frozen +$0.02
+requirement. The primary candidate failed its screen, production remains paused, and no candidate was promoted.

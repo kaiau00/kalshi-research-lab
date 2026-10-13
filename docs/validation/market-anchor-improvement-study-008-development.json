@@ -1,0 +1,748 @@
+{
+  "candidates": {
+    "pooled_lcb_001": {
+      "binary_log_loss": null,
+      "brier_score": null,
+      "chronological_block_pnl": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "daily_pnl": {
+        "2026-10-05": 0.0,
+        "2026-10-06": 0.0,
+        "2026-10-07": 0.0,
+        "2026-10-08": 0.0,
+        "2026-10-09": 0.0,
+        "2026-10-10": 0.0,
+        "2026-10-11": 0.0,
+        "2026-10-12": 0.0,
+        "2026-10-13": 0.0
+      },
+      "fees": 0.0,
+      "filter_audit": {
+        "independent_pass_counts": {
+          "all_candidate_filters": 0,
+          "all_common_filters": 17,
+          "lcb_edge": 0,
+          "maximum_price": 454,
+          "minimum_price": 484,
+          "raw_market_gap": 190,
+          "spread": 641,
+          "volatility": 643
+        },
+        "maximum_lcb_edge_after_common_filters": -0.04566385459135014
+      },
+      "maximum_drawdown": 0.0,
+      "net_pnl": 0.0,
+      "observed_utc_dates": 9,
+      "pnl_without_top_three_winners": 0.0,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "rejections": {
+        "cooldown": 0,
+        "daily_risk": 0,
+        "filter": 643,
+        "maximum_drawdown": 0
+      },
+      "settlements": 0,
+      "stressed_pnl": {
+        "1": 0.0,
+        "2": 0.0
+      },
+      "unresolved_exposure": 0,
+      "volatility_rejections": 0,
+      "wins": 0
+    },
+    "pooled_lcb_price80_001": {
+      "binary_log_loss": null,
+      "brier_score": null,
+      "chronological_block_pnl": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "daily_pnl": {
+        "2026-10-05": 0.0,
+        "2026-10-06": 0.0,
+        "2026-10-07": 0.0,
+        "2026-10-08": 0.0,
+        "2026-10-09": 0.0,
+        "2026-10-10": 0.0,
+        "2026-10-11": 0.0,
+        "2026-10-12": 0.0,
+        "2026-10-13": 0.0
+      },
+      "fees": 0.0,
+      "filter_audit": {
+        "independent_pass_counts": {
+          "all_candidate_filters": 0,
+          "all_common_filters": 4,
+          "lcb_edge": 0,
+          "maximum_price": 407,
+          "minimum_price": 484,
+          "raw_market_gap": 190,
+          "spread": 641,
+          "volatility": 643
+        },
+        "maximum_lcb_edge_after_common_filters": -0.05122377627632024
+      },
+      "maximum_drawdown": 0.0,
+      "net_pnl": 0.0,
+      "observed_utc_dates": 9,
+      "pnl_without_top_three_winners": 0.0,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "rejections": {
+        "cooldown": 0,
+        "daily_risk": 0,
+        "filter": 643,
+        "maximum_drawdown": 0
+      },
+      "settlements": 0,
+      "stressed_pnl": {
+        "1": 0.0,
+        "2": 0.0
+      },
+      "unresolved_exposure": 0,
+      "volatility_rejections": 0,
+      "wins": 0
+    },
+    "pooled_lcb_price80_vol90_001": {
+      "binary_log_loss": null,
+      "brier_score": null,
+      "chronological_block_pnl": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "daily_pnl": {
+        "2026-10-05": 0.0,
+        "2026-10-06": 0.0,
+        "2026-10-07": 0.0,
+        "2026-10-08": 0.0,
+        "2026-10-09": 0.0,
+        "2026-10-10": 0.0,
+        "2026-10-11": 0.0,
+        "2026-10-12": 0.0,
+        "2026-10-13": 0.0
+      },
+      "fees": 0.0,
+      "filter_audit": {
+        "independent_pass_counts": {
+          "all_candidate_filters": 0,
+          "all_common_filters": 4,
+          "lcb_edge": 0,
+          "maximum_price": 407,
+          "minimum_price": 484,
+          "raw_market_gap": 190,
+          "spread": 641,
+          "volatility": 582
+        },
+        "maximum_lcb_edge_after_common_filters": -0.05122377627632024
+      },
+      "maximum_drawdown": 0.0,
+      "net_pnl": 0.0,
+      "observed_utc_dates": 9,
+      "pnl_without_top_three_winners": 0.0,
+      "positive_blocks": 0,
+      "positive_day_share": 0.0,
+      "rejections": {
+        "cooldown": 0,
+        "daily_risk": 0,
+        "filter": 643,
+        "maximum_drawdown": 0
+      },
+      "settlements": 0,
+      "stressed_pnl": {
+        "1": 0.0,
+        "2": 0.0
+      },
+      "unresolved_exposure": 0,
+      "volatility_rejections": 61,
+      "wins": 0
+    }
+  },
+  "eligible_decisions": 643,
+  "eligible_probability_comparison": {
+    "kalshi_midpoint": {
+      "binary_log_loss": 0.48039222795632486,
+      "brier_score": 0.1586011772939347,
+      "rows": 643
+    },
+    "pooled_model": {
+      "binary_log_loss": 0.48377442366802187,
+      "brier_score": 0.1595340330247328,
+      "rows": 643
+    },
+    "raw_model": {
+      "binary_log_loss": 0.5362620954863427,
+      "brier_score": 0.167598300703816,
+      "rows": 643
+    }
+  },
+  "evaluation_dates": [
+    "2026-10-05",
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13"
+  ],
+  "exact_control": {
+    "binary_log_loss": 0.45345550025358633,
+    "brier_score": 0.1419694817729676,
+    "chronological_block_pnl": [
+      0.5185,
+      -0.4044,
+      -0.2639,
+      0.5668,
+      -0.2543
+    ],
+    "daily_pnl": {
+      "2026-10-05": 0.1792,
+      "2026-10-06": 0.0,
+      "2026-10-07": 0.3393,
+      "2026-10-08": -0.2539,
+      "2026-10-09": -0.5936,
+      "2026-10-10": 0.4354,
+      "2026-10-11": 0.3106,
+      "2026-10-12": -0.4048,
+      "2026-10-13": 0.1505
+    },
+    "fees": 0.1873,
+    "maximum_drawdown": 0.8647,
+    "net_pnl": 0.1627,
+    "observed_utc_dates": 9,
+    "pnl_without_top_three_winners": -0.5578,
+    "positive_blocks": 2,
+    "positive_day_share": 0.5555555555555556,
+    "rejections": {
+      "cooldown": 0,
+      "daily_risk": 0,
+      "filter": 626,
+      "maximum_drawdown": 0
+    },
+    "settlements": 17,
+    "stressed_pnl": {
+      "1": -0.0002,
+      "2": -0.1626
+    },
+    "unresolved_exposure": 0,
+    "wins": 14
+  },
+  "final_source_date_partial": true,
+  "ineligible_training_decisions": 352,
+  "method": {
+    "l2_penalty": 25.0,
+    "logit_delta_clip": [
+      -6.0,
+      6.0
+    ],
+    "lower_bound_z": 1.281551565545,
+    "minimum_lcb_edge": 0.02,
+    "minimum_training_dates": 5,
+    "minimum_training_rows": 250,
+    "predictors": [
+      "logit_delta",
+      "logit_delta_x_standardized_abs_raw_z",
+      "logit_delta_x_standardized_log_relative_sigma_bps",
+      "logit_delta_x_standardized_seconds_fraction",
+      "logit_delta_x_standardized_observed_fraction",
+      "logit_delta_x_standardized_spread_cents",
+      "logit_delta_x_standardized_abs_market_logit"
+    ]
+  },
+  "model_path": {
+    "2026-10-05": {
+      "coefficients": [
+        -0.09106517636720501,
+        0.025212272489931294,
+        -0.07820957179152185,
+        0.04791120266915089,
+        0.0,
+        0.016815705038923066,
+        0.031047076719081274
+      ],
+      "iterations": 4,
+      "modifier_means": [
+        1.1171926464033193,
+        1.4281166807917312,
+        0.9166848025398195,
+        0.0,
+        0.7715099715099716,
+        1.5152102212669203
+      ],
+      "modifier_scales": [
+        0.8032994697090198,
+        0.8009864584898037,
+        0.12785587006338586,
+        1.0,
+        0.39647700599446545,
+        0.939258145536887
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04"
+      ],
+      "training_rows": 351,
+      "volatility_p90_bps": 11.37419127022438
+    },
+    "2026-10-06": {
+      "coefficients": [
+        -0.0668252028329108,
+        -0.006347469064802481,
+        -0.06187109195675221,
+        0.07740635815700637,
+        0.0,
+        0.018220941337273283,
+        -0.022904594565490953
+      ],
+      "iterations": 5,
+      "modifier_means": [
+        1.1490034992560734,
+        1.4908682967165015,
+        0.913862893696478,
+        0.0,
+        0.7471698113207548,
+        1.5571966565145199
+      ],
+      "modifier_scales": [
+        0.8077394485018939,
+        0.7618381176231163,
+        0.1296041849296741,
+        1.0,
+        0.4083347561142791,
+        0.94263226486714
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05"
+      ],
+      "training_rows": 424,
+      "volatility_p90_bps": 11.222520026728539
+    },
+    "2026-10-07": {
+      "coefficients": [
+        -0.02773520933078775,
+        -0.021827799447426268,
+        -0.06310334365362989,
+        0.04237499842680538,
+        0.0,
+        0.07831436690799268,
+        0.005394225301154636
+      ],
+      "iterations": 5,
+      "modifier_means": [
+        1.149916338835701,
+        1.5043247061941074,
+        0.9139542107510689,
+        0.0,
+        0.7424849699398798,
+        1.560017436833428
+      ],
+      "modifier_scales": [
+        0.8089157924203508,
+        0.7260237017718117,
+        0.1262678939957664,
+        1.0,
+        0.4095535441007929,
+        0.9408579902695894
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06"
+      ],
+      "training_rows": 499,
+      "volatility_p90_bps": 10.914159958526128
+    },
+    "2026-10-08": {
+      "coefficients": [
+        -0.06646944020279606,
+        -0.004466923021566893,
+        -0.043845600089299205,
+        0.06252780975757856,
+        0.0,
+        -0.013792485178806735,
+        -0.0630805638275967
+      ],
+      "iterations": 5,
+      "modifier_means": [
+        1.1656013444104403,
+        1.5387684994983482,
+        0.9160658464895123,
+        0.0,
+        0.74198606271777,
+        1.5572540693866075
+      ],
+      "modifier_scales": [
+        0.840732505087906,
+        0.7081119930302431,
+        0.12347315102629491,
+        1.0,
+        0.4091253011008658,
+        0.9446533337110818
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07"
+      ],
+      "training_rows": 574,
+      "volatility_p90_bps": 11.222520026728539
+    },
+    "2026-10-09": {
+      "coefficients": [
+        -0.046225724865440736,
+        -0.009437852507765061,
+        -0.03160603879434744,
+        0.06480359842551402,
+        0.0,
+        -0.020257889798010464,
+        -0.05909747751641447
+      ],
+      "iterations": 5,
+      "modifier_means": [
+        1.1403921050453178,
+        1.596542713580612,
+        0.9149515597888347,
+        0.0,
+        0.745511811023622,
+        1.5445618271426078
+      ],
+      "modifier_scales": [
+        0.8279374405831104,
+        0.7128291919691999,
+        0.12167582067721659,
+        1.0,
+        0.40724677395882436,
+        0.9435778445698291
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08"
+      ],
+      "training_rows": 635,
+      "volatility_p90_bps": 11.733252662456216
+    },
+    "2026-10-10": {
+      "coefficients": [
+        -0.050981597599678685,
+        -0.0006935795768862305,
+        -0.00857746816015848,
+        0.02280661888925806,
+        0.0,
+        -0.023936735965075145,
+        -0.046062847619262666
+      ],
+      "iterations": 5,
+      "modifier_means": [
+        1.1314261222792732,
+        1.6041217621249422,
+        0.9123241828974006,
+        0.0,
+        0.7504261363636363,
+        1.5361352185022477
+      ],
+      "modifier_scales": [
+        0.8200503267054824,
+        0.6923669368599328,
+        0.12198550132525254,
+        1.0,
+        0.40399263072552066,
+        0.9390251964174738
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08",
+        "2026-10-09"
+      ],
+      "training_rows": 704,
+      "volatility_p90_bps": 11.533218858953967
+    },
+    "2026-10-11": {
+      "coefficients": [
+        -0.040531324207972175,
+        -0.01676399469225659,
+        -0.04639240699002992,
+        0.007201375538069679,
+        0.0,
+        -0.0594789472643694,
+        -0.05120151342124833
+      ],
+      "iterations": 4,
+      "modifier_means": [
+        1.148985997795212,
+        1.5211125075157095,
+        0.9170389037905352,
+        0.0,
+        0.7528445006321113,
+        1.5251983651526826
+      ],
+      "modifier_scales": [
+        0.8273627298142108,
+        0.7120183194080267,
+        0.11961579664918581,
+        1.0,
+        0.4026635400868434,
+        0.934625295155788
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-10"
+      ],
+      "training_rows": 791,
+      "volatility_p90_bps": 11.068062510000072
+    },
+    "2026-10-12": {
+      "coefficients": [
+        -0.047032164429465964,
+        -0.016736406214153038,
+        -0.03441385471208874,
+        -0.0006875697612151932,
+        0.0,
+        -0.07205072725790172,
+        -0.034446628968782714
+      ],
+      "iterations": 4,
+      "modifier_means": [
+        1.168691386410025,
+        1.4672338063518349,
+        0.9182336643733334,
+        0.0,
+        0.7598173515981735,
+        1.5263215169003155
+      ],
+      "modifier_scales": [
+        0.8393702425276159,
+        0.7172093830576649,
+        0.1178207018755172,
+        1.0,
+        0.4014323253613749,
+        0.926293453352181
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-10",
+        "2026-10-11"
+      ],
+      "training_rows": 876,
+      "volatility_p90_bps": 10.344982798271776
+    },
+    "2026-10-13": {
+      "coefficients": [
+        -0.007698212052438705,
+        -0.025293098840171033,
+        -0.018733741090257154,
+        -0.007681552294276876,
+        0.0,
+        -0.05710092157535594,
+        -0.021103749361164523
+      ],
+      "iterations": 4,
+      "modifier_means": [
+        1.1642900926453659,
+        1.485453186382701,
+        0.9177336297234885,
+        0.0,
+        0.7624338624338625,
+        1.5329426389373502
+      ],
+      "modifier_scales": [
+        0.827626857824075,
+        0.7052649278095755,
+        0.11848266950819937,
+        1.0,
+        0.399571731203729,
+        0.9268446174387995
+      ],
+      "predictors": [
+        "logit_delta",
+        "logit_delta_x_standardized_abs_raw_z",
+        "logit_delta_x_standardized_log_relative_sigma_bps",
+        "logit_delta_x_standardized_seconds_fraction",
+        "logit_delta_x_standardized_observed_fraction",
+        "logit_delta_x_standardized_spread_cents",
+        "logit_delta_x_standardized_abs_market_logit"
+      ],
+      "training_dates": [
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-10",
+        "2026-10-11",
+        "2026-10-12"
+      ],
+      "training_rows": 945,
+      "volatility_p90_bps": 10.296393341897101
+    }
+  },
+  "primary_development_screen": {
+    "gates": {
+      "beats_control_log_loss": false,
+      "beats_control_maximum_drawdown": true,
+      "beats_control_net_pnl": false,
+      "beats_control_one_cent_stress": true,
+      "beats_control_two_cent_stress": true,
+      "beats_control_without_top_three": true,
+      "minimum_30_settlements": false,
+      "positive_day_share_above_half": false,
+      "positive_in_four_of_five_blocks": false,
+      "positive_net_pnl": false,
+      "positive_one_cent_stress": false,
+      "positive_two_cent_stress": false,
+      "positive_without_top_three": false
+    },
+    "passed": false
+  },
+  "promotion_authorized": false,
+  "report_sha256": "fea3a07c4906ce2a20d27aec206487eecad480a2e8c2bdd0c1adb626b3c557bd",
+  "scope": "Read-only development evidence; no demo or production authorization",
+  "source": {
+    "account": "adaptive_baseline",
+    "checkpoint_sha256": "8b3e3345cbf2eba6714ec04cdfac4927594c2a80ba67d0cb6d42dcb4b0bec1e2",
+    "closed_trades": 995,
+    "dataset": "e2d5cb33e7c44660809b531f03d4b4e3",
+    "last_digest": "7700cb0359bef4d775dae80b8fb2c0fb26a29a97332e7b5d2e21bd34bded504b",
+    "next_segment": 7637,
+    "registration_sha256": "40879e6c4a912838074963672443c25f94284603d5eedcf3f6135b8eb5e125d3"
+  },
+  "study": "008"
+}

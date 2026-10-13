@@ -25,6 +25,10 @@ New entries in the conservative live pilot were paused on October 13 while the r
 market-prior probability pool, uncertainty-bound entry rule, lower price ceiling and volatility veto. Existing
 positions, ledgers and studies remain preserved.
 
+Its [frozen development result](docs/MARKET_ANCHOR_IMPROVEMENT_STUDY_008_RESULT.md) rejected all three candidates:
+probability pooling removed the raw model's apparent edge, and no decision cleared the uncertainty-bound entry
+rule. The primary candidate is not authorized for demo or production use.
+
 ## What is implemented
 
 - Raw market metadata, authenticated order-book updates, public trades, and official BRTI index observations, stored in receipt order with a SHA-256 chain.
