@@ -31,8 +31,8 @@ to official settlement.
 
 At the start of each evaluation UTC day, fit only trades officially settled before that day's start. Require at
 least five prior UTC dates and 250 settlements. The Kalshi midpoint log-odds is a fixed offset. The adjustment is a
-logistic regression with L2 penalty 25 and no free intercept. Every predictor is the clipped raw-model-minus-market
-logit difference multiplied by one of:
+logistic regression with L2 penalty 25 and no free intercept. Clip the raw-model-minus-market logit difference to
+the closed interval [-6, 6]. Every predictor is that clipped difference multiplied by one of:
 
 1. one;
 2. absolute raw model z-score;
@@ -42,9 +42,12 @@ logit difference multiplied by one of:
 6. binary spread in cents; or
 7. absolute Kalshi midpoint log-odds.
 
-Continuous predictors are standardized using that training prefix only. The no-intercept, delta-interaction form
-forces the pooled probability to equal the market midpoint when the raw model and market agree. Coefficients are
-fit by penalized Newton iterations. The inverse penalized Hessian supplies an approximate prediction variance.
+For terms two through seven, standardize the listed modifier using that training prefix only and then multiply it
+by the clipped difference; the first term is the unscaled clipped difference. Use population standard deviation
+and substitute one only when variance is effectively zero. This modifier-only standardization and no-intercept,
+delta-interaction form force the pooled probability to equal the market midpoint when the raw model and market
+agree. Coefficients are fit by penalized Newton iterations. The inverse penalized Hessian supplies an approximate
+prediction variance.
 
 For the baseline-selected side, calculate a one-sided 90% lower probability bound by subtracting 1.281551565545
 standard errors from selected-side log-odds. No bootstrap observation, same-day result or future coefficient may
@@ -58,15 +61,20 @@ All candidates preserve the control's agreement, spread, cooldown, realized-loss
   remain at least 0.02 after adding two cents to the decision ask and the one-contract fee.
 - `pooled_lcb_price80_001`: apply the same rule with an exclusive $0.80 maximum decision ask.
 - `pooled_lcb_price80_vol90_001` (primary): also reject relative model sigma above the training prefix's 90th
-  percentile. The percentile is recomputed from prior data at each walk-forward day and frozen from the complete
-  development source before any later prospective run.
+  percentile. Use the nearest-rank order statistic with rank `ceil(0.90 * n)`. The percentile is recomputed from
+  prior data at each walk-forward day and frozen from the complete development source before any later prospective
+  run.
 
 The two non-primary candidates are ablations. They may explain where the primary result came from, but none may be
 promoted from this development comparison.
 
 ## Evaluation
 
-Use expanding, day-ahead walk-forward evaluation. Apply the exact recorded delayed fill price, actual filled
+Use expanding, day-ahead walk-forward evaluation. A prior date is a distinct decision UTC date represented among
+rows settled before the evaluation day's start. Include every source decision date that meets the five-date and
+250-settlement training requirements, including a partial final source date; report that partial status. Start the
+control and every candidate with clean cooldown and realized-risk state on the first eligible evaluation date.
+Apply the exact recorded delayed fill price, actual filled
 quantity, exact fee and official outcome. Report settlements, wins, fees, net P&L, P&L without the three largest
 winners, one- and two-cent adverse-fill stress, positive-day share, five chronological blocks, maximum drawdown,
 selected-side Brier score and log loss, coefficient path, zero-training decisions, volatility rejections, cooldown
