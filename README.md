@@ -29,6 +29,10 @@ Its [frozen development result](docs/MARKET_ANCHOR_IMPROVEMENT_STUDY_008_RESULT.
 probability pooling removed the raw model's apparent edge, and no decision cleared the uncertainty-bound entry
 rule. The primary candidate is not authorized for demo or production use.
 
+[Moderate Disagreement Study 009](docs/MODERATE_DISAGREEMENT_STUDY_009_PROTOCOL.md) is the next prospective,
+read-only candidate. It freezes one simpler 30–50 cent, 6–8 percentage-point disagreement regime and requires 20
+future dates plus 50 official settlements before review. It cannot submit orders or resume production.
+
 ## What is implemented
 
 - Raw market metadata, authenticated order-book updates, public trades, and official BRTI index observations, stored in receipt order with a SHA-256 chain.

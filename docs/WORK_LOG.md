@@ -463,3 +463,10 @@ Implemented and ran Study 008 against that exact frozen checkpoint. The exact co
 stress. Kalshi's midpoint beat both the raw and pooled models on all 643 eligible decisions. Every pooled candidate
 selected zero trades; the best lower-bound edge after common filters was -$0.04566 versus the frozen +$0.02
 requirement. The primary candidate failed its screen, production remains paused, and no candidate was promoted.
+
+Preregistered read-only Moderate Disagreement Study 009 with a 2026-10-13 21:45 UTC prospective cutoff. The
+single candidate came from an explicitly post-result Study 008 diagnostic and therefore receives no credit for its
+45-trade development result. It freezes a 30–50 cent selected-side price, greater-than-6-through-8-point
+raw-model-versus-market gap, one-cent spread ceiling, two-cent stressed-edge check, one-hour cooldown and existing
+realized-risk controls. Review requires 20 future dates and 50 official settlements; passing would authorize only
+a separately frozen demo phase.
