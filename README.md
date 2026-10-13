@@ -20,6 +20,11 @@ a read-only, receipt-ordered decision tape and is not connected to demo or produ
 benchmark validated its resumable local replay path; the complete 591-million-event development extraction has
 started at segment 4,345 without calculating strategy P&L.
 
+New entries in the conservative live pilot were paused on October 13 while the read-only
+[Market Anchor Improvement Study 008](docs/MARKET_ANCHOR_IMPROVEMENT_STUDY_008_PROTOCOL.md) evaluates a
+market-prior probability pool, uncertainty-bound entry rule, lower price ceiling and volatility veto. Existing
+positions, ledgers and studies remain preserved.
+
 ## What is implemented
 
 - Raw market metadata, authenticated order-book updates, public trades, and official BRTI index observations, stored in receipt order with a SHA-256 chain.

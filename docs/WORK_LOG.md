@@ -444,3 +444,16 @@ segment linkage; keeps only one temporary archive; checkpoints every ten segment
 refuses identity drift. A real start/resume check processed segments 4,345 and 4,346 and saved the checkpoint at
 4,347 with 200,000 events. No model-comparison or P&L report was opened. The protocol records the performance-only
 source-registration amendment and its old/new hashes.
+
+## 2026-10-13 — Production entries paused and Study 008 preregistered
+
+At the user's explicit request, created the durable `PAUSE_ENTRIES` control in the current conservative Market
+Anchor ledger. The runner confirmed `entries_paused` with nine historical fills, no open position, no unresolved
+order and no STOP file. Recorder, settlement, archive and research processes remain active.
+
+Copied the verified Candidate Study 003 checkpoint to an isolated read-only Study 008 source snapshot at next
+segment 7,637 and last digest `7700cb0359bef4d775dae80b8fb2c0fb26a29a97332e7b5d2e21bd34bded504b`.
+Preregistered the exact control and three market-prior probability-pool candidates before calculating their
+results. The primary candidate uses an expanding day-ahead fit, a one-sided 90% probability lower bound, an $0.80
+exclusive price ceiling, a training-prefix 90th-percentile relative-volatility veto and the existing conservative
+risk controls. Study 008 has no order path and cannot promote itself.
