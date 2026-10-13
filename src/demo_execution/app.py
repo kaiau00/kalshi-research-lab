@@ -21,6 +21,7 @@ from .study_worker import (
     latest_conservative_anchor_status,
     latest_edge_status,
     latest_market_anchor_status,
+    latest_moderate_disagreement_status,
 )
 
 
@@ -156,6 +157,10 @@ def create_app(record=True):
     @app.get('/api/conservative-anchor/status', dependencies=[Depends(authenticated)])
     async def conservative_anchor_status():
         return await asyncio.to_thread(latest_conservative_anchor_status)
+
+    @app.get('/api/moderate-disagreement/status', dependencies=[Depends(authenticated)])
+    async def moderate_disagreement_status():
+        return await asyncio.to_thread(latest_moderate_disagreement_status)
 
     @app.get('/edge-validation', dependencies=[Depends(authenticated)])
     async def edge_validation_dashboard():

@@ -14,6 +14,7 @@ from pathlib import Path
 
 from conservative_anchor.report import prospective_status as conservative_prospective_status
 from market_anchor_study.report import prospective_status
+from moderate_disagreement.report import prospective_status as moderate_disagreement_prospective_status
 from research_lab.storage import canonical
 
 
@@ -54,6 +55,10 @@ def latest_market_anchor_status():
 
 def latest_conservative_anchor_status():
     return conservative_prospective_status(volume_root())
+
+
+def latest_moderate_disagreement_status():
+    return moderate_disagreement_prospective_status(volume_root())
 
 
 def candidate_work_ready():

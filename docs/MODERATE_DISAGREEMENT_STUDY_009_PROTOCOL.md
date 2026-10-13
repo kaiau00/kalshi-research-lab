@@ -14,6 +14,9 @@ The single frozen candidate is `moderate_disagreement_band_001`. It may only acc
 selected by the unchanged `adaptive_baseline` account in Candidate Study 003. It cannot infer an opposite-side
 fill.
 
+- Strategy registration SHA-256: `80c5cce79a49aa829f42928ae50c8e7a546e99e75bd7b585a373a22e3943eaa5`
+- Study registration SHA-256: `e32f574fd7cc0f363a711f69c3e051b5a9e368f7d5c3f5e6ab35404468fec70e`
+
 ## Frozen entry rules
 
 - KXBTC15M only, exchange index 2, subaccount-independent research simulation
