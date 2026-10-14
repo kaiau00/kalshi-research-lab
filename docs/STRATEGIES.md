@@ -1,5 +1,9 @@
 # Initial experiment definitions
 
+This file specifies the original three experiments and their shared probability and execution model. The
+[strategy registry](STRATEGY_REGISTRY.md) is the canonical inventory of every implemented, rejected, prospective
+and proposed strategy in the repository. New ideas must be added there even when they fail.
+
 All defaults are versioned in `src/research_lab/settings.py`. This is a starting specification, not an optimized configuration.
 
 | Model | Hypothesis | Entry filter |

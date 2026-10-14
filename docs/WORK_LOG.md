@@ -474,3 +474,18 @@ a separately frozen demo phase.
 The user explicitly authorized deploying the exact read-only Study 009 monitor to Railway after the October 16
 billing reset. The deployment must preserve the durable production entry pause and verify both registration hashes
 and `production_orders_authorized=false`; it does not authorize any demo or real order submission.
+## 2026-10-13 — Complete strategy registry and evidence-based research
+
+Created `STRATEGY_REGISTRY.md` as the canonical inventory of every code-defined strategy, the 40 Study 004
+variants, historical production and exit revisions, sizing policies, advanced research concepts and newly proposed
+candidates. Added a regression test that fails when a code-defined strategy or sizing variant is absent from the
+registry.
+
+Completed a primary-source research pass tied to the repository's actual evidence. The resulting memo ranks
+Rollover Bridge first, then a Kalshi-midpoint beta-calibration test and a jump-robust HAR settlement model. It also
+specifies a quote-innovation model, an order-flow execution overlay, a constituent-book BRTI replica and a
+complement-parity audit. Every proposal now has equations, required data, a baseline and a falsification rule.
+The memo explicitly demotes tail buying, Kelly as an edge source, early-exit optimization, standalone Hawkes
+outcome prediction and high-capacity AI models under the current sample.
+
+Validation: 178 tests passed and Ruff passed.

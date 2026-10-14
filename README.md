@@ -196,7 +196,9 @@ Open positions are shown at cost for drawdown, **not** liquidation value. Report
 See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md),
 [archived adaptive production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md),
-[operating guide](docs/OPERATIONS.md), [strategy assumptions](docs/STRATEGIES.md), and
+[operating guide](docs/OPERATIONS.md), [complete strategy registry](docs/STRATEGY_REGISTRY.md),
+[evidence-based strategy research](docs/EVIDENCE_BASED_STRATEGY_RESEARCH_2026-10-13.md),
+[initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 
 The complete paused live record is summarized in
