@@ -25,6 +25,8 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
 - `tail_underdog` and its 135/180-second variants — archived after sparse, negative demo evidence;
 - Study 004 and all forty parameter configurations — completed with no winner;
 - Study 008 and all three probability-pool candidates — completed and rejected;
+- Study 016 Databento futures overlay — completed and rejected after the larger micro-BTC replication failed
+  probability, concentration, stress and consistency gates;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new

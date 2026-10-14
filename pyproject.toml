@@ -27,7 +27,7 @@ dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 packages = ["src/research_lab", "src/demo_execution", "src/candidate_study", "src/walk_forward_study",
             "src/edge_validation", "src/production_execution", "src/market_anchor_study",
             "src/conservative_anchor", "src/rollover_bridge", "src/market_anchor_improvement",
-            "src/moderate_disagreement", "src/settlement_research"]
+            "src/moderate_disagreement", "src/settlement_research", "src/databento_overlay"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

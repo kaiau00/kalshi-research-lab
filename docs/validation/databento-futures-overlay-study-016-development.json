@@ -1,0 +1,669 @@
+{
+  "method": {
+    "adverse_buffer": "0.02",
+    "feature_names": [
+      "signed_return_5",
+      "signed_return_15",
+      "signed_return_60",
+      "log_rv_ratio"
+    ],
+    "l2_penalty": 25.0,
+    "lower_bound_z": 1.281551565545,
+    "maximum_staleness_minutes": 2,
+    "minimum_60_minute_coverage": 48,
+    "minimum_training_dates": 3,
+    "minimum_training_rows": 150,
+    "primary_symbol": "BTC.c.0",
+    "risk_per_market": "1.00",
+    "robustness_symbol": "MBT.c.0"
+  },
+  "primary_development_screen": {
+    "gates": {
+      "micro_btc_brier_points_same_direction": false,
+      "micro_btc_log_loss_points_same_direction": false,
+      "micro_btc_two_cent_stress_positive": false,
+      "minimum_100_settlements": false,
+      "no_unresolved_exposure": true,
+      "overlay_brier_better_than_calibration": true,
+      "overlay_brier_better_than_raw": true,
+      "overlay_log_loss_better_than_calibration": true,
+      "overlay_log_loss_better_than_raw": true,
+      "positive_day_share_above_half": false,
+      "positive_in_four_of_five_blocks": false,
+      "positive_net_pnl": false,
+      "positive_one_cent_stress": false,
+      "positive_two_cent_stress": false,
+      "positive_without_top_three": false
+    },
+    "passed": false
+  },
+  "promotion_authorized": false,
+  "report_sha256": "2e0cedbd7485e5bb837c43a0f479ad4427c2c28b7f868aa10fa21a06e4d4b5bd",
+  "results": {
+    "BTC.c.0": {
+      "coverage": {
+        "evaluated_trades": 33,
+        "evaluation_dates": [
+          "2026-09-29"
+        ],
+        "feature_complete_trades": 184,
+        "feature_dates": [
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-24",
+          "2026-09-28",
+          "2026-09-29"
+        ],
+        "feature_exclusions": {
+          "insufficient_60m_coverage": 193,
+          "stale_5m_endpoint": 1,
+          "stale_60m_endpoint": 2,
+          "stale_latest_bar": 236
+        },
+        "ineligible_before_training_gate": 151,
+        "source_trades": 616
+      },
+      "fixed_filter_diagnostics": {
+        "agreement_5_15": {
+          "chronological_block_pnl": [
+            0.279,
+            2.9332,
+            -3.3428,
+            0.7816,
+            -2.1692
+          ],
+          "daily_pnl": {
+            "2026-09-21": 0.0924,
+            "2026-09-22": 2.6625,
+            "2026-09-23": -2.4124,
+            "2026-09-24": 0.378,
+            "2026-09-28": 0.261,
+            "2026-09-29": -2.4997
+          },
+          "fees": 0.9692,
+          "maximum_drawdown": 4.8405,
+          "net_pnl": -1.5182,
+          "observed_utc_dates": 6,
+          "pnl_without_top_three_winners": -4.8559,
+          "positive_blocks": 3,
+          "positive_day_share": 0.6666666666666666,
+          "settlements": 59,
+          "stressed_pnl": {
+            "1": -2.3741,
+            "2": -3.2278
+          },
+          "unresolved_exposure": 0,
+          "wins": 42
+        },
+        "agreement_5_15_60": {
+          "chronological_block_pnl": [
+            -0.9999,
+            1.658,
+            -0.5316,
+            1.4294,
+            -1.6611
+          ],
+          "daily_pnl": {
+            "2026-09-21": -0.659,
+            "2026-09-22": 0.7497,
+            "2026-09-23": 0.0937,
+            "2026-09-24": 0.378,
+            "2026-09-28": 0.9403,
+            "2026-09-29": -1.6079
+          },
+          "fees": 0.5592,
+          "maximum_drawdown": 1.6611,
+          "net_pnl": -0.1052,
+          "observed_utc_dates": 6,
+          "pnl_without_top_three_winners": -2.6388,
+          "positive_blocks": 2,
+          "positive_day_share": 0.6666666666666666,
+          "settlements": 38,
+          "stressed_pnl": {
+            "1": -0.5864,
+            "2": -1.0661
+          },
+          "unresolved_exposure": 0,
+          "wins": 29
+        }
+      },
+      "model_path": {
+        "2026-09-29": {
+          "calibration_coefficients": [
+            -0.11605992615538899,
+            1.0252856328409858
+          ],
+          "overlay_coefficients": [
+            -0.1162944832616403,
+            1.0348511972549854,
+            -0.20399188560434017,
+            0.1345399789385463,
+            -0.03178668585811632,
+            0.07918190723409242
+          ],
+          "overlay_feature_means": [
+            3.354335870148913e-05,
+            -0.0004585363563347478,
+            -0.0003364309563492514,
+            -1.697839741184395
+          ],
+          "overlay_feature_scales": [
+            0.0012120160522144643,
+            0.00185282975149295,
+            0.005112141157500567,
+            0.5945803378096405
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-28"
+          ],
+          "training_rows": 151
+        }
+      },
+      "probability_metrics": {
+        "calibration_control": {
+          "binary_log_loss": 0.5691981735207337,
+          "brier_score": 0.19120019434839972,
+          "rows": 33
+        },
+        "futures_overlay": {
+          "binary_log_loss": 0.5591908317954601,
+          "brier_score": 0.18783440414332347,
+          "rows": 33
+        },
+        "raw_adaptive": {
+          "binary_log_loss": 0.5750633940260347,
+          "brier_score": 0.1931053938215746,
+          "rows": 33
+        }
+      },
+      "symbol": "BTC.c.0",
+      "trading_metrics": {
+        "all_feature_complete_source_fills": {
+          "chronological_block_pnl": [
+            -3.0984,
+            9.7452,
+            1.3706,
+            27.824,
+            0.5179
+          ],
+          "daily_pnl": {
+            "2026-09-21": -8.2058,
+            "2026-09-22": 13.0133,
+            "2026-09-23": -12.0328,
+            "2026-09-24": 18.9848,
+            "2026-09-28": 22.9776,
+            "2026-09-29": 1.6222
+          },
+          "fees": 5.5527,
+          "maximum_drawdown": 20.1935,
+          "net_pnl": 36.3593,
+          "observed_utc_dates": 6,
+          "pnl_without_top_three_winners": -11.8332,
+          "positive_blocks": 4,
+          "positive_day_share": 0.6666666666666666,
+          "settlements": 184,
+          "stressed_pnl": {
+            "1": 26.5094,
+            "2": 16.6744
+          },
+          "unresolved_exposure": 0,
+          "wins": 89
+        },
+        "calibration_lcb": {
+          "chronological_block_pnl": [
+            0.1064,
+            0.1392,
+            -1.7458,
+            -0.5546,
+            -1.492
+          ],
+          "daily_pnl": {
+            "2026-09-29": -3.5468
+          },
+          "fees": 0.1778,
+          "maximum_drawdown": 3.9334,
+          "net_pnl": -3.5468,
+          "observed_utc_dates": 1,
+          "pnl_without_top_three_winners": -3.9255,
+          "positive_blocks": 2,
+          "positive_day_share": 0.0,
+          "settlements": 11,
+          "stressed_pnl": {
+            "1": -3.7584,
+            "2": -3.9693
+          },
+          "unresolved_exposure": 0,
+          "wins": 6
+        },
+        "futures_overlay_lcb": {
+          "chronological_block_pnl": [
+            0.1064,
+            -0.7241,
+            -0.784,
+            -1.468,
+            -0.7967
+          ],
+          "daily_pnl": {
+            "2026-09-29": -3.6664
+          },
+          "fees": 0.1914,
+          "maximum_drawdown": 3.9914,
+          "net_pnl": -3.6664,
+          "observed_utc_dates": 1,
+          "pnl_without_top_three_winners": -4.0451,
+          "positive_blocks": 1,
+          "positive_day_share": 0.0,
+          "settlements": 10,
+          "stressed_pnl": {
+            "1": -3.8791,
+            "2": -4.0914
+          },
+          "unresolved_exposure": 0,
+          "wins": 5
+        }
+      }
+    },
+    "MBT.c.0": {
+      "coverage": {
+        "evaluated_trades": 166,
+        "evaluation_dates": [
+          "2026-09-24",
+          "2026-09-27",
+          "2026-09-28",
+          "2026-09-29",
+          "2026-09-30"
+        ],
+        "feature_complete_trades": 348,
+        "feature_dates": [
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-24",
+          "2026-09-27",
+          "2026-09-28",
+          "2026-09-29",
+          "2026-09-30"
+        ],
+        "feature_exclusions": {
+          "insufficient_60m_coverage": 130,
+          "stale_5m_endpoint": 1,
+          "stale_60m_endpoint": 2,
+          "stale_latest_bar": 135
+        },
+        "ineligible_before_training_gate": 182,
+        "source_trades": 616
+      },
+      "fixed_filter_diagnostics": {
+        "agreement_5_15": {
+          "chronological_block_pnl": [
+            -0.7976,
+            3.6369,
+            -5.6869,
+            0.2426,
+            -2.6113
+          ],
+          "daily_pnl": {
+            "2026-09-21": -0.9577,
+            "2026-09-22": 1.94,
+            "2026-09-23": -1.4253,
+            "2026-09-24": -1.1238,
+            "2026-09-27": 0.0,
+            "2026-09-28": -0.164,
+            "2026-09-29": -3.5981,
+            "2026-09-30": 0.1126
+          },
+          "fees": 1.6893,
+          "maximum_drawdown": 8.7731,
+          "net_pnl": -5.2163,
+          "observed_utc_dates": 8,
+          "pnl_without_top_three_winners": -9.6358,
+          "positive_blocks": 2,
+          "positive_day_share": 0.25,
+          "settlements": 119,
+          "stressed_pnl": {
+            "1": -6.7636,
+            "2": -8.3071
+          },
+          "unresolved_exposure": 0,
+          "wins": 85
+        },
+        "agreement_5_15_60": {
+          "chronological_block_pnl": [
+            -1.9383,
+            -1.4406,
+            0.3005,
+            2.6621,
+            -5.1445
+          ],
+          "daily_pnl": {
+            "2026-09-21": -2.0984,
+            "2026-09-22": -0.1024,
+            "2026-09-23": -1.6716,
+            "2026-09-24": 0.5764,
+            "2026-09-27": 0.0,
+            "2026-09-28": 1.8041,
+            "2026-09-29": -4.1815,
+            "2026-09-30": 0.1126
+          },
+          "fees": 1.0858,
+          "maximum_drawdown": 5.8334,
+          "net_pnl": -5.5608,
+          "observed_utc_dates": 8,
+          "pnl_without_top_three_winners": -8.8173,
+          "positive_blocks": 2,
+          "positive_day_share": 0.375,
+          "settlements": 74,
+          "stressed_pnl": {
+            "1": -6.5797,
+            "2": -7.5956
+          },
+          "unresolved_exposure": 0,
+          "wins": 52
+        }
+      },
+      "model_path": {
+        "2026-09-24": {
+          "calibration_coefficients": [
+            -0.25356139273019707,
+            0.9054171229889968
+          ],
+          "overlay_coefficients": [
+            -0.25178276002043204,
+            0.9021347197559678,
+            -0.13586438139374934,
+            0.12199754393634614,
+            -0.058522067284576734,
+            0.010479218959521282
+          ],
+          "overlay_feature_means": [
+            0.00012981893617066895,
+            2.2587706173925e-05,
+            -0.00033086187592290366,
+            -1.6831718073001436
+          ],
+          "overlay_feature_scales": [
+            0.0010592571368326662,
+            0.0015061929320581327,
+            0.004286204053496975,
+            0.5697649884462699
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23"
+          ],
+          "training_rows": 182
+        },
+        "2026-09-27": {
+          "calibration_coefficients": [
+            -0.2363781119320974,
+            0.918008210977539
+          ],
+          "overlay_coefficients": [
+            -0.22909452086027463,
+            0.9064975431302604,
+            -0.15763610495367808,
+            0.12772910690591338,
+            0.002240645798670315,
+            -0.03696453015715398
+          ],
+          "overlay_feature_means": [
+            0.00016359698740399462,
+            6.806562875327208e-05,
+            -0.0001725167335794733,
+            -1.6762436512142578
+          ],
+          "overlay_feature_scales": [
+            0.0011130238773851661,
+            0.0015201673012991345,
+            0.004306704056091565,
+            0.5523138737188827
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24"
+          ],
+          "training_rows": 222
+        },
+        "2026-09-28": {
+          "calibration_coefficients": [
+            -0.23728842863079141,
+            0.9140217644210008
+          ],
+          "overlay_coefficients": [
+            -0.23324608032711666,
+            0.9091611963442328,
+            -0.17104031662987312,
+            0.11856054092273804,
+            -0.019724575449661375,
+            -0.0476395905817563
+          ],
+          "overlay_feature_means": [
+            0.00014789481882731038,
+            5.822998513209262e-05,
+            -0.00013872601083570236,
+            -1.6782852501985925
+          ],
+          "overlay_feature_scales": [
+            0.0011114913301834204,
+            0.001517902915598536,
+            0.0043017282110626,
+            0.5526088708399728
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-27"
+          ],
+          "training_rows": 226
+        },
+        "2026-09-29": {
+          "calibration_coefficients": [
+            -0.20739755975134908,
+            0.843919961287114
+          ],
+          "overlay_coefficients": [
+            -0.21002311627255693,
+            0.8565468223933501,
+            -0.13298648824778567,
+            0.054627420442941776,
+            -0.04152172798908573,
+            0.01917830337230393
+          ],
+          "overlay_feature_means": [
+            8.69374528276261e-05,
+            -5.027409807343438e-05,
+            -2.995178208014505e-05,
+            -1.6857806982155226
+          ],
+          "overlay_feature_scales": [
+            0.0011097152649042394,
+            0.0015610004326032576,
+            0.004170441274154292,
+            0.5573779481107366
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-27",
+            "2026-09-28"
+          ],
+          "training_rows": 290
+        },
+        "2026-09-30": {
+          "calibration_coefficients": [
+            -0.2400697355171083,
+            0.8544886462680448
+          ],
+          "overlay_coefficients": [
+            -0.23984564604641334,
+            0.856941019545877,
+            -0.16747954706851617,
+            0.12017769482690628,
+            -0.029016859146651718,
+            0.042103573810822525
+          ],
+          "overlay_feature_means": [
+            6.801777536620985e-05,
+            -5.564297886049912e-05,
+            7.82653915387299e-05,
+            -1.6966361161518044
+          ],
+          "overlay_feature_scales": [
+            0.0010814495261917843,
+            0.0015105536659819371,
+            0.004152039558657983,
+            0.5639654829154102
+          ],
+          "training_dates": [
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-27",
+            "2026-09-28",
+            "2026-09-29"
+          ],
+          "training_rows": 345
+        }
+      },
+      "probability_metrics": {
+        "calibration_control": {
+          "binary_log_loss": 0.5404557567960419,
+          "brier_score": 0.17250539480827065,
+          "rows": 166
+        },
+        "futures_overlay": {
+          "binary_log_loss": 0.5421995987632664,
+          "brier_score": 0.17382204189630132,
+          "rows": 166
+        },
+        "raw_adaptive": {
+          "binary_log_loss": 0.5529064250578581,
+          "brier_score": 0.17593021754809374,
+          "rows": 166
+        }
+      },
+      "symbol": "MBT.c.0",
+      "trading_metrics": {
+        "all_feature_complete_source_fills": {
+          "chronological_block_pnl": [
+            1.1026,
+            5.4736,
+            -21.3201,
+            49.7193,
+            -4.755
+          ],
+          "daily_pnl": {
+            "2026-09-21": -11.2426,
+            "2026-09-22": 16.1936,
+            "2026-09-23": -17.4138,
+            "2026-09-24": 21.221,
+            "2026-09-27": 0.7628,
+            "2026-09-28": 24.2037,
+            "2026-09-29": -2.8152,
+            "2026-09-30": -0.6891
+          },
+          "fees": 9.2096,
+          "maximum_drawdown": 26.443,
+          "net_pnl": 30.2204,
+          "observed_utc_dates": 8,
+          "pnl_without_top_three_winners": -17.9721,
+          "positive_blocks": 3,
+          "positive_day_share": 0.5,
+          "settlements": 348,
+          "stressed_pnl": {
+            "1": 15.3641,
+            "2": 0.5296
+          },
+          "unresolved_exposure": 0,
+          "wins": 184
+        },
+        "calibration_lcb": {
+          "chronological_block_pnl": [
+            1.9999,
+            -5.4096,
+            -1.6667,
+            -4.6653,
+            2.4556
+          ],
+          "daily_pnl": {
+            "2026-09-24": -0.6518,
+            "2026-09-27": -0.9869,
+            "2026-09-28": -4.7259,
+            "2026-09-29": -0.9215,
+            "2026-09-30": 0.0
+          },
+          "fees": 1.3431,
+          "maximum_drawdown": 14.6327,
+          "net_pnl": -7.2861,
+          "observed_utc_dates": 5,
+          "pnl_without_top_three_winners": -20.5478,
+          "positive_blocks": 2,
+          "positive_day_share": 0.0,
+          "settlements": 37,
+          "stressed_pnl": {
+            "1": -10.6768,
+            "2": -14.0621
+          },
+          "unresolved_exposure": 0,
+          "wins": 11
+        },
+        "futures_overlay_lcb": {
+          "chronological_block_pnl": [
+            -0.5761,
+            -2.3794,
+            -0.7441,
+            1.851,
+            4.4026
+          ],
+          "daily_pnl": {
+            "2026-09-24": -1.2349,
+            "2026-09-27": 0.0,
+            "2026-09-28": -2.3974,
+            "2026-09-29": 6.1863,
+            "2026-09-30": 0.0
+          },
+          "fees": 0.823,
+          "maximum_drawdown": 4.4528,
+          "net_pnl": 2.554,
+          "observed_utc_dates": 5,
+          "pnl_without_top_three_winners": -9.8945,
+          "positive_blocks": 2,
+          "positive_day_share": 0.2,
+          "settlements": 27,
+          "stressed_pnl": {
+            "1": 1.0339,
+            "2": -0.4839
+          },
+          "unresolved_exposure": 0,
+          "wins": 12
+        }
+      }
+    }
+  },
+  "scope": "Development-only selection audit; no demo or production authorization",
+  "source": {
+    "account": "adaptive_volatility",
+    "checkpoint": "data/settlement-research-input/seed-checkpoint.json",
+    "checkpoint_sha256": "055195a302b02cee21fb9ce99b9fe0a2dbbdd22ebce580221f4c8ef056d1b57b",
+    "closed_trades": 616,
+    "databento_csv_sha256": {
+      "BTC.c.0": "dd2be37204adcf1f8da70c7926849213827f56eda7b657986f5ecbb009b2c2db",
+      "MBT.c.0": "6d62a2daafb380db7e13768dca94c833176e3fcaa03494185e63922c166f07b4"
+    }
+  },
+  "strategy": "databento_futures_overlay_016",
+  "study": "016"
+}

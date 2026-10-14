@@ -519,3 +519,13 @@ adaptive comparison account to causal CME `BTC.c.0` and `MBT.c.0` one-minute bar
 clock, gap exclusions, 5/15/60-minute momentum, 15/60-minute realized variance, expanding day-ahead ridge
 calibration, one-sided 90% lower bound, actual archived arrival fills, $1 maximum all-in sizing and existing
 robustness gates. CME futures are treated only as supplementary features, not as BRTI or Kalshi execution data.
+
+Implemented and ran the frozen Study 016 comparison. The strict main-contract path retained 184 feature-complete
+source fills but only 33 walk-forward evaluation trades on one date. Its probability scores improved slightly,
+while ten uncertainty-bound selections lost $3.6664 and failed every return gate. The more complete micro-BTC
+replication evaluated 166 trades over five dates: its futures overlay was worse than calibration alone on Brier
+score and log loss. Its 27 selected fills made +$2.5540 headline P&L, but fell to -$9.8945 without the three
+largest winners and -$0.4839 under two-cent stress, with one positive day and two positive blocks. Both fixed
+momentum diagnostics lost money. Study 016 is rejected and has no order authority.
+
+Validation: 187 tests passed and Ruff passed.
