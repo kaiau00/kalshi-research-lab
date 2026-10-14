@@ -470,3 +470,7 @@ single candidate came from an explicitly post-result Study 008 diagnostic and th
 raw-model-versus-market gap, one-cent spread ceiling, two-cent stressed-edge check, one-hour cooldown and existing
 realized-risk controls. Review requires 20 future dates and 50 official settlements; passing would authorize only
 a separately frozen demo phase.
+
+The user explicitly authorized deploying the exact read-only Study 009 monitor to Railway after the October 16
+billing reset. The deployment must preserve the durable production entry pause and verify both registration hashes
+and `production_orders_authorized=false`; it does not authorize any demo or real order submission.
