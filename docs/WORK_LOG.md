@@ -511,3 +511,11 @@ rows, all with quoted 500 ms arrivals, official results and jump features. It le
 full 14.341 GB replay has not been started, so Study 010 still has no performance result.
 
 Validation: 184 tests passed and Ruff passed.
+
+## 2026-10-13 — Databento Futures Overlay Study 016 declared
+
+Declared a development-only test before opening Databento-feature P&L. Study 016 joins the archived 616-trade
+adaptive comparison account to causal CME `BTC.c.0` and `MBT.c.0` one-minute bars. It freezes the completed-bar
+clock, gap exclusions, 5/15/60-minute momentum, 15/60-minute realized variance, expanding day-ahead ridge
+calibration, one-sided 90% lower bound, actual archived arrival fills, $1 maximum all-in sizing and existing
+robustness gates. CME futures are treated only as supplementary features, not as BRTI or Kalshi execution data.

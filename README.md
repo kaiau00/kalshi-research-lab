@@ -201,6 +201,7 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [evidence-based strategy research](docs/EVIDENCE_BASED_STRATEGY_RESEARCH_2026-10-13.md),
 [Market Calibration Study 010](docs/MARKET_CALIBRATION_STUDY_010_PROTOCOL.md),
 [Jump-Robust Settlement Study 011](docs/JUMP_ROBUST_SETTLEMENT_STUDY_011_PROTOCOL.md),
+[Databento Futures Overlay Study 016](docs/DATABENTO_FUTURES_OVERLAY_STUDY_016_PROTOCOL.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 
