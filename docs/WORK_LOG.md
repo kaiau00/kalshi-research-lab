@@ -489,3 +489,25 @@ The memo explicitly demotes tail buying, Kelly as an edge source, early-exit opt
 outcome prediction and high-capacity AI models under the current sample.
 
 Validation: 178 tests passed and Ruff passed.
+
+## 2026-10-13 — Portfolio cleanup and Studies 010/011 implementation
+
+Separated active development, passive prospective completion and rejected work in `RESEARCH_PORTFOLIO.md`.
+Preserved every raw archive, ledger, registration, audit and failed result. Removed only rebuildable local caches,
+about 956 MB of downloaded Study 007 benchmark/sample archives and an obsolete pre-fix checkpoint copy. Railway's
+bucket and durable volume were not changed.
+
+Froze Market Calibration Study 010 and Jump-Robust Settlement Study 011 before opening either study's P&L.
+Implemented a shared receipt-ordered tape at exactly 300, 180, 60 and 30 seconds before close, the first observed
+book at or after 500 ms, official outcomes, and contiguous 60/300/1,800-second realized-variation features. Study
+010 now has expanding day-ahead beta calibration, a penalized-Hessian 90% lower bound, $1/depth-capped IOC
+simulation, two-cent qualification buffer and all frozen robustness gates. Study 011 remains at its preregistered
+feature-audit milestone; its HAR/Student-t model has not been fit and no P&L has been opened.
+
+Exported and hash-checked the archived manifest extension through segment 7,636, then added a resumable local
+runner that verifies the manifest chain, archive SHA-256, event hashes, seed identity and source registration. A
+bounded seven-segment smoke test replayed 700,000 events and produced one complete set of four usable fixed-time
+rows, all with quoted 500 ms arrivals, official results and jump features. It left zero temporary archives. The
+full 14.341 GB replay has not been started, so Study 010 still has no performance result.
+
+Validation: 184 tests passed and Ruff passed.

@@ -1,10 +1,10 @@
 # Kalshi Research Lab
 
-A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The current
-authorized production pilot is Conservative Market Anchor `market_anchor_conservative_001`, with a fixed $1
-all-in maximum per market, IOC entries, hold-to-official-settlement position management, and frozen loss and
-cooldown controls. It uses a separate durable ledger and the same production account on exchange index 2. The
-purpose is to reject weak ideas and measure promising ones, not to promise a return.
+A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. New
+real-money entries are durably paused. The last authorized production revision was Conservative Market Anchor
+`market_anchor_conservative_001`, with a fixed $1 all-in maximum per market, IOC entries,
+hold-to-official-settlement position management, and frozen loss and cooldown controls. Its separate ledger is
+preserved. The purpose is to reject weak ideas and measure promising ones, not to promise a return.
 
 The original adaptive-volatility live-fill audit is complete: it lost $37.0860 across all 37 resolved fills, or
 $25.0750 under identical-entry hold-to-settlement accounting. That revision remains closed and its ledger is
@@ -197,7 +197,10 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [production pilot postmortem](docs/PRODUCTION_PILOT_001_POSTMORTEM.md),
 [archived adaptive production execution](docs/PRODUCTION_EXECUTION.md), [build plan](docs/BUILD_PLAN.md),
 [operating guide](docs/OPERATIONS.md), [complete strategy registry](docs/STRATEGY_REGISTRY.md),
+[research portfolio](docs/RESEARCH_PORTFOLIO.md),
 [evidence-based strategy research](docs/EVIDENCE_BASED_STRATEGY_RESEARCH_2026-10-13.md),
+[Market Calibration Study 010](docs/MARKET_CALIBRATION_STUDY_010_PROTOCOL.md),
+[Jump-Robust Settlement Study 011](docs/JUMP_ROBUST_SETTLEMENT_STUDY_011_PROTOCOL.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 
