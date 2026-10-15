@@ -590,3 +590,22 @@ the concentration and price stresses, but its development result was negative an
 positive-day and block-consistency gates. The 3,463-market holdout remains unopened.
 
 Validation: 205 tests passed and Ruff passed.
+
+## 2026-10-15 — Historical Parameter and Kelly Study 019
+
+Preregistered 1,620 conservative-anchor parameter combinations and five sizing paths before calculating new P&L.
+The first 80% of Dataset 017 is treated as exposed research data and the newest 3,463-market holdout remains
+sealed. Parameter selection uses only fixed $1 sizing; fixed $3 and eighth-, quarter- and half-Kelly paths begin at
+$100 and cannot promote a failed signal.
+
+Two neighboring fixed-$1 configurations passed every aggregate research gate. The selected two-cent-spread
+configuration made $11.9751 across 549 trades, remained positive without its three largest winners and under two
+cents of adverse price, was positive in four of five time blocks and 79 of 147 days, and had $6.5425 maximum
+drawdown. Its one-cent-spread neighbor also passed. Only two of 1,620 configurations passed, the simple daily P&L
+interval includes zero, and the selected signal's later original-validation slice falls to -$0.3789 under two-cent
+stress, so this is a holdout candidate rather than proof of edge.
+
+On the selected signal, fixed $1 ended at $111.9751. Eighth Kelly ended at $124.0070 with $13.5607 drawdown and
+only $0.3795 of two-cent-stressed P&L. Quarter Kelly was capped on 426 of 549 decisions. Half Kelly was capped on
+every decision and therefore exactly reproduced fixed $3: $143.4316 ending cash with $24.1941 drawdown. Fixed $1
+remains the recommended research sizing. No holdout, demo or production execution was enabled.

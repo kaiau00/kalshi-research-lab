@@ -1,0 +1,1094 @@
+{
+  "baseline": {
+    "configuration": {
+      "maximum_binary_spread": 0.01,
+      "maximum_raw_model_market_gap": 0.06,
+      "maximum_seconds_left": 300,
+      "maximum_selected_ask_exclusive": 0.85,
+      "minimum_net_edge": 0.04,
+      "minimum_selected_ask": 0.3,
+      "minimum_two_cent_stressed_edge": 0.0,
+      "name": "w00_e040_p3085_g060_t300_s01_b00",
+      "probability_market_log_odds_weight": 0.0
+    },
+    "decision_rejections": {
+      "minimum_net_edge": 57894,
+      "no_qualifying_decision": 13715,
+      "raw_model_market_gap": 2754,
+      "selected_ask_band": 7886
+    },
+    "gates": {
+      "maximum_drawdown_at_most_10": true,
+      "minimum_100_settlements": false,
+      "positive_in_four_of_five_blocks": true,
+      "positive_net_pnl": true,
+      "positive_on_majority_of_days": false,
+      "positive_one_cent_stress": true,
+      "positive_two_cent_stress": true,
+      "positive_without_top_three_winners": false
+    },
+    "review_gate_passed": false,
+    "sizing": {
+      "eighth_kelly_cap_3": {
+        "block_pnl": [
+          "1.8239",
+          "0.2884",
+          "4.2415",
+          "-5.0945",
+          "1.4919"
+        ],
+        "contracts": 226,
+        "daily_pnl_standard_error": 0.06505074756907973,
+        "decisions": 78,
+        "ending_cash": "102.7512",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7960256410256410256410256410",
+          "minimum_entry_price": "0.3000",
+          "seconds_left_counts": {
+            "120": 13,
+            "180": 15,
+            "240": 21,
+            "300": 25,
+            "60": 4
+          },
+          "side_counts": {
+            "no": 36,
+            "yes": 42
+          }
+        },
+        "fees": "2.4888",
+        "inability_to_afford_any_later_trade": false,
+        "kelly_cap_binding_decisions": 36,
+        "largest_winner_pnl": "1.3706",
+        "maximum_drawdown": "9.3103",
+        "mean_daily_pnl": 0.018715646258503405,
+        "mean_daily_pnl_95pct_normal_interval": [
+          -0.10878381897689286,
+          0.14621511149389968
+        ],
+        "mean_target_budget": "2.742856752586881079880350427",
+        "minimum_block_pnl": "-5.0945",
+        "observed_days": 147,
+        "pnl_without_top_three_winners": "0.0174",
+        "positive_blocks": 4,
+        "positive_day_share": 0.3129251700680272,
+        "positive_days": 46,
+        "realized_net_pnl": "2.7512",
+        "settled_markets": 78,
+        "stressed_pnl": {
+          "1": "0.5883",
+          "2": "-1.5718"
+        },
+        "trade_ledger_sha256": "fcdf3d359178209b7af5585124e5a13714fce5034de0ddf4c4f72a600ad9c3e8",
+        "win_rate": 0.8205128205128205,
+        "wins": 64,
+        "zero_size_decisions": {}
+      },
+      "fixed_1": {
+        "block_pnl": [
+          "0.4353",
+          "0.1714",
+          "1.5780",
+          "-1.9534",
+          "2.1812"
+        ],
+        "contracts": 80,
+        "daily_pnl_standard_error": 0.02432727573564522,
+        "decisions": 78,
+        "ending_cash": "102.4125",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7960256410256410256410256410",
+          "minimum_entry_price": "0.3000",
+          "seconds_left_counts": {
+            "120": 13,
+            "180": 15,
+            "240": 21,
+            "300": 25,
+            "60": 4
+          },
+          "side_counts": {
+            "no": 36,
+            "yes": 42
+          }
+        },
+        "fees": "0.8975",
+        "inability_to_afford_any_later_trade": false,
+        "kelly_cap_binding_decisions": null,
+        "largest_winner_pnl": "2.0559",
+        "maximum_drawdown": "3.3582",
+        "mean_daily_pnl": 0.016411564625850337,
+        "mean_daily_pnl_95pct_normal_interval": [
+          -0.03126989581601429,
+          0.06409302506771497
+        ],
+        "mean_target_budget": "1.00",
+        "minimum_block_pnl": "-1.9534",
+        "observed_days": 147,
+        "pnl_without_top_three_winners": "-0.1558",
+        "positive_blocks": 4,
+        "positive_day_share": 0.3197278911564626,
+        "positive_days": 47,
+        "realized_net_pnl": "2.4125",
+        "settled_markets": 78,
+        "stressed_pnl": {
+          "1": "1.6446",
+          "2": "0.8778"
+        },
+        "trade_ledger_sha256": "9dc15c53b6018c9a3757b554fb3591a81e204287750a5bd9e51a3ba0f78b192a",
+        "win_rate": 0.8205128205128205,
+        "wins": 64,
+        "zero_size_decisions": {}
+      },
+      "fixed_3": {
+        "block_pnl": [
+          "1.3073",
+          "0.5156",
+          "4.9908",
+          "-5.8576",
+          "6.8014"
+        ],
+        "contracts": 242,
+        "daily_pnl_standard_error": 0.07325787944854442,
+        "decisions": 78,
+        "ending_cash": "107.7575",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7960256410256410256410256410",
+          "minimum_entry_price": "0.3000",
+          "seconds_left_counts": {
+            "120": 13,
+            "180": 15,
+            "240": 21,
+            "300": 25,
+            "60": 4
+          },
+          "side_counts": {
+            "no": 36,
+            "yes": 42
+          }
+        },
+        "fees": "2.7125",
+        "inability_to_afford_any_later_trade": false,
+        "kelly_cap_binding_decisions": null,
+        "largest_winner_pnl": "6.1677",
+        "maximum_drawdown": "10.0734",
+        "mean_daily_pnl": 0.05277210884353741,
+        "mean_daily_pnl_95pct_normal_interval": [
+          -0.09081333487560964,
+          0.19635755256268447
+        ],
+        "mean_target_budget": "3.00",
+        "minimum_block_pnl": "-5.8576",
+        "observed_days": 147,
+        "pnl_without_top_three_winners": "-0.4598",
+        "positive_blocks": 4,
+        "positive_day_share": 0.3197278911564626,
+        "positive_days": 47,
+        "realized_net_pnl": "7.7575",
+        "settled_markets": 78,
+        "stressed_pnl": {
+          "1": "5.4358",
+          "2": "3.1172"
+        },
+        "trade_ledger_sha256": "e44f239ff0b87df841be8936f34c3ffe84523d9069dbc037bdccfa2da439ecac",
+        "win_rate": 0.8205128205128205,
+        "wins": 64,
+        "zero_size_decisions": {}
+      },
+      "half_kelly_cap_3": {
+        "block_pnl": [
+          "1.3073",
+          "0.5156",
+          "4.9908",
+          "-5.8576",
+          "6.8014"
+        ],
+        "contracts": 242,
+        "daily_pnl_standard_error": 0.07325787944854442,
+        "decisions": 78,
+        "ending_cash": "107.7575",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7960256410256410256410256410",
+          "minimum_entry_price": "0.3000",
+          "seconds_left_counts": {
+            "120": 13,
+            "180": 15,
+            "240": 21,
+            "300": 25,
+            "60": 4
+          },
+          "side_counts": {
+            "no": 36,
+            "yes": 42
+          }
+        },
+        "fees": "2.7125",
+        "inability_to_afford_any_later_trade": false,
+        "kelly_cap_binding_decisions": 77,
+        "largest_winner_pnl": "6.1677",
+        "maximum_drawdown": "10.0734",
+        "mean_daily_pnl": 0.05277210884353741,
+        "mean_daily_pnl_95pct_normal_interval": [
+          -0.09081333487560964,
+          0.19635755256268447
+        ],
+        "mean_target_budget": "2.999825702854489432460816337",
+        "minimum_block_pnl": "-5.8576",
+        "observed_days": 147,
+        "pnl_without_top_three_winners": "-0.4598",
+        "positive_blocks": 4,
+        "positive_day_share": 0.3197278911564626,
+        "positive_days": 47,
+        "realized_net_pnl": "7.7575",
+        "settled_markets": 78,
+        "stressed_pnl": {
+          "1": "5.4358",
+          "2": "3.1172"
+        },
+        "trade_ledger_sha256": "e44f239ff0b87df841be8936f34c3ffe84523d9069dbc037bdccfa2da439ecac",
+        "win_rate": 0.8205128205128205,
+        "wins": 64,
+        "zero_size_decisions": {}
+      },
+      "quarter_kelly_cap_3": {
+        "block_pnl": [
+          "1.3073",
+          "0.5156",
+          "4.9908",
+          "-5.8576",
+          "3.3749"
+        ],
+        "contracts": 237,
+        "daily_pnl_standard_error": 0.06734504247722566,
+        "decisions": 78,
+        "ending_cash": "104.3310",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7960256410256410256410256410",
+          "minimum_entry_price": "0.3000",
+          "seconds_left_counts": {
+            "120": 13,
+            "180": 15,
+            "240": 21,
+            "300": 25,
+            "60": 4
+          },
+          "side_counts": {
+            "no": 36,
+            "yes": 42
+          }
+        },
+        "fees": "2.6390",
+        "inability_to_afford_any_later_trade": false,
+        "kelly_cap_binding_decisions": 77,
+        "largest_winner_pnl": "2.7412",
+        "maximum_drawdown": "10.0734",
+        "mean_daily_pnl": 0.029462585034013607,
+        "mean_daily_pnl_95pct_normal_interval": [
+          -0.10253369822134867,
+          0.1614588682893759
+        ],
+        "mean_target_budget": "2.9806820821964754854611774",
+        "minimum_block_pnl": "-5.8576",
+        "observed_days": 147,
+        "pnl_without_top_three_winners": "-0.4598",
+        "positive_blocks": 4,
+        "positive_day_share": 0.3197278911564626,
+        "positive_days": 47,
+        "realized_net_pnl": "4.3310",
+        "settled_markets": 78,
+        "stressed_pnl": {
+          "1": "2.0607",
+          "2": "-0.2067"
+        },
+        "trade_ledger_sha256": "26a14d2a6712258d5a9fda92b1cde131b372fdd5a911b5bbd919ce5f963d0ed1",
+        "win_rate": 0.8205128205128205,
+        "wins": 64,
+        "zero_size_decisions": {}
+      }
+    }
+  },
+  "configurations_evaluated": 1620,
+  "holdout": {
+    "evaluated": false,
+    "locked": true,
+    "reason": "awaiting explicit authorization"
+  },
+  "passing_configurations": [
+    {
+      "configuration": {
+        "maximum_binary_spread": 0.01,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.85,
+        "minimum_net_edge": 0.03,
+        "minimum_selected_ask": 0.5,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "w00_e030_p5085_g060_t300_s01_b00",
+        "probability_market_log_odds_weight": 0.0
+      },
+      "decision_rejections": {
+        "binary_spread": 31,
+        "minimum_net_edge": 53060,
+        "no_qualifying_decision": 13273,
+        "raw_model_market_gap": 1798,
+        "selected_ask_band": 11964
+      },
+      "gates": {
+        "maximum_drawdown_at_most_10": true,
+        "minimum_100_settlements": true,
+        "positive_in_four_of_five_blocks": true,
+        "positive_net_pnl": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "review_gate_passed": true,
+      "sizing": {
+        "eighth_kelly_cap_3": {
+          "block_pnl": [
+            "5.0869",
+            "-7.4445",
+            "12.0039",
+            "4.1557",
+            "-1.3353"
+          ],
+          "contracts": 1109,
+          "daily_pnl_standard_error": 0.13705145920940467,
+          "decisions": 520,
+          "ending_cash": "112.4667",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7185576923076923076923076923",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 58,
+              "180": 103,
+              "240": 118,
+              "300": 207,
+              "60": 34
+            },
+            "side_counts": {
+              "no": 281,
+              "yes": 239
+            }
+          },
+          "fees": "14.1833",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 67,
+          "largest_winner_pnl": "0.9450",
+          "maximum_drawdown": "15.1562",
+          "mean_daily_pnl": 0.08480748299319728,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.18381337705723588,
+            0.35342834304363047
+          ],
+          "mean_target_budget": "1.984426621538159988476629210",
+          "minimum_block_pnl": "-7.4445",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "9.7910",
+          "positive_blocks": 3,
+          "positive_day_share": 0.5306122448979592,
+          "positive_days": 78,
+          "realized_net_pnl": "12.4667",
+          "settled_markets": 520,
+          "stressed_pnl": {
+            "1": "1.7662",
+            "2": "-8.9201"
+          },
+          "trade_ledger_sha256": "1222e3590e092b0d3bc1a3efbe1d372e4c15ad6a0b41659683d0024f9554d433",
+          "win_rate": 0.7519230769230769,
+          "wins": 391,
+          "zero_size_decisions": {}
+        },
+        "fixed_1": {
+          "block_pnl": [
+            "2.5930",
+            "-2.0059",
+            "5.4946",
+            "3.4056",
+            "0.8210"
+          ],
+          "contracts": 520,
+          "daily_pnl_standard_error": 0.06359832473088425,
+          "decisions": 520,
+          "ending_cash": "110.3083",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7185576923076923076923076923",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 58,
+              "180": 103,
+              "240": 118,
+              "300": 207,
+              "60": 34
+            },
+            "side_counts": {
+              "no": 281,
+              "yes": 239
+            }
+          },
+          "fees": "7.0417",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": null,
+          "largest_winner_pnl": "0.4825",
+          "maximum_drawdown": "6.0944",
+          "mean_daily_pnl": 0.07012448979591837,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.05452822667661476,
+            0.19477720626845152
+          ],
+          "mean_target_budget": "1.00",
+          "minimum_block_pnl": "-2.0059",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "8.8608",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5102040816326531,
+          "positive_days": 75,
+          "realized_net_pnl": "10.3083",
+          "settled_markets": 520,
+          "stressed_pnl": {
+            "1": "5.2700",
+            "2": "0.2382"
+          },
+          "trade_ledger_sha256": "fe4b5d487d99e45a829bd9b3a1bad3b885c3108c6f85f6625853f4e02477a4cd",
+          "win_rate": 0.7519230769230769,
+          "wins": 391,
+          "zero_size_decisions": {}
+        },
+        "fixed_3": {
+          "block_pnl": [
+            "10.2374",
+            "-4.8229",
+            "17.5217",
+            "13.6013",
+            "0.8508"
+          ],
+          "contracts": 1873,
+          "daily_pnl_standard_error": 0.24157181928532534,
+          "decisions": 520,
+          "ending_cash": "137.3883",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7185576923076923076923076923",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 58,
+              "180": 103,
+              "240": 118,
+              "300": 207,
+              "60": 34
+            },
+            "side_counts": {
+              "no": 281,
+              "yes": 239
+            }
+          },
+          "fees": "26.1617",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": null,
+          "largest_winner_pnl": "2.4125",
+          "maximum_drawdown": "23.2014",
+          "mean_daily_pnl": 0.2543421768707483,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.21913858892848936,
+            0.7278229426699859
+          ],
+          "mean_target_budget": "3.00",
+          "minimum_block_pnl": "-4.8229",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "30.1508",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5034013605442177,
+          "positive_days": 74,
+          "realized_net_pnl": "37.3883",
+          "settled_markets": 520,
+          "stressed_pnl": {
+            "1": "19.2014",
+            "2": "1.0362"
+          },
+          "trade_ledger_sha256": "e0769dc5c51f1d13c607fa042a487804ecf42c65b6d5acbb4788c39804d6ac35",
+          "win_rate": 0.7519230769230769,
+          "wins": 391,
+          "zero_size_decisions": {}
+        },
+        "half_kelly_cap_3": {
+          "block_pnl": [
+            "10.2374",
+            "-4.8229",
+            "17.5217",
+            "13.6013",
+            "0.8508"
+          ],
+          "contracts": 1873,
+          "daily_pnl_standard_error": 0.24157181928532534,
+          "decisions": 520,
+          "ending_cash": "137.3883",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7185576923076923076923076923",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 58,
+              "180": 103,
+              "240": 118,
+              "300": 207,
+              "60": 34
+            },
+            "side_counts": {
+              "no": 281,
+              "yes": 239
+            }
+          },
+          "fees": "26.1617",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 520,
+          "largest_winner_pnl": "2.4125",
+          "maximum_drawdown": "23.2014",
+          "mean_daily_pnl": 0.2543421768707483,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.21913858892848936,
+            0.7278229426699859
+          ],
+          "mean_target_budget": "3.00",
+          "minimum_block_pnl": "-4.8229",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "30.1508",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5034013605442177,
+          "positive_days": 74,
+          "realized_net_pnl": "37.3883",
+          "settled_markets": 520,
+          "stressed_pnl": {
+            "1": "19.2014",
+            "2": "1.0362"
+          },
+          "trade_ledger_sha256": "e0769dc5c51f1d13c607fa042a487804ecf42c65b6d5acbb4788c39804d6ac35",
+          "win_rate": 0.7519230769230769,
+          "wins": 391,
+          "zero_size_decisions": {}
+        },
+        "quarter_kelly_cap_3": {
+          "block_pnl": [
+            "6.7148",
+            "-6.9123",
+            "20.1176",
+            "12.0303",
+            "-0.0285"
+          ],
+          "contracts": 1761,
+          "daily_pnl_standard_error": 0.22377410215899401,
+          "decisions": 520,
+          "ending_cash": "131.9219",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7185576923076923076923076923",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 58,
+              "180": 103,
+              "240": 118,
+              "300": 207,
+              "60": 34
+            },
+            "side_counts": {
+              "no": 281,
+              "yes": 239
+            }
+          },
+          "fees": "24.2381",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 394,
+          "largest_winner_pnl": "1.9300",
+          "maximum_drawdown": "21.1806",
+          "mean_daily_pnl": 0.21715578231292518,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.2214414579187031,
+            0.6557530225445535
+          ],
+          "mean_target_budget": "2.867920670536395884411032573",
+          "minimum_block_pnl": "-6.9123",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "26.1719",
+          "positive_blocks": 3,
+          "positive_day_share": 0.5102040816326531,
+          "positive_days": 75,
+          "realized_net_pnl": "31.9219",
+          "settled_markets": 520,
+          "stressed_pnl": {
+            "1": "14.8465",
+            "2": "-2.2098"
+          },
+          "trade_ledger_sha256": "79a7a91a531d27f74b8165229e0243a48455c4ae706848915f659150054c48ca",
+          "win_rate": 0.7519230769230769,
+          "wins": 391,
+          "zero_size_decisions": {}
+        }
+      }
+    },
+    {
+      "configuration": {
+        "maximum_binary_spread": 0.02,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.85,
+        "minimum_net_edge": 0.03,
+        "minimum_selected_ask": 0.5,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "w00_e030_p5085_g060_t300_s02_b00",
+        "probability_market_log_odds_weight": 0.0
+      },
+      "decision_rejections": {
+        "minimum_net_edge": 53012,
+        "no_qualifying_decision": 13244,
+        "raw_model_market_gap": 1797,
+        "selected_ask_band": 11950
+      },
+      "gates": {
+        "maximum_drawdown_at_most_10": true,
+        "minimum_100_settlements": true,
+        "positive_in_four_of_five_blocks": true,
+        "positive_net_pnl": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "review_gate_passed": true,
+      "sizing": {
+        "eighth_kelly_cap_3": {
+          "block_pnl": [
+            "6.1628",
+            "-4.6001",
+            "15.9701",
+            "4.3173",
+            "2.1569"
+          ],
+          "contracts": 1225,
+          "daily_pnl_standard_error": 0.14389381023796433,
+          "decisions": 549,
+          "ending_cash": "124.0070",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7206193078324225865209471767",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 60,
+              "180": 106,
+              "240": 125,
+              "300": 216,
+              "60": 42
+            },
+            "side_counts": {
+              "no": 294,
+              "yes": 255
+            }
+          },
+          "fees": "15.7130",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 89,
+          "largest_winner_pnl": "0.9450",
+          "maximum_drawdown": "13.5607",
+          "mean_daily_pnl": 0.16331292517006804,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.11871894289634202,
+            0.44534479323647813
+          ],
+          "mean_target_budget": "2.059541410916810433265840647",
+          "minimum_block_pnl": "-4.6001",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "21.1720",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5578231292517006,
+          "positive_days": 82,
+          "realized_net_pnl": "24.0070",
+          "settled_markets": 549,
+          "stressed_pnl": {
+            "1": "12.1847",
+            "2": "0.3795"
+          },
+          "trade_ledger_sha256": "4d847b34ba15f22b6f9a96d2bc68c2ec876539ab6fa28922e47e133387e4f5b5",
+          "win_rate": 0.75591985428051,
+          "wins": 415,
+          "zero_size_decisions": {}
+        },
+        "fixed_1": {
+          "block_pnl": [
+            "2.6974",
+            "-1.5654",
+            "7.0945",
+            "2.6714",
+            "1.0772"
+          ],
+          "contracts": 549,
+          "daily_pnl_standard_error": 0.06586991131569922,
+          "decisions": 549,
+          "ending_cash": "111.9751",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7206193078324225865209471767",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 60,
+              "180": 106,
+              "240": 125,
+              "300": 216,
+              "60": 42
+            },
+            "side_counts": {
+              "no": 294,
+              "yes": 255
+            }
+          },
+          "fees": "7.4049",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": null,
+          "largest_winner_pnl": "0.4825",
+          "maximum_drawdown": "6.5425",
+          "mean_daily_pnl": 0.08146326530612245,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.04764176087264803,
+            0.21056829148489292
+          ],
+          "mean_target_budget": "1.00",
+          "minimum_block_pnl": "-1.5654",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "10.5276",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5374149659863946,
+          "positive_days": 79,
+          "realized_net_pnl": "11.9751",
+          "settled_markets": 549,
+          "stressed_pnl": {
+            "1": "6.6574",
+            "2": "1.3466"
+          },
+          "trade_ledger_sha256": "11be1fdd176497a67a1c2062b7b59fac75c676d98b5649f23000eac10b82156b",
+          "win_rate": 0.75591985428051,
+          "wins": 415,
+          "zero_size_decisions": {}
+        },
+        "fixed_3": {
+          "block_pnl": [
+            "10.4470",
+            "-3.1473",
+            "23.5915",
+            "10.6648",
+            "1.8756"
+          ],
+          "contracts": 1969,
+          "daily_pnl_standard_error": 0.24857835840207604,
+          "decisions": 549,
+          "ending_cash": "143.4316",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7206193078324225865209471767",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 60,
+              "180": 106,
+              "240": 125,
+              "300": 216,
+              "60": 42
+            },
+            "side_counts": {
+              "no": 294,
+              "yes": 255
+            }
+          },
+          "fees": "27.3884",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": null,
+          "largest_winner_pnl": "2.4125",
+          "maximum_drawdown": "24.1941",
+          "mean_daily_pnl": 0.2954530612244898,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.19176052124357923,
+            0.7826666436925588
+          ],
+          "mean_target_budget": "3.00",
+          "minimum_block_pnl": "-3.1473",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "36.1941",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5374149659863946,
+          "positive_days": 79,
+          "realized_net_pnl": "43.4316",
+          "settled_markets": 549,
+          "stressed_pnl": {
+            "1": "24.3185",
+            "2": "5.2291"
+          },
+          "trade_ledger_sha256": "4f22898a9df9da078ee6e736008a9850260f2c5dfccebe237e72529ca299b2e0",
+          "win_rate": 0.75591985428051,
+          "wins": 415,
+          "zero_size_decisions": {}
+        },
+        "half_kelly_cap_3": {
+          "block_pnl": [
+            "10.4470",
+            "-3.1473",
+            "23.5915",
+            "10.6648",
+            "1.8756"
+          ],
+          "contracts": 1969,
+          "daily_pnl_standard_error": 0.24857835840207604,
+          "decisions": 549,
+          "ending_cash": "143.4316",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7206193078324225865209471767",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 60,
+              "180": 106,
+              "240": 125,
+              "300": 216,
+              "60": 42
+            },
+            "side_counts": {
+              "no": 294,
+              "yes": 255
+            }
+          },
+          "fees": "27.3884",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 549,
+          "largest_winner_pnl": "2.4125",
+          "maximum_drawdown": "24.1941",
+          "mean_daily_pnl": 0.2954530612244898,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.19176052124357923,
+            0.7826666436925588
+          ],
+          "mean_target_budget": "3.00",
+          "minimum_block_pnl": "-3.1473",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "36.1941",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5374149659863946,
+          "positive_days": 79,
+          "realized_net_pnl": "43.4316",
+          "settled_markets": 549,
+          "stressed_pnl": {
+            "1": "24.3185",
+            "2": "5.2291"
+          },
+          "trade_ledger_sha256": "4f22898a9df9da078ee6e736008a9850260f2c5dfccebe237e72529ca299b2e0",
+          "win_rate": 0.75591985428051,
+          "wins": 415,
+          "zero_size_decisions": {}
+        },
+        "quarter_kelly_cap_3": {
+          "block_pnl": [
+            "6.2600",
+            "-4.9053",
+            "25.8257",
+            "9.3630",
+            "1.8817"
+          ],
+          "contracts": 1855,
+          "daily_pnl_standard_error": 0.23168409262575804,
+          "decisions": 549,
+          "ending_cash": "138.4251",
+          "entry_diagnostics": {
+            "maximum_entry_price": "0.8400",
+            "mean_entry_price": "0.7206193078324225865209471767",
+            "minimum_entry_price": "0.5000",
+            "seconds_left_counts": {
+              "120": 60,
+              "180": 106,
+              "240": 125,
+              "300": 216,
+              "60": 42
+            },
+            "side_counts": {
+              "no": 294,
+              "yes": 255
+            }
+          },
+          "fees": "25.4349",
+          "inability_to_afford_any_later_trade": false,
+          "kelly_cap_binding_decisions": 426,
+          "largest_winner_pnl": "2.3625",
+          "maximum_drawdown": "22.5169",
+          "mean_daily_pnl": 0.2613952380952381,
+          "mean_daily_pnl_95pct_normal_interval": [
+            -0.1927055834512476,
+            0.7154960596417239
+          ],
+          "mean_target_budget": "2.876165856935622668648196368",
+          "minimum_block_pnl": "-4.9053",
+          "observed_days": 147,
+          "pnl_without_top_three_winners": "32.0684",
+          "positive_blocks": 4,
+          "positive_day_share": 0.5374149659863946,
+          "positive_days": 79,
+          "realized_net_pnl": "38.4251",
+          "settled_markets": 549,
+          "stressed_pnl": {
+            "1": "20.4428",
+            "2": "2.4817"
+          },
+          "trade_ledger_sha256": "61c9df66397074100d5c29ac4ce0262b1b5e9e4d7bf3abb2d388ba52db49e3ea",
+          "win_rate": 0.75591985428051,
+          "wins": 415,
+          "zero_size_decisions": {}
+        }
+      }
+    }
+  ],
+  "production_orders_authorized": false,
+  "registration_sha256": "9ebb1607b3427f3c9a2b92937872aeb0affafbce4a3ae3f910083430f72b752e",
+  "selected_signal": {
+    "maximum_binary_spread": 0.02,
+    "maximum_raw_model_market_gap": 0.06,
+    "maximum_seconds_left": 300,
+    "maximum_selected_ask_exclusive": 0.85,
+    "minimum_net_edge": 0.03,
+    "minimum_selected_ask": 0.5,
+    "minimum_two_cent_stressed_edge": 0.0,
+    "name": "w00_e030_p5085_g060_t300_s02_b00",
+    "probability_market_log_odds_weight": 0.0
+  },
+  "selected_signal_original_partition_diagnostic": {
+    "original_development": {
+      "block_pnl": [
+        "2.6974",
+        "-1.5654",
+        "7.0945",
+        "0.6633",
+        "0"
+      ],
+      "contracts": 370,
+      "daily_pnl_standard_error": 0.07591253415332744,
+      "decisions": 370,
+      "ending_cash": "108.8898",
+      "entry_diagnostics": {
+        "maximum_entry_price": "0.8400",
+        "mean_entry_price": "0.7192432432432432432432432432",
+        "minimum_entry_price": "0.5000",
+        "seconds_left_counts": {
+          "120": 42,
+          "180": 83,
+          "240": 80,
+          "300": 137,
+          "60": 28
+        },
+        "side_counts": {
+          "no": 193,
+          "yes": 177
+        }
+      },
+      "fees": "4.9902",
+      "inability_to_afford_any_later_trade": false,
+      "kelly_cap_binding_decisions": null,
+      "largest_winner_pnl": "0.4825",
+      "maximum_drawdown": "6.5425",
+      "mean_daily_pnl": 0.08081636363636364,
+      "mean_daily_pnl_95pct_normal_interval": [
+        -0.06797220330415814,
+        0.2296049305768854
+      ],
+      "mean_target_budget": "1.00",
+      "minimum_block_pnl": "-1.5654",
+      "observed_days": 110,
+      "pnl_without_top_three_winners": "7.4423",
+      "positive_blocks": 3,
+      "positive_day_share": 0.5454545454545454,
+      "positive_days": 60,
+      "realized_net_pnl": "8.8898",
+      "settled_markets": 370,
+      "stressed_pnl": {
+        "1": "5.3057",
+        "2": "1.7255"
+      },
+      "trade_ledger_sha256": "35cc7d75ae772a00a2b826ac8e62919fb8555c49d155ec483d47f74af1b3213f",
+      "win_rate": 0.7567567567567568,
+      "wins": 280,
+      "zero_size_decisions": {}
+    },
+    "original_validation": {
+      "block_pnl": [
+        "0",
+        "0",
+        "0",
+        "2.0081",
+        "1.0772"
+      ],
+      "contracts": 179,
+      "daily_pnl_standard_error": 0.13430162532149947,
+      "decisions": 179,
+      "ending_cash": "103.0853",
+      "entry_diagnostics": {
+        "maximum_entry_price": "0.8400",
+        "mean_entry_price": "0.7234636871508379888268156425",
+        "minimum_entry_price": "0.5000",
+        "seconds_left_counts": {
+          "120": 18,
+          "180": 23,
+          "240": 45,
+          "300": 79,
+          "60": 14
+        },
+        "side_counts": {
+          "no": 101,
+          "yes": 78
+        }
+      },
+      "fees": "2.4147",
+      "inability_to_afford_any_later_trade": false,
+      "kelly_cap_binding_decisions": null,
+      "largest_winner_pnl": "0.4825",
+      "maximum_drawdown": "3.7337",
+      "mean_daily_pnl": 0.08338648648648647,
+      "mean_daily_pnl_95pct_normal_interval": [
+        -0.1798446991436525,
+        0.3466176721166254
+      ],
+      "mean_target_budget": "1.00",
+      "minimum_block_pnl": "0",
+      "observed_days": 37,
+      "pnl_without_top_three_winners": "1.6578",
+      "positive_blocks": 2,
+      "positive_day_share": 0.5135135135135135,
+      "positive_days": 19,
+      "realized_net_pnl": "3.0853",
+      "settled_markets": 179,
+      "stressed_pnl": {
+        "1": "1.3517",
+        "2": "-0.3789"
+      },
+      "trade_ledger_sha256": "6c63a4d6877757b5cef9cf3e9be7a277cdc11f94e08504a6be03280d88f57d11",
+      "win_rate": 0.7541899441340782,
+      "wins": 135,
+      "zero_size_decisions": {}
+    },
+    "post_selection_diagnostic_not_an_additional_gate": true
+  },
+  "signal_gate_passers": 2,
+  "source": {
+    "benchmark_top_of_second_values_loaded": 12464830,
+    "eligible_research_markets": 13793,
+    "excluded_unique_markets": 55,
+    "exclusion_memberships": {
+      "material_reconstruction_mismatch": 2,
+      "missing_candle_history": 8,
+      "missing_settlement_brti": 20,
+      "nonnumeric_expiration": 3,
+      "unsupported_strike_rule": 24
+    },
+    "holdout_evaluated": false,
+    "holdout_markets": 3463,
+    "observed_utc_dates": 147
+  },
+  "source_report_sha256": "8359eafa0292c1a3d331298768891af34aeb07beb08de868019547fcebdcaa8a",
+  "state": "complete",
+  "study": "019"
+}
