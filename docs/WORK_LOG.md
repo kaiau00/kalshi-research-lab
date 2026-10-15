@@ -574,3 +574,19 @@ acquisition.
 
 Validation: 198 tests passed, Ruff passed, and `git diff --check` passed. The acquisition ran locally with
 Railway variables injected by `railway run`; the stopped Railway service was not deployed or started.
+
+## 2026-10-15 — Historical Candle Strategy Screen 018
+
+Preregistered a fixed six-strategy screen before calculating P&L from Dataset 017. The protocol locks the
+chronological 60/20/20 market split, audit exclusions, causal BRTI cutoff, completed-candle decision clock, exact
+fee and $1 sizing rules, one- and two-cent price stresses, conservative risk layer and advancement gates. The
+newest 20% of markets is sealed.
+
+Implemented the source-checksummed simulator and ran development and validation only. None of the six strategies
+passed. Basic fair value and adaptive volatility lost heavily. Market Agreement and Moderate Disagreement lost in
+both partitions. Tail Underdog was slightly positive in validation but failed concentration, price stress,
+drawdown and block-consistency gates. Conservative Market Anchor made $3.3411 on 24 validation trades and survived
+the concentration and price stresses, but its development result was negative and it failed the minimum-trade,
+positive-day and block-consistency gates. The 3,463-market holdout remains unopened.
+
+Validation: 205 tests passed and Ruff passed.

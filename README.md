@@ -174,6 +174,10 @@ uv run python scripts/download_kalshi_archive.py \
 uv run python scripts/audit_kalshi_archive.py \
   --db data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
   --output reports/kxbtc15m-20260415-20261015-audit.json
+uv run python scripts/run_historical_candle_screen.py \
+  --database data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
+  --audit reports/kxbtc15m-20260415-20261015-audit.json \
+  --output reports/historical-candle-screen-018.json
 uv run research-lab verify --db data/events.sqlite3
 uv run research-lab backtest --db data/events.sqlite3 --split train --output reports/train
 uv run research-lab backtest --db data/events.sqlite3 --split validation --output reports/validation
@@ -215,6 +219,7 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [Jump-Robust Settlement Study 011](docs/JUMP_ROBUST_SETTLEMENT_STUDY_011_PROTOCOL.md),
 [Databento Futures Overlay Study 016](docs/DATABENTO_FUTURES_OVERLAY_STUDY_016_RESULT.md),
 [Kalshi Historical Archive Dataset 017](docs/KALSHI_HISTORICAL_ARCHIVE_DATASET_017.md),
+[Historical Candle Strategy Screen 018](docs/HISTORICAL_CANDLE_SCREEN_018_RESULT.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 
