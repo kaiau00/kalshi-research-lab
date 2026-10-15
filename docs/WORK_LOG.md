@@ -529,3 +529,48 @@ largest winners and -$0.4839 under two-cent stress, with one positive day and tw
 momentum diagnostics lost money. Study 016 is rejected and has no order authority.
 
 Validation: 187 tests passed and Ruff passed.
+
+## 2026-10-15 — Official Kalshi historical archive acquisition
+
+Probed only public read endpoints before changing the acquisition code. Kalshi returned current and archived
+`KXBTC15M` listings, exact official target/result/expiration fields, batched one-minute YES bid/ask candles and
+historical crypto chart data containing 3,601 seconds plus 60 one-minute bars. The sampled listing contained 13,809
+unique settled markets from May 22 through October 15, and deeper archive pagination reached February while still
+having more pages.
+
+Declared Dataset 017 before strategy evaluation. Added a resumable, hash-chained, read-only downloader for the
+fixed April 15 through October 15 interval. It batches adjacent contract candles under Kalshi's 10,000-candle
+request ceiling. The smoke audit correctly rejected the public event chart as BRTI: reconstructed settlements
+missed all five markets with complete points. The downloader therefore uses the documented authenticated CF
+Benchmarks passthrough for one raw official BRTI hour per UTC hour. Its authenticated client exposes only that
+GET path and no account or write method. Minute candles remain signal/quote-screening evidence rather than
+executable fill evidence.
+
+The passthrough probe returned 18,000 raw BRTI observations per hour at 200 ms. Selecting the documented
+top-of-second observations reconstructed all four official August 25 settlements in the test hour exactly to the
+cent; averaging the public event chart had failed this same check.
+
+The full acquisition found a second endpoint boundary during its first resumable pass. Batch candles returned
+6,454 current/cutoff markets but omitted older archived tickers. Repeating the batch requests did not recover
+them. Missing tickers are therefore fetched from Kalshi's dedicated historical-market candlestick endpoint with
+bounded authenticated concurrency and explicit pacing; the database records which batch tickers were already
+attempted so resume does not repeat the ineffective path. The benchmark path uses three concurrent requests with
+explicit pacing below Kalshi's four-request-per-second account bucket. Both clients remain GET-only and
+endpoint-whitelisted.
+
+The completed fixed interval contains 17,311 settled markets, 17,303 markets with candle history, 265,657 valid
+quote rows and all 4,331 required BRTI hours. Eight markets have no candles from either endpoint. The 433,022,184
+byte archive verifies all 34,135 receipt-ordered events through digest
+`03526f0e63396de6cd8ddf8df77bcddbd83aff4d0753daf3f4b5285232b7c70f`. The audit accepts both Kalshi's legacy
+plain numeric candle fields and its current `_dollars` fields; it found zero invalid quote rows, zero nonmonotonic
+quote markets, zero invalid BRTI hours and zero nonmonotonic BRTI hours.
+
+Official settlement reconstruction matched exactly for 17,164 markets and within one cent for 17,286. The audit
+preserves 122 one-cent rounding differences, two material discrepancies, 20 incomplete final-minute BRTI windows,
+three missing numeric expiration values and 24 unique records without a usable strike rule. Every YES/NO result
+with enough metadata to verify agreed with the official or reconstructed settlement value. These exceptions are
+data-quality exclusions, not parameters to tune after strategy results. No strategy P&L was opened during this
+acquisition.
+
+Validation: 198 tests passed, Ruff passed, and `git diff --check` passed. The acquisition ran locally with
+Railway variables injected by `railway run`; the stopped Railway service was not deployed or started.

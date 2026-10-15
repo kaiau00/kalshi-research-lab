@@ -168,13 +168,25 @@ Visit `http://localhost:8000`; username is `lab`, password is `LAB_DASHBOARD_PAS
 ```sh
 uv run research-lab history --db data/history-01.sqlite3 --days 2 --max-markets 192
 uv run research-lab screen --db data/history-01.sqlite3 --output reports/history-01.json
+uv run python scripts/download_kalshi_archive.py \
+  --db data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
+  --start 2026-04-15 --end 2026-10-15 --max-markets 20000
+uv run python scripts/audit_kalshi_archive.py \
+  --db data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
+  --output reports/kxbtc15m-20260415-20261015-audit.json
 uv run research-lab verify --db data/events.sqlite3
 uv run research-lab backtest --db data/events.sqlite3 --split train --output reports/train
 uv run research-lab backtest --db data/events.sqlite3 --split validation --output reports/validation
 uv run research-lab backtest --db data/events.sqlite3 --split forward --output reports/forward
 ```
 
-History has minute quotes and outcomes, not a time-accurate book or BRTI path. It can show whether cheap outcomes won more often than their quoted prices suggest, but cannot test the distance-to-threshold filter or establish a realizable return.
+The legacy `research-lab history` command has minute quotes and outcomes, not a time-accurate book or BRTI path.
+The separate Dataset 017 downloader preserves official market metadata, batched minute quote candles and one raw
+historical BRTI response per UTC hour. Neither dataset contains historical depth, queue position or a 500 ms
+arrival book, so neither can establish a realizable fill without conservative assumptions and later full-book
+validation. The completed six-month archive contains 17,311 settled markets, 17,303 with candles and all 4,331
+required BRTI hours; its audit records every missing or inconsistent source row. See
+[Dataset 017](docs/KALSHI_HISTORICAL_ARCHIVE_DATASET_017.md).
 
 Recorded-data replay processes only events already received at each simulated decision. Forecasts use the official threshold, the observed part of the final-minute benchmark average, and a conditional model for remaining seconds. The final outcome comes from the official market result, never the model.
 
@@ -202,6 +214,7 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [Market Calibration Study 010](docs/MARKET_CALIBRATION_STUDY_010_PROTOCOL.md),
 [Jump-Robust Settlement Study 011](docs/JUMP_ROBUST_SETTLEMENT_STUDY_011_PROTOCOL.md),
 [Databento Futures Overlay Study 016](docs/DATABENTO_FUTURES_OVERLAY_STUDY_016_RESULT.md),
+[Kalshi Historical Archive Dataset 017](docs/KALSHI_HISTORICAL_ARCHIVE_DATASET_017.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 
