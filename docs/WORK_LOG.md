@@ -609,3 +609,22 @@ On the selected signal, fixed $1 ended at $111.9751. Eighth Kelly ended at $124.
 only $0.3795 of two-cent-stressed P&L. Quarter Kelly was capped on 426 of 549 decisions. Half Kelly was capped on
 every decision and therefore exactly reproduced fixed $3: $143.4316 ending cash with $24.1941 drawdown. Fixed $1
 remains the recommended research sizing. No holdout, demo or production execution was enabled.
+
+## 2026-10-18 — Historical Robust Parameter and Risk Study 020
+
+Preregistered and ran a 4,608-configuration development-only neighborhood search after the user correctly
+questioned whether Study 019's +$11.9751 was strong enough. Study 020 varied the fast/slow variance blend,
+market-probability interpolation, edge, price band, raw-model disagreement, entry window and spread. Fixed $1
+remained the only signal-selection path; fixed $1.50/$2/$3 and smaller Kelly fractions could open only after a
+signal passed every stronger robustness gate. Dataset 017's newest 20% remained sealed.
+
+No configuration passed every gate. The strongest stressed near miss used 90% fast variance, raw probability,
+3.5% edge, $0.45-$0.80 asks, a 7.5-point disagreement cap, 5-300 seconds and a two-cent spread. It made +$24.4806
+across 727 fixed-$1 trades, +$21.2847 without its three largest winners and +$9.2233 under two-cent stress, with
+$6.1114 drawdown and a positive one-sided 90% daily-mean lower bound. It failed the frozen time-consistency gate:
+only three of five stressed blocks were positive, including -$5.1120 and -$1.6986 blocks. The highest headline
+configuration made +$27.5030 but lost $2.0356 under stress and drew down $14.1937.
+
+Because no fixed-$1 signal passed, the frozen risk comparison did not open. Increasing risk cannot repair the
+negative regimes. The holdout remains sealed, no order path was enabled and the near miss is preserved only as a
+development hypothesis for a separately frozen future executable-book test.

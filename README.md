@@ -182,6 +182,10 @@ uv run python scripts/run_historical_parameter_kelly_study.py \
   --database data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
   --audit reports/kxbtc15m-20260415-20261015-audit.json \
   --output reports/historical-parameter-kelly-study-019.json
+uv run python scripts/run_historical_robust_parameter_risk_study.py \
+  --database data/external/kalshi/kxbtc15m-20260415-20261015.sqlite3 \
+  --audit reports/kxbtc15m-20260415-20261015-audit.json \
+  --output reports/historical-robust-parameter-risk-study-020.json
 uv run research-lab verify --db data/events.sqlite3
 uv run research-lab backtest --db data/events.sqlite3 --split train --output reports/train
 uv run research-lab backtest --db data/events.sqlite3 --split validation --output reports/validation
@@ -225,6 +229,7 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [Kalshi Historical Archive Dataset 017](docs/KALSHI_HISTORICAL_ARCHIVE_DATASET_017.md),
 [Historical Candle Strategy Screen 018](docs/HISTORICAL_CANDLE_SCREEN_018_RESULT.md),
 [Historical Parameter and Kelly Study 019](docs/HISTORICAL_PARAMETER_KELLY_STUDY_019_RESULT.md),
+[Historical Robust Parameter and Risk Study 020](docs/HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_RESULT.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 

@@ -1,6 +1,6 @@
 # Research portfolio status
 
-Updated on 2026-10-13 after the completed live audit, Studies 004 and 008, and the evidence-based strategy review.
+Updated on 2026-10-18 after the historical archive, Studies 018-020 and the research-service restart.
 This document controls attention and runtime scope; it does not delete evidence or authorize orders.
 
 ## Active development
@@ -27,6 +27,8 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
 - Study 008 and all three probability-pool candidates — completed and rejected;
 - Study 016 Databento futures overlay — completed and rejected after the larger micro-BTC replication failed
   probability, concentration, stress and consistency gates;
+- Study 020 robust parameter and risk search — completed with no winner; its +$24.4806 fixed-$1 near miss failed
+  the preregistered two-cent-stressed block-consistency gate, so risk comparison and holdout remained unopened;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new
