@@ -4,9 +4,11 @@ Authorized by the user on 2026-10-19. This revision trades the exact Study 023 l
 risk rule. The authorization is a deliberate live pilot; it does not change the research conclusion that Study
 023 failed its validation drawdown and stressed-period consistency gates.
 
-The runner is restricted to `KXBTC15M`, exchange index 2 and subaccount 0. A fresh ledger starts with a durable
-`PAUSE_ENTRIES` file and requires exactly $100.0000 of index-2 cash before its first order. It never transfers
-funds. The previous production ledgers remain immutable.
+The runner is restricted to `KXBTC15M`, Predictions exchange index 2 and subaccount 0. A fresh ledger started with
+a durable `PAUSE_ENTRIES` file. On 2026-10-19 the user separately authorized exactly $140.0000 of internal
+Predictions funding and activation under funding revision `market-shrunk-half-kelly-funding-002-20261019`.
+Commissioning verified exactly $140.0000 on the BTC path with no position, resting order or unresolved order before
+the pause was removed. The runner itself has no transfer method. Previous production ledgers remain immutable.
 
 At the first processing opportunity just after each completed UTC minute, from 5 through 300 seconds before
 market close, it computes the structural probability with 90% weight on 60-second variance and 10% weight on

@@ -52,10 +52,11 @@ under a new name.
 
 ## Production state
 
-The user-authorized `market_shrunk_half_kelly_001` runner is selected on Railway with a fresh durable ledger, zero
-attempts, zero fills and zero unresolved orders. New real-money entries remain durably paused. Exchange index 2 has
-$0.0000 while the exact commissioning gate requires $100.0000; no funds were moved. The previous conservative
-ledger remains preserved at nine officially settled fills and -$0.1948 realized net P&L.
+The user-authorized `market_shrunk_half_kelly_001` runner is selected and active on Railway with a fresh durable
+ledger. It began with exactly $140.0000 of internally routed Predictions cash, zero attempts, zero fills, no
+position, no resting order and zero unresolved orders under funding revision
+`market-shrunk-half-kelly-funding-002-20261019`. The previous conservative ledger remains preserved and paused at
+nine officially settled fills and -$0.1948 realized net P&L.
 
 ## Deletion policy
 

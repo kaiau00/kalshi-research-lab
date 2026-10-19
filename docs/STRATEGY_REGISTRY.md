@@ -12,11 +12,12 @@ Statuses have precise meanings:
 - **development**: may be explored on disclosed data but has no untouched result;
 - **concept**: a mathematical proposal that is not yet implemented;
 - **historical live**: once sent orders under explicit authorization; the ledger is preserved;
+- **active live**: the selected production adapter may submit orders under its frozen authorization;
 - **paused live**: the production adapter exists but new entries are durably paused.
 
 No read-only study, registry entry or favorable result grants order authority. The user-authorized
-`market_shrunk_half_kelly_001` production runner is selected but its fresh real-money ledger remains paused by
-`/data/production-market-shrunk-half-kelly-001/PAUSE_ENTRIES`. The earlier conservative ledger remains immutable.
+`market_shrunk_half_kelly_001` production runner is selected and active with $140.0000 of authorized Predictions
+funding. The earlier conservative ledger remains immutable and paused.
 
 ## Directional strategies and research candidates
 
@@ -50,7 +51,7 @@ No read-only study, registry entry or favorable result grants order authority. T
 | `historical_candle_strategy_screen_018` | Fixed comparison of six existing strategies on audited Kalshi minute quotes and official BRTI, with chronological development/validation and a sealed holdout | Complete on development and validation; no strategy passed. The holdout remains sealed. Candle quotes cannot prove a 500 ms IOC fill | [protocol](HISTORICAL_CANDLE_SCREEN_018_PROTOCOL.md), [result](HISTORICAL_CANDLE_SCREEN_018_RESULT.md) |
 | `historical_parameter_kelly_study_019` | Preregistered 1,620-configuration conservative-anchor grid with a separate $100 fixed-versus-fractional-Kelly sizing comparison | Complete. Two neighboring fixed-$1 signals passed the aggregate research gate; the later split failed two-cent stress, daily uncertainty includes zero, and the newest 20% remains sealed | [protocol](HISTORICAL_PARAMETER_KELLY_STUDY_019_PROTOCOL.md), [result](HISTORICAL_PARAMETER_KELLY_STUDY_019_RESULT.md) |
 | `historical_robust_parameter_risk_study_020` | Preregistered 4,608-cell neighborhood search across volatility blend, probability blend, edge, price, disagreement, timing and spread, with risk secondary to fixed-$1 robustness | Complete with no winner. The best stressed near miss made +$24.4806 and +$9.2233 at two-cent stress but was positive in only three of five stressed blocks; no risk path was opened and the holdout remains sealed | [protocol](HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_PROTOCOL.md), [result](HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_RESULT.md) |
-| `market_shrunk_half_kelly_001` | Study 023's 90% fast-variance, 25% market-log-odds pooled signal with $0.45-$0.80 prices, 0.5-point edge, 7.5-point raw/market gap, two-cent spread and stress filters; half-Kelly sizing capped at $3 | User-authorized production pilot, currently paused with zero fills and no index-2 funding. Study 023 failed its validation drawdown and stressed-block gates; Study 024 found a $27.0156 historical half-Kelly drawdown | `src/market_shrunk_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_PRODUCTION_001.md), [risk result](MARKET_SHRUNK_KELLY_RISK_STUDY_024_RESULT.md) |
+| `market_shrunk_half_kelly_001` | Study 023's 90% fast-variance, 25% market-log-odds pooled signal with $0.45-$0.80 prices, 0.5-point edge, 7.5-point raw/market gap, two-cent spread and stress filters; half-Kelly sizing capped at $3 | **Active live** from a $140.0000 Predictions commissioning balance with zero initial fills. Study 023 failed its validation drawdown and stressed-block gates; Study 024 found a $27.0156 historical half-Kelly drawdown | `src/market_shrunk_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_PRODUCTION_001.md), [risk result](MARKET_SHRUNK_KELLY_RISK_STUDY_024_RESULT.md) |
 
 The earlier advanced-research names **Jump-Robust Settlement Filter**, **Hawkes Reaction-Delay Overlay** and
 **Robust Probability Pool and Evidence Gate** are preserved as the parent concepts of IDs 011, 013 and the
@@ -102,7 +103,7 @@ Sizing cannot turn a negative-expectation signal positive. These variants compar
 | `fixed_3` | Maximum $3 all-in cost | Frozen sizing audit variant; historical adaptive demo cap |
 | `eighth_kelly_cap_3` | One-eighth of model Kelly, maximum $3 | Frozen audit variant |
 | `quarter_kelly_cap_3` | One-quarter Kelly, maximum $3 | Frozen audit variant |
-| `half_kelly_cap_3` | One-half Kelly, maximum $3 | Study 024 diagnostic and user-authorized `market_shrunk_half_kelly_001` production risk rule; the new ledger remains paused |
+| `half_kelly_cap_3` | One-half Kelly, maximum $3 | Study 024 diagnostic and active user-authorized `market_shrunk_half_kelly_001` production risk rule |
 | Conservative Anchor risk layer | One-hour cooldown; daily halt at -$2 or three settled losses; indefinite halt at $5 realized drawdown | Implemented in the paused production revision and Studies 006/008/009 |
 
 Full Kelly for a binary contract with all-in unit cost `c` and estimated win probability `p` is

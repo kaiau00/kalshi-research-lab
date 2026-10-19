@@ -655,6 +655,20 @@ Read-only balance inspection found $0.0000 on the required index 2, $135.2303 on
 No funds were moved and the pause was not removed; those final external actions require the user's explicit
 authorization.
 
+## 2026-10-19 — $140 Predictions commissioning and activation
+
+The user explicitly authorized exactly $140.0000 of internal Predictions funding and activation of
+`market_shrunk_half_kelly_001`. Funding revision `market-shrunk-half-kelly-funding-002-20261019` changed only the
+fresh-ledger cash gate from $100.0000 to $140.0000; the signal, half-Kelly formula, $3 all-in cap, 500 ms IOC
+execution and hold-to-settlement policy were unchanged. The full suite passed with 237 tests and Ruff passed.
+
+Deployment `32f44d73-0f72-4cfc-bced-36151dceeb6d` reached SUCCESS. Before funding, the protected report confirmed
+the runner was paused with zero attempts, fills and unresolved orders. A one-time commissioning operation moved
+exactly $140.0000 within the Predictions account to the BTC market path. The Predictions total was $142.8001 after
+an unrelated balance change, leaving $2.8001 elsewhere. Final preflight found no BTC-path position or resting
+order. The durable pause was removed, and protected status verified `watching`, $140.0000 cash, the exact funding
+revision, zero fills, zero attempts, zero unresolved orders and no STOP file.
+
 ## 2026-10-15 — Historical Parameter and Kelly Study 019
 
 Preregistered 1,620 conservative-anchor parameter combinations and five sizing paths before calculating new P&L.
