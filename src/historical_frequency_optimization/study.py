@@ -241,9 +241,9 @@ def _trades_per_day(summary: dict) -> float:
     return summary["settled_markets"] / summary["observed_days"]
 
 
-def _mean_price(summary: dict) -> Decimal:
+def _mean_price(summary: dict) -> Decimal | None:
     value = summary["entry_diagnostics"]["mean_entry_price"]
-    return Decimal(value) if value is not None else Decimal("NaN")
+    return Decimal(value) if value is not None else None
 
 
 def development_gates(summary: dict):
@@ -252,7 +252,8 @@ def development_gates(summary: dict):
     return {
         "average_8_to_12_trades_per_day": 8 <= trades_per_day <= 12,
         "minimum_65pct_win_rate": summary["win_rate"] is not None and summary["win_rate"] >= 0.65,
-        "mean_entry_price_45_to_72_cents": Decimal("0.45") <= price <= Decimal("0.72"),
+        "mean_entry_price_45_to_72_cents": price is not None
+        and Decimal("0.45") <= price <= Decimal("0.72"),
         "base_pnl_above_15": Decimal(summary["realized_net_pnl"]) > 15,
         "pnl_without_top_three_above_10": Decimal(summary["pnl_without_top_three_winners"]) > 10,
         "positive_one_cent_stress": Decimal(summary["stressed_pnl"]["1"]) > 0,
@@ -279,7 +280,8 @@ def validation_gates(summary: dict):
     return {
         "average_8_to_12_trades_per_day": 8 <= trades_per_day <= 12,
         "minimum_65pct_win_rate": summary["win_rate"] is not None and summary["win_rate"] >= 0.65,
-        "mean_entry_price_45_to_72_cents": Decimal("0.45") <= price <= Decimal("0.72"),
+        "mean_entry_price_45_to_72_cents": price is not None
+        and Decimal("0.45") <= price <= Decimal("0.72"),
         "positive_base_pnl": Decimal(summary["realized_net_pnl"]) > 0,
         "positive_pnl_without_top_three": Decimal(summary["pnl_without_top_three_winners"]) > 0,
         "positive_one_cent_stress": Decimal(summary["stressed_pnl"]["1"]) > 0,

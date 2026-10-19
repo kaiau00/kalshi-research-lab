@@ -1,4 +1,4 @@
-from historical_frequency_optimization.study import probability_for_model
+from historical_frequency_optimization.study import _mean_price, probability_for_model
 from historical_robust_optimization.study import probability_for_variance_weight
 
 
@@ -26,3 +26,8 @@ def test_momentum_and_mean_reversion_move_probability_in_expected_directions():
     neutral = probability_for_model(fair, 0.60, 0.0)
     momentum = probability_for_model(fair, 0.60, 0.50)
     assert mean_reversion < neutral < momentum
+
+
+def test_missing_mean_entry_price_is_not_a_decimal_nan():
+    summary = {"entry_diagnostics": {"mean_entry_price": None}}
+    assert _mean_price(summary) is None
