@@ -29,7 +29,8 @@ packages = ["src/research_lab", "src/demo_execution", "src/candidate_study", "sr
             "src/conservative_anchor", "src/rollover_bridge", "src/market_anchor_improvement",
             "src/moderate_disagreement", "src/settlement_research", "src/databento_overlay",
             "src/historical_archive", "src/historical_backtest", "src/historical_optimization",
-            "src/historical_robust_optimization", "src/historical_frequency_optimization"]
+            "src/historical_robust_optimization", "src/historical_frequency_optimization",
+            "src/historical_market_confirmation"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
