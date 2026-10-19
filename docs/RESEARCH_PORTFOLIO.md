@@ -29,6 +29,9 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
   probability, concentration, stress and consistency gates;
 - Study 020 robust parameter and risk search — completed with no winner; its +$24.4806 fixed-$1 near miss failed
   the preregistered two-cent-stressed block-consistency gate, so risk comparison and holdout remained unopened;
+- Study 021 frequency strategy search — completed with no winner across 11,520 cells. The only 8–12-trade/day,
+  65%-win, 45–72-cent-mean-price cell with positive two-cent stress retained only +$0.3421, drew down $17.7168 and
+  lost in two of five chronological periods. Validation, risk sizing and the holdout stayed closed;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new

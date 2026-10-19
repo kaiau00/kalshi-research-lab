@@ -1,0 +1,913 @@
+{
+  "configurations_evaluated": 11520,
+  "development_gate_passers": 0,
+  "family_leaders": {
+    "trend_+0.00": {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": 1.5,
+        "maximum_raw_model_market_gap": 0.075,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.85,
+        "minimum_net_edge": 0.025,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.45,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d100_e025_p4585_g075_t005300_s01_r1500",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.0
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "7.6141",
+          "5.1967",
+          "-3.0217",
+          "5.0607",
+          "6.6286"
+        ],
+        "contracts": 753,
+        "daily_mean_one_sided_90pct_lower_bound": -0.005270888243971955,
+        "daily_pnl_standard_error": 0.1219130181412002,
+        "decisions": 715,
+        "ending_cash": "121.4784",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7024475524475524475524475524",
+          "minimum_entry_price": "0.4500"
+        },
+        "fees": "10.5416",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "7.0006",
+        "mean_daily_pnl": 0.19525818181818183,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-5.2385",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "18.3026",
+        "positive_blocks": 4,
+        "positive_day_share": 0.6,
+        "positive_days": 66,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "21.4784",
+        "settled_markets": 715,
+        "stressed_block_pnl": {
+          "1": [
+            "5.9845",
+            "3.4240",
+            "-4.1310",
+            "3.8511",
+            "5.0252"
+          ],
+          "2": [
+            "4.3573",
+            "1.6542",
+            "-5.2385",
+            "2.6426",
+            "3.4246"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "14.1538",
+          "2": "6.8402"
+        },
+        "trade_ledger_sha256": "17e9eea49837f9c1c3c75e8d843deb66c0f6a35490cb471756565b28c0c1ee6a",
+        "win_rate": 0.7468531468531469,
+        "wins": 534,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": false,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 87,
+        "fast_slow_variance_ratio": 6432,
+        "minimum_net_edge": 34904,
+        "no_qualifying_decision": 9620,
+        "raw_model_market_gap": 856,
+        "selected_ask_band": 6582
+      }
+    },
+    "trend_+0.25": {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.8,
+        "minimum_net_edge": 0.03,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w00_d125_e030_p4080_g060_t005300_s01_rnone",
+        "probability_market_log_odds_weight": 0.0,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "8.1539",
+          "1.5067",
+          "1.8690",
+          "-2.9494",
+          "8.8522"
+        ],
+        "contracts": 275,
+        "daily_mean_one_sided_90pct_lower_bound": 0.010780506621850566,
+        "daily_pnl_standard_error": 0.08979270531703701,
+        "decisions": 238,
+        "ending_cash": "117.4324",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7900",
+          "mean_entry_price": "0.6432773109243697478991596639",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "4.2376",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "8.8637",
+        "mean_daily_pnl": 0.15847636363636364,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-4.0914",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "13.9738",
+        "positive_blocks": 4,
+        "positive_day_share": 0.5272727272727272,
+        "positive_days": 58,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "17.4324",
+        "settled_markets": 238,
+        "stressed_block_pnl": {
+          "1": [
+            "7.6423",
+            "1.0154",
+            "1.4398",
+            "-3.5205",
+            "8.1522"
+          ],
+          "2": [
+            "7.1321",
+            "0.5239",
+            "1.0117",
+            "-4.0914",
+            "7.4528"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "14.7292",
+          "2": "12.0291"
+        },
+        "trade_ledger_sha256": "28d03201f19335ccfa1f611dd42eda1cc649f4acc443c75938c74954b359ff45",
+        "win_rate": 0.7100840336134454,
+        "wins": 169,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 14,
+        "minimum_net_edge": 33118,
+        "no_qualifying_decision": 10097,
+        "raw_model_market_gap": 5026,
+        "selected_ask_band": 12544
+      }
+    },
+    "trend_+0.50": {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 180,
+        "maximum_selected_ask_exclusive": 0.85,
+        "minimum_net_edge": 0.03,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.45,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d150_e030_p4585_g060_t005180_s01_rnone",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.5
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "0.6196",
+          "0.1972",
+          "0.9126",
+          "-0.8359",
+          "0.3572"
+        ],
+        "contracts": 48,
+        "daily_mean_one_sided_90pct_lower_bound": -0.028302110645331235,
+        "daily_pnl_standard_error": 0.02411893070318875,
+        "decisions": 48,
+        "ending_cash": "101.2507",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7529166666666666666666666667",
+          "minimum_entry_price": "0.5600"
+        },
+        "fees": "0.6093",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "1.6294",
+        "mean_daily_pnl": 0.011370000000000002,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-1.0096",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "0.1701",
+        "positive_blocks": 4,
+        "positive_day_share": 0.2545454545454545,
+        "positive_days": 28,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "1.2507",
+        "settled_markets": 48,
+        "stressed_block_pnl": {
+          "1": [
+            "0.5522",
+            "0.1010",
+            "0.8060",
+            "-0.9228",
+            "0.2516"
+          ],
+          "2": [
+            "0.4852",
+            "0.0051",
+            "0.6994",
+            "-1.0096",
+            "0.1460"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "0.7880",
+          "2": "0.3261"
+        },
+        "trade_ledger_sha256": "3fae9a143f38d80bed69289a17e6a81e51b60ed8db6fb5f2bfcd42d7a1ac8edb",
+        "win_rate": 0.7916666666666666,
+        "wins": 38,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": false,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": false,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": false,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": false,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": false,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 2,
+        "minimum_net_edge": 22159,
+        "no_qualifying_decision": 10287,
+        "raw_model_market_gap": 2394,
+        "selected_ask_band": 6297
+      }
+    },
+    "trend_-0.25": {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": 1.5,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.85,
+        "minimum_net_edge": 0.03,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.45,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d075_e030_p4585_g060_t005300_s01_r1500",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": -0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "3.4192",
+          "1.0227",
+          "1.3191",
+          "1.3060",
+          "-1.7158"
+        ],
+        "contracts": 167,
+        "daily_mean_one_sided_90pct_lower_bound": -0.04204019587833428,
+        "daily_pnl_standard_error": 0.055134066107562864,
+        "decisions": 162,
+        "ending_cash": "105.3512",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.8400",
+          "mean_entry_price": "0.7543209876543209876543209877",
+          "minimum_entry_price": "0.4600"
+        },
+        "fees": "2.1088",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "3.2755",
+        "mean_daily_pnl": 0.04864727272727273,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-2.1590",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "2.2357",
+        "positive_blocks": 4,
+        "positive_day_share": 0.5545454545454546,
+        "positive_days": 61,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "5.3512",
+        "settled_markets": 162,
+        "stressed_block_pnl": {
+          "1": [
+            "3.0336",
+            "0.7243",
+            "0.9892",
+            "0.9303",
+            "-1.9375"
+          ],
+          "2": [
+            "2.6484",
+            "0.4263",
+            "0.6598",
+            "0.5548",
+            "-2.1590"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "3.7399",
+          "2": "2.1303"
+        },
+        "trade_ledger_sha256": "77a0484eac316ccf49e88f7b0440fbb897f1b7a62b9954cd530a4ed8f50f6542",
+        "win_rate": 0.7839506172839507,
+        "wins": 127,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": false,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": false,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": false,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": false,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 8,
+        "fast_slow_variance_ratio": 6675,
+        "minimum_net_edge": 29283,
+        "no_qualifying_decision": 10173,
+        "raw_model_market_gap": 4275,
+        "selected_ask_band": 10760
+      }
+    }
+  },
+  "holdout": {
+    "evaluated": false,
+    "locked": true,
+    "reason": "Study 021 is development-only"
+  },
+  "production_orders_authorized": false,
+  "registration_sha256": "d85d9c8c6c2e656c0ae8468243e4c1062cf9bb2383fd3f4432c695754f8b710b",
+  "report_sha256": "9d54439acc1ddf16280b98796b46e5f16fc6d2aec29be177ba9646153bb2ad40",
+  "risk_recommendation": null,
+  "risk_sizing": null,
+  "selected_result": null,
+  "source": {
+    "benchmark_top_of_second_values_loaded": 12464830,
+    "development_utc_dates": 110,
+    "eligible_research_markets": 13793,
+    "excluded_unique_markets": 55,
+    "exclusion_memberships": {
+      "material_reconstruction_mismatch": 2,
+      "missing_candle_history": 8,
+      "missing_settlement_brti": 20,
+      "nonnumeric_expiration": 3,
+      "unsupported_strike_rule": 24
+    },
+    "holdout_evaluated": false,
+    "holdout_markets": 3463,
+    "observed_utc_dates": 147,
+    "validation_utc_dates": 37
+  },
+  "state": "complete_no_development_signal",
+  "study": "021",
+  "top_diagnostic_configurations": [
+    {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.8,
+        "minimum_net_edge": 0.03,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w00_d125_e030_p4080_g060_t005300_s01_rnone",
+        "probability_market_log_odds_weight": 0.0,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "8.1539",
+          "1.5067",
+          "1.8690",
+          "-2.9494",
+          "8.8522"
+        ],
+        "contracts": 275,
+        "daily_mean_one_sided_90pct_lower_bound": 0.010780506621850566,
+        "daily_pnl_standard_error": 0.08979270531703701,
+        "decisions": 238,
+        "ending_cash": "117.4324",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7900",
+          "mean_entry_price": "0.6432773109243697478991596639",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "4.2376",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "8.8637",
+        "mean_daily_pnl": 0.15847636363636364,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-4.0914",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "13.9738",
+        "positive_blocks": 4,
+        "positive_day_share": 0.5272727272727272,
+        "positive_days": 58,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "17.4324",
+        "settled_markets": 238,
+        "stressed_block_pnl": {
+          "1": [
+            "7.6423",
+            "1.0154",
+            "1.4398",
+            "-3.5205",
+            "8.1522"
+          ],
+          "2": [
+            "7.1321",
+            "0.5239",
+            "1.0117",
+            "-4.0914",
+            "7.4528"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "14.7292",
+          "2": "12.0291"
+        },
+        "trade_ledger_sha256": "28d03201f19335ccfa1f611dd42eda1cc649f4acc443c75938c74954b359ff45",
+        "win_rate": 0.7100840336134454,
+        "wins": 169,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 14,
+        "minimum_net_edge": 33118,
+        "no_qualifying_decision": 10097,
+        "raw_model_market_gap": 5026,
+        "selected_ask_band": 12544
+      }
+    },
+    {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.8,
+        "minimum_net_edge": 0.025,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d125_e025_p4080_g060_t005300_s01_rnone",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "7.2437",
+          "1.5067",
+          "0.6347",
+          "-1.2416",
+          "8.8522"
+        ],
+        "contracts": 270,
+        "daily_mean_one_sided_90pct_lower_bound": 0.008769714666712863,
+        "daily_pnl_standard_error": 0.08860159140102648,
+        "decisions": 236,
+        "ending_cash": "116.9957",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7900",
+          "mean_entry_price": "0.6476694915254237288135593220",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "4.1443",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "7.5885",
+        "mean_daily_pnl": 0.15450636363636364,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-2.3026",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "13.5777",
+        "positive_blocks": 4,
+        "positive_day_share": 0.5181818181818182,
+        "positive_days": 57,
+        "positive_two_cent_stressed_blocks": 3,
+        "realized_net_pnl": "16.9957",
+        "settled_markets": 236,
+        "stressed_block_pnl": {
+          "1": [
+            "6.7427",
+            "1.0154",
+            "0.2059",
+            "-1.7721",
+            "8.1522"
+          ],
+          "2": [
+            "6.2431",
+            "0.5239",
+            "-0.2219",
+            "-2.3026",
+            "7.4528"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "14.3441",
+          "2": "11.6953"
+        },
+        "trade_ledger_sha256": "65ded6a46fd042284547195becece473e38b4102dc8caa84d18809c3bab733eb",
+        "win_rate": 0.711864406779661,
+        "wins": 168,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": true,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": false
+      },
+      "development_rejections": {
+        "binary_spread": 16,
+        "minimum_net_edge": 32454,
+        "no_qualifying_decision": 10099,
+        "raw_model_market_gap": 5025,
+        "selected_ask_band": 13215
+      }
+    },
+    {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": 1.5,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.75,
+        "minimum_net_edge": 0.03,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w00_d125_e030_p4075_g060_t005300_s01_r1500",
+        "probability_market_log_odds_weight": 0.0,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "7.9582",
+          "1.4938",
+          "1.5853",
+          "-1.7619",
+          "5.8180"
+        ],
+        "contracts": 192,
+        "daily_mean_one_sided_90pct_lower_bound": 0.009150223012761777,
+        "daily_pnl_standard_error": 0.07785647437657606,
+        "decisions": 161,
+        "ending_cash": "115.0934",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7400",
+          "mean_entry_price": "0.6035403726708074534161490683",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "3.1166",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "5.6258",
+        "mean_daily_pnl": 0.13721272727272726,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-2.4540",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "11.6348",
+        "positive_blocks": 4,
+        "positive_day_share": 0.45454545454545453,
+        "positive_days": 50,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "15.0934",
+        "settled_markets": 161,
+        "stressed_block_pnl": {
+          "1": [
+            "7.5336",
+            "1.0796",
+            "1.3494",
+            "-2.1082",
+            "5.3405"
+          ],
+          "2": [
+            "7.1101",
+            "0.6657",
+            "1.1144",
+            "-2.4540",
+            "4.8635"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "13.1949",
+          "2": "11.2997"
+        },
+        "trade_ledger_sha256": "4266f588cbdd069d8e8566aafaac017a334461bdef7497074c39d9583080a7fa",
+        "win_rate": 0.6832298136645962,
+        "wins": 110,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": false,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 6,
+        "fast_slow_variance_ratio": 6674,
+        "minimum_net_edge": 29272,
+        "no_qualifying_decision": 10174,
+        "raw_model_market_gap": 3692,
+        "selected_ask_band": 11327
+      }
+    },
+    {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.01,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.75,
+        "minimum_net_edge": 0.025,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d125_e025_p4075_g060_t005300_s01_rnone",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "7.5417",
+          "1.2109",
+          "2.2502",
+          "-1.7267",
+          "7.0512"
+        ],
+        "contracts": 212,
+        "daily_mean_one_sided_90pct_lower_bound": 0.011707591090244912,
+        "daily_pnl_standard_error": 0.08312132257212014,
+        "decisions": 177,
+        "ending_cash": "116.3273",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7400",
+          "mean_entry_price": "0.6033333333333333333333333333",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "3.4427",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "6.5600",
+        "mean_daily_pnl": 0.14843,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-2.5575",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "12.9093",
+        "positive_blocks": 4,
+        "positive_day_share": 0.4636363636363636,
+        "positive_days": 51,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "16.3273",
+        "settled_markets": 177,
+        "stressed_block_pnl": {
+          "1": [
+            "7.1177",
+            "0.7771",
+            "1.9746",
+            "-2.1423",
+            "6.5039"
+          ],
+          "2": [
+            "6.6947",
+            "0.3435",
+            "1.7000",
+            "-2.5575",
+            "5.9574"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "14.2310",
+          "2": "12.1381"
+        },
+        "trade_ledger_sha256": "94f2b323a862190962bc9dba6cfc0fa011dba7473a5dc20d5fc2eeb34dc5c1ad",
+        "win_rate": 0.6836158192090396,
+        "wins": 121,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": false,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "binary_spread": 6,
+        "minimum_net_edge": 32546,
+        "no_qualifying_decision": 10158,
+        "raw_model_market_gap": 4311,
+        "selected_ask_band": 14052
+      }
+    },
+    {
+      "configuration": {
+        "fast_variance_weight": 0.75,
+        "maximum_binary_spread": 0.02,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.06,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.75,
+        "minimum_net_edge": 0.025,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.4,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v75_w10_d125_e025_p4075_g060_t005300_s02_rnone",
+        "probability_market_log_odds_weight": 0.1,
+        "trend_horizon_seconds": 60,
+        "trend_multiplier": 0.25
+      },
+      "development_fixed_1": {
+        "block_pnl": [
+          "7.7882",
+          "1.7136",
+          "0.8892",
+          "-1.7267",
+          "7.4147"
+        ],
+        "contracts": 218,
+        "daily_mean_one_sided_90pct_lower_bound": 0.009921785309420283,
+        "daily_pnl_standard_error": 0.08283469102100645,
+        "decisions": 183,
+        "ending_cash": "116.0790",
+        "entry_diagnostics": {
+          "maximum_entry_price": "0.7400",
+          "mean_entry_price": "0.6062841530054644808743169399",
+          "minimum_entry_price": "0.4000"
+        },
+        "fees": "3.5310",
+        "kelly_cap_binding_decisions": null,
+        "maximum_drawdown": "7.1965",
+        "mean_daily_pnl": 0.1461727272727273,
+        "mean_target_budget": "1.00",
+        "minimum_two_cent_stressed_block_pnl": "-2.5575",
+        "observed_days": 110,
+        "pnl_without_top_three_winners": "12.6610",
+        "positive_blocks": 4,
+        "positive_day_share": 0.4727272727272727,
+        "positive_days": 52,
+        "positive_two_cent_stressed_blocks": 4,
+        "realized_net_pnl": "16.0790",
+        "settled_markets": 183,
+        "stressed_block_pnl": {
+          "1": [
+            "7.3545",
+            "1.2604",
+            "0.5940",
+            "-2.1423",
+            "6.8575"
+          ],
+          "2": [
+            "6.9219",
+            "0.8075",
+            "0.3000",
+            "-2.5575",
+            "6.3012"
+          ]
+        },
+        "stressed_pnl": {
+          "1": "13.9241",
+          "2": "11.7731"
+        },
+        "trade_ledger_sha256": "ba9679b60bf84755afad1d60fd51c3fa312e290ac5e24cb28a51809216f7bb96",
+        "win_rate": 0.6830601092896175,
+        "wins": 125,
+        "zero_size_decisions": {}
+      },
+      "development_gate_passed": false,
+      "development_gates": {
+        "average_8_to_12_trades_per_day": false,
+        "base_pnl_above_15": true,
+        "maximum_drawdown_at_most_10": true,
+        "mean_entry_price_45_to_72_cents": true,
+        "minimum_65pct_win_rate": true,
+        "pnl_without_top_three_above_10": true,
+        "positive_in_four_of_five_base_blocks": true,
+        "positive_on_majority_of_days": false,
+        "positive_one_cent_stress": true,
+        "positive_one_sided_90pct_daily_mean_lower_bound": true,
+        "positive_two_cent_stress": true,
+        "positive_two_cent_stress_in_four_of_five_blocks": true
+      },
+      "development_rejections": {
+        "minimum_net_edge": 32537,
+        "no_qualifying_decision": 10152,
+        "raw_model_market_gap": 4307,
+        "selected_ask_band": 14047
+      }
+    }
+  ]
+}

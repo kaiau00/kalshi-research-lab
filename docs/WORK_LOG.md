@@ -1,5 +1,14 @@
 # Work log
 
+## 2026-10-18 — Frequency Strategy Study 021
+
+- Preregistered 11,520 fixed-$1 configurations targeting 8–12 trades/day, at least a 65% win rate and a 45–72
+  cent mean entry while testing mean reversion, neutral drift and two momentum strengths.
+- Evaluated only Dataset 017's oldest 60% development partition. Zero cells passed every gate, so validation and
+  risk sizing did not open and the final 20% holdout remained sealed.
+- The sole high-frequency cell with positive two-cent stress made only $0.3421 under that stress, drew down
+  $17.7168 and was negative in two of five base and stressed blocks. It was rejected.
+
 ## 2026-09-14 — scope and foundation
 
 - User approved BTC-only, $10/month Railway target, private `kaiau00/kalshi-research-lab`.
