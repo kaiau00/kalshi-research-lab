@@ -19,6 +19,17 @@
   cents on average, passed four of five base and stressed blocks and drew down $4.4504. It failed only frequency;
   Study 022 did not open validation or risk sizing.
 
+## 2026-10-18 — Market-Shrunk Fallback Validation 023
+
+- Froze Study 022's 5.33-trade/day lead and reproduced its development trade-ledger hash before one validation
+  evaluation.
+- Validation averaged 6.81 trades/day, won 70.63%, made $7.4240 and retained $2.2681 under two-cent stress, but
+  its $5.1635 drawdown missed the $5 cap.
+- Combined unsealed results averaged 5.70 trades/day, won 71.00%, entered at 66.44 cents, made $29.6609, retained
+  $26.4650 without the three largest wins and $12.1890 under two-cent stress, with $5.1635 drawdown.
+- Combined stressed P&L was positive in only three of five chronological blocks. Study 023 was rejected; risk
+  sizing did not open, the final holdout remained sealed and no orders were authorized.
+
 ## 2026-09-14 — scope and foundation
 
 - User approved BTC-only, $10/month Railway target, private `kaiau00/kalshi-research-lab`.
