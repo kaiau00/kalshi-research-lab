@@ -30,7 +30,7 @@ packages = ["src/research_lab", "src/demo_execution", "src/candidate_study", "sr
             "src/moderate_disagreement", "src/settlement_research", "src/databento_overlay",
             "src/historical_archive", "src/historical_backtest", "src/historical_optimization",
             "src/historical_robust_optimization", "src/historical_frequency_optimization",
-            "src/historical_market_confirmation"]
+            "src/historical_market_confirmation", "src/market_shrunk_production"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
