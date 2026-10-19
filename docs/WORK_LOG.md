@@ -9,6 +9,16 @@
 - The sole high-frequency cell with positive two-cent stress made only $0.3421 under that stress, drew down
   $17.7168 and was negative in two of five base and stressed blocks. It was rejected.
 
+## 2026-10-18 — Market Confirmation Study 022
+
+- Preregistered and evaluated 11,664 stronger-market-shrinkage and one-minute quote-confirmation cells on the
+  oldest 60% development partition.
+- No 8–12-trade/day cell remained positive under two-cent adverse-price stress. The closest-to-ten cell lost
+  $21.1564 under stress and drew down $27.0840.
+- A 5.33-trade/day fallback made $22.2369, retained $9.9209 under two-cent stress, won 71.16%, entered at 66.34
+  cents on average, passed four of five base and stressed blocks and drew down $4.4504. It failed only frequency;
+  Study 022 did not open validation or risk sizing.
+
 ## 2026-09-14 — scope and foundation
 
 - User approved BTC-only, $10/month Railway target, private `kaiau00/kalshi-research-lab`.

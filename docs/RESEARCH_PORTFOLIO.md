@@ -32,6 +32,9 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
 - Study 021 frequency strategy search — completed with no winner across 11,520 cells. The only 8–12-trade/day,
   65%-win, 45–72-cent-mean-price cell with positive two-cent stress retained only +$0.3421, drew down $17.7168 and
   lost in two of five chronological periods. Validation, risk sizing and the holdout stayed closed;
+- Study 022 market-confirmation search — completed with no 8–12-trade/day winner across 11,664 cells. No target-
+  frequency cell survived two-cent stress. A 5.33-trade/day fallback passed every other development gate and is
+  eligible only for one separately frozen lower-frequency validation diagnostic;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new
