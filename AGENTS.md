@@ -40,3 +40,10 @@ cap. Use a fresh durable ledger, exchange index 2, subaccount 0, 500 ms delayed 
 per market, and hold to official settlement with no early exits. Preserve all previous ledgers and their pause
 controls. This authorization does not itself authorize moving funds between Kalshi exchange indices; the new
 ledger must start paused and require exactly $100.0000 on index 2 before its first order.
+
+Later on October 19, 2026 the user explicitly authorized exactly $140.0000 of internal Predictions funding for
+this fresh ledger and activation of `market_shrunk_half_kelly_001`. Funding revision
+`market-shrunk-half-kelly-funding-002-20261019` replaces only the initial cash gate: require exactly $140.0000 on
+Predictions exchange index 2 before removing `/data/production-market-shrunk-half-kelly-001/PAUSE_ENTRIES`.
+Preserve the one-half-Kelly sizing, $3 all-in cap, signal, execution and hold rules unchanged. Verify no index-2
+position, resting order or unresolved order before activation; never move funds outside the Predictions account.

@@ -15,7 +15,8 @@ def test_market_shrunk_live_registration_is_exact_and_isolated():
     assert value["risk"]["revision"] == RISK_REVISION
     assert value["position"]["revision"] == HOLD_REVISION
     assert value["account"]["exchange_index"] == 2
-    assert value["account"]["required_initial_cash_dollars"] == "100.0000"
+    assert value["account"]["required_initial_cash_dollars"] == "140.0000"
+    assert value["account"]["funding_revision"] == "market-shrunk-half-kelly-funding-002-20261019"
     assert value["risk"]["maximum_all_in_entry_cost"] == "3.00"
     assert value["execution"]["fresh_ledger_starts_paused"] is True
     assert value["position"]["early_exit_submission"] == "disabled"

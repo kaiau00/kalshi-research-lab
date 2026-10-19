@@ -23,6 +23,7 @@ from research_lab.settings import Experiment
 from .registration import (
     AUTHORIZATION,
     CONFIG_REVISION,
+    FUNDING_REVISION,
     HOLD_AUTHORIZATION,
     HOLD_REVISION,
     RISK_AUTHORIZATION,
@@ -32,7 +33,7 @@ from .registration import (
     registration_hash,
 )
 
-STARTING_CASH = Decimal("100.0000")
+STARTING_CASH = Decimal("140.0000")
 KELLY_MULTIPLIER = Decimal("0.50")
 MAXIMUM_ALL_IN = Decimal("3.00")
 FAST_VARIANCE_WEIGHT = Decimal("0.90")
@@ -214,6 +215,7 @@ class Runner(ReconciliationRunner):
             "runner_revision": RUNNER_NAME,
             "state": "starting",
             "required_initial_cash": str(STARTING_CASH),
+            "funding_revision": FUNDING_REVISION,
             "risk_per_market": str(MAXIMUM_ALL_IN),
             "risk_policy_revision": RISK_REVISION,
             "config_revision": CONFIG_REVISION,

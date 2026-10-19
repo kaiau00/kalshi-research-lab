@@ -40,7 +40,7 @@ class PausedClient(FakeClient):
         if path == "/portfolio/positions":
             return {"market_positions": [], "cursor": ""}
         if path == "/portfolio/balance":
-            return {"balance_dollars": "100.0000", "portfolio_value": 0}
+            return {"balance_dollars": "140.0000", "portfolio_value": 0}
         raise AssertionError(f"unexpected read: {path}")
 
     async def submit(self, payload):

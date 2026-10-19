@@ -9,6 +9,7 @@ STRATEGY = "market_shrunk_half_kelly_001"
 CONFIG_REVISION = "market-shrunk-half-kelly-production-001-20261019"
 RISK_REVISION = "market-shrunk-half-kelly-risk-001-20261019"
 HOLD_REVISION = "market-shrunk-half-kelly-hold-001-20261019"
+FUNDING_REVISION = "market-shrunk-half-kelly-funding-002-20261019"
 SOURCE_STUDY_REGISTRATION_SHA256 = (
     "7314ad94911093b14a8fd33168240e0a789aa4a04727f677faaae6ee5fa2b5d0"
 )
@@ -23,7 +24,8 @@ def registration():
         "authorized_on": "2026-10-19",
         "authorization_scope": (
             "The user explicitly requested live real-money execution of the Study 023 lead "
-            "with one-half Kelly sizing."
+            "with one-half Kelly sizing, then explicitly authorized exactly $140 of internal "
+            "Predictions funding and bot activation."
         ),
         "source": {
             "study": "023",
@@ -38,7 +40,8 @@ def registration():
             "series": "KXBTC15M",
             "exchange_index": 2,
             "subaccount": 0,
-            "required_initial_cash_dollars": "100.0000",
+            "required_initial_cash_dollars": "140.0000",
+            "funding_revision": FUNDING_REVISION,
         },
         "decision": {
             "clock": "once just after each completed UTC minute boundary",
