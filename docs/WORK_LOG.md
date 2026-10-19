@@ -637,6 +637,24 @@ and lost $0.4644; one-thirty-second Kelly could not afford one integer contract.
 The diagnostic confirms that Kelly sizing does not repair the signal's regime instability. No holdout, demo or
 production execution was enabled.
 
+## 2026-10-19 — Market-Shrunk Half-Kelly production commissioning
+
+After the user explicitly requested live execution, registered and implemented a separate production revision
+for Study 023's exact signal and Study 024's half-Kelly sizing. The runner evaluates only just after completed UTC
+minute boundaries, reproduces the 90%/10% variance and 75%/25% log-odds probability pools, applies every frozen
+price, edge, disagreement, spread and two-cent-stress filter, caps all-in cost at $3, uses one 500 ms delayed IOC
+attempt per market, and holds fills to official settlement. It has no early-exit or transfer method.
+
+The fresh ledger automatically created `PAUSE_ENTRIES`, requires exactly $100.0000 on exchange index 2 before its
+first order, and preserves all previous production ledgers. The full suite passed with 237 tests and Ruff passed.
+Deployment `a7608bec-380c-43fe-bce3-8c31dfbe9192` reached SUCCESS, then guarded runner selection deployment
+`e8a9ed70-3d28-4fd2-8e81-97f5742cb6e8` reached SUCCESS. Protected status verified the selected strategy, exact
+revisions, active runner, durable pause, zero attempts, zero fills and zero unresolved orders.
+
+Read-only balance inspection found $0.0000 on the required index 2, $135.2303 on index 1 and $17.5589 on index 0.
+No funds were moved and the pause was not removed; those final external actions require the user's explicit
+authorization.
+
 ## 2026-10-15 — Historical Parameter and Kelly Study 019
 
 Preregistered 1,620 conservative-anchor parameter combinations and five sizing paths before calculating new P&L.

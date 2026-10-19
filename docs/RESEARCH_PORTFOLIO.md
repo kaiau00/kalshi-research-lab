@@ -52,10 +52,10 @@ under a new name.
 
 ## Production state
 
-New real-money entries remain durably paused. The October 13 hosted audit found nine conservative fills, all nine
-officially settled, zero unresolved orders and an active reconciliation/status runner. The production adapter may
-be retired after a separate zero-position, zero-resting-order and ledger-completeness check; this document does not
-change its runtime state.
+The user-authorized `market_shrunk_half_kelly_001` runner is selected on Railway with a fresh durable ledger, zero
+attempts, zero fills and zero unresolved orders. New real-money entries remain durably paused. Exchange index 2 has
+$0.0000 while the exact commissioning gate requires $100.0000; no funds were moved. The previous conservative
+ledger remains preserved at nine officially settled fills and -$0.1948 realized net P&L.
 
 ## Deletion policy
 
