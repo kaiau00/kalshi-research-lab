@@ -38,6 +38,10 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
 - Study 023 market-shrunk fallback validation — rejected. It averaged 5.70 trades/day across the unsealed 80%,
   won 71.00%, made $29.6609 and retained $12.1890 under two-cent stress, but validation drawdown missed its cap by
   $0.1635 and only three of five combined stressed blocks were positive. Risk sizing and holdout stayed closed;
+- Study 024 Kelly risk diagnostic — completed after the user requested a sizing comparison on the rejected Study
+  023 lead. Fixed $1 was the risk-adjusted leader. Half Kelly made +$106.6278 but hit the $3 cap on 829 of 838
+  decisions and drew down $27.0156; eighth Kelly made less than fixed $1 and nearly doubled drawdown; smaller
+  fractions skipped most or all trades. The diagnostic did not rescue the signal or open the holdout;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new

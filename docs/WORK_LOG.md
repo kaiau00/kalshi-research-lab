@@ -621,6 +621,22 @@ positive-day and block-consistency gates. The 3,463-market holdout remains unope
 
 Validation: 205 tests passed and Ruff passed.
 
+## 2026-10-19 — Market-Shrunk Kelly Risk Study 024
+
+Preregistered a user-requested risk-only comparison on Study 023's exact frozen signal before calculating any
+Kelly-sized P&L. The study starts with $100, includes entry fees in each target budget, uses integer contracts,
+caps Kelly exposure at $3 all-in per market, and compares fixed $1 with 1/32, 1/16, 1/8, 1/4 and 1/2 Kelly. The
+newest 20% holdout remained sealed.
+
+Fixed $1 was the descriptive risk-adjusted leader: +$29.6609 base P&L, +$12.1890 under two-cent adverse-price
+stress and $5.1635 maximum drawdown. Half Kelly produced the largest headline P&L at +$106.6278, but hit the $3
+cap on 829 of 838 decisions and drew down $27.0156. Quarter Kelly also drew down $26.7625. Eighth Kelly made
++$27.8864, retained only +$3.8363 under stress and drew down $9.6854. One-sixteenth Kelly skipped 622 decisions
+and lost $0.4644; one-thirty-second Kelly could not afford one integer contract.
+
+The diagnostic confirms that Kelly sizing does not repair the signal's regime instability. No holdout, demo or
+production execution was enabled.
+
 ## 2026-10-15 — Historical Parameter and Kelly Study 019
 
 Preregistered 1,620 conservative-anchor parameter combinations and five sizing paths before calculating new P&L.
