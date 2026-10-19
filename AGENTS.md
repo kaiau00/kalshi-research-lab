@@ -33,3 +33,10 @@ On October 13, 2026 the user explicitly authorized pausing new `market_anchor_co
 On October 13, 2026 the user asked to improve the failed Study 008 approach. Moderate Disagreement Study 009 is the resulting read-only prospective candidate, frozen from 2026-10-13T21:45:00Z. It may only filter future Candidate Study 003 observations under its registered 30–50 cent price band, greater-than-6-through-8-point raw-versus-market gap, one-cent spread, two-cent stressed-edge, cooldown and realized-risk rules. It has no order path. Do not change the candidate from prospective results or use its development evidence to resume production.
 
 Later on October 13, 2026 the user explicitly authorized deploying the exact read-only Study 009 monitor to the existing Railway research service after the billing period resets on October 16. This authorization permits the service restart and protected status endpoint only. It does not authorize removing `PAUSE_ENTRIES`, resuming production entries, placing demo or real orders, changing Study 009, moving funds, raising the Railway limit, or publishing private Railway-derived reports to GitHub.
+
+On October 19, 2026 the user explicitly authorized a new real-money revision using the exact Study 023
+`v90_w25_q0_e005_p4580_g075_t005300_s02_b00_rnone` signal with the Study 024 one-half-Kelly rule and $3 all-in
+cap. Use a fresh durable ledger, exchange index 2, subaccount 0, 500 ms delayed IOC execution, one signal attempt
+per market, and hold to official settlement with no early exits. Preserve all previous ledgers and their pause
+controls. This authorization does not itself authorize moving funds between Kalshi exchange indices; the new
+ledger must start paused and require exactly $100.0000 on index 2 before its first order.
