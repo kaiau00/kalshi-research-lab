@@ -47,3 +47,9 @@ this fresh ledger and activation of `market_shrunk_half_kelly_001`. Funding revi
 Predictions exchange index 2 before removing `/data/production-market-shrunk-half-kelly-001/PAUSE_ENTRIES`.
 Preserve the one-half-Kelly sizing, $3 all-in cap, signal, execution and hold rules unchanged. Verify no index-2
 position, resting order or unresolved order before activation; never move funds outside the Predictions account.
+
+On October 20, 2026 the user explicitly authorized resuming this runner with the current $129.9915 Predictions
+index-2 balance after Kalshi transferred $10.0085 internally away from index 2. The original $140.0000
+commissioning preflight had passed before activation. Preserve its durable `COMMISSIONED.json` receipt so later
+cash changes affect half-Kelly sizing instead of reopening the one-time initial funding gate. This authorization
+does not change the $3 cap, signal, execution or hold policy and does not authorize replacing missing funds.

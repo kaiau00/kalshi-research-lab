@@ -669,6 +669,19 @@ an unrelated balance change, leaving $2.8001 elsewhere. Final preflight found no
 order. The durable pause was removed, and protected status verified `watching`, $140.0000 cash, the exact funding
 revision, zero fills, zero attempts, zero unresolved orders and no STOP file.
 
+## 2026-10-20 — Durable commissioning receipt and authorized resumption
+
+The runner remained active but entered `waiting_initial_production_funding` before its first order because Kalshi
+completed a $10.0085 internal Predictions transfer from the BTC path after the verified $140.0000 commissioning
+preflight. The bot had submitted no order. Cash was $129.9915, with no position, resting order or unresolved order.
+
+Added a validated `COMMISSIONED.json` receipt so the one-time initial funding check remains durable across later
+cash changes; a missing or invalid receipt still preserves the exact initial-cash gate. The full suite passed with
+239 tests and Ruff passed. Deployment `51e332bd-5397-438a-886a-3420f6fca581` reached SUCCESS. After the user
+explicitly authorized resuming at $129.9915, the receipt was recorded and protected status verified `watching`,
+`commissioned=true`, entries unpaused, zero fills, zero attempts and zero unresolved orders. Signal, sizing, $3
+cap, IOC execution and hold-to-settlement rules were unchanged.
+
 ## 2026-10-15 — Historical Parameter and Kelly Study 019
 
 Preregistered 1,620 conservative-anchor parameter combinations and five sizing paths before calculating new P&L.

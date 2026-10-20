@@ -56,7 +56,9 @@ The user-authorized `market_shrunk_half_kelly_001` runner is selected and active
 ledger. It began with exactly $140.0000 of internally routed Predictions cash, zero attempts, zero fills, no
 position, no resting order and zero unresolved orders under funding revision
 `market-shrunk-half-kelly-funding-002-20261019`. The previous conservative ledger remains preserved and paused at
-nine officially settled fills and -$0.1948 realized net P&L.
+nine officially settled fills and -$0.1948 realized net P&L. Before the first bot order, a later Kalshi internal
+transfer reduced BTC-path cash to $129.9915. The user explicitly authorized resumption at that balance; the durable
+commissioning receipt prevents the already-passed $140 preflight from being repeated after ordinary cash changes.
 
 ## Deletion policy
 

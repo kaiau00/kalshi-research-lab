@@ -8,7 +8,11 @@ The runner is restricted to `KXBTC15M`, Predictions exchange index 2 and subacco
 a durable `PAUSE_ENTRIES` file. On 2026-10-19 the user separately authorized exactly $140.0000 of internal
 Predictions funding and activation under funding revision `market-shrunk-half-kelly-funding-002-20261019`.
 Commissioning verified exactly $140.0000 on the BTC path with no position, resting order or unresolved order before
-the pause was removed. The runner itself has no transfer method. Previous production ledgers remain immutable.
+the pause was removed. A durable `COMMISSIONED.json` receipt records that one-time check. On 2026-10-20 Kalshi
+transferred $10.0085 internally away from the BTC path before the first bot order; the user explicitly authorized
+resuming with the remaining $129.9915. Later cash changes therefore feed the half-Kelly calculation without
+reopening the initial commissioning gate. The runner itself has no transfer method. Previous production ledgers
+remain immutable.
 
 At the first processing opportunity just after each completed UTC minute, from 5 through 300 seconds before
 market close, it computes the structural probability with 90% weight on 60-second variance and 10% weight on
