@@ -1,4 +1,5 @@
 import asyncio
+import json
 from decimal import Decimal
 
 import pytest
@@ -10,6 +11,7 @@ from market_shrunk_production.registration import (
     RISK_AUTHORIZATION,
 )
 from market_shrunk_production.runner import (
+    COMMISSION_RECEIPT_FILE,
     ENTRY_PAUSE_FILE,
     Runner,
     forecast_at_completed_minute,
@@ -17,6 +19,7 @@ from market_shrunk_production.runner import (
     minute_boundary,
     order_payload,
     quantity_for_budget,
+    valid_commission_receipt,
 )
 from production_execution.client import validate_order
 from research_lab.demo import book_frame
@@ -31,16 +34,17 @@ class FakeClient:
 
 
 class PausedClient(FakeClient):
-    def __init__(self):
+    def __init__(self, balance="140.0000"):
         self.reads = []
         self.submissions = []
+        self.balance = balance
 
     async def get(self, path, params=None):
         self.reads.append((path, params))
         if path == "/portfolio/positions":
             return {"market_positions": [], "cursor": ""}
         if path == "/portfolio/balance":
-            return {"balance_dollars": "140.0000", "portfolio_value": 0}
+            return {"balance_dollars": self.balance, "portfolio_value": 0}
         raise AssertionError(f"unexpected read: {path}")
 
     async def submit(self, payload):
@@ -143,6 +147,55 @@ def test_fresh_runner_pause_blocks_signal_evaluation_and_submission(tmp_path, mo
             "/portfolio/positions",
             "/portfolio/balance",
         ]
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_valid_commission_receipt_allows_post_activation_balance_change(tmp_path, monkeypatch):
+    authorize(monkeypatch)
+    state, _ = warmed_state(720)
+    client = PausedClient("129.9915")
+    runner = Runner(lambda: state, tmp_path, client=client)
+    (tmp_path / ENTRY_PAUSE_FILE).unlink()
+    receipt = {
+        "strategy": runner.status["strategy"],
+        "candidate_registration_sha256": runner.status["candidate_registration_sha256"],
+        "funding_revision": runner.status["funding_revision"],
+        "initial_cash": runner.status["required_initial_cash"],
+        "exchange_index": 2,
+        "subaccount": 0,
+        "commissioned_ns": 1,
+    }
+    (tmp_path / COMMISSION_RECEIPT_FILE).write_text(json.dumps(receipt))
+    runner.signal = lambda *_args, **_kwargs: None
+    try:
+        assert valid_commission_receipt(tmp_path)
+        asyncio.run(runner.step())
+        runner.snapshot()
+        assert runner.status["state"] == "watching"
+        assert runner.status["commissioned"] is True
+        assert runner.status["cash"] == "129.9915"
+        assert client.submissions == []
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_missing_commission_receipt_preserves_initial_cash_gate(tmp_path, monkeypatch):
+    authorize(monkeypatch)
+    state, _ = warmed_state(720)
+    client = PausedClient("129.9915")
+    runner = Runner(lambda: state, tmp_path, client=client)
+    (tmp_path / ENTRY_PAUSE_FILE).unlink()
+    runner.signal = lambda *_args, **_kwargs: pytest.fail("uncommissioned runner evaluated a signal")
+    try:
+        asyncio.run(runner.step())
+        assert runner.status["state"] == "waiting_initial_production_funding"
+        assert runner.status["commissioned"] is False
+        assert client.submissions == []
     finally:
         asyncio.run(runner.client.close())
         runner.journal.db.close()

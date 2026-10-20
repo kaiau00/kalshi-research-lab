@@ -45,7 +45,27 @@ MAXIMUM_MODEL_MARKET_GAP = 0.075
 MAXIMUM_BINARY_SPREAD = Decimal("0.02")
 ADVERSE_PRICE_BUFFER = Decimal("0.02")
 ENTRY_PAUSE_FILE = "PAUSE_ENTRIES"
+COMMISSION_RECEIPT_FILE = "COMMISSIONED.json"
 RUNNER_NAME = "market_shrunk_half_kelly_001"
+
+
+def valid_commission_receipt(root: Path) -> bool:
+    path = root / COMMISSION_RECEIPT_FILE
+    try:
+        value = json.loads(path.read_text())
+    except (OSError, ValueError, TypeError):
+        return False
+    expected = {
+        "strategy": STRATEGY,
+        "candidate_registration_sha256": registration_hash(),
+        "funding_revision": FUNDING_REVISION,
+        "initial_cash": str(STARTING_CASH),
+        "exchange_index": 2,
+        "subaccount": 0,
+    }
+    return all(value.get(key) == expected_value for key, expected_value in expected.items()) and (
+        isinstance(value.get("commissioned_ns"), int) and value["commissioned_ns"] > 0
+    )
 
 
 def quantity_for_budget(price: Decimal, budget: Decimal, cfg: Experiment) -> int:
@@ -343,10 +363,12 @@ class Runner(ReconciliationRunner):
         if await self.manage_position(positions_data.get("market_positions", [])):
             return
         cash = await self.account()
+        commissioned = valid_commission_receipt(self.root)
+        self.status["commissioned"] = commissioned
         if (self.root / ENTRY_PAUSE_FILE).exists():
             self.status.update(state="entries_paused", markets=self.current_markets())
             return
-        if not self.journal.rows() and cash != STARTING_CASH:
+        if not self.journal.rows() and not commissioned and cash != STARTING_CASH:
             self.status.update(state="waiting_initial_production_funding", markets=self.current_markets())
             return
         markets = self.current_markets()
