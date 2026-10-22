@@ -1,5 +1,15 @@
 # Work log
 
+## 2026-10-21 — Market-Shrunk Regime Failure Analysis 025
+
+- Registered nine diagnostic views before replaying Study 023's exact 838 fixed-$1 decisions. The replay matched
+  the frozen trade-ledger hash, and the newest 20% holdout remained sealed.
+- Found three overlapping buckets with at least 20 trades and negative two-cent-stressed P&L in both development
+  and validation: 65–69-cent entries, a fast/slow variance ratio below 0.50, and 06:00–11:59 UTC.
+- A post-hoc removal of only 65–69-cent entries retained 713 trades, +$31.3116 base P&L and +$16.2750 stressed
+  P&L. This is a candidate hypothesis, not validation. Removing all three labels cut frequency to 1.53 trades/day.
+- No holdout, Railway deployment, production parameter, sizing rule or order authority changed.
+
 ## 2026-10-18 — Frequency Strategy Study 021
 
 - Preregistered 11,520 fixed-$1 configurations targeting 8–12 trades/day, at least a 65% win rate and a 45–72

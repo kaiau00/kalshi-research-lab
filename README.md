@@ -1,10 +1,11 @@
 # Kalshi Research Lab
 
-A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. New
-real-money entries are durably paused. The last authorized production revision was Conservative Market Anchor
-`market_anchor_conservative_001`, with a fixed $1 all-in maximum per market, IOC entries,
-hold-to-official-settlement position management, and frozen loss and cooldown controls. Its separate ledger is
-preserved. The purpose is to reject weak ideas and measure promising ones, not to promise a return.
+A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
+user-authorized production revision is `market_shrunk_half_kelly_001`, with half-Kelly sizing capped at $3 all-in,
+one delayed IOC attempt per market and hold-to-official-settlement position management. Its historical validation
+failed two preregistered robustness gates, so live results are a pilot rather than proof of an edge. Earlier
+production ledgers remain preserved and paused. The purpose is to reject weak ideas and measure promising ones,
+not to promise a return.
 
 The original adaptive-volatility live-fill audit is complete: it lost $37.0860 across all 37 resolved fills, or
 $25.0750 under identical-entry hold-to-settlement accounting. That revision remains closed and its ledger is
@@ -141,6 +142,10 @@ live-account expectations. See [Live-equivalence audit 002](docs/LIVE_EQUIVALENC
 
 The user authorized the real-money pilot despite that negative audit. That decision does not promote the strategy
 or prove an edge. Candidate Study 003 and Risk Sizing Audit 001 remain independent, frozen research studies.
+
+[Market-Shrunk Regime Failure Analysis 025](docs/MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_RESULT.md) diagnoses
+the current signal's historical weak regimes without changing it or opening the sealed holdout. It found one
+simple post-hoc candidate—avoid 65–69-cent entries—that requires a separately frozen holdout evaluation.
 
 ## Run locally
 

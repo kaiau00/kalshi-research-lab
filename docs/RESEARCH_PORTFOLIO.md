@@ -1,6 +1,6 @@
 # Research portfolio status
 
-Updated on 2026-10-18 after the historical archive, Studies 018-020 and the research-service restart.
+Updated on 2026-10-21 after Market-Shrunk Regime Failure Analysis 025.
 This document controls attention and runtime scope; it does not delete evidence or authorize orders.
 
 ## Active development
@@ -42,6 +42,10 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
   023 lead. Fixed $1 was the risk-adjusted leader. Half Kelly made +$106.6278 but hit the $3 cap on 829 of 838
   decisions and drew down $27.0156; eighth Kelly made less than fixed $1 and nearly doubled drawdown; smaller
   fractions skipped most or all trades. The diagnostic did not rescue the signal or open the holdout;
+- Study 025 regime failure analysis — completed on the exact Study 023 ledger. The 65–69-cent entry band, a
+  fast/slow variance ratio below 0.50 and 06:00–11:59 UTC each lost under two-cent stress in both development and
+  validation, but the groups overlap. Avoiding only 65–69-cent entries is the simplest post-hoc candidate; it is
+  not validated and the holdout remains sealed;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new

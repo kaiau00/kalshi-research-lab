@@ -1,0 +1,2735 @@
+{
+  "conclusion_scope": {
+    "candidate_selected": false,
+    "exploratory_diagnostic": true,
+    "holdout_evaluated": false,
+    "production_change_authorized": false
+  },
+  "features": {
+    "absolute_raw_market_gap": [
+      {
+        "aggregate": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "bucket": "0-1.49",
+        "development": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "bucket": "1.5-2.99",
+        "development": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "0.2576",
+          "maximum_drawdown": "2.1394",
+          "mean_entry_price": "0.7747619047619047619047619048",
+          "net_pnl": "0.4724",
+          "one_cent_stressed_pnl": "0.2711",
+          "pnl_without_top_three_winners": "-0.2380",
+          "top_three_share_of_positive_pnl": 0.195643193522624,
+          "trades": 21,
+          "two_cent_stressed_pnl": "0.0699",
+          "win_rate": 0.8095238095238095,
+          "win_rate_wilson_90pct": [
+            0.6369152016739241,
+            0.9114797349439114
+          ],
+          "wins": 17
+        },
+        "bucket": "3-4.99",
+        "development": {
+          "fees": "0.2097",
+          "maximum_drawdown": "2.1394",
+          "mean_entry_price": "0.7729411764705882352941176471",
+          "net_pnl": "-0.3497",
+          "one_cent_stressed_pnl": "-0.5127",
+          "pnl_without_top_three_winners": "-1.0601",
+          "top_three_share_of_positive_pnl": 0.2529013883944464,
+          "trades": 17,
+          "two_cent_stressed_pnl": "-0.6756",
+          "win_rate": 0.7647058823529411,
+          "win_rate_wilson_90pct": [
+            0.567039126263359,
+            0.8896851463234763
+          ],
+          "wins": 13
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.0479",
+          "maximum_drawdown": "0",
+          "mean_entry_price": "0.7825",
+          "net_pnl": "0.8221",
+          "one_cent_stressed_pnl": "0.7838",
+          "pnl_without_top_three_winners": "0.1983",
+          "top_three_share_of_positive_pnl": 0.7587884685561367,
+          "trades": 4,
+          "two_cent_stressed_pnl": "0.7455",
+          "win_rate": 1.0,
+          "win_rate_wilson_90pct": [
+            0.5965213747972953,
+            1.0
+          ],
+          "wins": 4
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "13.2615",
+          "maximum_drawdown": "5.5794",
+          "mean_entry_price": "0.6615544675642594859241126071",
+          "net_pnl": "29.1885",
+          "one_cent_stressed_pnl": "20.6478",
+          "pnl_without_top_three_winners": "25.9926",
+          "top_three_share_of_positive_pnl": 0.016284923744834368,
+          "trades": 817,
+          "two_cent_stressed_pnl": "12.1191",
+          "win_rate": 0.7074663402692778,
+          "win_rate_wilson_90pct": [
+            0.6806366011937267,
+            0.7329265407261308
+          ],
+          "wins": 578
+        },
+        "bucket": "5-7.5",
+        "development": {
+          "fees": "9.3334",
+          "maximum_drawdown": "4.4504",
+          "mean_entry_price": "0.6600878734622144112478031634",
+          "net_pnl": "22.5866",
+          "one_cent_stressed_pnl": "16.5866",
+          "pnl_without_top_three_winners": "19.3907",
+          "top_three_share_of_positive_pnl": 0.0231272559911309,
+          "trades": 569,
+          "two_cent_stressed_pnl": "10.5965",
+          "win_rate": 0.7100175746924429,
+          "win_rate_wilson_90pct": [
+            0.6777930034479678,
+            0.7402543685541025
+          ],
+          "wins": 404
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "3.9281",
+          "maximum_drawdown": "5.5794",
+          "mean_entry_price": "0.6649193548387096774193548387",
+          "net_pnl": "6.6019",
+          "one_cent_stressed_pnl": "4.0612",
+          "pnl_without_top_three_winners": "3.4462",
+          "top_three_share_of_positive_pnl": 0.05435108350814827,
+          "trades": 248,
+          "two_cent_stressed_pnl": "1.5226",
+          "win_rate": 0.7016129032258065,
+          "win_rate_wilson_90pct": [
+            0.651855601241395,
+            0.7470187061323077
+          ],
+          "wins": 174
+        }
+      }
+    ],
+    "chronological_block": [
+      {
+        "aggregate": {
+          "fees": "2.6460",
+          "maximum_drawdown": "2.8107",
+          "mean_entry_price": "0.6678571428571428571428571429",
+          "net_pnl": "10.4140",
+          "one_cent_stressed_pnl": "8.6944",
+          "pnl_without_top_three_winners": "7.2985",
+          "top_three_share_of_positive_pnl": 0.07798224843184469,
+          "trades": 168,
+          "two_cent_stressed_pnl": "6.9776",
+          "win_rate": 0.7440476190476191,
+          "win_rate_wilson_90pct": [
+            0.6851043370567768,
+            0.79525499012612
+          ],
+          "wins": 125
+        },
+        "bucket": "1",
+        "development": {
+          "fees": "2.6460",
+          "maximum_drawdown": "2.8107",
+          "mean_entry_price": "0.6678571428571428571428571429",
+          "net_pnl": "10.4140",
+          "one_cent_stressed_pnl": "8.6944",
+          "pnl_without_top_three_winners": "7.2985",
+          "top_three_share_of_positive_pnl": 0.07798224843184469,
+          "trades": 168,
+          "two_cent_stressed_pnl": "6.9776",
+          "win_rate": 0.7440476190476191,
+          "win_rate_wilson_90pct": [
+            0.6851043370567768,
+            0.79525499012612
+          ],
+          "wins": 125
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.4815",
+          "maximum_drawdown": "4.1572",
+          "mean_entry_price": "0.6732026143790849673202614379",
+          "net_pnl": "6.4485",
+          "one_cent_stressed_pnl": "4.8264",
+          "pnl_without_top_three_winners": "3.2928",
+          "top_three_share_of_positive_pnl": 0.08361197810408508,
+          "trades": 153,
+          "two_cent_stressed_pnl": "3.2067",
+          "win_rate": 0.7189542483660131,
+          "win_rate_wilson_90pct": [
+            0.6557741301104892,
+            0.7745252575266165
+          ],
+          "wins": 110
+        },
+        "bucket": "2",
+        "development": {
+          "fees": "2.4815",
+          "maximum_drawdown": "4.1572",
+          "mean_entry_price": "0.6732026143790849673202614379",
+          "net_pnl": "6.4485",
+          "one_cent_stressed_pnl": "4.8264",
+          "pnl_without_top_three_winners": "3.2928",
+          "top_three_share_of_positive_pnl": 0.08361197810408508,
+          "trades": 153,
+          "two_cent_stressed_pnl": "3.2067",
+          "win_rate": 0.7189542483660131,
+          "win_rate_wilson_90pct": [
+            0.6557741301104892,
+            0.7745252575266165
+          ],
+          "wins": 110
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.2367",
+          "maximum_drawdown": "3.7512",
+          "mean_entry_price": "0.6544186046511627906976744186",
+          "net_pnl": "0.4433",
+          "one_cent_stressed_pnl": "-0.9873",
+          "pnl_without_top_three_winners": "-2.7124",
+          "top_three_share_of_positive_pnl": 0.10242387261361498,
+          "trades": 129,
+          "two_cent_stressed_pnl": "-2.4167",
+          "win_rate": 0.6744186046511628,
+          "win_rate_wilson_90pct": [
+            0.6035787206914691,
+            0.7380925470459003
+          ],
+          "wins": 87
+        },
+        "bucket": "3",
+        "development": {
+          "fees": "2.2367",
+          "maximum_drawdown": "3.7512",
+          "mean_entry_price": "0.6544186046511627906976744186",
+          "net_pnl": "0.4433",
+          "one_cent_stressed_pnl": "-0.9873",
+          "pnl_without_top_three_winners": "-2.7124",
+          "top_three_share_of_positive_pnl": 0.10242387261361498,
+          "trades": 129,
+          "two_cent_stressed_pnl": "-2.4167",
+          "win_rate": 0.6744186046511628,
+          "win_rate_wilson_90pct": [
+            0.6035787206914691,
+            0.7380925470459003
+          ],
+          "wins": 87
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.7763",
+          "maximum_drawdown": "4.4504",
+          "mean_entry_price": "0.6589714285714285714285714286",
+          "net_pnl": "8.6537",
+          "one_cent_stressed_pnl": "6.8732",
+          "pnl_without_top_three_winners": "5.5181",
+          "top_three_share_of_positive_pnl": 0.07396748412421329,
+          "trades": 175,
+          "two_cent_stressed_pnl": "5.0960",
+          "win_rate": 0.7142857142857143,
+          "win_rate_wilson_90pct": [
+            0.6551863402959246,
+            0.7668601448176582
+          ],
+          "wins": 125
+        },
+        "bucket": "4",
+        "development": {
+          "fees": "2.1789",
+          "maximum_drawdown": "4.4504",
+          "mean_entry_price": "0.6552205882352941176470588235",
+          "net_pnl": "4.9311",
+          "one_cent_stressed_pnl": "3.5404",
+          "pnl_without_top_three_winners": "1.8156",
+          "top_three_share_of_positive_pnl": 0.09588278018514872,
+          "trades": 136,
+          "two_cent_stressed_pnl": "2.1533",
+          "win_rate": 0.6985294117647058,
+          "win_rate_wilson_90pct": [
+            0.6304493585691637,
+            0.7588645697373231
+          ],
+          "wins": 95
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.5974",
+          "maximum_drawdown": "2.6259",
+          "mean_entry_price": "0.6720512820512820512820512821",
+          "net_pnl": "3.7226",
+          "one_cent_stressed_pnl": "3.3328",
+          "pnl_without_top_three_winners": "1.7225",
+          "top_three_share_of_positive_pnl": 0.20205479452054795,
+          "trades": 39,
+          "two_cent_stressed_pnl": "2.9427",
+          "win_rate": 0.7692307692307693,
+          "win_rate_wilson_90pct": [
+            0.6430412184197166,
+            0.86048896631734
+          ],
+          "wins": 30
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.3786",
+          "maximum_drawdown": "5.1635",
+          "mean_entry_price": "0.6658215962441314553990610329",
+          "net_pnl": "3.7014",
+          "one_cent_stressed_pnl": "1.5122",
+          "pnl_without_top_three_winners": "0.5457",
+          "top_three_share_of_positive_pnl": 0.0644221563059486,
+          "trades": 213,
+          "two_cent_stressed_pnl": "-0.6746",
+          "win_rate": 0.6948356807511737,
+          "win_rate_wilson_90pct": [
+            0.6407631548375083,
+            0.7440206512294107
+          ],
+          "wins": 148
+        },
+        "bucket": "5",
+        "development": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "3.3786",
+          "maximum_drawdown": "5.1635",
+          "mean_entry_price": "0.6658215962441314553990610329",
+          "net_pnl": "3.7014",
+          "one_cent_stressed_pnl": "1.5122",
+          "pnl_without_top_three_winners": "0.5457",
+          "top_three_share_of_positive_pnl": 0.0644221563059486,
+          "trades": 213,
+          "two_cent_stressed_pnl": "-0.6746",
+          "win_rate": 0.6948356807511737,
+          "win_rate_wilson_90pct": [
+            0.6407631548375083,
+            0.7440206512294107
+          ],
+          "wins": 148
+        }
+      }
+    ],
+    "entry_price": [
+      {
+        "aggregate": {
+          "fees": "3.3505",
+          "maximum_drawdown": "3.8441",
+          "mean_entry_price": "0.4952205882352941176470588235",
+          "net_pnl": "17.2395",
+          "one_cent_stressed_pnl": "15.3171",
+          "pnl_without_top_three_winners": "14.0436",
+          "top_three_share_of_positive_pnl": 0.0567757270842549,
+          "trades": 136,
+          "two_cent_stressed_pnl": "13.3966",
+          "win_rate": 0.6102941176470589,
+          "win_rate_wilson_90pct": [
+            0.5399976074080377,
+            0.6762879083177884
+          ],
+          "wins": 83
+        },
+        "bucket": "45-54",
+        "development": {
+          "fees": "2.5128",
+          "maximum_drawdown": "3.8441",
+          "mean_entry_price": "0.4947",
+          "net_pnl": "10.5272",
+          "one_cent_stressed_pnl": "9.0856",
+          "pnl_without_top_three_winners": "7.3313",
+          "top_three_share_of_positive_pnl": 0.07787053010145902,
+          "trades": 100,
+          "two_cent_stressed_pnl": "7.6449",
+          "win_rate": 0.59,
+          "win_rate_wilson_90pct": [
+            0.5077672426627459,
+            0.6674910675962827
+          ],
+          "wins": 59
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.8377",
+          "maximum_drawdown": "2.0493",
+          "mean_entry_price": "0.4966666666666666666666666667",
+          "net_pnl": "6.7123",
+          "one_cent_stressed_pnl": "6.2315",
+          "pnl_without_top_three_winners": "3.5566",
+          "top_three_share_of_positive_pnl": 0.20694878907710165,
+          "trades": 36,
+          "two_cent_stressed_pnl": "5.7517",
+          "win_rate": 0.6666666666666666,
+          "win_rate_wilson_90pct": [
+            0.529839849663411,
+            0.7801932600442963
+          ],
+          "wins": 24
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.0722",
+          "maximum_drawdown": "5.0290",
+          "mean_entry_price": "0.6002185792349726775956284153",
+          "net_pnl": "1.0878",
+          "one_cent_stressed_pnl": "-0.7163",
+          "pnl_without_top_three_winners": "-0.2100",
+          "top_three_share_of_positive_pnl": 0.029903501414759583,
+          "trades": 183,
+          "two_cent_stressed_pnl": "-2.5170",
+          "win_rate": 0.6229508196721312,
+          "win_rate_wilson_90pct": [
+            0.5626341730044274,
+            0.6796849261619556
+          ],
+          "wins": 114
+        },
+        "bucket": "55-64",
+        "development": {
+          "fees": "2.0328",
+          "maximum_drawdown": "5.0290",
+          "mean_entry_price": "0.5990909090909090909090909091",
+          "net_pnl": "-1.5228",
+          "one_cent_stressed_pnl": "-2.7161",
+          "pnl_without_top_three_winners": "-2.8206",
+          "top_three_share_of_positive_pnl": 0.0467054619263034,
+          "trades": 121,
+          "two_cent_stressed_pnl": "-3.9067",
+          "win_rate": 0.6033057851239669,
+          "win_rate_wilson_90pct": [
+            0.5286626601129341,
+            0.6734301426989058
+          ],
+          "wins": 73
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.0394",
+          "maximum_drawdown": "2.9231",
+          "mean_entry_price": "0.6024193548387096774193548387",
+          "net_pnl": "2.6106",
+          "one_cent_stressed_pnl": "1.9998",
+          "pnl_without_top_three_winners": "1.3326",
+          "top_three_share_of_positive_pnl": 0.08185643738751144,
+          "trades": 62,
+          "two_cent_stressed_pnl": "1.3897",
+          "win_rate": 0.6612903225806451,
+          "win_rate_wilson_90pct": [
+            0.5575358430914085,
+            0.7515566848801519
+          ],
+          "wins": 41
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "1.9407",
+          "maximum_drawdown": "6.5615",
+          "mean_entry_price": "0.66968",
+          "net_pnl": "-1.6507",
+          "one_cent_stressed_pnl": "-2.8685",
+          "pnl_without_top_three_winners": "-2.6527",
+          "top_three_share_of_positive_pnl": 0.037777534808492025,
+          "trades": 125,
+          "two_cent_stressed_pnl": "-4.0860",
+          "win_rate": 0.672,
+          "win_rate_wilson_90pct": [
+            0.5999238389081057,
+            0.736788247638526
+          ],
+          "wins": 84
+        },
+        "bucket": "65-69",
+        "development": {
+          "fees": "1.3188",
+          "maximum_drawdown": "3.4373",
+          "mean_entry_price": "0.6701176470588235294117647059",
+          "net_pnl": "0.7212",
+          "one_cent_stressed_pnl": "-0.1067",
+          "pnl_without_top_three_winners": "-0.2808",
+          "top_three_share_of_positive_pnl": 0.053749309358924156,
+          "trades": 85,
+          "two_cent_stressed_pnl": "-0.9349",
+          "win_rate": 0.6941176470588235,
+          "win_rate_wilson_90pct": [
+            0.6069786466331251,
+            0.7692803525175047
+          ],
+          "wins": 59
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": true,
+        "validation": {
+          "fees": "0.6219",
+          "maximum_drawdown": "3.5778",
+          "mean_entry_price": "0.66875",
+          "net_pnl": "-2.3719",
+          "one_cent_stressed_pnl": "-2.7618",
+          "pnl_without_top_three_winners": "-3.3739",
+          "top_three_share_of_positive_pnl": 0.12713154689403167,
+          "trades": 40,
+          "two_cent_stressed_pnl": "-3.1511",
+          "win_rate": 0.625,
+          "win_rate_wilson_90pct": [
+            0.4949694846572278,
+            0.7391921531814077
+          ],
+          "wins": 25
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.2061",
+          "maximum_drawdown": "7.3811",
+          "mean_entry_price": "0.7198717948717948717948717949",
+          "net_pnl": "-0.5061",
+          "one_cent_stressed_pnl": "-2.0196",
+          "pnl_without_top_three_winners": "-1.3620",
+          "top_three_share_of_positive_pnl": 0.028176664625595038,
+          "trades": 156,
+          "two_cent_stressed_pnl": "-3.5266",
+          "win_rate": 0.7307692307692307,
+          "win_rate_wilson_90pct": [
+            0.6687876960195521,
+            0.7848826574727034
+          ],
+          "wins": 114
+        },
+        "bucket": "70-74",
+        "development": {
+          "fees": "1.6314",
+          "maximum_drawdown": "3.6534",
+          "mean_entry_price": "0.7183478260869565217391304348",
+          "net_pnl": "3.7586",
+          "one_cent_stressed_pnl": "2.6419",
+          "pnl_without_top_three_winners": "2.9027",
+          "top_three_share_of_positive_pnl": 0.03628247682270802,
+          "trades": 115,
+          "two_cent_stressed_pnl": "1.5313",
+          "win_rate": 0.7652173913043478,
+          "win_rate_wilson_90pct": [
+            0.6945706847347505,
+            0.823671686949211
+          ],
+          "wins": 88
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.5747",
+          "maximum_drawdown": "6.3722",
+          "mean_entry_price": "0.7241463414634146341463414634",
+          "net_pnl": "-4.2647",
+          "one_cent_stressed_pnl": "-4.6615",
+          "pnl_without_top_three_winners": "-5.1108",
+          "top_three_share_of_positive_pnl": 0.12467765940203056,
+          "trades": 41,
+          "two_cent_stressed_pnl": "-5.0579",
+          "win_rate": 0.6341463414634146,
+          "win_rate_wilson_90pct": [
+            0.5057132373366411,
+            0.7459710830185895
+          ],
+          "wins": 26
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.9496",
+          "maximum_drawdown": "3.0552",
+          "mean_entry_price": "0.7712605042016806722689075630",
+          "net_pnl": "13.4904",
+          "one_cent_stressed_pnl": "11.2062",
+          "pnl_without_top_three_winners": "12.7800",
+          "top_three_share_of_positive_pnl": 0.016409991060435614,
+          "trades": 238,
+          "two_cent_stressed_pnl": "8.9220",
+          "win_rate": 0.8403361344537815,
+          "win_rate_wilson_90pct": [
+            0.7974886084185008,
+            0.8755328670129315
+          ],
+          "wins": 200
+        },
+        "bucket": "75-79",
+        "development": {
+          "fees": "2.0473",
+          "maximum_drawdown": "3.0552",
+          "mean_entry_price": "0.7709090909090909090909090909",
+          "net_pnl": "8.7527",
+          "one_cent_stressed_pnl": "7.1692",
+          "pnl_without_top_three_winners": "8.0423",
+          "top_three_share_of_positive_pnl": 0.02373022898468425,
+          "trades": 165,
+          "two_cent_stressed_pnl": "5.5863",
+          "win_rate": 0.8363636363636363,
+          "win_rate_wilson_90pct": [
+            0.7836364431873168,
+            0.8782379213317253
+          ],
+          "wins": 138
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.9023",
+          "maximum_drawdown": "1.9735",
+          "mean_entry_price": "0.7720547945205479452054794521",
+          "net_pnl": "4.7377",
+          "one_cent_stressed_pnl": "4.0370",
+          "pnl_without_top_three_winners": "4.0273",
+          "top_three_share_of_positive_pnl": 0.053196747090802896,
+          "trades": 73,
+          "two_cent_stressed_pnl": "3.3357",
+          "win_rate": 0.8493150684931506,
+          "win_rate_wilson_90pct": [
+            0.7680598366345994,
+            0.9056028526891249
+          ],
+          "wins": 62
+        }
+      }
+    ],
+    "fast_slow_variance_ratio": [
+      {
+        "aggregate": {
+          "fees": "7.3089",
+          "maximum_drawdown": "8.0098",
+          "mean_entry_price": "0.6735744680851063829787234043",
+          "net_pnl": "7.3311",
+          "one_cent_stressed_pnl": "2.5585",
+          "pnl_without_top_three_winners": "4.1553",
+          "top_three_share_of_positive_pnl": 0.029950572784192345,
+          "trades": 470,
+          "two_cent_stressed_pnl": "-2.2081",
+          "win_rate": 0.6978723404255319,
+          "win_rate_wilson_90pct": [
+            0.6619825299085984,
+            0.731497095146957
+          ],
+          "wins": 328
+        },
+        "bucket": "0-0.49",
+        "development": {
+          "fees": "5.3027",
+          "maximum_drawdown": "4.9705",
+          "mean_entry_price": "0.6754941860465116279069767442",
+          "net_pnl": "6.7673",
+          "one_cent_stressed_pnl": "3.2942",
+          "pnl_without_top_three_winners": "3.6116",
+          "top_three_share_of_positive_pnl": 0.04091743642672282,
+          "trades": 344,
+          "two_cent_stressed_pnl": "-0.1737",
+          "win_rate": 0.7063953488372093,
+          "win_rate_wilson_90pct": [
+            0.6645222940234987,
+            0.7450471595978887
+          ],
+          "wins": 243
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": true,
+        "validation": {
+          "fees": "2.0062",
+          "maximum_drawdown": "5.7787",
+          "mean_entry_price": "0.6683333333333333333333333333",
+          "net_pnl": "0.5638",
+          "one_cent_stressed_pnl": "-0.7357",
+          "pnl_without_top_three_winners": "-2.5919",
+          "top_three_share_of_positive_pnl": 0.10915184825205544,
+          "trades": 126,
+          "two_cent_stressed_pnl": "-2.0344",
+          "win_rate": 0.6746031746031746,
+          "win_rate_wilson_90pct": [
+            0.6029040567387857,
+            0.7389615600727638
+          ],
+          "wins": 85
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "4.5784",
+          "maximum_drawdown": "4.9633",
+          "mean_entry_price": "0.6644210526315789473684210526",
+          "net_pnl": "15.6916",
+          "one_cent_stressed_pnl": "12.7289",
+          "pnl_without_top_three_winners": "12.5359",
+          "top_three_share_of_positive_pnl": 0.04632805021991767,
+          "trades": 285,
+          "two_cent_stressed_pnl": "9.7705",
+          "win_rate": 0.7368421052631579,
+          "win_rate_wilson_90pct": [
+            0.6918547967848845,
+            0.777374952420625
+          ],
+          "wins": 210
+        },
+        "bucket": "0.5-0.99",
+        "development": {
+          "fees": "3.1304",
+          "maximum_drawdown": "4.7390",
+          "mean_entry_price": "0.6608947368421052631578947368",
+          "net_pnl": "9.8496",
+          "one_cent_stressed_pnl": "7.8331",
+          "pnl_without_top_three_winners": "6.6939",
+          "top_three_share_of_positive_pnl": 0.06907896897061237,
+          "trades": 190,
+          "two_cent_stressed_pnl": "5.8200",
+          "win_rate": 0.7315789473684211,
+          "win_rate_wilson_90pct": [
+            0.675719841408965,
+            0.7809354183343157
+          ],
+          "wins": 139
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.4480",
+          "maximum_drawdown": "4.9633",
+          "mean_entry_price": "0.6714736842105263157894736842",
+          "net_pnl": "5.8420",
+          "one_cent_stressed_pnl": "4.8958",
+          "pnl_without_top_three_winners": "3.8419",
+          "top_three_share_of_positive_pnl": 0.08915525165040408,
+          "trades": 95,
+          "two_cent_stressed_pnl": "3.9505",
+          "win_rate": 0.7473684210526316,
+          "win_rate_wilson_90pct": [
+            0.6678881169795281,
+            0.8131490722980876
+          ],
+          "wins": 71
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "1.3004",
+          "maximum_drawdown": "2.5052",
+          "mean_entry_price": "0.6205797101449275362318840580",
+          "net_pnl": "3.7596",
+          "one_cent_stressed_pnl": "2.9515",
+          "pnl_without_top_three_winners": "0.6240",
+          "top_three_share_of_positive_pnl": 0.16063113137470864,
+          "trades": 69,
+          "two_cent_stressed_pnl": "2.1450",
+          "win_rate": 0.6811594202898551,
+          "win_rate_wilson_90pct": [
+            0.5835426862698885,
+            0.7651053930240723
+          ],
+          "wins": 47
+        },
+        "bucket": "1-1.99",
+        "development": {
+          "fees": "0.8375",
+          "maximum_drawdown": "1.9696",
+          "mean_entry_price": "0.6061904761904761904761904762",
+          "net_pnl": "3.0125",
+          "one_cent_stressed_pnl": "2.4988",
+          "pnl_without_top_three_winners": "-0.1231",
+          "top_three_share_of_positive_pnl": 0.2423446122455289,
+          "trades": 42,
+          "two_cent_stressed_pnl": "1.9862",
+          "win_rate": 0.6666666666666666,
+          "win_rate_wilson_90pct": [
+            0.5401737432111808,
+            0.7729865254784389
+          ],
+          "wins": 28
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.4629",
+          "maximum_drawdown": "2.3082",
+          "mean_entry_price": "0.6429629629629629629629629630",
+          "net_pnl": "0.7471",
+          "one_cent_stressed_pnl": "0.4527",
+          "pnl_without_top_three_winners": "-1.1729",
+          "top_three_share_of_positive_pnl": 0.29170908096446313,
+          "trades": 27,
+          "two_cent_stressed_pnl": "0.1588",
+          "win_rate": 0.7037037037037037,
+          "win_rate_wilson_90pct": [
+            0.5461018187481004,
+            0.8241994355278406
+          ],
+          "wins": 19
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "0.3314",
+          "maximum_drawdown": "1.3163",
+          "mean_entry_price": "0.5714285714285714285714285714",
+          "net_pnl": "2.8786",
+          "one_cent_stressed_pnl": "2.6800",
+          "pnl_without_top_three_winners": "-0.2570",
+          "top_three_share_of_positive_pnl": 0.5050495288717082,
+          "trades": 14,
+          "two_cent_stressed_pnl": "2.4816",
+          "win_rate": 0.7142857142857143,
+          "win_rate_wilson_90pct": [
+            0.49449621949513445,
+            0.8646659961183351
+          ],
+          "wins": 10
+        },
+        "bucket": "2+",
+        "development": {
+          "fees": "0.2725",
+          "maximum_drawdown": "1.3163",
+          "mean_entry_price": "0.5330",
+          "net_pnl": "2.6075",
+          "one_cent_stressed_pnl": "2.4478",
+          "pnl_without_top_three_winners": "-0.5281",
+          "top_three_share_of_positive_pnl": 0.5970410708505494,
+          "trades": 10,
+          "two_cent_stressed_pnl": "2.2884",
+          "win_rate": 0.7,
+          "win_rate_wilson_90pct": [
+            0.44169979586983504,
+            0.8731234160968022
+          ],
+          "wins": 7
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.0589",
+          "maximum_drawdown": "0.6855",
+          "mean_entry_price": "0.6675",
+          "net_pnl": "0.2711",
+          "one_cent_stressed_pnl": "0.2322",
+          "pnl_without_top_three_winners": "-0.6855",
+          "top_three_share_of_positive_pnl": 1.0,
+          "trades": 4,
+          "two_cent_stressed_pnl": "0.1932",
+          "win_rate": 0.75,
+          "win_rate_wilson_90pct": [
+            0.3561680085985064,
+            0.9420926788001414
+          ],
+          "wins": 3
+        }
+      }
+    ],
+    "modeled_net_edge": [
+      {
+        "aggregate": {
+          "fees": "0.5286",
+          "maximum_drawdown": "3.7082",
+          "mean_entry_price": "0.7032432432432432432432432432",
+          "net_pnl": "0.4514",
+          "one_cent_stressed_pnl": "0.0927",
+          "pnl_without_top_three_winners": "-0.7771",
+          "top_three_share_of_positive_pnl": 0.16322327775194315,
+          "trades": 37,
+          "two_cent_stressed_pnl": "-0.2659",
+          "win_rate": 0.7297297297297297,
+          "win_rate_wilson_90pct": [
+            0.5970975221052067,
+            0.831054280417132
+          ],
+          "wins": 27
+        },
+        "bucket": "0.5-1.99",
+        "development": {
+          "fees": "0.3962",
+          "maximum_drawdown": "3.7082",
+          "mean_entry_price": "0.7089285714285714285714285714",
+          "net_pnl": "0.7538",
+          "one_cent_stressed_pnl": "0.4824",
+          "pnl_without_top_three_winners": "-0.3860",
+          "top_three_share_of_positive_pnl": 0.19712220262183944,
+          "trades": 28,
+          "two_cent_stressed_pnl": "0.2113",
+          "win_rate": 0.75,
+          "win_rate_wilson_90pct": [
+            0.5975635055117416,
+            0.8583802240278415
+          ],
+          "wins": 21
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.1324",
+          "maximum_drawdown": "1.3417",
+          "mean_entry_price": "0.6855555555555555555555555556",
+          "net_pnl": "-0.3024",
+          "one_cent_stressed_pnl": "-0.3897",
+          "pnl_without_top_three_winners": "-1.4422",
+          "top_three_share_of_positive_pnl": 0.6534426417474059,
+          "trades": 9,
+          "two_cent_stressed_pnl": "-0.4772",
+          "win_rate": 0.6666666666666666,
+          "win_rate_wilson_90pct": [
+            0.39825972868840953,
+            0.858029098205005
+          ],
+          "wins": 6
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "12.8581",
+          "maximum_drawdown": "5.4624",
+          "mean_entry_price": "0.6609493670886075949367088608",
+          "net_pnl": "28.9319",
+          "one_cent_stressed_pnl": "20.6539",
+          "pnl_without_top_three_winners": "25.7360",
+          "top_three_share_of_positive_pnl": 0.016777091309394258,
+          "trades": 790,
+          "two_cent_stressed_pnl": "12.3880",
+          "win_rate": 0.7075949367088608,
+          "win_rate_wilson_90pct": [
+            0.6803030109815743,
+            0.7334697987439504
+          ],
+          "wins": 559
+        },
+        "bucket": "2-3.99",
+        "development": {
+          "fees": "9.0503",
+          "maximum_drawdown": "5.4499",
+          "mean_entry_price": "0.6593454545454545454545454545",
+          "net_pnl": "21.8197",
+          "one_cent_stressed_pnl": "16.0047",
+          "pnl_without_top_three_winners": "18.6238",
+          "top_three_share_of_positive_pnl": 0.02385589276157021,
+          "trades": 550,
+          "two_cent_stressed_pnl": "10.1994",
+          "win_rate": 0.7090909090909091,
+          "win_rate_wilson_90pct": [
+            0.6762741261966003,
+            0.7398606542918145
+          ],
+          "wins": 390
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "3.8078",
+          "maximum_drawdown": "5.4624",
+          "mean_entry_price": "0.664625",
+          "net_pnl": "7.1122",
+          "one_cent_stressed_pnl": "4.6492",
+          "pnl_without_top_three_winners": "3.9565",
+          "top_three_share_of_positive_pnl": 0.05582839451570102,
+          "trades": 240,
+          "two_cent_stressed_pnl": "2.1886",
+          "win_rate": 0.7041666666666667,
+          "win_rate_wilson_90pct": [
+            0.6536479308078919,
+            0.7501335346061252
+          ],
+          "wins": 169
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "0.1324",
+          "maximum_drawdown": "1.3858",
+          "mean_entry_price": "0.7809090909090909090909090909",
+          "net_pnl": "0.2776",
+          "one_cent_stressed_pnl": "0.1723",
+          "pnl_without_top_three_winners": "-0.3751",
+          "top_three_share_of_positive_pnl": 0.35059354353547834,
+          "trades": 11,
+          "two_cent_stressed_pnl": "0.0669",
+          "win_rate": 0.8181818181818182,
+          "win_rate_wilson_90pct": [
+            0.5728574951340221,
+            0.9378847474808304
+          ],
+          "wins": 9
+        },
+        "bucket": "4-7.99",
+        "development": {
+          "fees": "0.0966",
+          "maximum_drawdown": "1.3858",
+          "mean_entry_price": "0.7800",
+          "net_pnl": "-0.3366",
+          "one_cent_stressed_pnl": "-0.4132",
+          "pnl_without_top_three_winners": "-0.9796",
+          "top_three_share_of_positive_pnl": 0.5154308617234469,
+          "trades": 8,
+          "two_cent_stressed_pnl": "-0.4898",
+          "win_rate": 0.75,
+          "win_rate_wilson_90pct": [
+            0.4601530454871806,
+            0.9134851558009377
+          ],
+          "wins": 6
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.0358",
+          "maximum_drawdown": "0",
+          "mean_entry_price": "0.7833333333333333333333333333",
+          "net_pnl": "0.6142",
+          "one_cent_stressed_pnl": "0.5855",
+          "pnl_without_top_three_winners": "0.0000",
+          "top_three_share_of_positive_pnl": 1.0,
+          "trades": 3,
+          "two_cent_stressed_pnl": "0.5567",
+          "win_rate": 1.0,
+          "win_rate_wilson_90pct": [
+            0.5258044258424872,
+            1.0
+          ],
+          "wins": 3
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "bucket": "8+",
+        "development": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      }
+    ],
+    "seconds_left": [
+      {
+        "aggregate": {
+          "fees": "0.9054",
+          "maximum_drawdown": "4.5590",
+          "mean_entry_price": "0.6364150943396226415094339623",
+          "net_pnl": "1.0146",
+          "one_cent_stressed_pnl": "0.4450",
+          "pnl_without_top_three_winners": "-1.4980",
+          "top_three_share_of_positive_pnl": 0.1887597568946218,
+          "trades": 53,
+          "two_cent_stressed_pnl": "-0.1233",
+          "win_rate": 0.6792452830188679,
+          "win_rate_wilson_90pct": [
+            0.5673044241877219,
+            0.7737747363747649
+          ],
+          "wins": 36
+        },
+        "bucket": "5-60",
+        "development": {
+          "fees": "0.6062",
+          "maximum_drawdown": "4.5590",
+          "mean_entry_price": "0.6411111111111111111111111111",
+          "net_pnl": "-1.1162",
+          "one_cent_stressed_pnl": "-1.4987",
+          "pnl_without_top_three_winners": "-3.0662",
+          "top_three_share_of_positive_pnl": 0.24068131325598618,
+          "trades": 36,
+          "two_cent_stressed_pnl": "-1.8805",
+          "win_rate": 0.6388888888888888,
+          "win_rate_wilson_90pct": [
+            0.5018186600448381,
+            0.7565422647115846
+          ],
+          "wins": 23
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.2992",
+          "maximum_drawdown": "0.9405",
+          "mean_entry_price": "0.6264705882352941176470588235",
+          "net_pnl": "2.1308",
+          "one_cent_stressed_pnl": "1.9437",
+          "pnl_without_top_three_winners": "0.1707",
+          "top_three_share_of_positive_pnl": 0.3762838110230174,
+          "trades": 17,
+          "two_cent_stressed_pnl": "1.7572",
+          "win_rate": 0.7647058823529411,
+          "win_rate_wilson_90pct": [
+            0.567039126263359,
+            0.8896851463234763
+          ],
+          "wins": 13
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "1.6388",
+          "maximum_drawdown": "5.0216",
+          "mean_entry_price": "0.6600",
+          "net_pnl": "5.0612",
+          "one_cent_stressed_pnl": "4.0044",
+          "pnl_without_top_three_winners": "1.8653",
+          "top_three_share_of_positive_pnl": 0.12212541556803852,
+          "trades": 98,
+          "two_cent_stressed_pnl": "2.9482",
+          "win_rate": 0.7040816326530612,
+          "win_rate_wilson_90pct": [
+            0.6235815553657968,
+            0.7736160429792556
+          ],
+          "wins": 69
+        },
+        "bucket": "61-120",
+        "development": {
+          "fees": "1.1932",
+          "maximum_drawdown": "3.7693",
+          "mean_entry_price": "0.6522058823529411764705882353",
+          "net_pnl": "7.8368",
+          "one_cent_stressed_pnl": "7.0718",
+          "pnl_without_top_three_winners": "4.6409",
+          "top_three_share_of_positive_pnl": 0.1547374078252323,
+          "trades": 68,
+          "two_cent_stressed_pnl": "6.3076",
+          "win_rate": 0.75,
+          "win_rate_wilson_90pct": [
+            0.6551918190162838,
+            0.8256757104451655
+          ],
+          "wins": 51
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.4456",
+          "maximum_drawdown": "4.6775",
+          "mean_entry_price": "0.6776666666666666666666666667",
+          "net_pnl": "-2.7756",
+          "one_cent_stressed_pnl": "-3.0674",
+          "pnl_without_top_three_winners": "-4.1533",
+          "top_three_share_of_positive_pnl": 0.24979602197523254,
+          "trades": 30,
+          "two_cent_stressed_pnl": "-3.3594",
+          "win_rate": 0.6,
+          "win_rate_wilson_90pct": [
+            0.4505813079491151,
+            0.732873830425865
+          ],
+          "wins": 18
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.4939",
+          "maximum_drawdown": "5.4163",
+          "mean_entry_price": "0.6665605095541401273885350318",
+          "net_pnl": "4.7261",
+          "one_cent_stressed_pnl": "3.1023",
+          "pnl_without_top_three_winners": "1.5905",
+          "top_three_share_of_positive_pnl": 0.08620846083420625,
+          "trades": 157,
+          "two_cent_stressed_pnl": "1.4822",
+          "win_rate": 0.7070063694267515,
+          "win_rate_wilson_90pct": [
+            0.6441567612382704,
+            0.7628422608005803
+          ],
+          "wins": 111
+        },
+        "bucket": "121-180",
+        "development": {
+          "fees": "1.9468",
+          "maximum_drawdown": "5.4163",
+          "mean_entry_price": "0.6741935483870967741935483871",
+          "net_pnl": "1.2532",
+          "one_cent_stressed_pnl": "-0.0266",
+          "pnl_without_top_three_winners": "-1.8824",
+          "top_three_share_of_positive_pnl": 0.11621769877392478,
+          "trades": 124,
+          "two_cent_stressed_pnl": "-1.3039",
+          "win_rate": 0.7016129032258065,
+          "win_rate_wilson_90pct": [
+            0.6303091191424239,
+            0.7643066067126543
+          ],
+          "wins": 87
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.5471",
+          "maximum_drawdown": "1.4195",
+          "mean_entry_price": "0.6378787878787878787878787879",
+          "net_pnl": "3.4729",
+          "one_cent_stressed_pnl": "3.1289",
+          "pnl_without_top_three_winners": "0.9201",
+          "top_three_share_of_positive_pnl": 0.27180868620832843,
+          "trades": 33,
+          "two_cent_stressed_pnl": "2.7861",
+          "win_rate": 0.7272727272727273,
+          "win_rate_wilson_90pct": [
+            0.5862528685961469,
+            0.8338499655557726
+          ],
+          "wins": 24
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.1030",
+          "maximum_drawdown": "7.1789",
+          "mean_entry_price": "0.6678680203045685279187817259",
+          "net_pnl": "9.1170",
+          "one_cent_stressed_pnl": "7.1048",
+          "pnl_without_top_three_winners": "6.0216",
+          "top_three_share_of_positive_pnl": 0.0665142444571463,
+          "trades": 197,
+          "two_cent_stressed_pnl": "5.0953",
+          "win_rate": 0.7208121827411168,
+          "win_rate_wilson_90pct": [
+            0.6655205255250457,
+            0.7701208617657279
+          ],
+          "wins": 142
+        },
+        "bucket": "181-240",
+        "development": {
+          "fees": "2.1725",
+          "maximum_drawdown": "7.1789",
+          "mean_entry_price": "0.6636296296296296296296296296",
+          "net_pnl": "7.4775",
+          "one_cent_stressed_pnl": "6.0795",
+          "pnl_without_top_three_winners": "4.3821",
+          "top_three_share_of_positive_pnl": 0.09277803587753083,
+          "trades": 135,
+          "two_cent_stressed_pnl": "4.6842",
+          "win_rate": 0.7185185185185186,
+          "win_rate_wilson_90pct": [
+            0.6510421970593473,
+            0.7774082379782795
+          ],
+          "wins": 97
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.9305",
+          "maximum_drawdown": "2.6464",
+          "mean_entry_price": "0.6770967741935483870967741935",
+          "net_pnl": "1.6395",
+          "one_cent_stressed_pnl": "1.0253",
+          "pnl_without_top_three_winners": "0.1720",
+          "top_three_share_of_positive_pnl": 0.11139449973052779,
+          "trades": 62,
+          "two_cent_stressed_pnl": "0.4111",
+          "win_rate": 0.7258064516129032,
+          "win_rate_wilson_90pct": [
+            0.624656299608322,
+            0.8080732395518626
+          ],
+          "wins": 45
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "5.3780",
+          "maximum_drawdown": "4.7093",
+          "mean_entry_price": "0.6670570570570570570570570571",
+          "net_pnl": "9.7420",
+          "one_cent_stressed_pnl": "6.2624",
+          "pnl_without_top_three_winners": "6.5662",
+          "top_three_share_of_positive_pnl": 0.040983194025574814,
+          "trades": 333,
+          "two_cent_stressed_pnl": "2.7866",
+          "win_rate": 0.7117117117117117,
+          "win_rate_wilson_90pct": [
+            0.6693053641952706,
+            0.7507055732150625
+          ],
+          "wins": 237
+        },
+        "bucket": "241-300",
+        "development": {
+          "fees": "3.6244",
+          "maximum_drawdown": "4.7093",
+          "mean_entry_price": "0.6641704035874439461883408072",
+          "net_pnl": "6.7856",
+          "one_cent_stressed_pnl": "4.4479",
+          "pnl_without_top_three_winners": "3.6299",
+          "top_three_share_of_positive_pnl": 0.06080698306260478,
+          "trades": 223,
+          "two_cent_stressed_pnl": "2.1135",
+          "win_rate": 0.7130044843049327,
+          "win_rate_wilson_90pct": [
+            0.660858666630118,
+            0.7600437115133826
+          ],
+          "wins": 159
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.7536",
+          "maximum_drawdown": "2.6936",
+          "mean_entry_price": "0.6729090909090909090909090909",
+          "net_pnl": "2.9564",
+          "one_cent_stressed_pnl": "1.8145",
+          "pnl_without_top_three_winners": "-0.1792",
+          "top_three_share_of_positive_pnl": 0.12251643984949186,
+          "trades": 110,
+          "two_cent_stressed_pnl": "0.6731",
+          "win_rate": 0.7090909090909091,
+          "win_rate_wilson_90pct": [
+            0.6335233522585831,
+            0.7746198374216623
+          ],
+          "wins": 78
+        }
+      }
+    ],
+    "selected_market_probability": [
+      {
+        "aggregate": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "bucket": "20-34",
+        "development": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        },
+        "minimum_partition_count_met": false,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0",
+          "maximum_drawdown": "0",
+          "mean_entry_price": null,
+          "net_pnl": "0",
+          "one_cent_stressed_pnl": "0",
+          "pnl_without_top_three_winners": "0",
+          "top_three_share_of_positive_pnl": null,
+          "trades": 0,
+          "two_cent_stressed_pnl": "0",
+          "win_rate": null,
+          "win_rate_wilson_90pct": null,
+          "wins": 0
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "2.3543",
+          "maximum_drawdown": "3.7791",
+          "mean_entry_price": "0.4741772151898734177215189873",
+          "net_pnl": "13.1257",
+          "one_cent_stressed_pnl": "11.7717",
+          "pnl_without_top_three_winners": "9.9298",
+          "top_three_share_of_positive_pnl": 0.07935845767623417,
+          "trades": 79,
+          "two_cent_stressed_pnl": "10.4188",
+          "win_rate": 0.6075949367088608,
+          "win_rate_wilson_90pct": [
+            0.515106935038393,
+            0.6929572828999053
+          ],
+          "wins": 48
+        },
+        "bucket": "35-49",
+        "development": {
+          "fees": "1.7787",
+          "maximum_drawdown": "3.7791",
+          "mean_entry_price": "0.4729310344827586206896551724",
+          "net_pnl": "8.3013",
+          "one_cent_stressed_pnl": "7.2783",
+          "pnl_without_top_three_winners": "5.1054",
+          "top_three_share_of_positive_pnl": 0.10786682957452697,
+          "trades": 58,
+          "two_cent_stressed_pnl": "6.2560",
+          "win_rate": 0.5862068965517241,
+          "win_rate_wilson_90pct": [
+            0.47831854218427877,
+            0.6864110596116731
+          ],
+          "wins": 34
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.5756",
+          "maximum_drawdown": "1.9096",
+          "mean_entry_price": "0.4776190476190476190476190476",
+          "net_pnl": "4.8244",
+          "one_cent_stressed_pnl": "4.4934",
+          "pnl_without_top_three_winners": "1.6687",
+          "top_three_share_of_positive_pnl": 0.2964908159909804,
+          "trades": 21,
+          "two_cent_stressed_pnl": "4.1628",
+          "win_rate": 0.6666666666666666,
+          "win_rate_wilson_90pct": [
+            0.4872567201454219,
+            0.8080328611103353
+          ],
+          "wins": 14
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "4.5484",
+          "maximum_drawdown": "4.4472",
+          "mean_entry_price": "0.5897407407407407407407407407",
+          "net_pnl": "6.2216",
+          "one_cent_stressed_pnl": "3.5551",
+          "pnl_without_top_three_winners": "4.8041",
+          "top_three_share_of_positive_pnl": 0.021337672620642522,
+          "trades": 270,
+          "two_cent_stressed_pnl": "0.8958",
+          "win_rate": 0.6296296296296297,
+          "win_rate_wilson_90pct": [
+            0.5802268235439493,
+            0.6764602944125772
+          ],
+          "wins": 170
+        },
+        "bucket": "50-64",
+        "development": {
+          "fees": "3.0549",
+          "maximum_drawdown": "4.4472",
+          "mean_entry_price": "0.5869060773480662983425414365",
+          "net_pnl": "2.7151",
+          "one_cent_stressed_pnl": "0.9268",
+          "pnl_without_top_three_winners": "1.2976",
+          "top_three_share_of_positive_pnl": 0.032307029599392835,
+          "trades": 181,
+          "two_cent_stressed_pnl": "-0.8568",
+          "win_rate": 0.6187845303867403,
+          "win_rate_wilson_90pct": [
+            0.558067672597654,
+            0.6760025638878601
+          ],
+          "wins": 112
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.4935",
+          "maximum_drawdown": "4.0061",
+          "mean_entry_price": "0.5955056179775280898876404494",
+          "net_pnl": "3.5065",
+          "one_cent_stressed_pnl": "2.6283",
+          "pnl_without_top_three_winners": "2.0890",
+          "top_three_share_of_positive_pnl": 0.06284386790152466,
+          "trades": 89,
+          "two_cent_stressed_pnl": "1.7526",
+          "win_rate": 0.651685393258427,
+          "win_rate_wilson_90pct": [
+            0.5652539268265157,
+            0.7291666608832695
+          ],
+          "wins": 58
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "6.6164",
+          "maximum_drawdown": "5.1986",
+          "mean_entry_price": "0.7363394683026584867075664622",
+          "net_pnl": "10.3136",
+          "one_cent_stressed_pnl": "5.5921",
+          "pnl_without_top_three_winners": "9.3410",
+          "top_three_share_of_positive_pnl": 0.010438243078197745,
+          "trades": 489,
+          "two_cent_stressed_pnl": "0.8744",
+          "win_rate": 0.7709611451942741,
+          "win_rate_wilson_90pct": [
+            0.7382639554704923,
+            0.8006764805848924
+          ],
+          "wins": 377
+        },
+        "bucket": "65-80",
+        "development": {
+          "fees": "4.7095",
+          "maximum_drawdown": "4.6487",
+          "mean_entry_price": "0.7350720461095100864553314121",
+          "net_pnl": "11.2205",
+          "one_cent_stressed_pnl": "7.8688",
+          "pnl_without_top_three_winners": "10.2479",
+          "top_three_share_of_positive_pnl": 0.014410490054450494,
+          "trades": 347,
+          "two_cent_stressed_pnl": "4.5217",
+          "win_rate": 0.7809798270893372,
+          "win_rate_wilson_90pct": [
+            0.7423631675740185,
+            0.8152488109893039
+          ],
+          "wins": 271
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.9069",
+          "maximum_drawdown": "4.4542",
+          "mean_entry_price": "0.7394366197183098591549295775",
+          "net_pnl": "-0.9069",
+          "one_cent_stressed_pnl": "-2.2767",
+          "pnl_without_top_three_winners": "-1.8795",
+          "top_three_share_of_positive_pnl": 0.037867785906455745,
+          "trades": 142,
+          "two_cent_stressed_pnl": "-3.6473",
+          "win_rate": 0.7464788732394366,
+          "win_rate_wilson_90pct": [
+            0.6822081927309227,
+            0.8015327775810124
+          ],
+          "wins": 106
+        }
+      }
+    ],
+    "side": [
+      {
+        "aggregate": {
+          "fees": "6.0887",
+          "maximum_drawdown": "4.3598",
+          "mean_entry_price": "0.665625",
+          "net_pnl": "9.9813",
+          "one_cent_stressed_pnl": "6.0335",
+          "pnl_without_top_three_winners": "6.8256",
+          "top_three_share_of_positive_pnl": 0.035545127793277995,
+          "trades": 384,
+          "two_cent_stressed_pnl": "2.0916",
+          "win_rate": 0.7083333333333334,
+          "win_rate_wilson_90pct": [
+            0.6688289432603892,
+            0.7449225601984516
+          ],
+          "wins": 272
+        },
+        "bucket": "yes",
+        "development": {
+          "fees": "4.4777",
+          "maximum_drawdown": "4.3598",
+          "mean_entry_price": "0.6598916967509025270758122744",
+          "net_pnl": "10.3223",
+          "one_cent_stressed_pnl": "7.4360",
+          "pnl_without_top_three_winners": "7.1666",
+          "top_three_share_of_positive_pnl": 0.047955978426876135,
+          "trades": 277,
+          "two_cent_stressed_pnl": "4.5552",
+          "win_rate": 0.7148014440433214,
+          "win_rate_wilson_90pct": [
+            0.6682689783305673,
+            0.7571784351545716
+          ],
+          "wins": 198
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.6110",
+          "maximum_drawdown": "2.9850",
+          "mean_entry_price": "0.6804672897196261682242990654",
+          "net_pnl": "-0.3410",
+          "one_cent_stressed_pnl": "-1.4025",
+          "pnl_without_top_three_winners": "-2.3411",
+          "top_three_share_of_positive_pnl": 0.0870517061281337,
+          "trades": 107,
+          "two_cent_stressed_pnl": "-2.4636",
+          "win_rate": 0.6915887850467289,
+          "win_rate_wilson_90pct": [
+            0.6141827178586391,
+            0.7595449782003646
+          ],
+          "wins": 74
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "7.4304",
+          "maximum_drawdown": "4.6461",
+          "mean_entry_price": "0.6633480176211453744493392070",
+          "net_pnl": "19.6796",
+          "one_cent_stressed_pnl": "14.8854",
+          "pnl_without_top_three_winners": "16.4837",
+          "top_three_share_of_positive_pnl": 0.028765976597659768,
+          "trades": 454,
+          "two_cent_stressed_pnl": "10.0974",
+          "win_rate": 0.711453744493392,
+          "win_rate_wilson_90pct": [
+            0.6753055232415066,
+            0.7450966434322122
+          ],
+          "wins": 323
+        },
+        "bucket": "no",
+        "development": {
+          "fees": "5.0654",
+          "maximum_drawdown": "4.6461",
+          "mean_entry_price": "0.6664724919093851132686084142",
+          "net_pnl": "11.9146",
+          "one_cent_stressed_pnl": "8.6379",
+          "pnl_without_top_three_winners": "8.7187",
+          "top_three_share_of_positive_pnl": 0.04250290919972072,
+          "trades": 309,
+          "two_cent_stressed_pnl": "5.3657",
+          "win_rate": 0.7087378640776699,
+          "win_rate_wilson_90pct": [
+            0.6645581255267272,
+            0.7492939945559487
+          ],
+          "wins": 219
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "2.3650",
+          "maximum_drawdown": "4.2158",
+          "mean_entry_price": "0.6566896551724137931034482759",
+          "net_pnl": "7.7650",
+          "one_cent_stressed_pnl": "6.2475",
+          "pnl_without_top_three_winners": "4.6093",
+          "top_three_share_of_positive_pnl": 0.08788414676599596,
+          "trades": 145,
+          "two_cent_stressed_pnl": "4.7317",
+          "win_rate": 0.7172413793103448,
+          "win_rate_wilson_90pct": [
+            0.6521829757263722,
+            0.7743413003890969
+          ],
+          "wins": 104
+        }
+      }
+    ],
+    "utc_hour": [
+      {
+        "aggregate": {
+          "fees": "3.2397",
+          "maximum_drawdown": "6.1255",
+          "mean_entry_price": "0.6661306532663316582914572864",
+          "net_pnl": "4.7803",
+          "one_cent_stressed_pnl": "2.6783",
+          "pnl_without_top_three_winners": "1.6246",
+          "top_three_share_of_positive_pnl": 0.06944151043041985,
+          "trades": 199,
+          "two_cent_stressed_pnl": "0.5790",
+          "win_rate": 0.7185929648241206,
+          "win_rate_wilson_90pct": [
+            0.6634976771258353,
+            0.7678241324296847
+          ],
+          "wins": 143
+        },
+        "bucket": "00-05",
+        "development": {
+          "fees": "2.2352",
+          "maximum_drawdown": "6.1255",
+          "mean_entry_price": "0.6648529411764705882352941176",
+          "net_pnl": "0.7748",
+          "one_cent_stressed_pnl": "-0.6718",
+          "pnl_without_top_three_winners": "-2.3005",
+          "top_three_share_of_positive_pnl": 0.10326694671945359,
+          "trades": 136,
+          "two_cent_stressed_pnl": "-2.1174",
+          "win_rate": 0.7058823529411765,
+          "win_rate_wilson_90pct": [
+            0.6381032815977005,
+            0.7656296810905082
+          ],
+          "wins": 96
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.0045",
+          "maximum_drawdown": "2.2303",
+          "mean_entry_price": "0.6688888888888888888888888889",
+          "net_pnl": "4.0055",
+          "one_cent_stressed_pnl": "3.3501",
+          "pnl_without_top_three_winners": "1.4326",
+          "top_three_share_of_positive_pnl": 0.16425666660282562,
+          "trades": 63,
+          "two_cent_stressed_pnl": "2.6964",
+          "win_rate": 0.746031746031746,
+          "win_rate_wilson_90pct": [
+            0.6469946322052555,
+            0.8248072641089859
+          ],
+          "wins": 47
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.3215",
+          "maximum_drawdown": "6.0360",
+          "mean_entry_price": "0.6793457943925233644859813084",
+          "net_pnl": "-0.3715",
+          "one_cent_stressed_pnl": "-2.5559",
+          "pnl_without_top_three_winners": "-3.5272",
+          "top_three_share_of_positive_pnl": 0.0677987586233567,
+          "trades": 214,
+          "two_cent_stressed_pnl": "-4.7381",
+          "win_rate": 0.6822429906542056,
+          "win_rate_wilson_90pct": [
+            0.6278933047785589,
+            0.7320421115322042
+          ],
+          "wins": 146
+        },
+        "bucket": "06-11",
+        "development": {
+          "fees": "2.3942",
+          "maximum_drawdown": "4.0554",
+          "mean_entry_price": "0.6778289473684210526315789474",
+          "net_pnl": "0.3658",
+          "one_cent_stressed_pnl": "-1.2057",
+          "pnl_without_top_three_winners": "-2.7899",
+          "top_three_share_of_positive_pnl": 0.09366262814538677,
+          "trades": 152,
+          "two_cent_stressed_pnl": "-2.7748",
+          "win_rate": 0.6776315789473685,
+          "win_rate_wilson_90pct": [
+            0.6126386974838871,
+            0.7364114968035789
+          ],
+          "wins": 103
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": false,
+        "repeatable_weakness": true,
+        "validation": {
+          "fees": "0.9273",
+          "maximum_drawdown": "4.4671",
+          "mean_entry_price": "0.6830645161290322580645161290",
+          "net_pnl": "-0.7373",
+          "one_cent_stressed_pnl": "-1.3502",
+          "pnl_without_top_three_winners": "-2.1648",
+          "top_three_share_of_positive_pnl": 0.11106442903936077,
+          "trades": 62,
+          "two_cent_stressed_pnl": "-1.9633",
+          "win_rate": 0.6935483870967742,
+          "win_rate_wilson_90pct": [
+            0.5908382700689749,
+            0.7800727634968976
+          ],
+          "wins": 43
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.2254",
+          "maximum_drawdown": "4.6890",
+          "mean_entry_price": "0.6493298969072164948453608247",
+          "net_pnl": "6.8346",
+          "one_cent_stressed_pnl": "4.7857",
+          "pnl_without_top_three_winners": "3.6588",
+          "top_three_share_of_positive_pnl": 0.06528670604125081,
+          "trades": 194,
+          "two_cent_stressed_pnl": "2.7399",
+          "win_rate": 0.6907216494845361,
+          "win_rate_wilson_90pct": [
+            0.6338292358713715,
+            0.7423675845159967
+          ],
+          "wins": 134
+        },
+        "bucket": "12-17",
+        "development": {
+          "fees": "2.4471",
+          "maximum_drawdown": "4.5396",
+          "mean_entry_price": "0.6464583333333333333333333333",
+          "net_pnl": "5.9629",
+          "one_cent_stressed_pnl": "4.4125",
+          "pnl_without_top_three_winners": "2.7871",
+          "top_three_share_of_positive_pnl": 0.08505133932158179,
+          "trades": 144,
+          "two_cent_stressed_pnl": "2.8647",
+          "win_rate": 0.6944444444444444,
+          "win_rate_wilson_90pct": [
+            0.6281999671965923,
+            0.7535170332760077
+          ],
+          "wins": 100
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": true,
+        "repeatable_strength": false,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "0.7783",
+          "maximum_drawdown": "2.4482",
+          "mean_entry_price": "0.6576",
+          "net_pnl": "0.8717",
+          "one_cent_stressed_pnl": "0.3732",
+          "pnl_without_top_three_winners": "-1.1384",
+          "top_three_share_of_positive_pnl": 0.17782043683265364,
+          "trades": 50,
+          "two_cent_stressed_pnl": "-0.1248",
+          "win_rate": 0.68,
+          "win_rate_wilson_90pct": [
+            0.5646681873987485,
+            0.7768518657181944
+          ],
+          "wins": 34
+        }
+      },
+      {
+        "aggregate": {
+          "fees": "3.7325",
+          "maximum_drawdown": "6.0845",
+          "mean_entry_price": "0.6616883116883116883116883117",
+          "net_pnl": "18.4175",
+          "one_cent_stressed_pnl": "16.0108",
+          "pnl_without_top_three_winners": "15.2417",
+          "top_three_share_of_positive_pnl": 0.05360262358832753,
+          "trades": 231,
+          "two_cent_stressed_pnl": "13.6082",
+          "win_rate": 0.7445887445887446,
+          "win_rate_wilson_90pct": [
+            0.6947504465627415,
+            0.7887639721793006
+          ],
+          "wins": 172
+        },
+        "bucket": "18-23",
+        "development": {
+          "fees": "2.4666",
+          "maximum_drawdown": "2.3615",
+          "mean_entry_price": "0.6635714285714285714285714286",
+          "net_pnl": "15.1334",
+          "one_cent_stressed_pnl": "13.5389",
+          "pnl_without_top_three_winners": "11.9777",
+          "top_three_share_of_positive_pnl": 0.07853027908770795,
+          "trades": 154,
+          "two_cent_stressed_pnl": "11.9484",
+          "win_rate": 0.7662337662337663,
+          "win_rate_wilson_90pct": [
+            0.7058370823467457,
+            0.8174373225821439
+          ],
+          "wins": 118
+        },
+        "minimum_partition_count_met": true,
+        "partition_sign_instability": false,
+        "repeatable_strength": true,
+        "repeatable_weakness": false,
+        "validation": {
+          "fees": "1.2659",
+          "maximum_drawdown": "6.0845",
+          "mean_entry_price": "0.6579220779220779220779220779",
+          "net_pnl": "3.2841",
+          "one_cent_stressed_pnl": "2.4719",
+          "pnl_without_top_three_winners": "0.1686",
+          "top_three_share_of_positive_pnl": 0.16343520820874383,
+          "trades": 77,
+          "two_cent_stressed_pnl": "1.6598",
+          "win_rate": 0.7012987012987013,
+          "win_rate_wilson_90pct": [
+            0.6098650207909901,
+            0.779066522193266
+          ],
+          "wins": 54
+        }
+      }
+    ]
+  },
+  "fixed_1_replay": {
+    "block_pnl": [
+      "10.4140",
+      "6.4485",
+      "0.4433",
+      "8.6537",
+      "3.7014"
+    ],
+    "contracts": 894,
+    "daily_mean_one_sided_90pct_lower_bound": 0.04559932872515929,
+    "daily_mean_pnl": 0.2017748299319728,
+    "daily_pnl_standard_error": 0.09494796293592701,
+    "decisions": 838,
+    "ending_bankroll": "129.6609",
+    "fees": "13.5191",
+    "kelly_cap_binding_decisions": null,
+    "longest_loss_streak": 4,
+    "maximum_drawdown": "5.1635",
+    "maximum_target_budget": "1.00",
+    "mean_target_budget": "1.00",
+    "net_pnl": "29.6609",
+    "observed_days": 147,
+    "pnl_without_top_three_winners": "26.4650",
+    "positive_blocks": 5,
+    "positive_day_share": 0.564625850340136,
+    "positive_days": 83,
+    "positive_two_cent_stressed_blocks": 3,
+    "risk_screen": {
+      "maximum_drawdown_at_most_10": true,
+      "positive_two_cent_stress": true,
+      "positive_without_top_three_winners": true
+    },
+    "skipped_decisions": 0,
+    "stressed_pnl": {
+      "1": "20.9189",
+      "2": "12.1890"
+    },
+    "top_three_share_of_positive_pnl": 0.01598908545673131,
+    "top_three_winner_pnl": "3.1959",
+    "trade_ledger_sha256": "149f874d7e98af5b4720b0b1ee7a489d8e05b7330db93bf45f74e7c9fae37773",
+    "trades": 838,
+    "two_cent_stress_to_drawdown": "2.360608114650915076982666796",
+    "two_cent_stressed_block_pnl": [
+      "6.9776",
+      "3.2067",
+      "-2.4167",
+      "5.0960",
+      "-0.6746"
+    ],
+    "variant": "fixed_1",
+    "win_rate": 0.7100238663484487,
+    "wins": 595,
+    "zero_size_decisions": {}
+  },
+  "overall": {
+    "fees": "13.5191",
+    "maximum_drawdown": "5.1635",
+    "mean_entry_price": "0.6643914081145584725536992840",
+    "net_pnl": "29.6609",
+    "one_cent_stressed_pnl": "20.9189",
+    "pnl_without_top_three_winners": "26.4650",
+    "top_three_share_of_positive_pnl": 0.01598908545673131,
+    "trades": 838,
+    "two_cent_stressed_pnl": "12.1890",
+    "win_rate": 0.7100238663484487,
+    "win_rate_wilson_90pct": [
+      0.6835982480383329,
+      0.7350976946026355
+    ],
+    "wins": 595
+  },
+  "partition_sign_instabilities": [
+    {
+      "aggregate": {
+        "fees": "6.0887",
+        "maximum_drawdown": "4.3598",
+        "mean_entry_price": "0.665625",
+        "net_pnl": "9.9813",
+        "one_cent_stressed_pnl": "6.0335",
+        "pnl_without_top_three_winners": "6.8256",
+        "top_three_share_of_positive_pnl": 0.035545127793277995,
+        "trades": 384,
+        "two_cent_stressed_pnl": "2.0916",
+        "win_rate": 0.7083333333333334,
+        "win_rate_wilson_90pct": [
+          0.6688289432603892,
+          0.7449225601984516
+        ],
+        "wins": 272
+      },
+      "bucket": "yes",
+      "feature": "side"
+    },
+    {
+      "aggregate": {
+        "fees": "3.0722",
+        "maximum_drawdown": "5.0290",
+        "mean_entry_price": "0.6002185792349726775956284153",
+        "net_pnl": "1.0878",
+        "one_cent_stressed_pnl": "-0.7163",
+        "pnl_without_top_three_winners": "-0.2100",
+        "top_three_share_of_positive_pnl": 0.029903501414759583,
+        "trades": 183,
+        "two_cent_stressed_pnl": "-2.5170",
+        "win_rate": 0.6229508196721312,
+        "win_rate_wilson_90pct": [
+          0.5626341730044274,
+          0.6796849261619556
+        ],
+        "wins": 114
+      },
+      "bucket": "55-64",
+      "feature": "entry_price"
+    },
+    {
+      "aggregate": {
+        "fees": "2.2061",
+        "maximum_drawdown": "7.3811",
+        "mean_entry_price": "0.7198717948717948717948717949",
+        "net_pnl": "-0.5061",
+        "one_cent_stressed_pnl": "-2.0196",
+        "pnl_without_top_three_winners": "-1.3620",
+        "top_three_share_of_positive_pnl": 0.028176664625595038,
+        "trades": 156,
+        "two_cent_stressed_pnl": "-3.5266",
+        "win_rate": 0.7307692307692307,
+        "win_rate_wilson_90pct": [
+          0.6687876960195521,
+          0.7848826574727034
+        ],
+        "wins": 114
+      },
+      "bucket": "70-74",
+      "feature": "entry_price"
+    },
+    {
+      "aggregate": {
+        "fees": "1.6388",
+        "maximum_drawdown": "5.0216",
+        "mean_entry_price": "0.6600",
+        "net_pnl": "5.0612",
+        "one_cent_stressed_pnl": "4.0044",
+        "pnl_without_top_three_winners": "1.8653",
+        "top_three_share_of_positive_pnl": 0.12212541556803852,
+        "trades": 98,
+        "two_cent_stressed_pnl": "2.9482",
+        "win_rate": 0.7040816326530612,
+        "win_rate_wilson_90pct": [
+          0.6235815553657968,
+          0.7736160429792556
+        ],
+        "wins": 69
+      },
+      "bucket": "61-120",
+      "feature": "seconds_left"
+    },
+    {
+      "aggregate": {
+        "fees": "2.4939",
+        "maximum_drawdown": "5.4163",
+        "mean_entry_price": "0.6665605095541401273885350318",
+        "net_pnl": "4.7261",
+        "one_cent_stressed_pnl": "3.1023",
+        "pnl_without_top_three_winners": "1.5905",
+        "top_three_share_of_positive_pnl": 0.08620846083420625,
+        "trades": 157,
+        "two_cent_stressed_pnl": "1.4822",
+        "win_rate": 0.7070063694267515,
+        "win_rate_wilson_90pct": [
+          0.6441567612382704,
+          0.7628422608005803
+        ],
+        "wins": 111
+      },
+      "bucket": "121-180",
+      "feature": "seconds_left"
+    },
+    {
+      "aggregate": {
+        "fees": "4.5484",
+        "maximum_drawdown": "4.4472",
+        "mean_entry_price": "0.5897407407407407407407407407",
+        "net_pnl": "6.2216",
+        "one_cent_stressed_pnl": "3.5551",
+        "pnl_without_top_three_winners": "4.8041",
+        "top_three_share_of_positive_pnl": 0.021337672620642522,
+        "trades": 270,
+        "two_cent_stressed_pnl": "0.8958",
+        "win_rate": 0.6296296296296297,
+        "win_rate_wilson_90pct": [
+          0.5802268235439493,
+          0.6764602944125772
+        ],
+        "wins": 170
+      },
+      "bucket": "50-64",
+      "feature": "selected_market_probability"
+    },
+    {
+      "aggregate": {
+        "fees": "6.6164",
+        "maximum_drawdown": "5.1986",
+        "mean_entry_price": "0.7363394683026584867075664622",
+        "net_pnl": "10.3136",
+        "one_cent_stressed_pnl": "5.5921",
+        "pnl_without_top_three_winners": "9.3410",
+        "top_three_share_of_positive_pnl": 0.010438243078197745,
+        "trades": 489,
+        "two_cent_stressed_pnl": "0.8744",
+        "win_rate": 0.7709611451942741,
+        "win_rate_wilson_90pct": [
+          0.7382639554704923,
+          0.8006764805848924
+        ],
+        "wins": 377
+      },
+      "bucket": "65-80",
+      "feature": "selected_market_probability"
+    },
+    {
+      "aggregate": {
+        "fees": "3.2397",
+        "maximum_drawdown": "6.1255",
+        "mean_entry_price": "0.6661306532663316582914572864",
+        "net_pnl": "4.7803",
+        "one_cent_stressed_pnl": "2.6783",
+        "pnl_without_top_three_winners": "1.6246",
+        "top_three_share_of_positive_pnl": 0.06944151043041985,
+        "trades": 199,
+        "two_cent_stressed_pnl": "0.5790",
+        "win_rate": 0.7185929648241206,
+        "win_rate_wilson_90pct": [
+          0.6634976771258353,
+          0.7678241324296847
+        ],
+        "wins": 143
+      },
+      "bucket": "00-05",
+      "feature": "utc_hour"
+    },
+    {
+      "aggregate": {
+        "fees": "3.2254",
+        "maximum_drawdown": "4.6890",
+        "mean_entry_price": "0.6493298969072164948453608247",
+        "net_pnl": "6.8346",
+        "one_cent_stressed_pnl": "4.7857",
+        "pnl_without_top_three_winners": "3.6588",
+        "top_three_share_of_positive_pnl": 0.06528670604125081,
+        "trades": 194,
+        "two_cent_stressed_pnl": "2.7399",
+        "win_rate": 0.6907216494845361,
+        "win_rate_wilson_90pct": [
+          0.6338292358713715,
+          0.7423675845159967
+        ],
+        "wins": 134
+      },
+      "bucket": "12-17",
+      "feature": "utc_hour"
+    }
+  ],
+  "registration_sha256": "d2e224451786f24d24d1f4a6045de0d9705b8c69897ed4e41d317654bd561a94",
+  "repeatable_strengths": [
+    {
+      "aggregate": {
+        "fees": "7.4304",
+        "maximum_drawdown": "4.6461",
+        "mean_entry_price": "0.6633480176211453744493392070",
+        "net_pnl": "19.6796",
+        "one_cent_stressed_pnl": "14.8854",
+        "pnl_without_top_three_winners": "16.4837",
+        "top_three_share_of_positive_pnl": 0.028765976597659768,
+        "trades": 454,
+        "two_cent_stressed_pnl": "10.0974",
+        "win_rate": 0.711453744493392,
+        "win_rate_wilson_90pct": [
+          0.6753055232415066,
+          0.7450966434322122
+        ],
+        "wins": 323
+      },
+      "bucket": "no",
+      "feature": "side"
+    },
+    {
+      "aggregate": {
+        "fees": "3.3505",
+        "maximum_drawdown": "3.8441",
+        "mean_entry_price": "0.4952205882352941176470588235",
+        "net_pnl": "17.2395",
+        "one_cent_stressed_pnl": "15.3171",
+        "pnl_without_top_three_winners": "14.0436",
+        "top_three_share_of_positive_pnl": 0.0567757270842549,
+        "trades": 136,
+        "two_cent_stressed_pnl": "13.3966",
+        "win_rate": 0.6102941176470589,
+        "win_rate_wilson_90pct": [
+          0.5399976074080377,
+          0.6762879083177884
+        ],
+        "wins": 83
+      },
+      "bucket": "45-54",
+      "feature": "entry_price"
+    },
+    {
+      "aggregate": {
+        "fees": "2.9496",
+        "maximum_drawdown": "3.0552",
+        "mean_entry_price": "0.7712605042016806722689075630",
+        "net_pnl": "13.4904",
+        "one_cent_stressed_pnl": "11.2062",
+        "pnl_without_top_three_winners": "12.7800",
+        "top_three_share_of_positive_pnl": 0.016409991060435614,
+        "trades": 238,
+        "two_cent_stressed_pnl": "8.9220",
+        "win_rate": 0.8403361344537815,
+        "win_rate_wilson_90pct": [
+          0.7974886084185008,
+          0.8755328670129315
+        ],
+        "wins": 200
+      },
+      "bucket": "75-79",
+      "feature": "entry_price"
+    },
+    {
+      "aggregate": {
+        "fees": "3.1030",
+        "maximum_drawdown": "7.1789",
+        "mean_entry_price": "0.6678680203045685279187817259",
+        "net_pnl": "9.1170",
+        "one_cent_stressed_pnl": "7.1048",
+        "pnl_without_top_three_winners": "6.0216",
+        "top_three_share_of_positive_pnl": 0.0665142444571463,
+        "trades": 197,
+        "two_cent_stressed_pnl": "5.0953",
+        "win_rate": 0.7208121827411168,
+        "win_rate_wilson_90pct": [
+          0.6655205255250457,
+          0.7701208617657279
+        ],
+        "wins": 142
+      },
+      "bucket": "181-240",
+      "feature": "seconds_left"
+    },
+    {
+      "aggregate": {
+        "fees": "5.3780",
+        "maximum_drawdown": "4.7093",
+        "mean_entry_price": "0.6670570570570570570570570571",
+        "net_pnl": "9.7420",
+        "one_cent_stressed_pnl": "6.2624",
+        "pnl_without_top_three_winners": "6.5662",
+        "top_three_share_of_positive_pnl": 0.040983194025574814,
+        "trades": 333,
+        "two_cent_stressed_pnl": "2.7866",
+        "win_rate": 0.7117117117117117,
+        "win_rate_wilson_90pct": [
+          0.6693053641952706,
+          0.7507055732150625
+        ],
+        "wins": 237
+      },
+      "bucket": "241-300",
+      "feature": "seconds_left"
+    },
+    {
+      "aggregate": {
+        "fees": "13.2615",
+        "maximum_drawdown": "5.5794",
+        "mean_entry_price": "0.6615544675642594859241126071",
+        "net_pnl": "29.1885",
+        "one_cent_stressed_pnl": "20.6478",
+        "pnl_without_top_three_winners": "25.9926",
+        "top_three_share_of_positive_pnl": 0.016284923744834368,
+        "trades": 817,
+        "two_cent_stressed_pnl": "12.1191",
+        "win_rate": 0.7074663402692778,
+        "win_rate_wilson_90pct": [
+          0.6806366011937267,
+          0.7329265407261308
+        ],
+        "wins": 578
+      },
+      "bucket": "5-7.5",
+      "feature": "absolute_raw_market_gap"
+    },
+    {
+      "aggregate": {
+        "fees": "12.8581",
+        "maximum_drawdown": "5.4624",
+        "mean_entry_price": "0.6609493670886075949367088608",
+        "net_pnl": "28.9319",
+        "one_cent_stressed_pnl": "20.6539",
+        "pnl_without_top_three_winners": "25.7360",
+        "top_three_share_of_positive_pnl": 0.016777091309394258,
+        "trades": 790,
+        "two_cent_stressed_pnl": "12.3880",
+        "win_rate": 0.7075949367088608,
+        "win_rate_wilson_90pct": [
+          0.6803030109815743,
+          0.7334697987439504
+        ],
+        "wins": 559
+      },
+      "bucket": "2-3.99",
+      "feature": "modeled_net_edge"
+    },
+    {
+      "aggregate": {
+        "fees": "4.5784",
+        "maximum_drawdown": "4.9633",
+        "mean_entry_price": "0.6644210526315789473684210526",
+        "net_pnl": "15.6916",
+        "one_cent_stressed_pnl": "12.7289",
+        "pnl_without_top_three_winners": "12.5359",
+        "top_three_share_of_positive_pnl": 0.04632805021991767,
+        "trades": 285,
+        "two_cent_stressed_pnl": "9.7705",
+        "win_rate": 0.7368421052631579,
+        "win_rate_wilson_90pct": [
+          0.6918547967848845,
+          0.777374952420625
+        ],
+        "wins": 210
+      },
+      "bucket": "0.5-0.99",
+      "feature": "fast_slow_variance_ratio"
+    },
+    {
+      "aggregate": {
+        "fees": "1.3004",
+        "maximum_drawdown": "2.5052",
+        "mean_entry_price": "0.6205797101449275362318840580",
+        "net_pnl": "3.7596",
+        "one_cent_stressed_pnl": "2.9515",
+        "pnl_without_top_three_winners": "0.6240",
+        "top_three_share_of_positive_pnl": 0.16063113137470864,
+        "trades": 69,
+        "two_cent_stressed_pnl": "2.1450",
+        "win_rate": 0.6811594202898551,
+        "win_rate_wilson_90pct": [
+          0.5835426862698885,
+          0.7651053930240723
+        ],
+        "wins": 47
+      },
+      "bucket": "1-1.99",
+      "feature": "fast_slow_variance_ratio"
+    },
+    {
+      "aggregate": {
+        "fees": "2.3543",
+        "maximum_drawdown": "3.7791",
+        "mean_entry_price": "0.4741772151898734177215189873",
+        "net_pnl": "13.1257",
+        "one_cent_stressed_pnl": "11.7717",
+        "pnl_without_top_three_winners": "9.9298",
+        "top_three_share_of_positive_pnl": 0.07935845767623417,
+        "trades": 79,
+        "two_cent_stressed_pnl": "10.4188",
+        "win_rate": 0.6075949367088608,
+        "win_rate_wilson_90pct": [
+          0.515106935038393,
+          0.6929572828999053
+        ],
+        "wins": 48
+      },
+      "bucket": "35-49",
+      "feature": "selected_market_probability"
+    },
+    {
+      "aggregate": {
+        "fees": "3.7325",
+        "maximum_drawdown": "6.0845",
+        "mean_entry_price": "0.6616883116883116883116883117",
+        "net_pnl": "18.4175",
+        "one_cent_stressed_pnl": "16.0108",
+        "pnl_without_top_three_winners": "15.2417",
+        "top_three_share_of_positive_pnl": 0.05360262358832753,
+        "trades": 231,
+        "two_cent_stressed_pnl": "13.6082",
+        "win_rate": 0.7445887445887446,
+        "win_rate_wilson_90pct": [
+          0.6947504465627415,
+          0.7887639721793006
+        ],
+        "wins": 172
+      },
+      "bucket": "18-23",
+      "feature": "utc_hour"
+    },
+    {
+      "aggregate": {
+        "fees": "2.7763",
+        "maximum_drawdown": "4.4504",
+        "mean_entry_price": "0.6589714285714285714285714286",
+        "net_pnl": "8.6537",
+        "one_cent_stressed_pnl": "6.8732",
+        "pnl_without_top_three_winners": "5.5181",
+        "top_three_share_of_positive_pnl": 0.07396748412421329,
+        "trades": 175,
+        "two_cent_stressed_pnl": "5.0960",
+        "win_rate": 0.7142857142857143,
+        "win_rate_wilson_90pct": [
+          0.6551863402959246,
+          0.7668601448176582
+        ],
+        "wins": 125
+      },
+      "bucket": "4",
+      "feature": "chronological_block"
+    }
+  ],
+  "repeatable_weaknesses": [
+    {
+      "aggregate": {
+        "fees": "1.9407",
+        "maximum_drawdown": "6.5615",
+        "mean_entry_price": "0.66968",
+        "net_pnl": "-1.6507",
+        "one_cent_stressed_pnl": "-2.8685",
+        "pnl_without_top_three_winners": "-2.6527",
+        "top_three_share_of_positive_pnl": 0.037777534808492025,
+        "trades": 125,
+        "two_cent_stressed_pnl": "-4.0860",
+        "win_rate": 0.672,
+        "win_rate_wilson_90pct": [
+          0.5999238389081057,
+          0.736788247638526
+        ],
+        "wins": 84
+      },
+      "bucket": "65-69",
+      "feature": "entry_price"
+    },
+    {
+      "aggregate": {
+        "fees": "7.3089",
+        "maximum_drawdown": "8.0098",
+        "mean_entry_price": "0.6735744680851063829787234043",
+        "net_pnl": "7.3311",
+        "one_cent_stressed_pnl": "2.5585",
+        "pnl_without_top_three_winners": "4.1553",
+        "top_three_share_of_positive_pnl": 0.029950572784192345,
+        "trades": 470,
+        "two_cent_stressed_pnl": "-2.2081",
+        "win_rate": 0.6978723404255319,
+        "win_rate_wilson_90pct": [
+          0.6619825299085984,
+          0.731497095146957
+        ],
+        "wins": 328
+      },
+      "bucket": "0-0.49",
+      "feature": "fast_slow_variance_ratio"
+    },
+    {
+      "aggregate": {
+        "fees": "3.3215",
+        "maximum_drawdown": "6.0360",
+        "mean_entry_price": "0.6793457943925233644859813084",
+        "net_pnl": "-0.3715",
+        "one_cent_stressed_pnl": "-2.5559",
+        "pnl_without_top_three_winners": "-3.5272",
+        "top_three_share_of_positive_pnl": 0.0677987586233567,
+        "trades": 214,
+        "two_cent_stressed_pnl": "-4.7381",
+        "win_rate": 0.6822429906542056,
+        "win_rate_wilson_90pct": [
+          0.6278933047785589,
+          0.7320421115322042
+        ],
+        "wins": 146
+      },
+      "bucket": "06-11",
+      "feature": "utc_hour"
+    }
+  ],
+  "report_sha256": "9cd054f0f63b1fc66c93387f51964a81ef5726068644626f55f20b45680610ba",
+  "signal": {
+    "fast_variance_weight": 0.9,
+    "maximum_binary_spread": 0.02,
+    "maximum_fast_slow_variance_ratio": null,
+    "maximum_raw_model_market_gap": 0.075,
+    "maximum_seconds_left": 300,
+    "maximum_selected_ask_exclusive": 0.8,
+    "minimum_net_edge": 0.005,
+    "minimum_seconds_left": 5,
+    "minimum_selected_ask": 0.45,
+    "minimum_two_cent_stressed_edge": 0.0,
+    "name": "v90_w25_q0_e005_p4580_g075_t005300_s02_b00_rnone",
+    "probability_market_log_odds_weight": 0.25,
+    "quote_confirmation": "none",
+    "trend_multiplier": 0.0
+  },
+  "source": {
+    "development_utc_dates": 110,
+    "eligible_research_markets": 13793,
+    "holdout_evaluated": false,
+    "holdout_markets": 3463,
+    "observed_utc_dates": 147,
+    "validation_utc_dates": 37
+  },
+  "state": "complete_diagnostic",
+  "study": "025"
+}
