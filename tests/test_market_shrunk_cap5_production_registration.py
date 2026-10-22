@@ -1,3 +1,6 @@
+import tomllib
+from pathlib import Path
+
 from market_shrunk_cap5_production.registration import (
     CONFIG_REVISION,
     HOLD_REVISION,
@@ -6,6 +9,12 @@ from market_shrunk_cap5_production.registration import (
     registration,
     registration_hash,
 )
+
+
+def test_cap5_runtime_package_is_in_the_deployed_wheel():
+    config = tomllib.loads(Path("pyproject.toml").read_text())
+    packages = config["tool"]["hatch"]["build"]["targets"]["wheel"]["packages"]
+    assert "src/market_shrunk_cap5_production" in packages
 
 
 def test_market_shrunk_live_registration_is_exact_and_isolated():
