@@ -1,5 +1,14 @@
 # Work log
 
+## 2026-10-22 — Expanded Kelly-Cap Study 027
+
+- Replayed Study 023's exact 838 decisions with quarter- and half-Kelly sizing capped at $3, $4, $5 and $6,
+  starting each path with $100 and preserving integer contracts, fees and one-/two-cent stress.
+- Quarter Kelly did not benefit robustly from more cap: base P&L rose modestly, stressed P&L fell and drawdown
+  increased. Half Kelly at $4 had the best requested stress-to-drawdown ratio; $5 had the highest stressed P&L
+  and 4/5 positive stressed blocks. The $6 cap drew down $52.9143 and was dominated by $5 under stress.
+- The holdout remained sealed. The live half-Kelly cap remains $3 and no Railway setting or order rule changed.
+
 ## 2026-10-21 — Market-Shrunk Regime Failure Analysis 025
 
 - Registered nine diagnostic views before replaying Study 023's exact 838 fixed-$1 decisions. The replay matched

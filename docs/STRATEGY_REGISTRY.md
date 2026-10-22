@@ -106,6 +106,10 @@ Sizing cannot turn a negative-expectation signal positive. These variants compar
 | `eighth_kelly_cap_3` | One-eighth of model Kelly, maximum $3 | Frozen audit variant |
 | `quarter_kelly_cap_3` | One-quarter Kelly, maximum $3 | Frozen audit variant |
 | `half_kelly_cap_3` | One-half Kelly, maximum $3 | Study 024 diagnostic and active user-authorized `market_shrunk_half_kelly_001` production risk rule |
+| `quarter_kelly_cap_4/5/6` | One-quarter Kelly, maximum $4, $5 or $6 | Study 027 diagnostic. Every larger cap had worse stressed P&L and drawdown than quarter Kelly capped at $3 |
+| `half_kelly_cap_4` | One-half Kelly, maximum $4 | Study 027's best stress-to-drawdown ratio among expanded paths; historical drawdown $33.3021; research only |
+| `half_kelly_cap_5` | One-half Kelly, maximum $5 | Study 027's highest two-cent-stressed P&L and 4/5 positive stressed blocks; historical drawdown $38.6751; research only |
+| `half_kelly_cap_6` | One-half Kelly, maximum $6 | Study 027's highest headline P&L but lower stress P&L than $5 and $52.9143 drawdown; rejected as dominated under stress |
 | Conservative Anchor risk layer | One-hour cooldown; daily halt at -$2 or three settled losses; indefinite halt at $5 realized drawdown | Implemented in the paused production revision and Studies 006/008/009 |
 
 Full Kelly for a binary contract with all-in unit cost `c` and estimated win probability `p` is

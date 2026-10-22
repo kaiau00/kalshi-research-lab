@@ -1,0 +1,610 @@
+{
+  "fixed_1_replay": {
+    "block_pnl": [
+      "10.4140",
+      "6.4485",
+      "0.4433",
+      "8.6537",
+      "3.7014"
+    ],
+    "contracts": 894,
+    "daily_mean_one_sided_90pct_lower_bound": 0.04559932872515929,
+    "daily_mean_pnl": 0.2017748299319728,
+    "daily_pnl_standard_error": 0.09494796293592701,
+    "decisions": 838,
+    "ending_bankroll": "129.6609",
+    "fees": "13.5191",
+    "kelly_cap_binding_decisions": null,
+    "longest_loss_streak": 4,
+    "maximum_drawdown": "5.1635",
+    "maximum_target_budget": "1.00",
+    "mean_target_budget": "1.00",
+    "net_pnl": "29.6609",
+    "observed_days": 147,
+    "pnl_without_top_three_winners": "26.4650",
+    "positive_blocks": 5,
+    "positive_day_share": 0.564625850340136,
+    "positive_days": 83,
+    "positive_two_cent_stressed_blocks": 3,
+    "risk_screen": {
+      "maximum_drawdown_at_most_10": true,
+      "positive_two_cent_stress": true,
+      "positive_without_top_three_winners": true
+    },
+    "skipped_decisions": 0,
+    "stressed_pnl": {
+      "1": "20.9189",
+      "2": "12.1890"
+    },
+    "top_three_share_of_positive_pnl": 0.01598908545673131,
+    "top_three_winner_pnl": "3.1959",
+    "trade_ledger_sha256": "149f874d7e98af5b4720b0b1ee7a489d8e05b7330db93bf45f74e7c9fae37773",
+    "trades": 838,
+    "two_cent_stress_to_drawdown": "2.360608114650915076982666796",
+    "two_cent_stressed_block_pnl": [
+      "6.9776",
+      "3.2067",
+      "-2.4167",
+      "5.0960",
+      "-0.6746"
+    ],
+    "variant": "fixed_1",
+    "win_rate": 0.7100238663484487,
+    "wins": 595,
+    "zero_size_decisions": {}
+  },
+  "holdout": {
+    "evaluated": false,
+    "locked": true
+  },
+  "production_change_authorized": false,
+  "production_orders_authorized": false,
+  "rankings": {
+    "best_two_cent_stress_to_drawdown": [
+      "half_kelly_cap_4",
+      "half_kelly_cap_5",
+      "half_kelly_cap_3",
+      "half_kelly_cap_6",
+      "quarter_kelly_cap_3",
+      "quarter_kelly_cap_4",
+      "quarter_kelly_cap_6",
+      "quarter_kelly_cap_5"
+    ],
+    "highest_base_pnl": [
+      "half_kelly_cap_6",
+      "half_kelly_cap_5",
+      "half_kelly_cap_4",
+      "half_kelly_cap_3",
+      "quarter_kelly_cap_6",
+      "quarter_kelly_cap_5",
+      "quarter_kelly_cap_4",
+      "quarter_kelly_cap_3"
+    ],
+    "highest_two_cent_stressed_pnl": [
+      "half_kelly_cap_5",
+      "half_kelly_cap_6",
+      "half_kelly_cap_4",
+      "half_kelly_cap_3",
+      "quarter_kelly_cap_3",
+      "quarter_kelly_cap_4",
+      "quarter_kelly_cap_6",
+      "quarter_kelly_cap_5"
+    ]
+  },
+  "registration_sha256": "fe5a1cf5e1577a5e7ee18c86d51089579ef4ea6e7027d1a37f6c99b128f9f57c",
+  "report_sha256": "c3e90d27ef77ba8dd77dba5abb38c512db4699a76c101ed7ca72514821926f6e",
+  "risk_results": {
+    "half_kelly_cap_3": {
+      "all_in_cap_dollars": "3.00",
+      "block_pnl": [
+        "38.2395",
+        "23.8633",
+        "-1.5858",
+        "32.2295",
+        "13.8813"
+      ],
+      "contracts": 3314,
+      "daily_mean_one_sided_90pct_lower_bound": 0.14878186528160875,
+      "daily_mean_pnl": 0.7253591836734693,
+      "daily_pnl_standard_error": 0.35053411984169897,
+      "decisions": 838,
+      "ending_bankroll": "206.6278",
+      "fees": "50.7422",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "0.0000",
+        "net_pnl": "0.0000",
+        "two_cent_stressed_pnl": "0.0000"
+      },
+      "kelly_cap_binding_decisions": 829,
+      "kelly_multiplier": "0.50",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "27.0156",
+      "maximum_target_budget": "3.00",
+      "mean_target_budget": "2.995885185581063247493090533",
+      "net_pnl": "106.6278",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "97.0398",
+      "positive_blocks": 4,
+      "positive_day_share": 0.5850340136054422,
+      "positive_days": 86,
+      "positive_two_cent_stressed_blocks": 3,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "74.1840",
+        "2": "41.7829"
+      },
+      "top_three_share_of_positive_pnl": 0.012739533930768047,
+      "top_three_winner_pnl": "9.5880",
+      "trade_ledger_sha256": "da63d90df84c4edcc2709aa37d8dcc378992d71cecb83f556d5bf24ab795d123",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "1.546621211448200299086453753",
+      "two_cent_stressed_block_pnl": [
+        "25.4738",
+        "12.2129",
+        "-11.9789",
+        "18.6426",
+        "-2.5675"
+      ],
+      "variant": "half_kelly_cap_3",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "half_kelly_cap_4": {
+      "all_in_cap_dollars": "4.00",
+      "block_pnl": [
+        "50.2412",
+        "32.6495",
+        "-3.5034",
+        "46.7444",
+        "20.4867"
+      ],
+      "contracts": 4632,
+      "daily_mean_one_sided_90pct_lower_bound": 0.22022979914557828,
+      "daily_mean_pnl": 0.9974040816326532,
+      "daily_pnl_standard_error": 0.47248841462414437,
+      "decisions": 838,
+      "ending_bankroll": "246.6184",
+      "fees": "70.4116",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "6.2865",
+        "net_pnl": "39.9906",
+        "two_cent_stressed_pnl": "14.2703"
+      },
+      "kelly_cap_binding_decisions": 785,
+      "kelly_multiplier": "0.50",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "33.3021",
+      "maximum_target_budget": "4.00",
+      "mean_target_budget": "3.962617400631871693664466204",
+      "net_pnl": "146.6184",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "133.8342",
+      "positive_blocks": 4,
+      "positive_day_share": 0.5714285714285714,
+      "positive_days": 84,
+      "positive_two_cent_stressed_blocks": 3,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "101.3023",
+        "2": "56.0532"
+      },
+      "top_three_share_of_positive_pnl": 0.012283967367282572,
+      "top_three_winner_pnl": "12.7842",
+      "trade_ledger_sha256": "b52bad5f67e569c062d25a1fabd3101a18006bfdb57c51fe10eb51bb9f099b49",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "1.683173133225832605151026512",
+      "two_cent_stressed_block_pnl": [
+        "32.9617",
+        "16.3046",
+        "-17.8865",
+        "27.4321",
+        "-2.7587"
+      ],
+      "variant": "half_kelly_cap_4",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "half_kelly_cap_5": {
+      "all_in_cap_dollars": "5.00",
+      "block_pnl": [
+        "58.0045",
+        "34.9161",
+        "-4.5703",
+        "53.8341",
+        "32.7257"
+      ],
+      "contracts": 5683,
+      "daily_mean_one_sided_90pct_lower_bound": 0.24339238285050657,
+      "daily_mean_pnl": 1.18986462585034,
+      "daily_pnl_standard_error": 0.5754142663466049,
+      "decisions": 838,
+      "ending_bankroll": "274.9101",
+      "fees": "86.1299",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "11.6595",
+        "net_pnl": "68.2823",
+        "two_cent_stressed_pnl": "22.0481"
+      },
+      "kelly_cap_binding_decisions": 717,
+      "kelly_multiplier": "0.50",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "38.6751",
+      "maximum_target_budget": "5.00",
+      "mean_target_budget": "4.872137763450355813318912593",
+      "net_pnl": "174.9101",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "158.9300",
+      "positive_blocks": 4,
+      "positive_day_share": 0.5714285714285714,
+      "positive_days": 84,
+      "positive_two_cent_stressed_blocks": 4,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "119.3330",
+        "2": "63.8310"
+      },
+      "top_three_share_of_positive_pnl": 0.0125760499991658,
+      "top_three_winner_pnl": "15.9801",
+      "trade_ledger_sha256": "eb6107a88096155ac72d4f6ffa08258aba465de676ba759e8260d32ac03ecfe3",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "1.650441757099529154417183149",
+      "two_cent_stressed_block_pnl": [
+        "37.6775",
+        "14.9479",
+        "-22.3155",
+        "29.9463",
+        "3.5748"
+      ],
+      "variant": "half_kelly_cap_5",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "half_kelly_cap_6": {
+      "all_in_cap_dollars": "6.00",
+      "block_pnl": [
+        "63.8073",
+        "39.8040",
+        "-4.2173",
+        "61.3820",
+        "33.6221"
+      ],
+      "contracts": 6714,
+      "daily_mean_one_sided_90pct_lower_bound": 0.21953893988688167,
+      "daily_mean_pnl": 1.3224360544217688,
+      "daily_pnl_standard_error": 0.6705138356772616,
+      "decisions": 838,
+      "ending_bankroll": "294.3981",
+      "fees": "101.5719",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "25.8987",
+        "net_pnl": "87.7703",
+        "two_cent_stressed_pnl": "21.4192"
+      },
+      "kelly_cap_binding_decisions": 662,
+      "kelly_multiplier": "0.50",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "52.9143",
+      "maximum_target_budget": "6.00",
+      "mean_target_budget": "5.722062425830142073561990675",
+      "net_pnl": "194.3981",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "175.3426",
+      "positive_blocks": 4,
+      "positive_day_share": 0.5578231292517006,
+      "positive_days": 82,
+      "positive_two_cent_stressed_blocks": 3,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "128.7532",
+        "2": "63.2021"
+      },
+      "top_three_share_of_positive_pnl": 0.01276166588578438,
+      "top_three_winner_pnl": "19.0555",
+      "trade_ledger_sha256": "50657835cd5d8b2dfbd9e70ea290b6aac2292799d64e3976fde59c10abc2bd2d",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "1.194423813600482289286638961",
+      "two_cent_stressed_block_pnl": [
+        "40.9993",
+        "16.5315",
+        "-25.1867",
+        "32.6064",
+        "-1.7484"
+      ],
+      "variant": "half_kelly_cap_6",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "quarter_kelly_cap_3": {
+      "all_in_cap_dollars": "3.00",
+      "block_pnl": [
+        "26.7896",
+        "12.4036",
+        "-0.1303",
+        "17.7648",
+        "5.7560"
+      ],
+      "contracts": 2717,
+      "daily_mean_one_sided_90pct_lower_bound": -0.013670150281950844,
+      "daily_mean_pnl": 0.4257394557823129,
+      "daily_pnl_standard_error": 0.2671420720144283,
+      "decisions": 838,
+      "ending_bankroll": "162.5837",
+      "fees": "40.6663",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "0.0000",
+        "net_pnl": "0.0000",
+        "two_cent_stressed_pnl": "0.0000"
+      },
+      "kelly_cap_binding_decisions": 415,
+      "kelly_multiplier": "0.25",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "26.7625",
+      "maximum_target_budget": "3.00",
+      "mean_target_budget": "2.595575205712581756464190408",
+      "net_pnl": "62.5837",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "56.1916",
+      "positive_blocks": 4,
+      "positive_day_share": 0.5374149659863946,
+      "positive_days": 79,
+      "positive_two_cent_stressed_blocks": 3,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "36.0588",
+        "2": "9.5694"
+      },
+      "top_three_share_of_positive_pnl": 0.010833919059755281,
+      "top_three_winner_pnl": "6.3921",
+      "trade_ledger_sha256": "0ad5f715629c2c3eb429c38db5a0213ba943c4834b7263130b452b3644988d1e",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "0.3575674918262494161606725829",
+      "two_cent_stressed_block_pnl": [
+        "17.4787",
+        "2.9960",
+        "-8.5934",
+        "6.4146",
+        "-8.7265"
+      ],
+      "variant": "quarter_kelly_cap_3",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "quarter_kelly_cap_4": {
+      "all_in_cap_dollars": "4.00",
+      "block_pnl": [
+        "33.4834",
+        "10.8882",
+        "2.6294",
+        "22.5278",
+        "2.9417"
+      ],
+      "contracts": 3310,
+      "daily_mean_one_sided_90pct_lower_bound": -0.02574346740871314,
+      "daily_mean_pnl": 0.4929965986394558,
+      "daily_pnl_standard_error": 0.31537156714034664,
+      "decisions": 838,
+      "ending_bankroll": "172.4705",
+      "fees": "48.6895",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "3.7458",
+        "net_pnl": "9.8868",
+        "two_cent_stressed_pnl": "-1.5762"
+      },
+      "kelly_cap_binding_decisions": 241,
+      "kelly_multiplier": "0.25",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "30.5083",
+      "maximum_target_budget": "4.00",
+      "mean_target_budget": "3.050816475452800717838793854",
+      "net_pnl": "72.4705",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "65.4644",
+      "positive_blocks": 5,
+      "positive_day_share": 0.5306122448979592,
+      "positive_days": 78,
+      "positive_two_cent_stressed_blocks": 2,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "40.2085",
+        "2": "7.9932"
+      },
+      "top_three_share_of_positive_pnl": 0.009960532344895641,
+      "top_three_winner_pnl": "7.0061",
+      "trade_ledger_sha256": "fd55d59c5a786e03e110cdafac17484514ddc2000a377f430477ef62d957f04f",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "0.2620008325603196507180013308",
+      "two_cent_stressed_block_pnl": [
+        "23.0951",
+        "-0.6994",
+        "-7.6119",
+        "8.6621",
+        "-15.4527"
+      ],
+      "variant": "quarter_kelly_cap_4",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "quarter_kelly_cap_5": {
+      "all_in_cap_dollars": "5.00",
+      "block_pnl": [
+        "37.3977",
+        "6.5494",
+        "3.9803",
+        "21.9517",
+        "3.1717"
+      ],
+      "contracts": 3555,
+      "daily_mean_one_sided_90pct_lower_bound": -0.07480592356208687,
+      "daily_mean_pnl": 0.4969442176870748,
+      "daily_pnl_standard_error": 0.34759940451894683,
+      "decisions": 838,
+      "ending_bankroll": "173.0508",
+      "fees": "51.8292",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "5.2016",
+        "net_pnl": "10.4671",
+        "two_cent_stressed_pnl": "-5.7189"
+      },
+      "kelly_cap_binding_decisions": 140,
+      "kelly_multiplier": "0.25",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "31.9641",
+      "maximum_target_budget": "5.00",
+      "mean_target_budget": "3.280993058956941592493417890",
+      "net_pnl": "73.0508",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "65.7629",
+      "positive_blocks": 5,
+      "positive_day_share": 0.5578231292517006,
+      "positive_days": 82,
+      "positive_two_cent_stressed_blocks": 2,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "38.4267",
+        "2": "3.8505"
+      },
+      "top_three_share_of_positive_pnl": 0.009769044972941064,
+      "top_three_winner_pnl": "7.2879",
+      "trade_ledger_sha256": "1018ef80c27a9131392e4a244500d8b44630af62eeb039d8239c79788ed4decb",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "0.1204632697307291617783701090",
+      "two_cent_stressed_block_pnl": [
+        "26.3912",
+        "-5.8658",
+        "-6.9763",
+        "7.2002",
+        "-16.8988"
+      ],
+      "variant": "quarter_kelly_cap_5",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    },
+    "quarter_kelly_cap_6": {
+      "all_in_cap_dollars": "6.00",
+      "block_pnl": [
+        "39.2970",
+        "3.6752",
+        "5.6805",
+        "21.8309",
+        "5.3255"
+      ],
+      "contracts": 3680,
+      "daily_mean_one_sided_90pct_lower_bound": -0.0819197153548108,
+      "daily_mean_pnl": 0.5157081632653061,
+      "daily_pnl_standard_error": 0.36333195174803756,
+      "decisions": 838,
+      "ending_bankroll": "175.8091",
+      "fees": "53.4409",
+      "incremental_vs_cap_3": {
+        "maximum_drawdown": "6.8648",
+        "net_pnl": "13.2254",
+        "two_cent_stressed_pnl": "-5.3716"
+      },
+      "kelly_cap_binding_decisions": 58,
+      "kelly_multiplier": "0.25",
+      "longest_loss_streak": 4,
+      "maximum_drawdown": "33.6273",
+      "maximum_target_budget": "6.00",
+      "mean_target_budget": "3.410252043272395173004024803",
+      "net_pnl": "75.8091",
+      "observed_days": 147,
+      "pnl_without_top_three_winners": "68.4162",
+      "positive_blocks": 5,
+      "positive_day_share": 0.5578231292517006,
+      "positive_days": 82,
+      "positive_two_cent_stressed_blocks": 2,
+      "risk_screen": {
+        "maximum_drawdown_at_most_10": false,
+        "positive_two_cent_stress": true,
+        "positive_without_top_three_winners": true
+      },
+      "skipped_decisions": 0,
+      "stressed_pnl": {
+        "1": "39.9787",
+        "2": "4.1978"
+      },
+      "top_three_share_of_positive_pnl": 0.009613470327680342,
+      "top_three_winner_pnl": "7.3929",
+      "trade_ledger_sha256": "85aaa7f01a7f1631ddc1c4e8fc0d6dd2ff3b7b378ac59c1270a2071178231fd4",
+      "trades": 838,
+      "two_cent_stress_to_drawdown": "0.1248330969182777088853401849",
+      "two_cent_stressed_block_pnl": [
+        "28.1362",
+        "-9.1056",
+        "-5.6031",
+        "6.7332",
+        "-15.9629"
+      ],
+      "variant": "quarter_kelly_cap_6",
+      "win_rate": 0.7100238663484487,
+      "wins": 595,
+      "zero_size_decisions": {}
+    }
+  },
+  "signal": {
+    "fast_variance_weight": 0.9,
+    "maximum_binary_spread": 0.02,
+    "maximum_fast_slow_variance_ratio": null,
+    "maximum_raw_model_market_gap": 0.075,
+    "maximum_seconds_left": 300,
+    "maximum_selected_ask_exclusive": 0.8,
+    "minimum_net_edge": 0.005,
+    "minimum_seconds_left": 5,
+    "minimum_selected_ask": 0.45,
+    "minimum_two_cent_stressed_edge": 0.0,
+    "name": "v90_w25_q0_e005_p4580_g075_t005300_s02_b00_rnone",
+    "probability_market_log_odds_weight": 0.25,
+    "quote_confirmation": "none",
+    "trend_multiplier": 0.0
+  },
+  "source": {
+    "eligible_research_markets": 13793,
+    "holdout_evaluated": false,
+    "holdout_markets": 3463,
+    "observed_utc_dates": 147
+  },
+  "state": "complete_risk_diagnostic",
+  "study": "027"
+}

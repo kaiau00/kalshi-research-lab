@@ -30,15 +30,30 @@ def quantity_for_budget(price: Decimal, budget: Decimal, cash: Decimal, cfg: Exp
     return quantity
 
 
-def target_budget(variant: str, probability: float, price: Decimal, cash: Decimal, cfg: Experiment):
+def target_budget(
+    variant: str,
+    probability: float,
+    price: Decimal,
+    cash: Decimal,
+    cfg: Experiment,
+    *,
+    kelly_cap: Decimal | None = None,
+    kelly_multiplier: Decimal | None = None,
+):
     settings = RISK_VARIANTS[variant]
     if settings["kind"] == "fixed":
         return min(Decimal(settings["maximum_all_in_dollars"]), cash), None
     unit_cost = price + entry_fee(price, 1, cfg)
     full_kelly = full_kelly_fraction(probability, unit_cost)
+    cap = kelly_cap if kelly_cap is not None else Decimal(settings.get("cap", KELLY_CAP))
+    multiplier = (
+        kelly_multiplier
+        if kelly_multiplier is not None
+        else Decimal(settings["multiplier"])
+    )
     budget = min(
-        KELLY_CAP,
-        cash * full_kelly * Decimal(settings["multiplier"]),
+        cap,
+        cash * full_kelly * multiplier,
         cash,
     )
     return budget, full_kelly
@@ -51,7 +66,16 @@ def _stress_pnl(trade: dict, cents: int, cfg: Experiment):
     )
 
 
-def run_variant(decisions: list[dict], variant: str, observed_days: list[str], cfg: Experiment):
+def run_variant(
+    decisions: list[dict],
+    variant: str,
+    observed_days: list[str],
+    cfg: Experiment,
+    *,
+    kelly_cap: Decimal | None = None,
+    kelly_multiplier: Decimal | None = None,
+    result_name: str | None = None,
+):
     cash = STARTING_CASH
     peak = STARTING_CASH
     maximum_drawdown = Decimal(0)
@@ -63,10 +87,21 @@ def run_variant(decisions: list[dict], variant: str, observed_days: list[str], c
     current_loss_streak = 0
     for decision in decisions:
         budget, full_kelly = target_budget(
-            variant, decision["probability"], decision["price"], cash, cfg
+            variant,
+            decision["probability"],
+            decision["price"],
+            cash,
+            cfg,
+            kelly_cap=kelly_cap,
+            kelly_multiplier=kelly_multiplier,
         )
         target_budgets.append(budget)
-        if full_kelly is not None and budget == KELLY_CAP:
+        effective_cap = (
+            kelly_cap
+            if kelly_cap is not None
+            else Decimal(RISK_VARIANTS[variant].get("cap", KELLY_CAP))
+        )
+        if full_kelly is not None and budget == effective_cap:
             cap_binding += 1
         quantity = quantity_for_budget(decision["price"], budget, cash, cfg)
         if quantity < 1:
@@ -129,7 +164,7 @@ def run_variant(decisions: list[dict], variant: str, observed_days: list[str], c
         lower_90 = None
     budgets_used = [row["target_budget"] for row in trades]
     result = {
-        "variant": variant,
+        "variant": result_name or variant,
         "decisions": len(decisions),
         "trades": len(trades),
         "skipped_decisions": len(decisions) - len(trades),

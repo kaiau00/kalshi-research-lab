@@ -47,6 +47,9 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
   fast/slow variance ratio below 0.50 and 06:00–11:59 UTC each lost under two-cent stress in both development and
   validation, but the groups overlap. Avoiding only 65–69-cent entries is the simplest post-hoc candidate; it is
   not validated and the holdout remains sealed;
+- Study 027 expanded Kelly-cap diagnostic — completed on Study 023's same 838 decisions. Quarter-Kelly robustness
+  worsened above $3. Half Kelly improved through a $5 cap, but historical drawdown rose to $33.30 at $4 and $38.68
+  at $5; the $6 cap was dominated under stress and drew down $52.91. No live cap changed;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new

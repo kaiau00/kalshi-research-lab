@@ -149,6 +149,10 @@ simple post-hoc candidate—avoid 65–69-cent entries—that requires a separat
 [Study 026](docs/MARKET_SHRUNK_PRICE_BAND_HOLDOUT_026_PROTOCOL.md) freezes that candidate and its pass/fail gates.
 Its runner remains locked behind an explicit one-time holdout disclosure flag.
 
+[Expanded Kelly-Cap Study 027](docs/MARKET_SHRUNK_EXPANDED_KELLY_CAP_STUDY_027_RESULT.md) compares quarter- and
+half-Kelly sizing with $3 through $6 caps on the same 838 historical decisions. It is a risk diagnostic only and
+does not change the live $3 cap.
+
 ## Run locally
 
 Python 3.12 and uv are required. From this repository:
