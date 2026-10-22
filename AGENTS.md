@@ -53,3 +53,12 @@ index-2 balance after Kalshi transferred $10.0085 internally away from index 2. 
 commissioning preflight had passed before activation. Preserve its durable `COMMISSIONED.json` receipt so later
 cash changes affect half-Kelly sizing instead of reopening the one-time initial funding gate. This authorization
 does not change the $3 cap, signal, execution or hold policy and does not authorize replacing missing funds.
+
+On October 22, 2026 the user explicitly authorized changing the active `market_shrunk_half_kelly_001` production
+runner to a new revision with the identical Study 023 signal and one-half-Kelly sizing capped at $5 all-in per market.
+Use the fresh ledger `/data/production-market-shrunk-half-kelly-cap5-001`, Predictions exchange index 2, subaccount
+0, the existing cash without a transfer, 500 ms delayed IOC execution, one signal attempt per market, and hold to
+official settlement with early exits disabled. Preserve the complete $3 ledger. The new ledger must start paused and
+must verify exact cash, no position, no resting order, and no unresolved order before a matching commission receipt
+is written and entries are enabled. This is an explicitly authorized risk pilot based on Study 027; do not claim the
+signal is proven, and do not raise the cap above $5 without a new explicit request.

@@ -9,6 +9,8 @@ from contextlib import asynccontextmanager
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
+from market_shrunk_cap5_production.runner import RUNNER_NAME as MARKET_SHRUNK_CAP5_RUNNER_NAME
+from market_shrunk_cap5_production.runner import Runner as MarketShrunkCap5ProductionRunner
 from market_shrunk_production.runner import RUNNER_NAME as MARKET_SHRUNK_RUNNER_NAME
 from market_shrunk_production.runner import Runner as MarketShrunkProductionRunner
 from production_execution.runner import Runner as ProductionRunner
@@ -90,10 +92,12 @@ def create_app(record=True):
                 runner = Runner(production_state_provider=lambda: application.state.research_recorder.state)
                 task = asyncio.create_task(runner.run())
             if os.environ.get('LAB_PRODUCTION_ENABLED') == '1':
-                runner_class = (
-                    MarketShrunkProductionRunner
-                    if os.environ.get('LAB_PRODUCTION_RUNNER') == MARKET_SHRUNK_RUNNER_NAME
-                    else ProductionRunner
+                production_runners = {
+                    MARKET_SHRUNK_RUNNER_NAME: MarketShrunkProductionRunner,
+                    MARKET_SHRUNK_CAP5_RUNNER_NAME: MarketShrunkCap5ProductionRunner,
+                }
+                runner_class = production_runners.get(
+                    os.environ.get('LAB_PRODUCTION_RUNNER'), ProductionRunner
                 )
                 production_runner = runner_class(
                     state_provider=lambda: application.state.research_recorder.state
