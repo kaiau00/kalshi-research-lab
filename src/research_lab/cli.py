@@ -16,6 +16,12 @@ def main():
     serve = sub.add_parser('serve', help='Recorder, protected dashboard and hourly fixed paper replay')
     serve.add_argument('--port', type=int, default=int(os.environ.get('PORT', '8000')))
     sub.add_parser('record', help='Run the data collector only')
+    hft_record = sub.add_parser('hft-record', help='Bounded read-only HFT forward-tape capture')
+    hft_record.add_argument('--db', type=Path, required=True)
+    hft_record.add_argument('--duration-seconds', type=int, default=60)
+    hft_record.add_argument('--max-storage-bytes', type=int, default=256_000_000)
+    hft_summary = sub.add_parser('hft-summary', help='Verify and size a local HFT forward tape')
+    hft_summary.add_argument('--db', type=Path, required=True)
     replay = sub.add_parser('backtest', help='Replay recorded books and benchmark with simulated execution')
     replay.add_argument('--db', type=Path, default=db_path())
     replay.add_argument('--output', type=Path, default=Path('reports'))
@@ -60,6 +66,26 @@ def main():
         elif args.command == 'record':
             from .recorder import Recorder
             asyncio.run(Recorder(db_path()).run())
+        elif args.command == 'hft-record':
+            if not 10 <= args.duration_seconds <= 1800:
+                raise ValueError('HFT local capture duration must be 10-1800 seconds')
+            if args.db.exists():
+                raise ValueError('Refusing to append to an existing HFT capture')
+            from hft_research.forward_tape import ForwardTapeRecorder
+
+            async def bounded_capture():
+                recorder = ForwardTapeRecorder(args.db, max_storage_bytes=args.max_storage_bytes)
+                try:
+                    await asyncio.wait_for(recorder.run(), timeout=args.duration_seconds)
+                except TimeoutError:
+                    pass
+
+            asyncio.run(bounded_capture())
+            from hft_research.forward_tape import summarize_tape
+            print(json.dumps(summarize_tape(args.db), indent=2))
+        elif args.command == 'hft-summary':
+            from hft_research.forward_tape import summarize_tape
+            print(json.dumps(summarize_tape(args.db), indent=2))
         elif args.command == 'maintain':
             from .segments import process_one
             print(json.dumps(process_one(args.root)))

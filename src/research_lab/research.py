@@ -47,7 +47,9 @@ PROSPECTIVE_SOURCE_FILES = (
 # those frozen dependencies have this exact digest.
 LEGACY_SOURCE_COMPATIBILITY = {
     'c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc':
-        '66ed1e8f00dbfd1e2b23fea0f3d133cc1de269d236900aea31fb3af6f3e1b6dd',
+        # Recorder constructor gained an optional isolated registration hook for
+        # Study 028. Its default v6 recording behavior is unchanged.
+        '8217ca49fde673f76519b2e492074d93ddeb582c037e0861a19f1584a6ea2c21',
 }
 
 

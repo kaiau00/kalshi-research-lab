@@ -4,11 +4,15 @@ import contextlib
 import json
 import os
 import sys
+import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
+from hft_research.archive import process_trade_segment
+from hft_research.sidecar import TradeTapeSidecar
 from market_shrunk_cap5_production.runner import RUNNER_NAME as MARKET_SHRUNK_CAP5_RUNNER_NAME
 from market_shrunk_cap5_production.runner import Runner as MarketShrunkCap5ProductionRunner
 from market_shrunk_production.runner import RUNNER_NAME as MARKET_SHRUNK_RUNNER_NAME
@@ -41,6 +45,37 @@ def create_app(record=True):
     candidate_worker_status = {'study': '003', 'state': 'starting'}
     parameter = None
     parameter_task = None
+    hft_trade_tape = None
+    hft_trade_task = None
+    hft_trade_archive_task = None
+    hft_trade_archive_status = {'state': 'disabled'}
+    hft_trade_start_error = None
+
+    async def hft_trade_archive_loop():
+        nonlocal hft_trade_archive_status
+        while True:
+            try:
+                result = (
+                    await asyncio.to_thread(process_trade_segment, hft_trade_tape.root)
+                    if hft_trade_tape.store.has_sealed()
+                    else {'state': 'idle'}
+                )
+                hft_trade_archive_status = {**result, 'updated_ns': time.time_ns()}
+                await asyncio.sleep(1 if result['state'] == 'complete' else 5)
+            except asyncio.CancelledError:
+                raise
+            except Exception as exc:
+                hft_trade_archive_status = {
+                    'state': 'waiting_io',
+                    'error': f'{type(exc).__name__}: {exc}',
+                    'updated_ns': time.time_ns(),
+                }
+                if 'HFT trade archive budget reached' in str(exc):
+                    hft_trade_archive_status['state'] = 'stopped_archive_budget'
+                    if hft_trade_task:
+                        hft_trade_task.cancel()
+                    return
+                await asyncio.sleep(5)
 
     async def candidate_supervisor():
         nonlocal candidate_process, candidate_worker_status
@@ -85,6 +120,8 @@ def create_app(record=True):
     async def lifespan(application):
         nonlocal runner, task, production_runner, production_task
         nonlocal candidate_task, parameter, parameter_task
+        nonlocal hft_trade_tape, hft_trade_task, hft_trade_archive_task
+        nonlocal hft_trade_start_error
         async with original(application):
             if os.environ.get('LAB_DEMO_ENABLED') == '1' and os.environ.get('LAB_PRODUCTION_ENABLED') == '1':
                 raise RuntimeError('Demo and production execution cannot run at the same time')
@@ -108,13 +145,27 @@ def create_app(record=True):
             if os.environ.get('LAB_PARAMETER_STUDY_ENABLED') == '1':
                 parameter = ParameterRunner()
                 parameter_task = asyncio.create_task(parameter.run())
+            if os.environ.get('LAB_HFT_TRADE_TAPE_ENABLED') == '1':
+                try:
+                    hft_trade_tape = TradeTapeSidecar(
+                        Path(os.environ.get('LAB_HFT_TRADE_TAPE_DIR', '/data/hft-trades-v1')),
+                        watch_provider=lambda: set(application.state.research_recorder.watch),
+                    )
+                    hft_trade_task = asyncio.create_task(hft_trade_tape.run())
+                    hft_trade_archive_task = asyncio.create_task(hft_trade_archive_loop())
+                except Exception as exc:
+                    hft_trade_start_error = f'{type(exc).__name__}: {exc}'
             try:
                 yield
             finally:
-                for background in (parameter_task, candidate_task, production_task, task):
+                backgrounds = (
+                    hft_trade_archive_task, hft_trade_task,
+                    parameter_task, candidate_task, production_task, task,
+                )
+                for background in backgrounds:
                     if background:
                         background.cancel()
-                for background in (parameter_task, candidate_task, production_task, task):
+                for background in backgrounds:
                     if not background:
                         continue
                     with contextlib.suppress(asyncio.CancelledError, Exception):
@@ -137,6 +188,23 @@ def create_app(record=True):
         return {
             **production_runner.status,
             'runner_active': bool(production_task and not production_task.done()),
+        }
+
+    @app.get('/api/hft-trade-tape/status', dependencies=[Depends(authenticated)])
+    async def hft_trade_tape_status():
+        if not hft_trade_tape:
+            enabled = os.environ.get('LAB_HFT_TRADE_TAPE_ENABLED') == '1'
+            return {
+                'study': '028',
+                'state': 'failed' if enabled else 'disabled',
+                'error': hft_trade_start_error,
+                'production_orders_authorized': False,
+                'demo_orders_authorized': False,
+            }
+        return {
+            **hft_trade_tape.snapshot(),
+            'runner_active': bool(hft_trade_task and not hft_trade_task.done()),
+            'archive_job': hft_trade_archive_status,
         }
 
     @app.get('/api/candidate-study/status', dependencies=[Depends(authenticated)])

@@ -747,3 +747,37 @@ configuration made +$27.5030 but lost $2.0356 under stress and drew down $14.193
 Because no fixed-$1 signal passed, the frozen risk comparison did not open. Increasing risk cannot repair the
 negative regimes. The holdout remains sealed, no order path was enabled and the near miss is preserved only as a
 development hypothesis for a separately frozen future executable-book test.
+
+## 2026-10-22 — Jev-Gated HFT Study 028 kickoff
+
+Registered the research-only Jev-gated HFT feasibility study without adding a Jev network client or order path.
+The typed boundary enforces a monotone veto: Jev may remove deterministic quote/taker permissions but cannot create
+an action, select price or quantity, or bypass a hard control. The model is pinned to `jev-1.13.0`; failures map to
+cancel-all in the protocol.
+
+A read-only Railway audit found 1,275,153,752 catalogued v6 events across 8,059 segments, a 38.4 GB private
+archive, and a READY 3,666.59 MB/5,000 MB volume. A representative recent segment contained order-book deltas,
+snapshots and BRTI but no public trades, consistent with the recorder's registered collection profile. Existing
+data can support signal and markout research but cannot prove maker queue fills or maker P&L. Study 028 therefore
+requires a separately registered forward public-trade tape before its maker stage. No deployment, production
+setting, live strategy, order or stored observation was changed.
+
+Built and locally commissioned a bounded combined forward recorder to verify the missing channel before choosing
+hosted architecture. A corrected 60.05-second capture preserved 61,483 events, including 2,437 unique public
+trades and zero duplicate IDs or WebSocket errors, under verified event-chain digest
+`528e55f78cf353ecf022a2c8e9a5650c3103cae7d04fa65db5b2d60ffd98efd0`. It projected 3.69 GB/month for public
+trades alone and 45.94 GB/month if the existing order book were duplicated. The hosted recommendation is therefore
+a separately registered trade-only sidecar in the existing service, with ambiguous cross-stream ordering excluded
+from queue evidence. No deployment or Jev call was made.
+
+Implemented that hosted sidecar locally, disabled by default. It follows the main recorder's BTC-only watch set,
+captures raw public-trade frames in receipt order, validates fixed-point fields and stream sequence, and writes a
+separate registered segmented chain. A bounded recent trade-ID cache avoids unbounded RAM growth. The archive path
+verifies every event hash, uploads and reads back each compressed segment, uploads a durable manifest before local
+deletion, and restores the exact original chain. A 256 MB hot stop and 5 GB archive stop are frozen in the example
+configuration. Sidecar startup/runtime errors are reported separately and do not abort the shared production app.
+A 30-second read-only smoke test of source identity
+`2fc3187a8bb955f0dfb021954bbac3ad75f593b75232e99b36ceea745dbfac5f` captured and verified 793 segmented events,
+including 790 valid public trades across two current BTC 15-minute markets, with zero invalid frames, duplicate
+IDs or WebSocket errors. The integrated GitHub-main suite passed with 271 tests and Ruff passed. The sidecar was not deployed or
+enabled, no Railway variable changed, and no Jev or order endpoint was called.

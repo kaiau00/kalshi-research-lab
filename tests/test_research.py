@@ -46,7 +46,7 @@ def test_forward_requires_preregistered_code_and_settings(tmp_path):
 
 
 def test_segments_v6_registration_is_compatible_with_frozen_prospective_source():
-    assert source_hash() == '66ed1e8f00dbfd1e2b23fea0f3d133cc1de269d236900aea31fb3af6f3e1b6dd'
+    assert source_hash() == '8217ca49fde673f76519b2e492074d93ddeb582c037e0861a19f1584a6ea2c21'
     assert source_compatible('c587b8a6f75c2b13acb90b131a1f88fdb215b227bb45c093bbebddfc11fc1ccc')
     assert not source_compatible('0' * 64)
 

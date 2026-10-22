@@ -1,0 +1,49 @@
+{
+  "audit_date": "2026-10-22",
+  "study": "028",
+  "registration_sha256": "d72707eb0c78c8456b47ed6dc44719f0bd13a79fb15cdabcee9ba77582e79466",
+  "railway": {
+    "project": "Kalyx",
+    "environment": "production",
+    "service": "research-lab",
+    "deployment_state": "SUCCESS",
+    "instance_state": "RUNNING",
+    "volume": {
+      "state": "READY",
+      "mount": "/data",
+      "used_mb": 3666.591744,
+      "capacity_mb": 5000
+    },
+    "bucket": {
+      "name": "research-archive",
+      "objects": 10319,
+      "storage_bytes": 38405072724
+    }
+  },
+  "v6_catalog": {
+    "segments": 8059,
+    "archived_segments": 8056,
+    "sealed_segments": 2,
+    "open_segments": 1,
+    "catalogued_events": 1275153752,
+    "catalogued_archive_bytes": 32471410419
+  },
+  "representative_segment": {
+    "segment": 8056,
+    "events": 500000,
+    "websocket_frames": {
+      "orderbook_delta": 498691,
+      "orderbook_snapshot": 2,
+      "cfbenchmarks_value": 693,
+      "ok": 2,
+      "public_trade": 0
+    }
+  },
+  "conclusion": {
+    "signal_and_markout_stage_ready": true,
+    "maker_fill_stage_ready": false,
+    "blocking_field": "public trade events and observed queue acknowledgements",
+    "production_orders_authorized": false,
+    "demo_orders_authorized": false
+  }
+}

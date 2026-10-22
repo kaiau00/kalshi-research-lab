@@ -55,6 +55,7 @@ funding. The earlier conservative ledger remains immutable and paused.
 | `market_shrunk_half_kelly_cap5_001` | Identical Study 023 signal with half-Kelly sizing capped at $5 | User-authorized live risk pilot using a fresh paused ledger; Study 027 found stronger stressed P&L with materially larger historical drawdown, and the signal remains unproven | `src/market_shrunk_cap5_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_CAP5_PRODUCTION_001.md), [risk result](MARKET_SHRUNK_EXPANDED_KELLY_CAP_STUDY_027_RESULT.md) |
 | Study 025 regime diagnostic | Predefined side, price, timing, volatility-ratio and model/market buckets applied to Study 023's exact fixed-$1 ledger | Complete diagnostic. Three overlapping buckets were stressed losers in both partitions. Avoiding 65–69-cent entries is a post-hoc candidate only; no rule changed and the holdout remains sealed | [protocol](MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_PROTOCOL.md), [result](MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_RESULT.md) |
 | `market_shrunk_skip_65_69_026` | Study 023's exact first signal, but discard the entire market when its selected ask is at least $0.65 and below $0.70 | Frozen holdout candidate selected from Study 025. The newest 20% remains sealed; no demo or production authority | [Study 026 protocol](MARKET_SHRUNK_PRICE_BAND_HOLDOUT_026_PROTOCOL.md) |
+| `jev_gated_hft_feasibility_028` | Deterministic settlement-aware passive quoting and rare stale-quote taking, with Jev limited to regime classification and veto/side permissions | Development feasibility study. A disabled-by-default, trade-only segmented sidecar is built locally for the missing queue evidence. It has hard 256 MB hot/5 GB archive stops and no account or order path; deployment remains unapproved | [protocol](JEV_GATED_HFT_STUDY_028_PROTOCOL.md), [data audit](JEV_GATED_HFT_DATA_AUDIT_028.md), [commissioning](HFT_FORWARD_TAPE_028_COMMISSIONING.md) |
 
 The earlier advanced-research names **Jump-Robust Settlement Filter**, **Hawkes Reaction-Delay Overlay** and
 **Robust Probability Pool and Evidence Gate** are preserved as the parent concepts of IDs 011, 013 and the
@@ -95,6 +96,7 @@ These change realized P&L or fill quality but do not create directional edge.
 | `adaptive-hold-settlement-002-20261008` | Verify exposure and hold until official settlement | Historical live policy and current policy for all Market Anchor revisions |
 | 500 ms delayed IOC | Observe the first recorded executable book at or after modeled arrival; cap quantity to best-level integer depth | Shared research execution benchmark |
 | Hawkes reaction-delay overlay | Mutually exciting book-event intensities choose trade-now, wait or reject | Parent research concept for `order_flow_execution_overlay_013`; not implemented |
+| Jev supervisory gate | Typed regime, quote-side and taker-permission response intersected with a deterministic baseline; failure cancels all | Study 028 development contract only. Jev cannot create an action, set price/size or bypass risk |
 
 ## Sizing and risk policies
 

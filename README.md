@@ -241,6 +241,8 @@ See [Market Anchor live pilot](docs/MARKET_ANCHOR_LIVE_PILOT_001.md),
 [Historical Candle Strategy Screen 018](docs/HISTORICAL_CANDLE_SCREEN_018_RESULT.md),
 [Historical Parameter and Kelly Study 019](docs/HISTORICAL_PARAMETER_KELLY_STUDY_019_RESULT.md),
 [Historical Robust Parameter and Risk Study 020](docs/HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_RESULT.md),
+[Jev-Gated HFT Feasibility Study 028](docs/JEV_GATED_HFT_STUDY_028_PROTOCOL.md),
+[HFT forward-tape local commissioning](docs/HFT_FORWARD_TAPE_028_COMMISSIONING.md),
 [initial strategy assumptions](docs/STRATEGIES.md), and
 [work log](docs/WORK_LOG.md).
 

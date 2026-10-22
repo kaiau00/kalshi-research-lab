@@ -69,8 +69,8 @@ def load_signer():
 
 
 class Recorder:
-    def __init__(self, path: Path):
-        self.segmented = os.environ.get('LAB_SEGMENTED') == '1'
+    def __init__(self, path: Path, *, segmented=None, initial_registration=None):
+        self.segmented = os.environ.get('LAB_SEGMENTED') == '1' if segmented is None else segmented
         if self.segmented:
             from .segments import SegmentedStore
             self.store = SegmentedStore(path.parent)
@@ -80,10 +80,14 @@ class Recorder:
             latest = [json.loads(zlib.decompress(row[0])) for row in
                       self.store.conn.execute('SELECT payload FROM latest_markets')]
         if self.store.prefix()['last_event_id'] == 0:
-            from .research import source_hash
-            from .settings import Experiment
-            self.store.append('experiment_registration', {'config': Experiment().to_dict(),
-                                                          'source_sha256': source_hash()})
+            if initial_registration is None:
+                from .research import source_hash
+                from .settings import Experiment
+                initial_registration = ('experiment_registration', {
+                    'config': Experiment().to_dict(), 'source_sha256': source_hash(),
+                })
+            kind, payload = initial_registration
+            self.store.append(kind, payload)
             self.store.commit()
         self.client = MarketDataClient()
         self.current, self.watch = set(), set()
