@@ -39,8 +39,16 @@ class TradeTapeSidecar:
         self.watch_provider = watch_provider
         self.source_sha256 = trade_tape_source_hash()
         self.store = SegmentedStore(self.root)
+        # The trade feed can be materially busier than the shared book recorder.
+        # Rotate it independently so a single open segment cannot consume the
+        # sidecar's entire hot-storage allowance before it becomes archivable.
+        self.store.limit = int(os.environ.get("LAB_HFT_TRADE_SEGMENT_EVENTS", "100000"))
+        self.store.seconds = int(os.environ.get("LAB_HFT_TRADE_SEGMENT_SECONDS", "300"))
         self._register()
         self.max_bytes = int(os.environ.get("LAB_HFT_TRADE_HOT_MAX_BYTES", "256000000"))
+        self.archive_max_bytes = int(
+            os.environ.get("LAB_HFT_TRADE_ARCHIVE_MAX_BYTES", "5000000000")
+        )
         self.last_commit = time.monotonic()
         self.trade_ids = OrderedDict()
         self.trade_id_cache_limit = 100_000
@@ -60,6 +68,12 @@ class TradeTapeSidecar:
             "error": None,
             "production_orders_authorized": False,
             "demo_orders_authorized": False,
+            "limits": {
+                "segment_events": self.store.limit,
+                "segment_seconds": self.store.seconds,
+                "hot_max_bytes": self.max_bytes,
+                "archive_max_bytes": self.archive_max_bytes,
+            },
         }
 
     def _register(self):

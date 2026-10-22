@@ -58,6 +58,14 @@ def make_sidecar(tmp_path, monkeypatch):
 
 def test_trade_sidecar_registration_scope_and_raw_frame(tmp_path, monkeypatch):
     sidecar = make_sidecar(tmp_path, monkeypatch)
+    assert sidecar.store.limit == 100_000
+    assert sidecar.store.seconds == 300
+    assert sidecar.status["limits"] == {
+        "segment_events": 100_000,
+        "segment_seconds": 300,
+        "hot_max_bytes": 256_000_000,
+        "archive_max_bytes": 5_000_000_000,
+    }
     first = next(sidecar.store.active.events())
     assert first.kind == "hft_trade_registration"
     assert first.payload["format"] == TRADE_TAPE_FORMAT
@@ -72,6 +80,17 @@ def test_trade_sidecar_registration_scope_and_raw_frame(tmp_path, monkeypatch):
     assert sidecar.status["trade_messages"] == 1
     assert sidecar.status["non_block_trade_messages"] == 1
     assert sidecar.status["block_trade_messages"] == 0
+    sidecar.store.close()
+
+
+def test_trade_sidecar_uses_independent_rotation_limits(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_SEGMENT_EVENTS", "500000")
+    monkeypatch.setenv("LAB_SEGMENT_SECONDS", "1800")
+    monkeypatch.setenv("LAB_HFT_TRADE_SEGMENT_EVENTS", "1234")
+    monkeypatch.setenv("LAB_HFT_TRADE_SEGMENT_SECONDS", "45")
+    sidecar = TradeTapeSidecar(tmp_path, lambda: {"KXBTC15M-TEST"})
+    assert sidecar.store.limit == 1234
+    assert sidecar.store.seconds == 45
     sidecar.store.close()
 
 

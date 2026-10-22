@@ -71,12 +71,20 @@ Two independent stops bound the experiment:
 - `LAB_HFT_TRADE_ARCHIVE_MAX_BYTES=5000000000` stops capture once the new archive reaches 5 GB and preserves the
   unarchived local segment.
 
+The trade tape rotates independently from the main recorder at 100,000 events or five minutes, whichever comes
+first. This keeps a normal open segment well below the 256 MB hot limit even when the public trade feed is much
+busier than the commissioning smoke sample. The optional controls are
+`LAB_HFT_TRADE_SEGMENT_EVENTS` and `LAB_HFT_TRADE_SEGMENT_SECONDS`; changing them requires a new commissioning
+review.
+
 `LAB_HFT_TRADE_TAPE_ENABLED` defaults to `0`. Sidecar startup or runtime failure is isolated from the production
 runner and is visible at the protected `/api/hft-trade-tape/status` endpoint. It adds no Railway instance.
 
 The reviewed implementation source identity is
-`2fc3187a8bb955f0dfb021954bbac3ad75f593b75232e99b36ceea745dbfac5f`. A 30-second read-only smoke test of this
-exact source against two current Predictions markets captured 790 valid non-block public trades, one subscription
+`63e83d76c3e5a7ffd59179f660676e2349aced4728f4b496aa414d75f6edcb00`. A 30-second read-only smoke test of the
+preceding capture implementation
+(`2fc3187a8bb955f0dfb021954bbac3ad75f593b75232e99b36ceea745dbfac5f`) against two current Predictions markets
+captured 790 valid non-block public trades, one subscription
 frame and one session-gap marker: 793 events total. The complete temporary segmented chain verified, with zero
 invalid frames, duplicate IDs, WebSocket errors or block trades. The test used Railway-provided credentials only
 for WebSocket authentication and did not deploy or call an account or order endpoint.
