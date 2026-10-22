@@ -146,6 +146,8 @@ or prove an edge. Candidate Study 003 and Risk Sizing Audit 001 remain independe
 [Market-Shrunk Regime Failure Analysis 025](docs/MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_RESULT.md) diagnoses
 the current signal's historical weak regimes without changing it or opening the sealed holdout. It found one
 simple post-hoc candidate—avoid 65–69-cent entries—that requires a separately frozen holdout evaluation.
+[Study 026](docs/MARKET_SHRUNK_PRICE_BAND_HOLDOUT_026_PROTOCOL.md) freezes that candidate and its pass/fail gates.
+Its runner remains locked behind an explicit one-time holdout disclosure flag.
 
 ## Run locally
 

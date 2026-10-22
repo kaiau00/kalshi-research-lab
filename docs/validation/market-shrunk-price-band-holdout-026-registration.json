@@ -1,0 +1,82 @@
+{
+  "registration": {
+    "candidate": {
+      "base_signal": {
+        "fast_variance_weight": 0.9,
+        "maximum_binary_spread": 0.02,
+        "maximum_fast_slow_variance_ratio": null,
+        "maximum_raw_model_market_gap": 0.075,
+        "maximum_seconds_left": 300,
+        "maximum_selected_ask_exclusive": 0.8,
+        "minimum_net_edge": 0.005,
+        "minimum_seconds_left": 5,
+        "minimum_selected_ask": 0.45,
+        "minimum_two_cent_stressed_edge": 0.0,
+        "name": "v90_w25_q0_e005_p4580_g075_t005300_s02_b00_rnone",
+        "probability_market_log_odds_weight": 0.25,
+        "quote_confirmation": "none",
+        "trend_multiplier": 0.0
+      },
+      "excluded_selected_ask": [
+        "0.65",
+        "0.70"
+      ],
+      "expected_filtered_unsealed_fixed_1_ledger_sha256": "a56172fdf61f214d15593705cec1034794b1d0160480e55643e10ed62724407b",
+      "expected_study_023_fixed_1_ledger_sha256": "149f874d7e98af5b4720b0b1ee7a489d8e05b7330db93bf45f74e7c9fae37773",
+      "filter": "discard the market when the base signal's first selected-side ask is at least 0.65 and below 0.70; do not search later minutes for another entry",
+      "first_base_signal_consumes_market": true
+    },
+    "declared_date": "2026-10-21",
+    "economics": {
+      "adverse_price_stress_cents": [
+        1,
+        2
+      ],
+      "fees_inside_budget": true,
+      "historical_depth_or_fill_claim": false,
+      "integer_contracts": true,
+      "position_policy": "hold to official settlement",
+      "sizing": "fixed $1 maximum all-in per market"
+    },
+    "execution_guard": {
+      "explicit_unlock_flag_required": true,
+      "no_parameter_search": true,
+      "one_candidate_only": true,
+      "output_must_not_already_exist": true
+    },
+    "holdout_gates": {
+      "maximum_drawdown_dollars": "5.00",
+      "minimum_observed_utc_dates": 20,
+      "minimum_settled_trades": 100,
+      "minimum_trades_per_observed_day": 3.0,
+      "minimum_win_rate": 0.65,
+      "positive_base_and_two_cent_stressed_blocks": 4,
+      "positive_day_share_above": 0.5,
+      "positive_net_pnl": true,
+      "positive_one_and_two_cent_stressed_pnl": true,
+      "positive_one_sided_90pct_daily_mean_lower_bound": true,
+      "positive_pnl_without_top_three_winners": true
+    },
+    "interpretation": {
+      "passing_does_not_prove_executable_fills": true,
+      "passing_requires_new_executable_book_forward_validation": true,
+      "production_change_authorized": false,
+      "production_orders_authorized": false,
+      "risk_sizing_opens": false
+    },
+    "name": "market_shrunk_price_band_holdout_026",
+    "objective": "Evaluate one frozen Study 025 candidate once on Dataset 017's previously sealed newest 20%.",
+    "source": {
+      "audit_sha256": "dd361ab7ce8caed0c3861ce7953840d8034415046fcc78575a446c2bce755610",
+      "database_sha256": "31623b3a178d276bbc5fb0d8ab87600d90dfba7da98ead1099010ef0438a2d7f",
+      "event_chain_sha256": "03526f0e63396de6cd8ddf8df77bcddbd83aff4d0753daf3f4b5285232b7c70f",
+      "holdout": "newest 20% of Dataset 017, unopened when this registration was committed",
+      "selection_source": "Study 025's already-viewed development and validation analysis",
+      "series": "KXBTC15M",
+      "study_025_registration_sha256": "d2e224451786f24d24d1f4a6045de0d9705b8c69897ed4e41d317654bd561a94",
+      "study_025_report_sha256": "9cd054f0f63b1fc66c93387f51964a81ef5726068644626f55f20b45680610ba"
+    },
+    "study": "026"
+  },
+  "registration_sha256": "258db6cd1e228ce4f98e93bfaa9da9cbc1ac19ca5f71645a746ce6721de4e100"
+}

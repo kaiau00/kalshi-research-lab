@@ -80,11 +80,24 @@ def probability_for_model(fair: dict, fast_weight: float, trend_multiplier: floa
     return min(0.999, max(0.001, probability))
 
 
-def build_tape(database: Path, audit_path: Path):
-    partitions, candles, benchmark, exclusions = load_source(database, audit_path)
+def build_tape(
+    database: Path,
+    audit_path: Path,
+    partition_names: tuple[str, ...] = ("development", "validation"),
+):
+    allowed = {"development", "validation", "holdout"}
+    if not partition_names or len(set(partition_names)) != len(partition_names):
+        raise ValueError("partition_names must contain unique partition names")
+    if not set(partition_names) <= allowed:
+        raise ValueError("unknown Dataset 017 partition")
+    partitions, candles, benchmark, exclusions = load_source(
+        database,
+        audit_path,
+        include_holdout="holdout" in partition_names,
+    )
     tagged = [
         (market, partition)
-        for partition in ("development", "validation")
+        for partition in partition_names
         for market in partitions[partition]
     ]
     tagged.sort(key=lambda value: (value[0].close_second, value[0].ticker))
@@ -103,7 +116,7 @@ def build_tape(database: Path, audit_path: Path):
     partition_totals = Counter(partition for _market, partition in eligible)
     partition_seen = Counter()
     tape = []
-    partition_days = {"development": set(), "validation": set()}
+    partition_days = {partition: set() for partition in partition_names}
     for index, (market, partition) in enumerate(eligible):
         block = min(4, index * 5 // len(eligible))
         partition_index = partition_seen[partition]
@@ -153,7 +166,7 @@ def build_tape(database: Path, audit_path: Path):
         "eligible_markets": len(eligible),
         "excluded_unique_markets": len(tagged) - len(eligible),
         "exclusion_memberships": dict(sorted(excluded.items())),
-        "observed_days": sorted(partition_days["development"] | partition_days["validation"]),
+        "observed_days": sorted(set().union(*partition_days.values())),
         "partition_days": {key: sorted(value) for key, value in partition_days.items()},
         "holdout_markets": len(partitions["holdout"]),
         "benchmark_top_of_second_values_loaded": benchmark.loaded_seconds,

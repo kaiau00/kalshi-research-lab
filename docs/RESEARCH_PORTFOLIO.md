@@ -11,6 +11,7 @@ This document controls attention and runtime scope; it does not delete evidence 
 | Study 009 — Moderate Disagreement | Collect untouched evidence for the frozen development lead | Read-only monitor after the October 16 billing reset |
 | Study 010 — Market Calibration | Test whether a conservative calibration of Kalshi's own midpoint creates executable favorite-side value | Frozen development engine and resumable replay; no order path |
 | Study 011 — Jump-Robust Settlement | Test whether jump-separated realized volatility fixes the Gaussian model's overconfidence | Frozen feature audit shares Study 010's resumable replay; no order path |
+| Study 026 — Price-Band Holdout | One-time test of Study 025's frozen 65–69-cent exclusion | Registered and locked; explicit holdout disclosure required; no order path |
 
 ## Passive completion
 

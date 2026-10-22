@@ -10,6 +10,15 @@
   P&L. This is a candidate hypothesis, not validation. Removing all three labels cut frequency to 1.53 trades/day.
 - No holdout, Railway deployment, production parameter, sizing rule or order authority changed.
 
+## 2026-10-21 — Price-Band Holdout Study 026 registration
+
+- Froze one candidate before holdout disclosure: Study 023's exact first signal, with the market discarded when
+  its selected ask is 65–69 cents. No later opportunity in that market may replace the discarded signal.
+- Added replay guards for the original 838-trade ledger and the filtered 713-trade ledger, fixed-$1 economics,
+  one-shot profitability, stress, concentration, consistency, uncertainty and drawdown gates, and an explicit
+  unlock requirement.
+- The holdout remains sealed. No Study 026 P&L was calculated and no live rule changed.
+
 ## 2026-10-18 — Frequency Strategy Study 021
 
 - Preregistered 11,520 fixed-$1 configurations targeting 8–12 trades/day, at least a 65% win rate and a 45–72

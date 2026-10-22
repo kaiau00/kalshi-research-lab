@@ -84,7 +84,7 @@ class Quote:
 
 
 class Benchmark:
-    """Dense top-of-second BRTI array for the unsealed 80% of the archive."""
+    """Dense top-of-second BRTI array for the selected archive partitions."""
 
     def __init__(self, start_second: int, end_second: int):
         self.start_second = start_second
@@ -136,7 +136,7 @@ def _decode(blob: bytes) -> dict:
     return json.loads(zlib.decompress(blob))
 
 
-def load_source(database: Path, audit_path: Path):
+def load_source(database: Path, audit_path: Path, *, include_holdout: bool = False):
     if _sha256(database) != SOURCE_DATABASE_SHA256:
         raise ValueError("Dataset 017 database checksum mismatch")
     if _sha256(audit_path) != SOURCE_AUDIT_SHA256:
@@ -174,8 +174,10 @@ def load_source(database: Path, audit_path: Path):
                     )
                 )
         partitions = _partition(markets)
-        unsealed = partitions["development"] + partitions["validation"]
-        unsealed_tickers = {row.ticker for row in unsealed}
+        selected = partitions["development"] + partitions["validation"]
+        if include_holdout:
+            selected += partitions["holdout"]
+        selected_tickers = {row.ticker for row in selected}
         candle_rows: dict[str, list[Quote]] = {}
         candle_kinds = ("historical_candle_batch", "historical_candles")
         placeholders = ",".join("?" for _ in candle_kinds)
@@ -196,7 +198,7 @@ def load_source(database: Path, audit_path: Path):
                 ]
             for group in groups:
                 ticker = group["market_ticker"]
-                if ticker not in unsealed_tickers:
+                if ticker not in selected_tickers:
                     continue
                 parsed = []
                 for row in group.get("candlesticks", []):
@@ -212,8 +214,8 @@ def load_source(database: Path, audit_path: Path):
                         continue
                 candle_rows[ticker] = sorted(parsed, key=lambda item: item.second)
 
-        first_needed = min(row.close_second for row in unsealed) - 902
-        last_needed = max(row.close_second for row in unsealed) - 1
+        first_needed = min(row.close_second for row in selected) - 902
+        last_needed = max(row.close_second for row in selected) - 1
         benchmark = Benchmark(first_needed, last_needed)
         for (blob,) in connection.execute(
             "SELECT payload FROM events WHERE kind='historical_benchmark' ORDER BY id"
