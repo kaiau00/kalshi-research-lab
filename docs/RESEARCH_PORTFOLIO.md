@@ -1,6 +1,6 @@
 # Research portfolio status
 
-Updated on 2026-10-22 after the local Study 028 trade-tape build.
+Updated on 2026-10-22 after hosted Study 028 trade-tape commissioning.
 This document controls attention and runtime scope; it does not delete evidence or authorize orders.
 
 ## Active development
@@ -12,7 +12,7 @@ This document controls attention and runtime scope; it does not delete evidence 
 | Study 010 — Market Calibration | Test whether a conservative calibration of Kalshi's own midpoint creates executable favorite-side value | Frozen development engine and resumable replay; no order path |
 | Study 011 — Jump-Robust Settlement | Test whether jump-separated realized volatility fixes the Gaussian model's overconfidence | Frozen feature audit shares Study 010's resumable replay; no order path |
 | Study 026 — Price-Band Holdout | One-time test of Study 025's frozen 65–69-cent exclusion | Registered and locked; explicit holdout disclosure required; no order path |
-| Study 028 — Jev-Gated HFT Feasibility | Determine whether deterministic quoting has a conservative maker edge and whether a Jev veto improves adverse selection | Trade-only sidecar is implemented, tested and disabled locally; deployment and 24-hour cost commissioning remain pending; no order path |
+| Study 028 — Jev-Gated HFT Feasibility | Determine whether deterministic quoting has a conservative maker edge and whether a Jev veto improves adverse selection | Trade-only sidecar is recording on Railway with verified segment archival and no order path; 24-hour cost/capacity audit remains pending |
 
 ## Passive completion
 

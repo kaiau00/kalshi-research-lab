@@ -781,3 +781,16 @@ A 30-second read-only smoke test of source identity
 including 790 valid public trades across two current BTC 15-minute markets, with zero invalid frames, duplicate
 IDs or WebSocket errors. The integrated GitHub-main suite passed with 271 tests and Ruff passed. The sidecar was not deployed or
 enabled, no Railway variable changed, and no Jev or order endpoint was called.
+
+Commissioned the trade-only sidecar on the existing Railway service after restoring the bucket variables to
+Railway-managed references. The live rate exposed a capacity flaw in the shared 500,000-event/30-minute segment
+policy: an open trade segment could reach the 256 MB hot cap before it became archivable. Added sidecar-specific
+100,000-event/300-second rotation, created a fresh registered dataset under source identity
+`63e83d76c3e5a7ffd59179f660676e2349aced4728f4b496aa414d75f6edcb00`, and redeployed. The full suite passed with
+273 tests and Ruff passed.
+
+Deployment `4d3876c1-dca8-4d40-988c-31a261b2cc1e` was healthy with production disabled. A later checkpoint had
+598,577 trades, zero invalid or duplicate IDs, 36 verified archived segments totaling 47,604,889 bytes, 6,659,092
+hot bytes and zero sealed backlog. The observed early rate projects the frozen 5 GB archive stop at roughly 13
+days if it persists, so the 24-hour audit must resolve collection scope or capacity before the 20-date gate. No
+cap, strategy, Jev call or order authority was changed.
