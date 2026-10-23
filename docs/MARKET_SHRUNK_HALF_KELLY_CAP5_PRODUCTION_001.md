@@ -37,3 +37,15 @@ binds that funding revision to the unchanged strategy, sizing, execution and hol
 cash, no position and no resting order; protected status showed zero attempts, fills and unresolved orders. The
 matching durable `COMMISSIONED.json` receipt was written and `PAUSE_ENTRIES` was removed under the user's explicit
 authorization. Immediately after activation, status was `watching`, commissioned and unpaused, with no order yet.
+
+On October 23, the first execution audit found eight qualifying signals but zero submitted intents. Every signal
+remained in the durable pre-submit `signal` state. A direct reproduction showed Kalshi returning HTTP 429 when the
+runner's normal position and balance reads were followed by the additional exchange, position, resting-order and
+balance preflight burst. No order reached Kalshi and no position or unresolved order existed.
+
+The corrected implementation preserves every strategy, sizing, latency, IOC and hold rule. It reads positions on
+every loop, caches balance for at most five seconds, and alternates exchange-status and resting-order refreshes so
+each is at most six seconds old when an order is considered. A stale cache, inactive exchange or resting order
+cancels the signal before submission. It also deterministically converts an interrupted pre-submit attempt to an
+arrival cancellation on restart; this is safe because the intent transaction changes the state to `submitted`
+before any order POST. The fix does not retry a consumed market or alter the one-attempt rule.

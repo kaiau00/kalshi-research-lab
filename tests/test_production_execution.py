@@ -282,6 +282,17 @@ def test_arrival_cancellations_count_toward_three_signal_limit(tmp_path):
     journal.db.close()
 
 
+def test_incomplete_pre_submit_attempts_recover_as_arrival_cancellations(tmp_path):
+    journal = Journal(tmp_path / "orders.sqlite3")
+    decision = {"ticker": "KXBTC15M-26OCT071415-15", "side": "yes"}
+    journal.begin_attempt("signal-interrupted", decision)
+    assert journal.recorded_attempts()[0]["state"] == "signal"
+    assert journal.cancel_incomplete_signal_attempts() == 1
+    assert journal.recorded_attempts()[0]["state"] == "arrival_canceled"
+    assert journal.cancel_incomplete_signal_attempts() == 0
+    journal.db.close()
+
+
 def test_runner_reports_exit_against_official_hold_counterfactual(tmp_path, monkeypatch):
     replay, ticker, _, _ = prepared(risk_per_market="1.00")
 

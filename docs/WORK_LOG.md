@@ -815,3 +815,19 @@ All 282 tests and Ruff passed. Deployment `ee45409e-d556-41b4-8e39-37a445245de0`
 clean account and protected-status check, a matching durable `COMMISSIONED.json` receipt was written and
 `PAUSE_ENTRIES` was removed. The runner then reported `watching`, `commissioned=true`, `entries_paused=false`, no
 STOP, no exposure and no unresolved order. No manual order or transfer was made.
+
+## 2026-10-23 — Cap-five production preflight rate-limit repair
+
+Audited the active runner after the user reported no visible trades. It was healthy and unpaused but had recorded
+eight qualifying signals, all stranded in the pre-submit `signal` state, with zero intents, submissions, fills or
+exposure. Replaying the same read sequence reproduced an HTTP 429 on the final account read. The normal one-second
+position and balance polling plus the signal-time exchange, exposure and balance burst exhausted the Kalshi read
+allowance before the 500 ms IOC arrival point.
+
+Reworked only the safety-read scheduling: positions remain checked every loop; balance is cached for no more than
+five seconds; exchange state and resting orders are refreshed alternately and must each be no more than six
+seconds old at a signal. Missing or stale safety evidence fails closed. No REST request now occurs between a
+durably recorded signal and its frozen 500 ms arrival check. Added deterministic recovery of pre-submit attempts
+that have no client order ID; the journal can prove no POST occurred because intent persistence and the transition
+to `submitted` are atomic and precede the network call. No strategy, probability, sizing, $5 cap, market scope,
+IOC, hold policy or one-attempt rule changed.

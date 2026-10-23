@@ -1,5 +1,6 @@
 import asyncio
 import json
+import time
 from decimal import Decimal
 
 import pytest
@@ -45,6 +46,16 @@ class PausedClient(FakeClient):
             return {"market_positions": [], "cursor": ""}
         if path == "/portfolio/balance":
             return {"balance_dollars": self.balance, "portfolio_value": 0}
+        if path == "/exchange/status":
+            return {
+                "trading_active": True,
+                "exchange_active": True,
+                "exchange_index_statuses": [
+                    {"exchange_index": 2, "trading_active": True, "exchange_active": True}
+                ],
+            }
+        if path == "/portfolio/orders":
+            return {"orders": [], "cursor": ""}
         raise AssertionError(f"unexpected read: {path}")
 
     async def submit(self, payload):
@@ -195,6 +206,96 @@ def test_missing_commission_receipt_preserves_initial_cash_gate(tmp_path, monkey
         asyncio.run(runner.step())
         assert runner.status["state"] == "waiting_initial_production_funding"
         assert runner.status["commissioned"] is False
+        assert client.submissions == []
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_entry_safety_reads_are_cached_and_fail_closed(tmp_path, monkeypatch):
+    authorize(monkeypatch)
+    state, _ = warmed_state(720)
+    client = PausedClient()
+    runner = Runner(lambda: state, tmp_path, client=client)
+    try:
+        assert runner.entry_safety_reason() == "entry_safety_cache_stale"
+        asyncio.run(runner.refresh_entry_safety())
+        assert runner.entry_safety_reason() == "entry_safety_cache_stale"
+        runner.entry_safety_refresh_at = 0
+        asyncio.run(runner.refresh_entry_safety())
+        assert runner.entry_safety_reason() is None
+        assert [path for path, _ in client.reads] == [
+            "/exchange/status",
+            "/portfolio/orders",
+        ]
+        asyncio.run(runner.refresh_entry_safety())
+        assert len(client.reads) == 2
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_balance_read_is_cached_between_watching_steps(tmp_path, monkeypatch):
+    authorize(monkeypatch)
+    state, _ = warmed_state(720)
+    client = PausedClient()
+    runner = Runner(lambda: state, tmp_path, client=client)
+    try:
+        first = asyncio.run(runner.cached_account())
+        second = asyncio.run(runner.cached_account())
+        assert first == second == Decimal("129.4663")
+        assert [path for path, _ in client.reads] == ["/portfolio/balance"]
+    finally:
+        asyncio.run(runner.client.close())
+        runner.journal.db.close()
+        runner.lock.close()
+
+
+def test_signal_path_uses_rate_safe_cached_preflight(tmp_path, monkeypatch):
+    authorize(monkeypatch)
+    state, ticker = warmed_state(720)
+    client = PausedClient()
+    runner = Runner(lambda: state, tmp_path, client=client)
+    (tmp_path / ENTRY_PAUSE_FILE).unlink()
+    receipt = {
+        "strategy": runner.status["strategy"],
+        "candidate_registration_sha256": runner.status["candidate_registration_sha256"],
+        "funding_revision": runner.status["funding_revision"],
+        "initial_cash": runner.status["required_initial_cash"],
+        "exchange_index": 2,
+        "subaccount": 0,
+        "commissioned_ns": 1,
+    }
+    (tmp_path / COMMISSION_RECEIPT_FILE).write_text(json.dumps(receipt))
+    now_ns = time.time_ns()
+    runner.entry_safety.update(
+        exchange_ready=True,
+        exchange_observed_ns=now_ns,
+        resting_orders=[],
+        orders_observed_ns=now_ns,
+    )
+    runner.entry_safety_refresh_at = time.monotonic()
+    runner.signal = lambda *_args, **_kwargs: {
+        "ticker": ticker,
+        "side": "yes",
+        "limit": Decimal(".50"),
+        "quantity": 1,
+        "reservation": Decimal(".51"),
+        "arrival_ns": 0,
+    }
+    runner.current_markets = lambda: [ticker]
+    runner.arrival_fill_preview = lambda _decision: None
+    try:
+        asyncio.run(runner.step())
+        attempts = runner.journal.recorded_attempts()
+        assert len(attempts) == 1 and attempts[0]["state"] == "arrival_canceled"
+        assert runner.status["state"] == "arrival_ioc_not_marketable"
+        assert [path for path, _ in client.reads] == [
+            "/portfolio/positions",
+            "/portfolio/balance",
+        ]
         assert client.submissions == []
     finally:
         asyncio.run(runner.client.close())

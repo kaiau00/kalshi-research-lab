@@ -147,6 +147,20 @@ class Journal:
     def recorded_attempts(self):
         return [dict(row) for row in self.db.execute("SELECT * FROM signal_attempts ORDER BY created_ns")]
 
+    def cancel_incomplete_signal_attempts(self):
+        """Close pre-submit attempts left behind by an interrupted API preflight.
+
+        A submitted order is impossible in this state: ``intent`` changes the
+        attempt to ``submitted`` in the same transaction before the HTTP POST.
+        """
+
+        changed = self.db.execute(
+            "UPDATE signal_attempts SET state='arrival_canceled' "
+            "WHERE state='signal' AND client_id IS NULL"
+        ).rowcount
+        self.db.commit()
+        return changed
+
     def begin_attempt(self, attempt_id, decision):
         ticker = decision["ticker"]
         if len(self.attempts(ticker)) >= 3 or self.entry_position(ticker):

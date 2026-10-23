@@ -44,6 +44,9 @@ MAXIMUM_SELECTED_ASK = Decimal("0.80")
 MAXIMUM_MODEL_MARKET_GAP = 0.075
 MAXIMUM_BINARY_SPREAD = Decimal("0.02")
 ADVERSE_PRICE_BUFFER = Decimal("0.02")
+BALANCE_CACHE_SECONDS = 5.0
+ENTRY_SAFETY_REFRESH_SECONDS = 2.0
+ENTRY_SAFETY_MAX_AGE_NS = 6_000_000_000
 ENTRY_PAUSE_FILE = "PAUSE_ENTRIES"
 COMMISSION_RECEIPT_FILE = "COMMISSIONED.json"
 RUNNER_NAME = "market_shrunk_half_kelly_cap5_001"
@@ -228,6 +231,7 @@ class Runner(ReconciliationRunner):
         frozen = registration()
         self.journal.register_risk_policy(frozen["risk"])
         self.journal.register_hold_policy(frozen["position"])
+        recovered_attempts = self.journal.cancel_incomplete_signal_attempts()
         self.status = {
             "environment": "production",
             "real_money": True,
@@ -248,16 +252,71 @@ class Runner(ReconciliationRunner):
             "execution": "completed-minute decision; 500ms delayed IOC; one attempt; no POST retry",
             "strategy_parameters": frozen,
             "started_ns": time.time_ns(),
+            "recovered_pre_submit_attempts": recovered_attempts,
         }
         self.account_at = 0.0
+        self.cached_cash = None
         self.settlement_at = 0.0
         self.counterfactual_at = 0.0
+        self.entry_safety_refresh_at = 0.0
+        self.entry_safety_next = "exchange"
+        self.entry_safety = {
+            "exchange_ready": None,
+            "exchange_observed_ns": 0,
+            "resting_orders": None,
+            "orders_observed_ns": 0,
+        }
         self.last_evaluated_boundary = {}
         self.rejections = {}
         self.kelly_cap_binding_signals = 0
 
     def reject(self, reason):
         self.rejections[reason] = self.rejections.get(reason, 0) + 1
+        return None
+
+    async def cached_account(self):
+        if self.cached_cash is not None and time.monotonic() - self.account_at < BALANCE_CACHE_SECONDS:
+            return self.cached_cash
+        self.cached_cash = await self.account()
+        self.account_at = time.monotonic()
+        return self.cached_cash
+
+    async def refresh_entry_safety(self):
+        if time.monotonic() - self.entry_safety_refresh_at < ENTRY_SAFETY_REFRESH_SECONDS:
+            return
+        observed_ns = time.time_ns()
+        if self.entry_safety_next == "exchange":
+            self.entry_safety.update(
+                exchange_ready=await self.exchange_ready(),
+                exchange_observed_ns=observed_ns,
+            )
+            self.entry_safety_next = "orders"
+        else:
+            orders = await self.read(
+                "/portfolio/orders", {"exchange_index": 2, "status": "resting", "limit": 200}
+            )
+            if orders.get("cursor"):
+                raise RuntimeError("Production resting-order pagination was not exhausted")
+            self.entry_safety.update(
+                resting_orders=orders.get("orders", []),
+                orders_observed_ns=observed_ns,
+            )
+            self.entry_safety_next = "exchange"
+        self.entry_safety_refresh_at = time.monotonic()
+
+    def entry_safety_reason(self, now_ns=None):
+        now_ns = now_ns or time.time_ns()
+        if (
+            not self.entry_safety["exchange_observed_ns"]
+            or not self.entry_safety["orders_observed_ns"]
+            or now_ns - self.entry_safety["exchange_observed_ns"] > ENTRY_SAFETY_MAX_AGE_NS
+            or now_ns - self.entry_safety["orders_observed_ns"] > ENTRY_SAFETY_MAX_AGE_NS
+        ):
+            return "entry_safety_cache_stale"
+        if not self.entry_safety["exchange_ready"]:
+            return "exchange_paused"
+        if self.entry_safety["resting_orders"]:
+            return "existing_account_exposure"
         return None
 
     def signal(self, ticker, cash, now_ns=None):
@@ -362,7 +421,7 @@ class Runner(ReconciliationRunner):
             raise RuntimeError("Production account exposure pagination was not exhausted")
         if await self.manage_position(positions_data.get("market_positions", [])):
             return
-        cash = await self.account()
+        cash = await self.cached_account()
         commissioned = valid_commission_receipt(self.root)
         self.status["commissioned"] = commissioned
         if (self.root / ENTRY_PAUSE_FILE).exists():
@@ -371,6 +430,7 @@ class Runner(ReconciliationRunner):
         if not self.journal.rows() and not commissioned and cash != STARTING_CASH:
             self.status.update(state="waiting_initial_production_funding", markets=self.current_markets())
             return
+        await self.refresh_entry_safety()
         markets = self.current_markets()
         self.status.update(state="watching", markets=markets)
         for ticker in markets:
@@ -379,20 +439,13 @@ class Runner(ReconciliationRunner):
                 continue
             attempt_id = "signal-" + uuid.uuid4().hex
             self.journal.begin_attempt(attempt_id, decision)
-            if not await self.exchange_ready():
-                self.status["state"] = "exchange_paused"
+            safety_reason = self.entry_safety_reason()
+            if safety_reason:
+                self.status["state"] = safety_reason
+                if safety_reason == "existing_account_exposure":
+                    self.status["resting_order_count"] = len(self.entry_safety["resting_orders"])
                 self.journal.finish_attempt(attempt_id, "arrival_canceled")
                 return
-            clear, positions, resting = await self.exposure_clear()
-            if not clear:
-                self.status.update(
-                    state="existing_account_exposure",
-                    nonzero_position_count=len(positions),
-                    resting_order_count=len(resting),
-                )
-                self.journal.finish_attempt(attempt_id, "arrival_canceled")
-                return
-            cash = await self.account()
             if cash < Decimal(decision["reservation"]):
                 self.status["state"] = "insufficient_production_cash"
                 self.journal.finish_attempt(attempt_id, "arrival_canceled")
@@ -438,8 +491,9 @@ class Runner(ReconciliationRunner):
         orders = [json.loads(row["exchange_order"]) for row in rows if row["exchange_order"]]
         settled = self.journal.settled()
         attempts = self.journal.recorded_attempts()
+        now_ns = time.time_ns()
         self.status.update(
-            updated_ns=time.time_ns(),
+            updated_ns=now_ns,
             entries_paused=(self.root / ENTRY_PAUSE_FILE).exists(),
             stop_exists=(self.root / "STOP").exists(),
             submitted_attempts=len(rows),
@@ -450,6 +504,25 @@ class Runner(ReconciliationRunner):
             filled_markets=sum(fill_count(order) > 0 for order in orders),
             unresolved_orders=len(self.journal.pending()),
             kelly_cap_binding_signals=self.kelly_cap_binding_signals,
+            entry_safety_cache={
+                "exchange_ready": self.entry_safety["exchange_ready"],
+                "exchange_age_seconds": (
+                    (now_ns - self.entry_safety["exchange_observed_ns"]) / 1e9
+                    if self.entry_safety["exchange_observed_ns"]
+                    else None
+                ),
+                "resting_order_count": (
+                    len(self.entry_safety["resting_orders"])
+                    if self.entry_safety["resting_orders"] is not None
+                    else None
+                ),
+                "orders_age_seconds": (
+                    (now_ns - self.entry_safety["orders_observed_ns"]) / 1e9
+                    if self.entry_safety["orders_observed_ns"]
+                    else None
+                ),
+                "maximum_age_seconds": ENTRY_SAFETY_MAX_AGE_NS / 1e9,
+            },
             rejections=dict(sorted(self.rejections.items())),
             recent_orders=[
                 {
