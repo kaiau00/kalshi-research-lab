@@ -34,7 +34,7 @@ class FakeClient:
 
 
 class PausedClient(FakeClient):
-    def __init__(self, balance="139.4648"):
+    def __init__(self, balance="129.4663"):
         self.reads = []
         self.submissions = []
         self.balance = balance

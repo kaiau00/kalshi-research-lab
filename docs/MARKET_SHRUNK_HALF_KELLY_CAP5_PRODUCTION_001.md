@@ -5,8 +5,10 @@ Study 023 half-Kelly rule capped at $3 to the identical signal and half-Kelly ru
 new production revision with a separate durable ledger. It does not alter or rewrite the $3 runner's 12 settled
 fills and +$9.4733 realized net P&L.
 
-The runner is restricted to `KXBTC15M`, Predictions exchange index 2, subaccount 0. Its commissioning balance is
-the observed $139.4648 available after the prior runner's settled activity. No transfer is authorized or required.
+The runner is restricted to `KXBTC15M`, Predictions exchange index 2, subaccount 0. Its current commissioning
+balance is the $129.4663 observed during the user's October 22 resumption authorization under funding revision
+`market-shrunk-half-kelly-cap5-funding-002-20261022`. The earlier $139.4648 snapshot is historical. No transfer is
+authorized or required.
 The new ledger is `/data/production-market-shrunk-half-kelly-cap5-001` and starts with `PAUSE_ENTRIES`. Before the
 pause is removed, commissioning must verify the exact cash balance, no position, no resting order, and no unresolved
 order, then write a matching `COMMISSIONED.json` receipt.

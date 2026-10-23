@@ -33,7 +33,7 @@ from .registration import (
     registration_hash,
 )
 
-STARTING_CASH = Decimal("139.4648")
+STARTING_CASH = Decimal("129.4663")
 KELLY_MULTIPLIER = Decimal("0.50")
 MAXIMUM_ALL_IN = Decimal("5.00")
 FAST_VARIANCE_WEIGHT = Decimal("0.90")

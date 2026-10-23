@@ -9,7 +9,7 @@ STRATEGY = "market_shrunk_half_kelly_cap5_001"
 CONFIG_REVISION = "market-shrunk-half-kelly-cap5-production-001-20261022"
 RISK_REVISION = "market-shrunk-half-kelly-cap5-risk-001-20261022"
 HOLD_REVISION = "market-shrunk-half-kelly-cap5-hold-001-20261022"
-FUNDING_REVISION = "market-shrunk-half-kelly-cap5-funding-001-20261022"
+FUNDING_REVISION = "market-shrunk-half-kelly-cap5-funding-002-20261022"
 SOURCE_STUDY_REGISTRATION_SHA256 = (
     "fe5a1cf5e1577a5e7ee18c86d51089579ef4ea6e7027d1a37f6c99b128f9f57c"
 )
@@ -40,7 +40,7 @@ def registration():
             "series": "KXBTC15M",
             "exchange_index": 2,
             "subaccount": 0,
-            "required_initial_cash_dollars": "139.4648",
+            "required_initial_cash_dollars": "129.4663",
             "funding_revision": FUNDING_REVISION,
         },
         "decision": {
