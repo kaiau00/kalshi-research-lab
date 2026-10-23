@@ -831,3 +831,20 @@ durably recorded signal and its frozen 500 ms arrival check. Added deterministic
 that have no client order ID; the journal can prove no POST occurred because intent persistence and the transition
 to `submitted` are atomic and precede the network call. No strategy, probability, sizing, $5 cap, market scope,
 IOC, hold policy or one-attempt rule changed.
+
+## 2026-10-23 — Deterministic HFT baseline and isolated Demo service
+
+Frozen Study 029 before its first P&L replay. The deterministic baseline combines the adaptive final-minute BRTI
+settlement model with a 75/25 raw/market log-odds pool, midpoint/microprice reference, exact CARA binary-inventory
+reservation values, one-contract passive quotes, a $5 unsettled-premium cap and strict durable reconciliation. The
+new client is fixed to Kalshi Demo hosts and has no production fallback. The standalone FastAPI service exposes a
+protected Demo dashboard and runs from a separate ledger and volume. Unit and integration coverage verifies quote
+construction, post-only payloads, cancellation, maker fills, signed inventory, settlements, commissioning identity,
+external-exposure refusal, cumulative-order monotonicity and dashboard authentication.
+
+Downloaded and checksum-verified 76 main order-book/BRTI segments and 172 public-trade segments, then merged about
+40 million events by receipt time. The conservative replay used 500 ms acknowledgement, joined behind all displayed
+size, granted no cancellation or block-trade credit and excluded ambiguous cross-stream ordering. Across 39.2045
+hours, three UTC dates and 2,049,350 public trades, the engine produced two quote intents, one acknowledged quote and
+zero plausible fills. Every credibility gate except zero unresolved exposure failed or was not measurable. The
+baseline therefore has no demonstrated edge and Jev remains disabled.

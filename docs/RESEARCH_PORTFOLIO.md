@@ -1,7 +1,6 @@
 # Research portfolio status
 
-Updated on 2026-10-22 after hosted Study 028 trade-tape commissioning and activation of the Market-Shrunk
-half-Kelly $5 risk revision.
+Updated on 2026-10-23 after the first frozen Study 029 deterministic HFT replay.
 This document controls attention and runtime scope; it does not delete evidence or authorize orders.
 
 ## Active development
@@ -14,6 +13,7 @@ This document controls attention and runtime scope; it does not delete evidence 
 | Study 011 — Jump-Robust Settlement | Test whether jump-separated realized volatility fixes the Gaussian model's overconfidence | Frozen feature audit shares Study 010's resumable replay; no order path |
 | Study 026 — Price-Band Holdout | One-time test of Study 025's frozen 65–69-cent exclusion | Registered and locked; explicit holdout disclosure required; no order path |
 | Study 028 — Jev-Gated HFT Feasibility | Determine whether deterministic quoting has a conservative maker edge and whether a Jev veto improves adverse selection | Trade-only sidecar is recording on Railway with verified segment archival and no order path; 24-hour cost/capacity audit remains pending |
+| Study 029 — Deterministic HFT Baseline | Test the fixed mathematical market maker with conservative queue fills and isolated Demo execution | First 39.2-hour replay had two intents and zero fills; Demo may audit mechanics, while Jev and production remain disabled |
 
 ## Passive completion
 

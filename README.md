@@ -211,6 +211,25 @@ validation. The completed six-month archive contains 17,311 settled markets, 17,
 required BRTI hours; its audit records every missing or inconsistent source row. See
 [Dataset 017](docs/KALSHI_HISTORICAL_ARCHIVE_DATASET_017.md).
 
+## Deterministic HFT Demo
+
+Study 029 is a separate Kalshi Demo service for one-contract, post-only BTC 15-minute quoting. It combines the
+adaptive BRTI settlement model with market midpoint/microprice information and exact CARA binary-inventory
+reservation values. The service has its own durable ledger, volume and protected dashboard. Its client is fixed to
+Demo hosts and contains no production fallback.
+
+Recorded-data evaluation is intentionally queue-conservative: 500 ms acknowledgement latency, back of displayed
+queue, no cancellation credit, no block-trade credit and no fill unless both exchange and receipt clocks establish
+that a matching public trade occurred later. Run a previously prepared local tape slice with:
+
+```sh
+PYTHONPATH=src .venv/bin/python scripts/hft_replay_029.py --skip-download
+```
+
+Jev remains disabled until the deterministic baseline passes every 20-date/1,000-fill profitability, concentration,
+consistency, stress and reconciliation gate. See
+[the frozen Study 029 protocol](docs/DETERMINISTIC_HFT_BASELINE_STUDY_029_PROTOCOL.md).
+
 Recorded-data replay processes only events already received at each simulated decision. Forecasts use the official threshold, the observed part of the final-minute benchmark average, and a conditional model for remaining seconds. The final outcome comes from the official market result, never the model.
 
 At the start of a fresh collector database, the default configuration and source hash are registered. `--split forward` only succeeds with those same definitions. Replaying this growing dataset reconstructs the fixed paper accounts across restarts; it is not submitting exchange paper orders. A code/config change requires a **new dataset**, and the earlier dataset remains available for exploratory replay. Reports disclose execution assumptions. Actual authenticated feed behavior still needs commissioning with your key.
