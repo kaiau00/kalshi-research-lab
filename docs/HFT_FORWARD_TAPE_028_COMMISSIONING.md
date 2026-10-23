@@ -105,3 +105,26 @@ for WebSocket authentication and did not deploy or call an account or order endp
 
 Enabling the sidecar requires a deployment restart and Railway variable changes, so it remains a separate
 reviewed operation.
+
+## Hosted commissioning result
+
+Study 028 was enabled on the existing Railway research service on 2026-10-22 with production execution disabled.
+The first live-rate check showed that the shared 500,000-event/30-minute segment policy could reach the 256 MB
+hot limit before rotation. The sidecar was therefore moved to its own reviewed source identity and a fresh dataset,
+with rotation fixed at 100,000 events or 300 seconds. This change did not alter the main recorder, a strategy, an
+account path or an order path.
+
+Deployment `4d3876c1-dca8-4d40-988c-31a261b2cc1e` then verified the complete hosted path. At the recorded checkpoint:
+
+- process health returned HTTP 200 and the main book and benchmark recorder remained connected;
+- production status was `disabled`;
+- both production and demo order authority were false;
+- 598,577 public trades had been recorded with zero invalid messages and zero duplicate trade IDs;
+- 36 segments totaling 47,604,889 compressed bytes had been verified and archived;
+- the local hot dataset used 6,659,092 bytes, with zero sealed backlog; and
+- the configured 256 MB hot cap and 5 GB archive cap were reported by the running service.
+
+This proves continuous capture, time/event rotation, bucket upload, read-back verification, manifest update and
+local cleanup. It does not prove the maker strategy or authorize Jev, demo orders or live orders. The remaining
+commissioning gate is the planned 24-hour cost and resource audit before treating the tape as a long-running data
+source.
