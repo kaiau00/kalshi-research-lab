@@ -794,3 +794,10 @@ Deployment `4d3876c1-dca8-4d40-988c-31a261b2cc1e` was healthy with production di
 hot bytes and zero sealed backlog. The observed early rate projects the frozen 5 GB archive stop at roughly 13
 days if it persists, so the 24-hour audit must resolve collection scope or capacity before the 20-date gate. No
 cap, strategy, Jev call or order authority was changed.
+
+Implemented the first offline Study 028 replay primitive. The conservative queue model joins a simulated quote
+behind all displayed contracts and advances it only with a strictly later, non-block public trade at the exact
+price on the opposite taker direction. Book cancellations give no queue credit; partial fills remain partial;
+same-millisecond or conflicting exchange/receipt ordering is excluded. The adapter consumes the already validated
+trade-tape type and fails closed when Kalshi's outcome-side and book-side fields disagree. The integrated suite
+passed with 282 tests and Ruff passed. This is research code only and has no account, socket or order path.

@@ -50,7 +50,12 @@ timestamp. Block trades cannot advance a displayed-queue simulation. See the off
 
 - Acknowledged quotes join behind all displayed size at their level.
 - A fill requires public trades to consume the simulated quantity ahead and then our quantity.
+- The passive maker outcome is the opposite of `taker_outcome_side`; its exact-price comparison uses the
+  corresponding YES or NO leg price. `taker_outcome_side=yes` must agree with `taker_book_side=bid`, and NO must
+  agree with ask, following Kalshi's [order-direction definition](https://docs.kalshi.com/getting_started/order_direction).
 - Displayed cancellations do not move us forward unless a frozen observable attribution rule permits it.
+- A trade advances the queue only when both exchange time and local receipt time place it strictly after quote
+  acknowledgement. Equal exchange milliseconds or conflicting clock order are ambiguous and excluded.
 - Partial fills, cancel latency and fill/cancel races remain exposure.
 - Results are repeated with doubled latency and one- and two-cent adverse execution stress.
 - Taker fills use the first observed executable level after the frozen latency and include the exact applicable fee.
