@@ -1,6 +1,7 @@
 # Research portfolio status
 
-Updated on 2026-10-22 after hosted Study 028 trade-tape commissioning.
+Updated on 2026-10-22 after hosted Study 028 trade-tape commissioning and activation of the Market-Shrunk
+half-Kelly $5 risk revision.
 This document controls attention and runtime scope; it does not delete evidence or authorize orders.
 
 ## Active development
@@ -50,7 +51,7 @@ authority. Study 003's `adaptive_baseline` is also a source benchmark for later 
   not validated and the holdout remains sealed;
 - Study 027 expanded Kelly-cap diagnostic — completed on Study 023's same 838 decisions. Quarter-Kelly robustness
   worsened above $3. Half Kelly improved through a $5 cap, but historical drawdown rose to $33.30 at $4 and $38.68
-  at $5; the $6 cap was dominated under stress and drew down $52.91. No live cap changed;
+  at $5; the $6 cap was dominated under stress and drew down $52.91. The user later authorized the $5 cap live;
 - Risk Sizing Audit 001 — frozen evidence; no new observations and no selection while the signal edge is unproven;
 - completed fair-value, tail and adaptive demo ledgers — preserved with their runners disabled;
 - prior adaptive and Market Anchor production ledgers — immutable historical records, never reused for a new
@@ -61,13 +62,13 @@ under a new name.
 
 ## Production state
 
-The user-authorized `market_shrunk_half_kelly_001` runner is selected and active on Railway with a fresh durable
-ledger. It began with exactly $140.0000 of internally routed Predictions cash, zero attempts, zero fills, no
-position, no resting order and zero unresolved orders under funding revision
-`market-shrunk-half-kelly-funding-002-20261019`. The previous conservative ledger remains preserved and paused at
-nine officially settled fills and -$0.1948 realized net P&L. Before the first bot order, a later Kalshi internal
-transfer reduced BTC-path cash to $129.9915. The user explicitly authorized resumption at that balance; the durable
-commissioning receipt prevents the already-passed $140 preflight from being repeated after ordinary cash changes.
+The user-authorized `market_shrunk_half_kelly_cap5_001` runner is selected and active on Railway with its own
+durable ledger. Its October 22 commissioning preflight found exactly $129.4663 of Predictions cash, no position,
+no resting order and zero unresolved orders. Funding revision
+`market-shrunk-half-kelly-cap5-funding-002-20261022` and candidate registration SHA-256
+`343fdcf0a3cd7ee0c051eaebee20438c53a7cd909fd780158023f62a1373eb16` bind the commissioned receipt to the
+unchanged Study 023 signal and the authorized half-Kelly $5 cap. The prior $3 runner and both Market Anchor ledgers
+remain preserved and paused.
 
 ## Deletion policy
 

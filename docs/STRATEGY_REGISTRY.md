@@ -16,8 +16,9 @@ Statuses have precise meanings:
 - **paused live**: the production adapter exists but new entries are durably paused.
 
 No read-only study, registry entry or favorable result grants order authority. The user-authorized
-`market_shrunk_half_kelly_001` production runner is selected and active with $140.0000 of authorized Predictions
-funding. The earlier conservative ledger remains immutable and paused.
+`market_shrunk_half_kelly_cap5_001` production runner is selected and active on the Predictions exchange. It was
+commissioned at $129.4663 with half-Kelly sizing capped at $5 all-in. Earlier production ledgers remain immutable
+and paused.
 
 ## Directional strategies and research candidates
 
@@ -52,7 +53,7 @@ funding. The earlier conservative ledger remains immutable and paused.
 | `historical_parameter_kelly_study_019` | Preregistered 1,620-configuration conservative-anchor grid with a separate $100 fixed-versus-fractional-Kelly sizing comparison | Complete. Two neighboring fixed-$1 signals passed the aggregate research gate; the later split failed two-cent stress, daily uncertainty includes zero, and the newest 20% remains sealed | [protocol](HISTORICAL_PARAMETER_KELLY_STUDY_019_PROTOCOL.md), [result](HISTORICAL_PARAMETER_KELLY_STUDY_019_RESULT.md) |
 | `historical_robust_parameter_risk_study_020` | Preregistered 4,608-cell neighborhood search across volatility blend, probability blend, edge, price, disagreement, timing and spread, with risk secondary to fixed-$1 robustness | Complete with no winner. The best stressed near miss made +$24.4806 and +$9.2233 at two-cent stress but was positive in only three of five stressed blocks; no risk path was opened and the holdout remains sealed | [protocol](HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_PROTOCOL.md), [result](HISTORICAL_ROBUST_PARAMETER_RISK_STUDY_020_RESULT.md) |
 | `market_shrunk_half_kelly_001` | Study 023 signal with half-Kelly sizing capped at $3 | Historical live revision preserved at 12 settled fills and +$9.4733 realized net P&L before the authorized cap change | `src/market_shrunk_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_PRODUCTION_001.md) |
-| `market_shrunk_half_kelly_cap5_001` | Identical Study 023 signal with half-Kelly sizing capped at $5 | User-authorized live risk pilot using a fresh paused ledger; Study 027 found stronger stressed P&L with materially larger historical drawdown, and the signal remains unproven | `src/market_shrunk_cap5_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_CAP5_PRODUCTION_001.md), [risk result](MARKET_SHRUNK_EXPANDED_KELLY_CAP_STUDY_027_RESULT.md) |
+| `market_shrunk_half_kelly_cap5_001` | Identical Study 023 signal with half-Kelly sizing capped at $5 | **Active live** under the October 22 authorization and separate commissioned ledger; Study 027 found stronger stressed P&L with materially larger historical drawdown, and the signal remains unproven | `src/market_shrunk_cap5_production`, [production specification](MARKET_SHRUNK_HALF_KELLY_CAP5_PRODUCTION_001.md), [risk result](MARKET_SHRUNK_EXPANDED_KELLY_CAP_STUDY_027_RESULT.md) |
 | Study 025 regime diagnostic | Predefined side, price, timing, volatility-ratio and model/market buckets applied to Study 023's exact fixed-$1 ledger | Complete diagnostic. Three overlapping buckets were stressed losers in both partitions. Avoiding 65–69-cent entries is a post-hoc candidate only; no rule changed and the holdout remains sealed | [protocol](MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_PROTOCOL.md), [result](MARKET_SHRUNK_REGIME_FAILURE_ANALYSIS_025_RESULT.md) |
 | `market_shrunk_skip_65_69_026` | Study 023's exact first signal, but discard the entire market when its selected ask is at least $0.65 and below $0.70 | Frozen holdout candidate selected from Study 025. The newest 20% remains sealed; no demo or production authority | [Study 026 protocol](MARKET_SHRUNK_PRICE_BAND_HOLDOUT_026_PROTOCOL.md) |
 | `jev_gated_hft_feasibility_028` | Deterministic settlement-aware passive quoting and rare stale-quote taking, with Jev limited to regime classification and veto/side permissions | Development feasibility study. The trade-only sidecar is commissioned on Railway and collecting the missing queue evidence with hard 256 MB hot/5 GB archive stops and no account or order path. The 24-hour cost/capacity audit remains open | [protocol](JEV_GATED_HFT_STUDY_028_PROTOCOL.md), [data audit](JEV_GATED_HFT_DATA_AUDIT_028.md), [commissioning](HFT_FORWARD_TAPE_028_COMMISSIONING.md) |
@@ -108,10 +109,10 @@ Sizing cannot turn a negative-expectation signal positive. These variants compar
 | `fixed_3` | Maximum $3 all-in cost | Frozen sizing audit variant; historical adaptive demo cap |
 | `eighth_kelly_cap_3` | One-eighth of model Kelly, maximum $3 | Frozen audit variant |
 | `quarter_kelly_cap_3` | One-quarter Kelly, maximum $3 | Frozen audit variant |
-| `half_kelly_cap_3` | One-half Kelly, maximum $3 | Study 024 diagnostic and active user-authorized `market_shrunk_half_kelly_001` production risk rule |
+| `half_kelly_cap_3` | One-half Kelly, maximum $3 | Study 024 diagnostic and historical `market_shrunk_half_kelly_001` production risk rule |
 | `quarter_kelly_cap_4/5/6` | One-quarter Kelly, maximum $4, $5 or $6 | Study 027 diagnostic. Every larger cap had worse stressed P&L and drawdown than quarter Kelly capped at $3 |
 | `half_kelly_cap_4` | One-half Kelly, maximum $4 | Study 027's best stress-to-drawdown ratio among expanded paths; historical drawdown $33.3021; research only |
-| `half_kelly_cap_5` | One-half Kelly, maximum $5 | Study 027's highest two-cent-stressed P&L and 4/5 positive stressed blocks; historical drawdown $38.6751; research only |
+| `half_kelly_cap_5` | One-half Kelly, maximum $5 | Active authorized risk rule; Study 027 had the highest two-cent-stressed P&L and 4/5 positive stressed blocks, with $38.6751 historical drawdown |
 | `half_kelly_cap_6` | One-half Kelly, maximum $6 | Study 027's highest headline P&L but lower stress P&L than $5 and $52.9143 drawdown; rejected as dominated under stress |
 | Conservative Anchor risk layer | One-hour cooldown; daily halt at -$2 or three settled losses; indefinite halt at $5 realized drawdown | Implemented in the paused production revision and Studies 006/008/009 |
 

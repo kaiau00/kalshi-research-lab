@@ -29,3 +29,11 @@ Study 027 is the risk reference. On the already-viewed 838-trade Study 023 ledge
 blocks, and had a $38.6751 maximum drawdown. Study 023 still failed its original validation drawdown and stressed
 consistency gates, and Study 027 reused disclosed data. The live revision is an explicitly authorized risk pilot,
 not proof of a profitable edge.
+
+Funding revision `market-shrunk-half-kelly-cap5-funding-002-20261022` records the exact final preflight balance.
+Candidate registration SHA-256 `343fdcf0a3cd7ee0c051eaebee20438c53a7cd909fd780158023f62a1373eb16`
+binds that funding revision to the unchanged strategy, sizing, execution and hold rules. Deployment
+`ee45409e-d556-41b4-8e39-37a445245de0` reached SUCCESS. A direct read-only account preflight found $129.4663
+cash, no position and no resting order; protected status showed zero attempts, fills and unresolved orders. The
+matching durable `COMMISSIONED.json` receipt was written and `PAUSE_ENTRIES` was removed under the user's explicit
+authorization. Immediately after activation, status was `watching`, commissioned and unpaused, with no order yet.

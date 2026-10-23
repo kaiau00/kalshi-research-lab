@@ -801,3 +801,17 @@ price on the opposite taker direction. Book cancellations give no queue credit; 
 same-millisecond or conflicting exchange/receipt ordering is excluded. The adapter consumes the already validated
 trade-tape type and fails closed when Kalshi's outcome-side and book-side fields disagree. The integrated suite
 passed with 282 tests and Ruff passed. This is research code only and has no account, socket or order path.
+
+## 2026-10-22 — Half-Kelly $5 live activation
+
+The user explicitly authorized resuming real-money BTC 15-minute Predictions trading with the existing Study 023
+signal, half-Kelly sizing and a $5 all-in cap. The final paused preflight observed $129.4663 cash, no account
+position, no resting order, zero runner attempts, zero fills and zero unresolved orders. Funding revision
+`market-shrunk-half-kelly-cap5-funding-002-20261022` updates only the fresh-ledger commissioning balance; signal,
+execution and hold rules are unchanged. The resulting candidate registration SHA-256 is
+`343fdcf0a3cd7ee0c051eaebee20438c53a7cd909fd780158023f62a1373eb16`.
+
+All 282 tests and Ruff passed. Deployment `ee45409e-d556-41b4-8e39-37a445245de0` reached SUCCESS. After a second
+clean account and protected-status check, a matching durable `COMMISSIONED.json` receipt was written and
+`PAUSE_ENTRIES` was removed. The runner then reported `watching`, `commissioned=true`, `entries_paused=false`, no
+STOP, no exposure and no unresolved order. No manual order or transfer was made.

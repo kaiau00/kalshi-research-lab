@@ -1,7 +1,7 @@
 # Kalshi Research Lab
 
 A BTC-only, 15-minute market recorder, strategy research system, and tightly scoped execution service. The
-user-authorized production revision is `market_shrunk_half_kelly_001`, with half-Kelly sizing capped at $3 all-in,
+user-authorized production revision is `market_shrunk_half_kelly_cap5_001`, with half-Kelly sizing capped at $5 all-in,
 one delayed IOC attempt per market and hold-to-official-settlement position management. Its historical validation
 failed two preregistered robustness gates, so live results are a pilot rather than proof of an edge. Earlier
 production ledgers remain preserved and paused. The purpose is to reject weak ideas and measure promising ones,
@@ -150,8 +150,8 @@ simple post-hoc candidate—avoid 65–69-cent entries—that requires a separat
 Its runner remains locked behind an explicit one-time holdout disclosure flag.
 
 [Expanded Kelly-Cap Study 027](docs/MARKET_SHRUNK_EXPANDED_KELLY_CAP_STUDY_027_RESULT.md) compares quarter- and
-half-Kelly sizing with $3 through $6 caps on the same 838 historical decisions. It is a risk diagnostic only and
-does not change the live $3 cap.
+half-Kelly sizing with $3 through $6 caps on the same 838 historical decisions. The user later authorized the
+half-Kelly $5 cap as a live risk pilot; the diagnostic still does not prove the signal has an edge.
 
 ## Run locally
 
