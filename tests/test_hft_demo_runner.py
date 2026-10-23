@@ -66,6 +66,8 @@ class FakeClient:
             return {"order": self.orders[path.rsplit("/", 1)[1]]}
         if path == "/portfolio/settlements":
             return {"settlements": [], "cursor": ""}
+        if path.endswith("/orderbook"):
+            return {"orderbook_fp": {"yes_dollars": [["0.45", "1"]], "no_dollars": []}}
         raise AssertionError(path)
 
     async def close(self):
@@ -162,3 +164,18 @@ def test_payload_expiration_is_short_lived(monkeypatch):
     assert payload["expiration_time"] == 1_003
     assert payload["post_only"] is True
     assert payload["count"] == "1"
+
+
+def test_one_sided_book_is_skipped_without_stopping_runner(tmp_path, monkeypatch):
+    asyncio.run(_one_sided_book_is_skipped_without_stopping_runner(tmp_path, monkeypatch))
+
+
+async def _one_sided_book_is_skipped_without_stopping_runner(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    runner = Runner(tmp_path, client=FakeClient())
+    runner.market.forecast = lambda *args, **kwargs: {"yes_probability": 0.5, "seconds_left": 100}
+    await runner.quote_market("KXBTC15M-TEST")
+    assert runner.status["last_rejections"] == ["one_sided_or_invalid_book"]
+    assert runner.journal.summary()["orders"] == 0
+    runner.journal.close()
+    runner.lock.close()

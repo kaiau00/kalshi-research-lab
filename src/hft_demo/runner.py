@@ -343,7 +343,14 @@ class Runner:
         received_ns = time.time_ns()
         data = await self.client.get("/markets/" + ticker + "/orderbook", {"depth": 10})
         inventory = self.journal.inventory().get(ticker, 0)
-        snapshot = parse_top(data, received_ns, ticker, forecast["yes_probability"], inventory)
+        # A Kalshi book can legitimately be one-sided between updates.  It is
+        # unusable for a two-sided fair-value quote, but it must never take
+        # down the runner or turn into a blind order.
+        try:
+            snapshot = parse_top(data, received_ns, ticker, forecast["yes_probability"], inventory)
+        except (KeyError, TypeError, ValueError):
+            self.status["last_rejections"] = ["one_sided_or_invalid_book"]
+            return
         snapshot = Snapshot(
             **{**snapshot.__dict__, "seconds_left": forecast["seconds_left"]}
         )
