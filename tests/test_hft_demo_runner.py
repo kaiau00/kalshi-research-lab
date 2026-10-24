@@ -179,3 +179,19 @@ async def _one_sided_book_is_skipped_without_stopping_runner(tmp_path, monkeypat
     assert runner.journal.summary()["orders"] == 0
     runner.journal.close()
     runner.lock.close()
+
+
+def test_create_is_reconciled_from_authoritative_read(tmp_path, monkeypatch):
+    asyncio.run(_create_is_reconciled_from_authoritative_read(tmp_path, monkeypatch))
+
+
+async def _create_is_reconciled_from_authoritative_read(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+    runner = Runner(tmp_path, client=client)
+    quote, value = decision("KXBTC15M-TEST")
+    await runner.submit(quote, value)
+    row = runner.journal.active()[0]
+    assert row["exchange_order"] is not None
+    runner.journal.close()
+    runner.lock.close()

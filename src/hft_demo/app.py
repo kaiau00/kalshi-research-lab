@@ -61,6 +61,11 @@ def create_app(*, runner_factory=Runner):
     async def api_status():
         if not runner:
             return {"state": "starting", "runner_active": False}
+        # A stopped runner closes its journal during cleanup. Preserve its
+        # last durable snapshot for diagnosis instead of turning this endpoint
+        # into a 500 response.
+        if task and task.done():
+            return {**runner.status, "runner_active": False}
         return {**runner.snapshot(), "runner_active": bool(task and not task.done())}
 
     @app.get("/", response_class=HTMLResponse, dependencies=[Depends(authenticated)])

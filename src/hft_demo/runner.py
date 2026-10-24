@@ -323,7 +323,12 @@ class Runner:
                 "fill_count": response.get("fill_count_fp", response.get("fill_count", "0")),
                 "remaining_count": response.get("remaining_count_fp", response.get("remaining_count", "1")),
             })
-            self.journal.apply_order(response)
+            # A successful create response confirms the write, but Kalshi does
+            # not promise it has every field used by our durable invariant.
+            # Read the order back before recording exchange state instead of
+            # treating a partial acknowledgement as authoritative.
+            current = await self.client.get("/portfolio/orders/" + response["order_id"])
+            self.journal.apply_order(normalize_order_response(current))
         except httpx.HTTPStatusError as exc:
             definitive = exc.response.status_code in {400, 401, 403, 409, 422, 429}
             self.journal.create_error(
