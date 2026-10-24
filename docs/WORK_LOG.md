@@ -1,5 +1,22 @@
 # Work log
 
+## 2026-10-23 — HFT feasibility diagnostic 030 and Demo reconciliation repair
+
+- Replayed the entire 39.2045-hour Study 029 tape three more times as clearly labelled post-hoc diagnostics,
+  preserving the 500 ms acknowledgement, back-of-queue, no-cancellation-credit and ambiguous-order exclusion
+  rules. Relaxed admissibility and break-even variants each stayed at two intents, one acknowledgement and zero
+  plausible fills. An intentionally non-tradable negative-edge queue-turnover probe produced four intents, two
+  acknowledgements and still zero fills.
+- This is evidence against continuing a passive-HFT threshold search on the current three-date tape. It does not
+  demonstrate a profitable edge, and Jev remains disabled. The next useful evidence is longer forward
+  trade-plus-book collection with exact Demo fill and fee reconciliation.
+- The isolated Kalshi Demo runner submitted one one-contract post-only quote. It expired unfilled. A partial create
+  acknowledgement initially failed the strict journal invariant and stopped the runner without exposure. Repaired
+  the adapter to read the authoritative order before recording its exchange state; the expired quote reconciled
+  terminally with zero inventory, zero fees and zero unresolved writes. The protected dashboard now serves its last
+  durable status after a runner failure instead of returning a 500. No production code, order rule or account scope
+  changed.
+
 ## 2026-10-22 — Expanded Kelly-Cap Study 027
 
 - Replayed Study 023's exact 838 decisions with quarter- and half-Kelly sizing capped at $3, $4, $5 and $6,
