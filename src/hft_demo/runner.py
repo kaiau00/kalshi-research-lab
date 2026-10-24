@@ -222,20 +222,27 @@ class Runner:
 
     def commission(self):
         path = self.root / "COMMISSIONED.json"
-        value = {
+        identity = {
             "environment": "Kalshi Demo",
             "exchange_index": 2,
             "subaccount": 0,
             "credential_identity_sha256": self.identity_sha256,
             "registration_sha256": registration_hash(),
-            "starting_cash": str(self.cash),
         }
-        encoded = dumps(value)
-        if path.exists() and path.read_text() != encoded:
-            raise RuntimeError("HFT Demo commissioning identity changed")
-        if not path.exists():
+        if path.exists():
+            try:
+                existing = json.loads(path.read_text())
+            except (OSError, ValueError, TypeError) as exc:
+                raise RuntimeError("HFT Demo commissioning receipt is unreadable") from exc
+            if (
+                any(existing.get(key) != value for key, value in identity.items())
+                or not isinstance(existing.get("starting_cash"), str)
+            ):
+                raise RuntimeError("HFT Demo commissioning identity changed")
+        else:
+            value = {**identity, "starting_cash": str(self.cash)}
             temporary = self.root / "COMMISSIONED.tmp"
-            temporary.write_text(encoded)
+            temporary.write_text(dumps(value))
             os.replace(temporary, path)
         self.status["commissioned"] = True
 
@@ -440,7 +447,12 @@ class Runner:
             except (httpx.HTTPError, TimeoutError) as exc:
                 self.status.update(state="waiting_api", error=type(exc).__name__)
             except Exception as exc:
-                self.status.update(state="stopped_error", error=f"{type(exc).__name__}: {exc}")
+                self.status.update(state="stopping_on_error", error=f"{type(exc).__name__}: {exc}")
+                try:
+                    await self.cancel_all()
+                except Exception as cancel_exc:
+                    self.status["cancel_on_error"] = f"{type(cancel_exc).__name__}: {cancel_exc}"
+                self.status["state"] = "stopped_error"
                 self.snapshot()
                 raise
             self.snapshot()

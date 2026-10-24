@@ -147,7 +147,10 @@ def test_commission_receipt_is_exact_and_tamper_evident(tmp_path, monkeypatch):
     receipt = json.loads((tmp_path / "COMMISSIONED.json").read_text())
     assert receipt["environment"] == "Kalshi Demo"
     assert receipt["starting_cash"] == "100"
-    receipt["starting_cash"] = "101"
+    runner.cash = Decimal("99")
+    runner.commission()
+    assert json.loads((tmp_path / "COMMISSIONED.json").read_text())["starting_cash"] == "100"
+    receipt["credential_identity_sha256"] = "tampered"
     (tmp_path / "COMMISSIONED.json").write_text(json.dumps(receipt))
     with pytest.raises(RuntimeError, match="commissioning identity changed"):
         runner.commission()
@@ -193,5 +196,28 @@ async def _create_is_reconciled_from_authoritative_read(tmp_path, monkeypatch):
     await runner.submit(quote, value)
     row = runner.journal.active()[0]
     assert row["exchange_order"] is not None
+    runner.journal.close()
+    runner.lock.close()
+
+
+def test_runner_cancels_tracked_quotes_before_stopping_on_error(tmp_path, monkeypatch):
+    asyncio.run(_runner_cancels_tracked_quotes_before_stopping_on_error(tmp_path, monkeypatch))
+
+
+async def _runner_cancels_tracked_quotes_before_stopping_on_error(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+    runner = Runner(tmp_path, client=client)
+    quote, value = decision("KXBTC15M-TEST")
+    await runner.submit(quote, value)
+
+    async def fail_step():
+        raise RuntimeError("expected test failure")
+
+    runner.step = fail_step
+    with pytest.raises(RuntimeError, match="expected test failure"):
+        await runner.loop()
+    assert all(order["status"] == "canceled" for order in client.orders.values())
+    assert runner.status["state"] == "stopped_error"
     runner.journal.close()
     runner.lock.close()
