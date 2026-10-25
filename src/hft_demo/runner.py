@@ -306,9 +306,15 @@ class Runner:
     async def cancel_row(self, row: dict):
         self.journal.begin_cancel(row["client_id"])
         try:
-            response = await self.client.cancel(row["order_id"], row["ticker"])
-            response = response.get("order", response)
-            self.journal.acknowledge_cancel(row["client_id"], response)
+            await self.client.cancel(row["order_id"], row["ticker"])
+            # Kalshi's cancellation acknowledgement is not a stable source of
+            # order state: it can omit the legacy ``reduced_by`` field even
+            # though the cancellation succeeded.  Read the authoritative
+            # order snapshot before changing the durable state.  A still-
+            # resting response remains a cancel intent and is reconciled on
+            # the next pass; a terminal response closes the quote safely.
+            current = await self.client.get("/portfolio/orders/" + row["order_id"])
+            self.journal.apply_order(normalize_order_response(current))
         except httpx.HTTPStatusError as exc:
             self.journal.cancel_error(row["client_id"], "HTTP_" + str(exc.response.status_code))
         except httpx.RequestError as exc:

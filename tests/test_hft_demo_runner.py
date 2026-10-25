@@ -117,6 +117,30 @@ async def _quote_cancel_fill_inventory_and_account_reconciliation(tmp_path, monk
     runner.lock.close()
 
 
+def test_cancel_uses_authoritative_order_when_ack_omits_reduced_by(tmp_path, monkeypatch):
+    asyncio.run(_cancel_uses_authoritative_order_when_ack_omits_reduced_by(tmp_path, monkeypatch))
+
+
+async def _cancel_uses_authoritative_order_when_ack_omits_reduced_by(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+
+    async def abbreviated_cancel(order_id, ticker):
+        order = client.orders[order_id]
+        order.update(status="canceled", remaining_count_fp="0")
+        return {"order_id": order_id}
+
+    client.cancel = abbreviated_cancel
+    runner = Runner(tmp_path, client=client)
+    quote, value = decision("KXBTC15M-TEST")
+    await runner.submit(quote, value)
+    await runner.cancel_row(runner.journal.active()[0])
+    assert not runner.journal.active()
+    assert not runner.journal.unresolved()
+    runner.journal.close()
+    runner.lock.close()
+
+
 def test_external_order_and_position_fail_closed(tmp_path, monkeypatch):
     asyncio.run(_external_order_and_position_fail_closed(tmp_path, monkeypatch))
 
