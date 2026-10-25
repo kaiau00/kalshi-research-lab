@@ -323,6 +323,13 @@ class Runner:
     async def cancel_all(self):
         for row in list(self.journal.active()):
             await self.cancel_row(row)
+            # A cancellation can be accepted before the order-read endpoint
+            # reflects its terminal state.  Do not start a second write while
+            # that first cancellation remains durably unresolved; the next
+            # reconciliation pass will either close it or keep the runner
+            # safely blocked.
+            if self.journal.unresolved():
+                return
 
     async def submit(self, quote, decision):
         payload = make_payload(quote)
@@ -380,6 +387,8 @@ class Runner:
             payload = json.loads(row["payload"])
             if (row["outcome"], payload["price"]) not in wanted:
                 await self.cancel_row(row)
+                if self.journal.unresolved():
+                    return
         if self.journal.unresolved():
             return
         active = {(row["outcome"], json.loads(row["payload"])["price"]) for row in self.journal.active(ticker)}
@@ -422,6 +431,8 @@ class Runner:
         for row in list(self.journal.active()):
             if row["ticker"] != ticker:
                 await self.cancel_row(row)
+                if self.journal.unresolved():
+                    return
         if not self.journal.unresolved():
             await self.quote_market(ticker)
 

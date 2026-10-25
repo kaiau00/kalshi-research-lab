@@ -141,6 +141,52 @@ async def _cancel_uses_authoritative_order_when_ack_omits_reduced_by(tmp_path, m
     runner.lock.close()
 
 
+def test_cancel_all_waits_for_delayed_terminal_readback(tmp_path, monkeypatch):
+    asyncio.run(_cancel_all_waits_for_delayed_terminal_readback(tmp_path, monkeypatch))
+
+
+async def _cancel_all_waits_for_delayed_terminal_readback(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+    runner = Runner(tmp_path, client=client)
+    yes_quote, value = decision("KXBTC15M-TEST")
+    no_quote = Quote(
+        yes_quote.ticker,
+        "no",
+        Decimal("0.45"),
+        "ask",
+        Decimal("0.55"),
+        1,
+        Decimal(".01"),
+        0,
+    )
+    await runner.submit(yes_quote, value)
+    await runner.submit(no_quote, value)
+    first_id = runner.journal.active()[0]["order_id"]
+    original_get = client.get
+    stale_reads = 1
+
+    async def delayed_get(path, params=None):
+        nonlocal stale_reads
+        if path == "/portfolio/orders/" + first_id and stale_reads:
+            stale_reads -= 1
+            order = dict(client.orders[first_id])
+            order.update(status="resting", remaining_count_fp="1")
+            return {"order": order}
+        return await original_get(path, params)
+
+    client.get = delayed_get
+    await runner.cancel_all()
+    assert len(runner.journal.unresolved()) == 1
+    assert len(runner.journal.active()) == 1
+    assert await runner.reconcile()
+    await runner.cancel_all()
+    assert not runner.journal.active()
+    assert not runner.journal.unresolved()
+    runner.journal.close()
+    runner.lock.close()
+
+
 def test_external_order_and_position_fail_closed(tmp_path, monkeypatch):
     asyncio.run(_external_order_and_position_fail_closed(tmp_path, monkeypatch))
 
