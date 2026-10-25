@@ -250,6 +250,29 @@ class Journal:
         )
         self.db.commit()
 
+    def confirm_missing_cancel(self, client_id: str, evidence: dict):
+        """Close a cancellation only after the runner has independently proved no exposure.
+
+        This is deliberately narrower than accepting a 404 by itself.  The
+        caller must first prove that the order is absent from the account's
+        ticker order list and that the ticker has no current position.
+        """
+        row = self.row(client_id)
+        if not row or row["state"] not in {"cancel_intent", "uncertain_cancel"}:
+            raise RuntimeError("Unexpected missing HFT demo cancellation")
+        if not row["exchange_order"]:
+            raise RuntimeError("Cannot close missing HFT demo order without a readback")
+        previous = json.loads(row["exchange_order"])
+        if Decimal(str(previous.get("fill_count_fp", "NaN"))) != 0:
+            raise RuntimeError("Cannot infer an unfilled HFT demo cancellation")
+        self.db.execute(
+            "UPDATE orders SET state='terminal',cancel_response=?,updated_ns=?,error=NULL "
+            "WHERE client_id=?",
+            (dumps(evidence), time.time_ns(), client_id),
+        )
+        self.db.commit()
+        self.audit("missing_cancel_confirmed", {"client_id": client_id, **evidence})
+
     def acknowledge_cancel(self, client_id: str, response: dict):
         row = self.row(client_id)
         reduced = Decimal(str(response.get("reduced_by", "NaN")))

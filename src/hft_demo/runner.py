@@ -299,9 +299,50 @@ class Runner:
                         self.journal.apply_order(order)
                 continue
             if row["state"] not in {"terminal", "rejected"}:
-                response = await self.client.get("/portfolio/orders/" + row["order_id"])
-                self.journal.apply_order(normalize_order_response(response))
+                try:
+                    response = await self.client.get("/portfolio/orders/" + row["order_id"])
+                except httpx.HTTPStatusError as exc:
+                    if exc.response.status_code != 404 or row["state"] not in {
+                        "cancel_intent",
+                        "uncertain_cancel",
+                    }:
+                        raise
+                    await self.confirm_missing_cancel(row)
+                else:
+                    self.journal.apply_order(normalize_order_response(response))
         return not self.journal.unresolved()
+
+    async def confirm_missing_cancel(self, row: dict):
+        """Prove that an order-read 404 cannot conceal a fill or resting quote."""
+        orders = await self.client.get(
+            "/portfolio/orders",
+            {"ticker": row["ticker"], "exchange_index": 2, "limit": 200},
+        )
+        positions = await self.client.get(
+            "/portfolio/positions", {"exchange_index": 2, "limit": 200}
+        )
+        if orders.get("cursor") or positions.get("cursor"):
+            raise RuntimeError("Unexpected HFT Demo missing-cancel pagination")
+        if any(order.get("order_id") == row["order_id"] for order in orders.get("orders", [])):
+            raise RuntimeError("HFT Demo missing cancel remains discoverable")
+        quantity = next(
+            (
+                Decimal(str(item.get("position_fp", "0")))
+                for item in positions.get("market_positions", [])
+                if item.get("ticker") == row["ticker"]
+            ),
+            Decimal(0),
+        )
+        if quantity != 0:
+            raise RuntimeError("HFT Demo missing cancel has position exposure")
+        self.journal.confirm_missing_cancel(
+            row["client_id"],
+            {
+                "proof": "order_read_404_absent_from_ticker_orders_and_positions",
+                "order_id": row["order_id"],
+                "ticker": row["ticker"],
+            },
+        )
 
     async def cancel_row(self, row: dict):
         self.journal.begin_cancel(row["client_id"])

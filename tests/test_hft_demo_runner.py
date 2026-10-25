@@ -2,6 +2,7 @@ import asyncio
 import json
 from decimal import Decimal
 
+import httpx
 import pytest
 
 from hft_demo.engine import Decision, Quote
@@ -183,6 +184,72 @@ async def _cancel_all_waits_for_delayed_terminal_readback(tmp_path, monkeypatch)
     await runner.cancel_all()
     assert not runner.journal.active()
     assert not runner.journal.unresolved()
+    runner.journal.close()
+    runner.lock.close()
+
+
+def test_cancel_read_404_is_closed_only_after_order_and_position_proof(tmp_path, monkeypatch):
+    asyncio.run(_cancel_read_404_is_closed_only_after_order_and_position_proof(tmp_path, monkeypatch))
+
+
+async def _cancel_read_404_is_closed_only_after_order_and_position_proof(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+    runner = Runner(tmp_path, client=client)
+    quote, value = decision("KXBTC15M-TEST")
+    await runner.submit(quote, value)
+    row = runner.journal.active()[0]
+    runner.journal.begin_cancel(row["client_id"])
+    del client.orders[row["order_id"]]
+    original_get = client.get
+
+    async def missing_get(path, params=None):
+        if path.endswith("/" + row["order_id"]):
+            request = httpx.Request("GET", "https://demo.invalid" + path)
+            response = httpx.Response(404, request=request)
+            raise httpx.HTTPStatusError("not found", request=request, response=response)
+        return await original_get(path, params)
+
+    client.get = missing_get
+
+    assert await runner.reconcile()
+    assert not runner.journal.active()
+    assert not runner.journal.unresolved()
+    closed = runner.journal.row(row["client_id"])
+    assert closed["state"] == "terminal"
+    assert "order_read_404" in closed["cancel_response"]
+    runner.journal.close()
+    runner.lock.close()
+
+
+def test_cancel_read_404_with_position_fails_closed(tmp_path, monkeypatch):
+    asyncio.run(_cancel_read_404_with_position_fails_closed(tmp_path, monkeypatch))
+
+
+async def _cancel_read_404_with_position_fails_closed(tmp_path, monkeypatch):
+    monkeypatch.setenv("LAB_HFT_DEMO_AUTHORIZATION", AUTHORIZATION)
+    client = FakeClient()
+    runner = Runner(tmp_path, client=client)
+    quote, value = decision("KXBTC15M-TEST")
+    await runner.submit(quote, value)
+    row = runner.journal.active()[0]
+    runner.journal.begin_cancel(row["client_id"])
+    del client.orders[row["order_id"]]
+    client.positions[quote.ticker] = 1
+    original_get = client.get
+
+    async def missing_get(path, params=None):
+        if path.endswith("/" + row["order_id"]):
+            request = httpx.Request("GET", "https://demo.invalid" + path)
+            response = httpx.Response(404, request=request)
+            raise httpx.HTTPStatusError("not found", request=request, response=response)
+        return await original_get(path, params)
+
+    client.get = missing_get
+
+    with pytest.raises(RuntimeError, match="position exposure"):
+        await runner.reconcile()
+    assert len(runner.journal.unresolved()) == 1
     runner.journal.close()
     runner.lock.close()
 
