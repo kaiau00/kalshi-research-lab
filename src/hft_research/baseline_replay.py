@@ -254,8 +254,16 @@ class BaselineReplay:
             self.last_ns = event.received_ns
             self.dates.add(datetime.fromtimestamp(event.received_ns / 1e9, UTC).date().isoformat())
             self.process_timers(event.received_ns)
-            if event.kind == "ws" and (event.payload.get("frame") or {}).get("type") == "trade":
-                self.apply_trade(event)
+            if event.kind == "ws":
+                frame_type = (event.payload.get("frame") or {}).get("type")
+                if frame_type == "trade":
+                    self.apply_trade(event)
+                # The public-trade sidecar has no book_convention marker.  Its
+                # subscribe acknowledgements carry an independent sequence
+                # space, so applying them to the book state could manufacture
+                # a sequence gap and invalidate every quote in a replay.
+                elif event.payload.get("book_convention") == "yes_price":
+                    self.state.apply(event)
             else:
                 if event.kind == "market":
                     self.settle(event.payload.get("market") or {})

@@ -59,3 +59,16 @@ def test_credible_edge_requires_every_frozen_gate():
     report = replay.report()
     assert report["credible_edge"] is False  # one-cent stress erases this small sample
     assert report["jev_comparison_authorized"] is False
+
+
+def test_trade_sidecar_control_message_does_not_affect_book_sequence():
+    replay = BaselineReplay()
+    sidecar_ok = Event(
+        1,
+        1_000_000_000,
+        None,
+        "ws",
+        {"session": "separate-trade-feed", "frame": {"type": "ok", "sid": 1, "seq": 99}},
+    )
+    replay.consume([sidecar_ok])
+    assert replay.state.seq == {}
