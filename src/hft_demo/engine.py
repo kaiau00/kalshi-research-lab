@@ -110,16 +110,17 @@ def pooled_probability(raw: float, market: float, market_weight: float) -> float
     return clamp_probability(logistic((1 - market_weight) * logit(raw) + market_weight * logit(market)))
 
 
-def certainty_equivalent(inventory: int, probability: float, risk_aversion: float) -> float:
+def certainty_equivalent(inventory: int | float | Decimal, probability: float, risk_aversion: float) -> float:
     """CARA certainty equivalent for terminal payoff ``inventory * YES``."""
 
+    quantity = float(inventory)
     if risk_aversion <= 0:
-        return inventory * probability
-    expectation = (1 - probability) + probability * math.exp(-risk_aversion * inventory)
+        return quantity * probability
+    expectation = (1 - probability) + probability * math.exp(-risk_aversion * quantity)
     return -math.log(expectation) / risk_aversion
 
 
-def reservation_values(inventory: int, probability: float, risk_aversion: float) -> tuple[float, float]:
+def reservation_values(inventory: int | float | Decimal, probability: float, risk_aversion: float) -> tuple[float, float]:
     current = certainty_equivalent(inventory, probability, risk_aversion)
     yes = certainty_equivalent(inventory + 1, probability, risk_aversion) - current
     no = 1 + certainty_equivalent(inventory - 1, probability, risk_aversion) - current

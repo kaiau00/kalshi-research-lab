@@ -55,10 +55,37 @@ def test_credible_edge_requires_every_frozen_gate():
     replay.first_ns = 1
     replay.last_ns = 2
     replay.metrics["plausible_fills"] = 1000
+    replay.plausible_filled_contracts = Decimal("1000")
     replay.market_pnl = {f"m{i}": Decimal("1") for i in range(5)}
     report = replay.report()
     assert report["credible_edge"] is False  # one-cent stress erases this small sample
     assert report["jev_comparison_authorized"] is False
+
+
+def test_fractional_public_trade_keeps_residual_quote_and_tracks_exact_exposure():
+    replay = BaselineReplay()
+    acknowledgement = QuoteAcknowledgement(
+        "KXBTC15M-TEST", "yes", Decimal(".42"), Decimal(1), Decimal(0), 1_000, 1_000_000_000
+    )
+    from hft_research.baseline_replay import SimQuote
+
+    replay.quotes[("KXBTC15M-TEST", "yes")] = SimQuote(
+        "yes", Decimal(".42"), 1_000_000_000, 10_000_000_000, QueueState.join_back(acknowledgement)
+    )
+    frame = {
+        "type": "trade",
+        "msg": {
+            "trade_id": "partial-1", "market_ticker": "KXBTC15M-TEST",
+            "yes_price_dollars": ".42", "no_price_dollars": ".58", "count_fp": ".10",
+            "taker_outcome_side": "no", "taker_book_side": "ask", "is_block_trade": False,
+            "ts_ms": 1001,
+        },
+    }
+    replay.apply_trade(Event(1, 1_001_000_000, None, "ws", {"frame": frame}))
+    assert replay.inventory["KXBTC15M-TEST"] == Decimal(".10")
+    assert replay.fills["KXBTC15M-TEST"]["yes"] == Decimal(".10")
+    assert replay.plausible_filled_contracts == Decimal(".10")
+    assert ("KXBTC15M-TEST", "yes") in replay.quotes
 
 
 def test_trade_sidecar_control_message_does_not_affect_book_sequence():

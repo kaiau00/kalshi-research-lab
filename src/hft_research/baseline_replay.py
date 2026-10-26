@@ -80,6 +80,7 @@ class BaselineReplay:
         self.dates = set()
         self.metrics = defaultdict(int)
         self.rejections = defaultdict(int)
+        self.plausible_filled_contracts = D(0)
 
     def displayed_ahead(self, ticker: str, outcome: str, price: Decimal) -> Decimal:
         book = self.state.books.get(ticker)
@@ -142,16 +143,16 @@ class BaselineReplay:
             if update.disposition.startswith("timing_ambiguous"):
                 self.metrics["ambiguous_trade_ordering"] += 1
             if update.filled:
-                if update.filled != 1:
-                    raise RuntimeError("Study 029 simulated a non-unit fill")
-                signed = 1 if quote.outcome == "yes" else -1
-                self.inventory[key[0]] += signed
-                self.fills[key[0]][quote.outcome] += 1
-                fee = maker_fee(quote.price, 1, self.cfg.maker_fee_coefficient)
-                self.cost[key[0]] += quote.price + fee
+                signed = D(1) if quote.outcome == "yes" else D(-1)
+                self.inventory[key[0]] += signed * update.filled
+                self.fills[key[0]][quote.outcome] += update.filled
+                fee = maker_fee(quote.price, update.filled, self.cfg.maker_fee_coefficient)
+                self.cost[key[0]] += quote.price * update.filled + fee
                 self.fees[key[0]] += fee
                 self.metrics["plausible_fills"] += 1
-                del self.quotes[key]
+                self.plausible_filled_contracts += update.filled
+                if quote.queue.remaining == 0:
+                    del self.quotes[key]
 
     def settle(self, market: dict):
         ticker = market.get("ticker")
@@ -278,7 +279,7 @@ class BaselineReplay:
         winners = sorted((value for value in pnl_values if value > 0), reverse=True)
         net = sum(pnl_values, D(0))
         without_top_three = net - sum(winners[:3], D(0))
-        fills = self.metrics["plausible_fills"]
+        filled_contracts = self.plausible_filled_contracts
         ordered = list(self.market_pnl.values())
         equity = peak = D(0)
         drawdown = D(0)
@@ -292,11 +293,11 @@ class BaselineReplay:
             blocks = [sum(ordered[i : i + block_size], D(0)) for i in range(0, len(ordered), block_size)]
             blocks += [D(0)] * (5 - len(blocks))
         positive_blocks = sum(value > 0 for value in blocks)
-        one_cent = net - D("0.01") * fills
-        two_cent = net - D("0.02") * fills
+        one_cent = net - D("0.01") * filled_contracts
+        two_cent = net - D("0.02") * filled_contracts
         gates = {
             "twenty_distinct_utc_dates": len(self.dates) >= 20,
-            "one_thousand_plausible_fills": fills >= 1000,
+            "one_thousand_plausible_fills": filled_contracts >= 1000,
             "positive_after_fees": net > 0,
             "positive_conservative_queue": net > 0,
             "positive_without_three_largest_winners": without_top_three > 0,
@@ -312,7 +313,10 @@ class BaselineReplay:
             "distinct_utc_dates": len(self.dates),
             "dates": sorted(self.dates),
             "elapsed_hours": round(((self.last_ns or 0) - (self.first_ns or 0)) / 3.6e12, 4),
-            "metrics": dict(sorted(self.metrics.items())),
+            "metrics": {
+                **dict(sorted(self.metrics.items())),
+                "plausible_filled_contracts": str(filled_contracts),
+            },
             "rejections": dict(sorted(self.rejections.items())),
             "settled_markets": len(self.market_pnl),
             "fees": str(sum(self.fees.values(), D(0))),
@@ -323,7 +327,7 @@ class BaselineReplay:
             "positive_time_blocks": positive_blocks,
             "time_block_pnl": [str(value) for value in blocks],
             "maximum_drawdown": str(drawdown),
-            "unresolved_inventory": dict(self.inventory),
+            "unresolved_inventory": {ticker: str(quantity) for ticker, quantity in self.inventory.items()},
             "active_simulated_quotes": len(self.quotes),
             "gates": gates,
             "credible_edge": all(gates.values()),
