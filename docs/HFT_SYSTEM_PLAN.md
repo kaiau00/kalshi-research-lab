@@ -118,6 +118,55 @@ Once it is in place, the work sequence is:
 5. run the selected version on Demo for operational confirmation; and
 6. only after those gates, compare the locked Jev variants.
 
+## Direction adjustments
+
+The project is pursuing a **low-latency passive market maker**, rather than
+claiming to compete in colocated exchange HFT. Its economic target is repeatable
+maker P&L after fees, queue position and adverse selection—not a final-second
+speed race or a high trade count for its own sake.
+
+Research now has two separate tracks:
+
+1. **Maker track.** Prove or reject the deterministic quote engine using
+   conservative queue replay and the isolated Demo runner.
+2. **Directional track.** Independently test whether the opening settlement
+   reference plus early-window BTC movement contains executable information.
+   This is a new registered candidate, not a parameter change to Study 029.
+
+Cross-asset lead-lag is a later hypothesis. It requires a synchronized,
+multi-asset tape and does not take priority over proving BTC first. Rebuilding
+the settlement index from constituent exchanges is also out of scope until an
+exact, contract-consistent index reconstruction is demonstrably possible.
+
+### ML before Jev
+
+Before using Jev, build a conventional, calibrated model from recorded data to
+estimate:
+
+- probability that a passive quote fills;
+- adverse-selection risk after that fill;
+- short-horizon markout; and
+- expected value after fees and inventory risk.
+
+This model is evaluated like any other candidate on untouched data. Jev then
+has a measurable benchmark. Its permitted role remains a low-frequency
+abnormal-regime or news-shock veto; it does not run the pricing path and cannot
+create, price, size or risk-enable a quote.
+
+### Faster evidence gates
+
+The final promotion standard remains 20 forward UTC dates and 1,000 plausible
+fills. Earlier checkpoints are rejection tests, not promotion shortcuts:
+
+| Evidence point | Question |
+|---|---|
+| 100 plausible fills | Does the strategy already lose after fees or one-cent stress? |
+| 250 plausible fills | Is P&L dependent on a few fills or winners? |
+| 500 plausible fills | Do multiple chronological blocks remain positive? |
+| 1,000 fills and 20 dates | Does it meet every final gate and justify Demo comparison? |
+
+No frozen Study 029 parameter changes occur because of these adjustments.
+
 ## Non-negotiable constraints
 
 - No claim of impressive returns before forward data supports it.
