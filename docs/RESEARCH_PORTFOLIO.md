@@ -14,6 +14,7 @@ This document controls attention and runtime scope; it does not delete evidence 
 | Study 026 — Price-Band Holdout | One-time test of Study 025's frozen 65–69-cent exclusion | Registered and locked; explicit holdout disclosure required; no order path |
 | Study 028 — Jev-Gated HFT Feasibility | Determine whether deterministic quoting has a conservative maker edge and whether a Jev veto improves adverse selection | Trade-only sidecar is recording on Railway with verified segment archival and no order path; 24-hour cost/capacity audit remains pending |
 | Study 029 — Deterministic HFT Baseline | Test the fixed mathematical market maker with conservative queue fills and isolated Demo execution | First 39.2-hour replay had two intents and zero fills; Demo may audit mechanics, while Jev and production remain disabled |
+| Study 032 — Weather Settlement Edge | Determine whether exact weather settlement sources and intraday observations create a replicable edge in daily-high markets | Read-only feasibility inventory. No orders, Demo path or settlement-source proxy |
 
 ## Passive completion
 
