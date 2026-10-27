@@ -134,7 +134,7 @@ class BaselineReplay:
         except ValueError:
             self.metrics["invalid_trades"] += 1
             return
-        self.metrics["public_trades"] += 1
+        self.metrics["public_trades_considered"] += 1
         for key, quote in list(self.quotes.items()):
             if quote.queue is None:
                 continue
@@ -258,7 +258,17 @@ class BaselineReplay:
             if event.kind == "ws":
                 frame_type = (event.payload.get("frame") or {}).get("type")
                 if frame_type == "trade":
-                    self.apply_trade(event)
+                    # Public trades do not change fair value or the book.  We
+                    # need to parse them only while a simulated quote is live;
+                    # otherwise they cannot affect a fill, timer, decision or
+                    # risk state.  This preserves the conservative fill model
+                    # while making a full forward day practical to replay.
+                    self.metrics["public_trades"] += 1
+                    if self.quotes:
+                        self.process_timers(event.received_ns)
+                        if self.quotes:
+                            self.apply_trade(event)
+                    continue
                 # The public-trade sidecar has no book_convention marker.  Its
                 # subscribe acknowledgements carry an independent sequence
                 # space, so applying them to the book state could manufacture

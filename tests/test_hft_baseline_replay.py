@@ -99,3 +99,18 @@ def test_trade_sidecar_control_message_does_not_affect_book_sequence():
     )
     replay.consume([sidecar_ok])
     assert replay.state.seq == {}
+
+
+def test_unquoted_public_trade_is_counted_without_parsing_or_evaluating():
+    replay = BaselineReplay()
+    trade = Event(
+        1,
+        1_000_000_000,
+        None,
+        "ws",
+        {"frame": {"type": "trade", "msg": {"market_ticker": "KXBTC15M-TEST"}}},
+    )
+    report = replay.consume([trade])
+    assert report["metrics"]["public_trades"] == 1
+    assert "public_trades_considered" not in report["metrics"]
+    assert report["rejections"] == {}
