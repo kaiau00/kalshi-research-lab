@@ -229,6 +229,7 @@ PYTHONPATH=src .venv/bin/python scripts/hft_replay_029.py --skip-download
 Jev remains disabled until the deterministic baseline passes every 20-date/1,000-fill profitability, concentration,
 consistency, stress and reconciliation gate. See
 [the frozen Study 029 protocol](docs/DETERMINISTIC_HFT_BASELINE_STUDY_029_PROTOCOL.md).
+The system design, evidence and gated ML/Jev plan are in [the HFT system plan](docs/HFT_SYSTEM_PLAN.md).
 
 Recorded-data replay processes only events already received at each simulated decision. Forecasts use the official threshold, the observed part of the final-minute benchmark average, and a conditional model for remaining seconds. The final outcome comes from the official market result, never the model.
 
