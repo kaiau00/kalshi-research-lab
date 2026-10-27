@@ -77,6 +77,7 @@ class BaselineReplay:
         self.last_evaluation_ns = 0
         self.first_ns = None
         self.last_ns = None
+        self.last_observed_utc_day = None
         self.dates = set()
         self.metrics = defaultdict(int)
         self.rejections = defaultdict(int)
@@ -253,27 +254,30 @@ class BaselineReplay:
         for event in events:
             self.first_ns = event.received_ns if self.first_ns is None else self.first_ns
             self.last_ns = event.received_ns
-            self.dates.add(datetime.fromtimestamp(event.received_ns / 1e9, UTC).date().isoformat())
+            utc_day = event.received_ns // 86_400_000_000_000
+            if utc_day != self.last_observed_utc_day:
+                self.last_observed_utc_day = utc_day
+                self.dates.add(datetime.fromtimestamp(event.received_ns / 1e9, UTC).date().isoformat())
+            frame_type = (event.payload.get("frame") or {}).get("type") if event.kind == "ws" else None
+            if frame_type == "trade":
+                # Public trades do not change fair value or the book. We need
+                # to parse them and advance quote timers only while a simulated
+                # quote is live; otherwise they cannot affect a fill, decision
+                # or risk state. This preserves the conservative fill model
+                # while making a full forward day practical to replay.
+                self.metrics["public_trades"] += 1
+                if self.quotes:
+                    self.process_timers(event.received_ns)
+                    if self.quotes:
+                        self.apply_trade(event)
+                continue
             self.process_timers(event.received_ns)
             if event.kind == "ws":
-                frame_type = (event.payload.get("frame") or {}).get("type")
-                if frame_type == "trade":
-                    # Public trades do not change fair value or the book.  We
-                    # need to parse them only while a simulated quote is live;
-                    # otherwise they cannot affect a fill, timer, decision or
-                    # risk state.  This preserves the conservative fill model
-                    # while making a full forward day practical to replay.
-                    self.metrics["public_trades"] += 1
-                    if self.quotes:
-                        self.process_timers(event.received_ns)
-                        if self.quotes:
-                            self.apply_trade(event)
-                    continue
                 # The public-trade sidecar has no book_convention marker.  Its
                 # subscribe acknowledgements carry an independent sequence
                 # space, so applying them to the book state could manufacture
                 # a sequence gap and invalidate every quote in a replay.
-                elif event.payload.get("book_convention") == "yes_price":
+                if event.payload.get("book_convention") == "yes_price":
                     self.state.apply(event)
             else:
                 if event.kind == "market":
