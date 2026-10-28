@@ -46,6 +46,12 @@ agrees with Kalshi's final expiration value. If the official source cannot be
 obtained historically at the required timestamp, the affected rule is
 prospective-only. It must not be backtested using a convenient substitute.
 
+An accepted normalized source record must contain: the exact rule-named
+authority, station identifier, local observed-for date, source report timestamp,
+Fahrenheit value and immutable raw-record identifier. It is rejected unless its
+authority and observed-for date match the contract rule; a final-value mismatch
+is retained as a disclosed data-quality failure, never silently rounded away.
+
 ## Execution assumptions
 
 Historical candles may screen directional value, but they do not contain
