@@ -52,6 +52,12 @@ Fahrenheit value and immutable raw-record identifier. It is rejected unless its
 authority and observed-for date match the contract rule; a final-value mismatch
 is retained as a disclosed data-quality failure, never silently rounded away.
 
+The raw collector uses The Weather Company's History on Demand endpoint with
+English units and bounded 48-hour requests. Because that endpoint is queried by
+geocode while the contract names a station, every request must also retain
+documented station-to-geocode mapping evidence. A response is not accepted as
+the contract's settlement measurement until it passes final-value validation.
+
 ## Execution assumptions
 
 Historical candles may screen directional value, but they do not contain
