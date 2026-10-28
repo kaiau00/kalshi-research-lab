@@ -13,11 +13,13 @@ historical quote.
 ## First market family
 
 The first inventory target is `KXHIGHNY` (New York City daily maximum
-temperature). On October 27, 2026, active and finalized market rules retrieved
-from Kalshi named **The Weather Company** as the settlement source for this
-family. The series therefore cannot be labelled with NWS Daily Climate Reports
-or METAR data unless the individual contract rules explicitly name those
-sources.
+temperature). Current rules name **The Weather Company**, but the historical
+inventory also contains older contracts settled from the National Weather
+Service's *Climatological Report (Daily)* and *Daily Climate Report*. These
+are distinct source regimes: every observation must retain the authority named
+in its exact contract rule, and no calibration table or backtest may blend
+them. NWS, METAR, forecast pages and other weather feeds cannot stand in for a
+different rule-named authority.
 
 Every later market family is admitted only after its actual `rules_primary`,
 station identifier, local-time convention and outcome type are recorded. The
