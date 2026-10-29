@@ -14,6 +14,7 @@ parser.add_argument("--db", type=Path, required=True)
 parser.add_argument("--source", default="The Weather Company")
 parser.add_argument("--max-event-dates", type=int, default=10)
 parser.add_argument("--max-contracts", type=int, default=100)
+parser.add_argument("--event-offset", type=int, default=0)
 parser.add_argument("--resume", action="store_true")
 args = parser.parse_args()
 markets = select_markets(
@@ -21,6 +22,7 @@ markets = select_markets(
     source=args.source,
     max_event_dates=args.max_event_dates,
     max_contracts=args.max_contracts,
+    event_offset=args.event_offset,
 )
 result = asyncio.run(download(args.db, markets=markets, source=args.source, resume=args.resume))
 print(json.dumps(result, indent=2, sort_keys=True))

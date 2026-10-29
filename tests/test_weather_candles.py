@@ -43,6 +43,16 @@ def test_select_markets_keeps_one_source_and_complete_ladders(tmp_path):
     assert epoch_seconds(selected[0]["open_time"]) == 1787666400
 
 
+def test_select_markets_offset_yields_a_non_overlapping_event_slice(tmp_path):
+    path = tmp_path / "inventory.sqlite3"
+    inventory(path, [market("A", "E1"), market("B", "E2")])
+    first = select_markets(path, source="The Weather Company", max_event_dates=1, max_contracts=10)
+    selected = select_markets(
+        path, source="The Weather Company", max_event_dates=1, max_contracts=10, event_offset=1
+    )
+    assert {row["ticker"] for row in first}.isdisjoint(row["ticker"] for row in selected)
+
+
 def test_download_archives_raw_candle_response_and_resumes(tmp_path):
     path = tmp_path / "candles.sqlite3"
     rows = [market("A", "E1")]

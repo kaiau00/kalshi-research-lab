@@ -25,9 +25,10 @@ def select_markets(
     source: str,
     max_event_dates: int,
     max_contracts: int,
+    event_offset: int = 0,
 ) -> list[dict]:
     """Select complete, finalized event ladders from a single rule-derived source."""
-    if not 1 <= max_event_dates <= 20 or not 1 <= max_contracts <= 200:
+    if not 1 <= max_event_dates <= 20 or not 1 <= max_contracts <= 200 or event_offset < 0:
         raise ValueError("Selection limits must remain bounded")
     store = Store(inventory_path, readonly=True)
     by_ticker: dict[str, dict] = {}
@@ -54,7 +55,7 @@ def select_markets(
         events[market["event_ticker"]].append(market)
     selected_events = sorted(
         events.values(), key=lambda ladder: max(row["close_time"] for row in ladder), reverse=True
-    )[:max_event_dates]
+    )[event_offset : event_offset + max_event_dates]
     selected = sorted(
         (market for ladder in selected_events for market in ladder),
         key=lambda market: (market["close_time"], market["ticker"]),
