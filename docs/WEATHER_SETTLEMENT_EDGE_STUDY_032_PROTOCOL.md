@@ -58,6 +58,16 @@ geocode while the contract names a station, every request must also retain
 documented station-to-geocode mapping evidence. A response is not accepted as
 the contract's settlement measurement until it passes final-value validation.
 
+### Public NWS branch
+
+Older `KXHIGHNY` contracts whose rules explicitly name an NWS daily climate
+report may be evaluated in a separate branch using public NCEI Central Park
+daily summaries (`USW00094728`) as a *reference*. It is retained only after it
+matches the Kalshi final value on every included event date. It is never used
+for Weather Company-settled contracts. Since daily summaries lack timestamped
+intraday state, this branch cannot replay the late-day lock-in hypothesis; it
+can only establish settlement alignment and support later forecast research.
+
 ## Execution assumptions
 
 Historical candles may screen directional value, but they do not contain

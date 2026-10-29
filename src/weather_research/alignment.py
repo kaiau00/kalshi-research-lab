@@ -9,7 +9,7 @@ from decimal import Decimal, InvalidOperation
 
 from weather_research.inventory import settlement_source
 
-RULE_DATE = re.compile(r"\bfor (?P<date>[A-Z][a-z]{2} \d{1,2}, \d{4})\b")
+RULE_DATE = re.compile(r"\bfor (?P<date>[A-Z][a-z]+ \d{1,2}, \d{4})\b")
 
 
 @dataclass(frozen=True)
@@ -62,7 +62,12 @@ def contract_event_date(market: dict) -> str:
     match = RULE_DATE.search(market.get("rules_primary", ""))
     if not match:
         raise ValueError("Market rule has no parseable weather observation date")
-    return datetime.strptime(match.group("date"), "%b %d, %Y").date().isoformat()
+    for pattern in ("%b %d, %Y", "%B %d, %Y"):
+        try:
+            return datetime.strptime(match.group("date"), pattern).date().isoformat()
+        except ValueError:
+            continue
+    raise ValueError("Market rule has an invalid weather observation date")
 
 
 def align_final_value(market: dict, observation: SourceObservation) -> dict:

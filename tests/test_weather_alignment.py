@@ -30,6 +30,8 @@ def observation(**overrides):
 
 def test_contract_event_date_comes_from_rule_not_expiration_time():
     assert contract_event_date(market()) == "2026-08-26"
+    full_month = {**market(), "rules_primary": market()["rules_primary"].replace("Aug 26", "August 26")}
+    assert contract_event_date(full_month) == "2026-08-26"
 
 
 def test_alignment_requires_matching_source_date_and_final_value():
