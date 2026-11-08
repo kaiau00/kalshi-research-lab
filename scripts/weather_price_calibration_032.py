@@ -19,7 +19,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--inventory", type=Path, required=True)
 parser.add_argument("--candles-glob", required=True)
 parser.add_argument("--ncei", type=Path, required=True, help="Immutable NCEI reference archive")
+parser.add_argument(
+    "--horizons-seconds",
+    default="300,900,1800",
+    help="Comma-separated positive fixed decision horizons (default: 300,900,1800)",
+)
 args = parser.parse_args()
+try:
+    horizons = tuple(int(value) for value in args.horizons_seconds.split(","))
+except ValueError as exc:
+    raise SystemExit("--horizons-seconds must be comma-separated integers") from exc
+if not horizons or any(value <= 0 for value in horizons) or len(set(horizons)) != len(horizons):
+    raise SystemExit("--horizons-seconds must be unique positive integers")
 
 markets = {}
 raw_markets = []
@@ -64,7 +75,9 @@ for filename in sorted(glob(args.candles_glob)):
     finally:
         archive.close()
 
-report = calibration_report(quotes_at_fixed_horizons(markets, candles))
+report = calibration_report(
+    quotes_at_fixed_horizons(markets, candles, horizons_seconds=horizons), horizons_seconds=horizons
+)
 report["reference_validation"] = reference_validation
 report["archive_coverage"] = {
     "validated_nws_markets": len(markets),

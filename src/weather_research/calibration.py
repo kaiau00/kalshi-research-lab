@@ -30,8 +30,15 @@ def adverse_price(price: Decimal) -> Decimal | None:
     return stressed if stressed < Decimal("1") else None
 
 
-def quotes_at_fixed_horizons(markets: dict[str, dict], candle_rows: dict[str, list[dict]]) -> list[IndicativeQuote]:
+def quotes_at_fixed_horizons(
+    markets: dict[str, dict],
+    candle_rows: dict[str, list[dict]],
+    *,
+    horizons_seconds: tuple[int, ...] = HORIZONS_SECONDS,
+) -> list[IndicativeQuote]:
     """Build causal quotes using only the last one-minute candle at/before each fixed horizon."""
+    if not horizons_seconds or any(not isinstance(horizon, int) or horizon <= 0 for horizon in horizons_seconds):
+        raise ValueError("Horizon seconds must be a non-empty sequence of positive integers")
     output: list[IndicativeQuote] = []
     for ticker, rows in candle_rows.items():
         market = markets.get(ticker)
@@ -40,7 +47,7 @@ def quotes_at_fixed_horizons(markets: dict[str, dict], candle_rows: dict[str, li
         close = int(market["close_second"])
         event_date = market["event_date"]
         ordered = sorted(rows, key=lambda row: int(row["end_period_ts"]))
-        for horizon in HORIZONS_SECONDS:
+        for horizon in horizons_seconds:
             decision = close - horizon
             eligible = [row for row in ordered if int(row["end_period_ts"]) <= decision]
             if not eligible or decision - int(eligible[-1]["end_period_ts"]) > 60:
@@ -107,7 +114,9 @@ def _summary(quotes: list[IndicativeQuote]) -> dict:
     return {"quotes": len(quotes), "bands": rows}
 
 
-def calibration_report(quotes: list[IndicativeQuote]) -> dict:
+def calibration_report(
+    quotes: list[IndicativeQuote], *, horizons_seconds: tuple[int, ...] | None = None
+) -> dict:
     """Split by whole event dates; this is a screen, not an executable backtest."""
     dates = sorted({quote.event_date for quote in quotes})
     cutoff = dates[(len(dates) * 3) // 5 - 1] if dates else None
@@ -117,7 +126,7 @@ def calibration_report(quotes: list[IndicativeQuote]) -> dict:
         "registration": {
             "study": "032",
             "kind": "exploratory fixed-time displayed-quote calibration screen",
-            "horizons_seconds": list(HORIZONS_SECONDS),
+            "horizons_seconds": list(horizons_seconds or HORIZONS_SECONDS),
             "fee": "ceil_6dp(0.07 * price * (1-price)) per one-contract indicative taker fill",
             "stress": "one-cent worse displayed ask; observations at 1.00 cannot pass stress",
             "limitations": [

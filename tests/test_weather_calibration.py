@@ -19,6 +19,16 @@ def test_fixed_horizon_quotes_use_only_prior_quote_and_both_sides():
     }
 
 
+def test_fixed_horizon_quotes_accept_a_separate_preregistered_horizon_set():
+    markets = {"M": {"event_date": "2026-01-01", "close_second": 7200, "result": "no"}}
+    rows = {"M": [{"end_period_ts": 3600, "yes_ask": {"close": "0.40"}, "yes_bid": {"close": "0.38"}}]}
+    quotes = quotes_at_fixed_horizons(markets, rows, horizons_seconds=(3600,))
+    assert {(quote.horizon_seconds, quote.side, quote.outcome) for quote in quotes} == {
+        (3600, "yes", False),
+        (3600, "no", True),
+    }
+
+
 def test_report_keeps_whole_dates_in_chronological_split():
     markets = {}
     rows = {}
