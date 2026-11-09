@@ -47,3 +47,20 @@ reconcile-only startup mode. Then restart only to obtain the durable
 reconciliation receipt, verify zero Demo resting orders and zero positions,
 and leave quoting paused. This is an execution-harness repair only; Study 029
 still has no credible economic edge.
+
+## Authorized paused reconciliation — 2026-11-08
+
+The user authorized the quoted pause-only repair. Before restart,
+`/data/hft-demo-029/PAUSE_QUOTES` was created. The restarted runner then:
+
+- reconciled the missing cancellation to terminal using its existing narrow
+  404/ticker-order/position proof;
+- reported `quotes_paused`, zero unresolved writes, zero active orders and
+  zero inventory; and
+- preserved the Demo-only account scope; no production order path was enabled.
+
+After read-back verification, the `hft-demo` Railway deployment was stopped to
+avoid idle compute charges. Its READY durable volume, the pause control, the
+reconciled journal and all evidence remain preserved. Restarting it later
+requires explicit authorization and will remain quote-paused unless that
+durable control is deliberately removed.

@@ -1,5 +1,21 @@
 # Work log
 
+## 2026-11-08 — HFT Demo reconciliation and cost control
+
+- Independently verified the one `uncertain_cancel` HFT Demo journal row was
+  a zero-filled order: its direct order read returned 404, it was absent from
+  the ticker and account resting-order lists, and the Demo account had no
+  nonzero position.
+- Under explicit authorization, wrote the durable `PAUSE_QUOTES` control,
+  restarted solely to let the existing runner reconcile the cancellation, and
+  verified `quotes_paused`, zero unresolved writes, zero active orders and
+  zero inventory. No Demo quote and no production order was submitted.
+- Railway usage had reached $9.5284 of the $10 hard limit. Stopped both the
+  paused HFT Demo and research-lab deployments before the limit was exceeded;
+  their READY durable volumes and research archive remain preserved. The next
+  multi-hour historical replay must wait for the next billing window or an
+  explicit budget change.
+
 ## 2026-10-23 — HFT feasibility diagnostic 030 and Demo reconciliation repair
 
 - Replayed the entire 39.2045-hour Study 029 tape three more times as clearly labelled post-hoc diagnostics,
