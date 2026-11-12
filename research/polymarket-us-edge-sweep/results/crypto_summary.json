@@ -1,0 +1,153 @@
+{
+  "rules": "PREREG.md T3",
+  "markets_read": 1120,
+  "classified": 1113,
+  "missing_quote_or_settlement": 7,
+  "primary_n": 1113,
+  "by_band": {
+    "0.70-0.85": {
+      "n": 1,
+      "wins": 1,
+      "win_rate": 1.0,
+      "mean_price": 0.8,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.1848,
+      "se_pnl": null,
+      "ci95_low": null,
+      "ci95_high": null,
+      "sum_pnl_25lot": 4.62
+    },
+    "0.85-0.90": {
+      "n": 1,
+      "wins": 1,
+      "win_rate": 1.0,
+      "mean_price": 0.85,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.138,
+      "se_pnl": null,
+      "ci95_low": null,
+      "ci95_high": null,
+      "sum_pnl_25lot": 3.45
+    },
+    "0.90-0.95": {
+      "n": 4,
+      "wins": 4,
+      "win_rate": 1.0,
+      "mean_price": 0.925,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.0686,
+      "se_pnl": 0.007967433714816835,
+      "ci95_low": 0.052983829918959,
+      "ci95_high": 0.084216170081041,
+      "sum_pnl_25lot": 6.86
+    },
+    "0.95-0.97": {
+      "n": 7,
+      "wins": 7,
+      "win_rate": 1.0,
+      "mean_price": 0.9571428571428572,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.039028571428571426,
+      "se_pnl": 0.0016967355611956303,
+      "ci95_low": 0.03570296972862799,
+      "ci95_high": 0.04235417312851487,
+      "sum_pnl_25lot": 6.83
+    },
+    "0.97-0.995": {
+      "n": 1100,
+      "wins": 1100,
+      "win_rate": 1.0,
+      "mean_price": 0.9897181818181818,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.009451636363636363,
+      "se_pnl": 5.768141998127197e-05,
+      "ci95_low": 0.00933858078047307,
+      "ci95_high": 0.009564691946799656,
+      "sum_pnl_25lot": 259.92
+    },
+    "LEAD:btc-5m": {
+      "n": 1,
+      "wins": 1,
+      "win_rate": 1.0,
+      "mean_price": 0.93,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.064,
+      "se_pnl": null,
+      "ci95_low": null,
+      "ci95_high": null,
+      "sum_pnl_25lot": 1.6
+    },
+    "LEAD:eth-15m": {
+      "n": 1,
+      "wins": 1,
+      "win_rate": 1.0,
+      "mean_price": 0.93,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.064,
+      "se_pnl": null,
+      "ci95_low": null,
+      "ci95_high": null,
+      "sum_pnl_25lot": 1.6
+    },
+    "LEAD:eth-5m": {
+      "n": 10,
+      "wins": 10,
+      "win_rate": 1.0,
+      "mean_price": 0.939,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.05576,
+      "se_pnl": 0.010608876786289238,
+      "ci95_low": 0.034966601498873096,
+      "ci95_high": 0.07655339850112691,
+      "sum_pnl_25lot": 13.94
+    },
+    "LEAD_0.85-0.97": {
+      "n": 12,
+      "wins": 12,
+      "win_rate": 1.0,
+      "mean_price": 0.9375,
+      "mean_payoff": 1.0,
+      "mean_pnl_per_contract": 0.057133333333333335,
+      "se_pnl": 0.00880878808206597,
+      "ci95_low": 0.039868108692484035,
+      "ci95_high": 0.07439855797418264,
+      "sum_pnl_25lot": 17.14
+    }
+  },
+  "cheap_side": {
+    "n": 4,
+    "wins": 0,
+    "win_rate": 0.0,
+    "mean_price": 0.045,
+    "mean_payoff": 0.0,
+    "mean_pnl_per_contract": -0.049,
+    "se_pnl": 0.011240996397117117,
+    "ci95_low": -0.07103235293834954,
+    "ci95_high": -0.02696764706165045,
+    "sum_pnl_25lot": -4.9
+  },
+  "new_user_lead": {
+    "n": 12,
+    "wins": 12,
+    "win_rate": 1.0,
+    "mean_price": 0.9375,
+    "mean_payoff": 1.0,
+    "mean_pnl_per_contract": 0.05846666666666667,
+    "se_pnl": 0.009012023394142164,
+    "ci95_low": 0.04080310081414802,
+    "ci95_high": 0.07613023251918531,
+    "sum_pnl_25lot": 17.54
+  },
+  "one_lot_lead": {
+    "n": 12,
+    "wins": 12,
+    "win_rate": 1.0,
+    "mean_price": 0.9375,
+    "mean_payoff": 1.0,
+    "mean_pnl_per_contract": 0.058333333333333334,
+    "se_pnl": 0.008513210174472817,
+    "ci95_low": 0.04164744139136661,
+    "ci95_high": 0.07501922527530006,
+    "sum_pnl_25lot": 17.5
+  }
+}

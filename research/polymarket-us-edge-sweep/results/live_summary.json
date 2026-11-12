@@ -1,0 +1,583 @@
+{
+  "rules": "PREREG.md T4",
+  "samples": 768,
+  "windows_after_cutoff": [
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1600z",
+      "windowEnd": "2026-11-12T16:15:00Z",
+      "samples": 35,
+      "priceToBeat": "71617.93",
+      "settlementPrice": "71944.57",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1615z",
+      "windowEnd": "2026-11-12T16:30:00Z",
+      "samples": 36,
+      "priceToBeat": "71944.57",
+      "settlementPrice": "71869.10",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1630z",
+      "windowEnd": "2026-11-12T16:45:00Z",
+      "samples": 36,
+      "priceToBeat": "71869.10",
+      "settlementPrice": "71453.48",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1610z",
+      "windowEnd": "2026-11-12T16:15:00Z",
+      "samples": 35,
+      "priceToBeat": "71957.90",
+      "settlementPrice": "71944.57",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1615z",
+      "windowEnd": "2026-11-12T16:20:00Z",
+      "samples": 36,
+      "priceToBeat": "71944.57",
+      "settlementPrice": "71826.29",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1620z",
+      "windowEnd": "2026-11-12T16:25:00Z",
+      "samples": 36,
+      "priceToBeat": "71826.29",
+      "settlementPrice": "71840.14",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1625z",
+      "windowEnd": "2026-11-12T16:30:00Z",
+      "samples": 36,
+      "priceToBeat": "71840.14",
+      "settlementPrice": "71869.10",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1630z",
+      "windowEnd": "2026-11-12T16:35:00Z",
+      "samples": 36,
+      "priceToBeat": "71869.10",
+      "settlementPrice": "71736.37",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1635z",
+      "windowEnd": "2026-11-12T16:40:00Z",
+      "samples": 36,
+      "priceToBeat": "71736.37",
+      "settlementPrice": "71636.78",
+      "resolved": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1640z",
+      "windowEnd": "2026-11-12T16:45:00Z",
+      "samples": 36,
+      "priceToBeat": "71636.78",
+      "settlementPrice": "71453.48",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1600z",
+      "windowEnd": "2026-11-12T16:15:00Z",
+      "samples": 35,
+      "priceToBeat": "2007.40",
+      "settlementPrice": "2015.47",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1615z",
+      "windowEnd": "2026-11-12T16:30:00Z",
+      "samples": 36,
+      "priceToBeat": "2015.47",
+      "settlementPrice": "2014.95",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1630z",
+      "windowEnd": "2026-11-12T16:45:00Z",
+      "samples": 36,
+      "priceToBeat": "2014.95",
+      "settlementPrice": "1998.96",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1610z",
+      "windowEnd": "2026-11-12T16:15:00Z",
+      "samples": 35,
+      "priceToBeat": "2021.23",
+      "settlementPrice": "2015.47",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1615z",
+      "windowEnd": "2026-11-12T16:20:00Z",
+      "samples": 36,
+      "priceToBeat": "2015.47",
+      "settlementPrice": "2014.46",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1620z",
+      "windowEnd": "2026-11-12T16:25:00Z",
+      "samples": 36,
+      "priceToBeat": "2014.46",
+      "settlementPrice": "2015.58",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1625z",
+      "windowEnd": "2026-11-12T16:30:00Z",
+      "samples": 36,
+      "priceToBeat": "2015.58",
+      "settlementPrice": "2014.95",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1630z",
+      "windowEnd": "2026-11-12T16:35:00Z",
+      "samples": 36,
+      "priceToBeat": "2014.95",
+      "settlementPrice": "2009.96",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1635z",
+      "windowEnd": "2026-11-12T16:40:00Z",
+      "samples": 36,
+      "priceToBeat": "2009.96",
+      "settlementPrice": "2001.92",
+      "resolved": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1640z",
+      "windowEnd": "2026-11-12T16:45:00Z",
+      "samples": 36,
+      "priceToBeat": "2001.92",
+      "settlementPrice": "1998.96",
+      "resolved": true
+    }
+  ],
+  "trades": [
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1600z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1600z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1600z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1615z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1615z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1615z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1630z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1630z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-15m-2026-11-12-1630z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1610z",
+      "bucket": "20-40s",
+      "status": "failed_price_or_spread_gate",
+      "side": "up",
+      "ask": 0.57,
+      "spread": 0.05,
+      "distance_bps": 3.2991513093072475,
+      "payoff": 0.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1610z",
+      "bucket": "60-90s",
+      "status": "trade",
+      "side": "up",
+      "ask": 0.89,
+      "spread": 0.01,
+      "distance_bps": 9.501389006627486,
+      "payoff": 0.0,
+      "pnl": -0.8992,
+      "up_won": false
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1610z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1615z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1615z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.99,
+      "spread": 0.01,
+      "distance_bps": -13.93989845237799,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1615z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1620z",
+      "bucket": "20-40s",
+      "status": "trade",
+      "side": "up",
+      "ask": 0.98,
+      "spread": 0.01,
+      "distance_bps": 5.133217934547364,
+      "payoff": 1.0,
+      "pnl": 0.018,
+      "up_won": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1620z",
+      "bucket": "60-90s",
+      "status": "trade",
+      "side": "up",
+      "ask": 0.95,
+      "spread": 0.01,
+      "distance_bps": 7.097679693605224,
+      "payoff": 1.0,
+      "pnl": 0.0456,
+      "up_won": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1620z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1625z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1625z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.46,
+      "spread": 0.01,
+      "distance_bps": -2.7352396584973246,
+      "payoff": 0.0,
+      "pnl": null,
+      "up_won": true
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1625z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1630z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1630z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1630z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1635z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1635z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.99,
+      "spread": 0.01,
+      "distance_bps": -14.939423335750053,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1635z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1640z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1640z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpc-btc-updown-5m-2026-11-12-1640z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1600z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1600z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1600z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1615z",
+      "bucket": "20-40s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.99,
+      "spread": 0.01,
+      "distance_bps": -3.473135298466363,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1615z",
+      "bucket": "60-90s",
+      "status": "trade",
+      "side": "down",
+      "ask": 0.86,
+      "spread": 0.03,
+      "distance_bps": -8.980535557463023,
+      "payoff": 1.0,
+      "pnl": 0.1284,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1615z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1630z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1630z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-15m-2026-11-12-1630z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1610z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1610z",
+      "bucket": "60-90s",
+      "status": "trade",
+      "side": "down",
+      "ask": 0.96,
+      "spread": 0.01,
+      "distance_bps": -5.392755896162238,
+      "payoff": 1.0,
+      "pnl": 0.0364,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1610z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1615z",
+      "bucket": "20-40s",
+      "status": "trade",
+      "side": "down",
+      "ask": 0.98,
+      "spread": 0.01,
+      "distance_bps": -3.076205550070207,
+      "payoff": 1.0,
+      "pnl": 0.018,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1615z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.8,
+      "spread": 0.12,
+      "distance_bps": -6.102794881590895,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1615z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1620z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1620z",
+      "bucket": "60-90s",
+      "status": "trade",
+      "side": "up",
+      "ask": 0.98,
+      "spread": 0.01,
+      "distance_bps": 12.01314496192528,
+      "payoff": 1.0,
+      "pnl": 0.018,
+      "up_won": true
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1620z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1625z",
+      "bucket": "20-40s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.99,
+      "spread": 0.01,
+      "distance_bps": -4.01869437085107,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1625z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.85,
+      "spread": 0.1,
+      "distance_bps": -9.525794064239573,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1625z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1630z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1630z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1630z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1635z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1635z",
+      "bucket": "60-90s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1635z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1640z",
+      "bucket": "20-40s",
+      "status": "missing_quote"
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1640z",
+      "bucket": "60-90s",
+      "status": "failed_price_or_spread_gate",
+      "side": "down",
+      "ask": 0.99,
+      "spread": 0.02,
+      "distance_bps": -11.439018542199488,
+      "payoff": 1.0,
+      "pnl": null,
+      "up_won": false
+    },
+    {
+      "slug": "cpceth-eth-updown-5m-2026-11-12-1640z",
+      "bucket": "5-15s",
+      "status": "missing_quote"
+    }
+  ],
+  "taken_n": 7,
+  "taken_mean_pnl": -0.09068571428571429,
+  "taken_sum_pnl_25lot": -15.87
+}

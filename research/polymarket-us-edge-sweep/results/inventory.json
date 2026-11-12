@@ -1,0 +1,268 @@
+{
+  "note": "Event counts are from offset binary search on the public events list. A null count means the probe did not finish. League spreads are the open winner markets returned for that league, up to 30 events.",
+  "event_counts": {
+    "politics": {
+      "open_events": 686,
+      "open_and_past_end": 553
+    },
+    "sports": {
+      "open_events": 3977,
+      "open_and_past_end": 13
+    },
+    "crypto": {
+      "open_events": 64,
+      "open_and_past_end": 0
+    },
+    "culture": {
+      "open_events": 226,
+      "open_and_past_end": 1
+    },
+    "climate": {
+      "open_events": 0,
+      "open_and_past_end": 0
+    },
+    "weather": {
+      "open_events": 30,
+      "open_and_past_end": 0
+    },
+    "economics": {
+      "open_events": 79,
+      "open_and_past_end": 2
+    },
+    "finance": {
+      "open_events": 0,
+      "open_and_past_end": 0
+    },
+    "mentions": {
+      "open_events": 0,
+      "open_and_past_end": 0
+    },
+    "world": {
+      "open_events": 0,
+      "open_and_past_end": 0
+    }
+  },
+  "league_spreads": [
+    {
+      "league": "nfl",
+      "events": 30,
+      "two_sided_winner_quotes": 29,
+      "median_spread": 0.005,
+      "spread_at_least_3c": 4
+    },
+    {
+      "league": "nba",
+      "events": 30,
+      "two_sided_winner_quotes": 30,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 6
+    },
+    {
+      "league": "ncaab",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "cbb",
+      "events": 30,
+      "two_sided_winner_quotes": 29,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 5
+    },
+    {
+      "league": "wnba",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "nhl",
+      "events": 30,
+      "two_sided_winner_quotes": 30,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "mlb",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "atp",
+      "events": 30,
+      "two_sided_winner_quotes": 29,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 3
+    },
+    {
+      "league": "wta",
+      "events": 8,
+      "two_sided_winner_quotes": 7,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "itf",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "ufc",
+      "events": 24,
+      "two_sided_winner_quotes": 23,
+      "median_spread": 0.01,
+      "spread_at_least_3c": 1
+    },
+    {
+      "league": "epl",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    },
+    {
+      "league": "mls",
+      "events": 0,
+      "two_sided_winner_quotes": 0,
+      "median_spread": null,
+      "spread_at_least_3c": 0
+    }
+  ],
+  "tag_samples": [
+    {
+      "tag": "economics",
+      "slug": "2026ipos",
+      "title": "Which Companies Will Confirm an IPO in 2026?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 23
+    },
+    {
+      "tag": "economics",
+      "slug": "openai",
+      "title": "OpenAI IPO Officially Confirmed?",
+      "endDate": "2027-07-01T03:59:00Z",
+      "closed": false,
+      "markets": 4
+    },
+    {
+      "tag": "economics",
+      "slug": "anthropic",
+      "title": "Anthropic IPO Officially Confirmed?",
+      "endDate": "2027-07-01T03:59:00Z",
+      "closed": false,
+      "markets": 3
+    },
+    {
+      "tag": "economics",
+      "slug": "jerpowgov",
+      "title": "Jerome Powell Announced Out as Fed Governor?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 1
+    },
+    {
+      "tag": "economics",
+      "slug": "usfed-2026",
+      "title": "Fed Rate Cut in 2026?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 1
+    },
+    {
+      "tag": "economics",
+      "slug": "elonmusk-tsla-ceo",
+      "title": "Elon Musk Announced Out As Tesla CEO?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 1
+    },
+    {
+      "tag": "economics",
+      "slug": "altman-openai-ceo",
+      "title": "Sam Altman Announced Out As OpenAI CEO?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 1
+    },
+    {
+      "tag": "economics",
+      "slug": "elonmusk-by-2026-12-31-hit",
+      "title": "What Will Elon's Net Worth Hit By December 31?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 5
+    },
+    {
+      "tag": "culture",
+      "slug": "sptfy-1-artst-glbl-yr-2026",
+      "title": "Top Global Artist 2026",
+      "endDate": "2026-12-03T04:59:00Z",
+      "closed": false,
+      "markets": 12
+    },
+    {
+      "tag": "culture",
+      "slug": "gtavi",
+      "title": "GTA VI Released By?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 2
+    },
+    {
+      "tag": "culture",
+      "slug": "aliens",
+      "title": "US Confirms That Aliens Exist?",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 1
+    },
+    {
+      "tag": "culture",
+      "slug": "2026",
+      "title": "TIME Person of the Year 2026",
+      "endDate": "2027-01-01T04:59:00Z",
+      "closed": false,
+      "markets": 26
+    },
+    {
+      "tag": "culture",
+      "slug": "oscars-03-14-2027-bestpic",
+      "title": "Oscar Winner: Best Picture",
+      "endDate": "2027-03-15T03:59:00Z",
+      "closed": false,
+      "markets": 43
+    },
+    {
+      "tag": "culture",
+      "slug": "sptfy-1-artst-us-yr-2026",
+      "title": "Top Artist in the US 2026?",
+      "endDate": "2026-12-03T04:59:00Z",
+      "closed": false,
+      "markets": 11
+    },
+    {
+      "tag": "culture",
+      "slug": "sptfy-n1-song-glbl-yr-2026",
+      "title": "Top Song 2026?",
+      "endDate": "2026-12-03T04:59:00Z",
+      "closed": false,
+      "markets": 14
+    },
+    {
+      "tag": "culture",
+      "slug": "sptfy-n1-song-us-yr-2026",
+      "title": "Top Song in the US 2026?",
+      "endDate": "2026-12-03T04:59:00Z",
+      "closed": false,
+      "markets": 13
+    }
+  ]
+}

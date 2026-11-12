@@ -1,0 +1,37 @@
+{
+  "note": "Checked 2026-11-12 after the book pull. The pre-registered sample of every raw 97-99 cent ask was not verified one by one: 3,928 of 3,946 of those asks were books wider than 3 cents or one-sided, so they are not a market sitting at 99 cents. The races below are the ones with real size. Sources are public counts, not Polymarket prices. None of these is a certified result.",
+  "mn_01": {
+    "market": "Democrat Yes bid 0.95 / ask 0.98, ask size 981.25. Republican Yes is 0.02 / 0.05.",
+    "counts": "Minnesota Secretary of State file ushouse.txt: Jake Johnson (DFL) 163,055, Brad Finstad (R) 162,733, write-in 391. Margin 322 or 323 votes, about 0.1 percent.",
+    "status": "unresolved",
+    "why": "Finstad requested a recount. MPR (2026-11-05) and WXOW report the State Canvassing Board meets 2026-11-19 and a recount request is open through 2026-11-23. AP had not called it. A 98 cent ask is a price on a recount, not a delayed settlement of a decided race.",
+    "sources": [
+      "https://electionresultsfiles.sos.mn.gov/20261103/ushouse.txt",
+      "https://www.mprnews.org/story/2026/11/05/minnesota-1st-congressional-district-republican-rep-brad-finstad-calls-for-recount",
+      "https://www.wxow.com/news/top-stories/update-finstad-says-hes-allowing-a-recount-to-proceed-johnson-declares-victory/article_88b9865b-c27f-4d5e-a62b-afd1d0f05b17.html"
+    ]
+  },
+  "ca_23": {
+    "market": "Democrat Yes bid 0.01 size 452 / ask 0.02. Republican Yes bid 0.98 size 432, no ask. Buying No on the Democrat at 0.99 means hitting that 0.01 bid.",
+    "counts": "Jay Obernolte (R) 106,793 (50.9 percent), Tessa Lynn Hodge (D) 102,964 (49.1 percent), about 95 percent of expected vote, updated 2026-11-12 morning. Not called.",
+    "status": "unresolved",
+    "why": "California was still counting. There is no ask on the leading Republican. The 1 cent offer on the Democrat is the remaining-count risk, and the size you can sell into is the 452-contract bid.",
+    "sources": [
+      "https://exa.ai/library/election/contest/3dm50hkg2rf",
+      "https://www.callthemap.com/results/house/ca-23",
+      "https://theballotbook.com/results/state/united-states-representative-district-23"
+    ]
+  },
+  "la_05_la_06": {
+    "market": "Still two-sided and not pinned at 99 cents. LA-05 Republican Yes 0.71 / 0.99. LA-06 Republican Yes 0.91 / 0.98.",
+    "counts": "No candidate won a majority on November 3. Runoffs are December 12, 2026. LA-05 Pat Moore (D) vs Gabe Firment (R). LA-06 Chauna Banks (D) vs Blake Miguez (R).",
+    "status": "not a settlement lag",
+    "why": "The event end date is the November 3 primary. The race is not over. The open market is the runoff.",
+    "sources": [
+      "https://www.axios.com/local/new-orleans/2026/11/06/louisiana-house-midterms-redistricting",
+      "https://www.callthemap.com/results/house/la-05",
+      "https://www.callthemap.com/results/house/la-06",
+      "https://wgno.com/yleh/johnson-higgins-re-elected-to-house-easily-districts-5-6-go-to-runoffs/amp/"
+    ]
+  }
+}

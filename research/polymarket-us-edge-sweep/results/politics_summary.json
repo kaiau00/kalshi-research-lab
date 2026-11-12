@@ -1,0 +1,8 @@
+{
+  "rules": "PREREG.md T2",
+  "events": 555,
+  "markets": 4117,
+  "executable_candidates_raw": 3946,
+  "display_only_97_99": 2039,
+  "note": "Full candidate rows were dropped from this file. Almost all raw asks were wide books. See politics_tight.json for the 3-cent-spread subset and politics_verification.json for the races with size."
+}
